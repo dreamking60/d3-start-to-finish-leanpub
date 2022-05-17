@@ -86,14 +86,17 @@ Open your text editor and open `d3-start-to-finish-code/step1`. In Atom, VS Code
 
 If you’re comfortable setting up a local web server (for example using Node or Python) please do so by navigating to `d3-start-to-finish` within a command line interface and starting the web server there. Here’s a screenshot of my command line after starting `http-server` (a node web server):
 
-![Starting node's http-server.png](91362466cb9b83dc8295bd5c9a85e6fc.png)
+![Starting node's http-server](91362466cb9b83dc8295bd5c9a85e6fc.png)
 
-Otherwise I recommend using Brackets as your code editor, opening `step1` as detailed above then click on the lightning symbol in the toolbar on the far right (or select Live Preview from the File menu.) You can also read the Web Development Tools chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) for other options.
+Otherwise I recommend using Brackets as your code editor, opening `step1` as detailed above then clicking on the lightning symbol in the toolbar on the far right (or selecting Live Preview from the File menu.) You can also read the Web Development Tools chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) for other options.
 
 ### View step1 in your browser
 
-If you’re using a standalone web server or VS Code's Live Server extension navigate to the appropriate location in your web browser. Typically the URL will be similar to `localhost:8000`. If you’re using Brackets a browser window should have opened when you clicked on Live Preview. You should now be able to see a friendly greeting in your web browser:
+If you’re using a standalone web server or VS Code's Live Server extension navigate to the appropriate location in your web browser (the URL will be something like `localhost:8000`). If you’re using Brackets a browser window should open when you click on Live Preview.
 
+You should now be able to see a friendly greeting in your web browser:
+
+{width: 50%}
 ![Step 1 of the code download](a87e7b386cc4b34b0c09031b6bf552ba.png)
 
 ### Edit the code
@@ -118,8 +121,9 @@ markua-end-insert
 
 Refresh your browser and verify that the greeting has updated.
 
+{width: 50%}
 ![Greeting after edit](3eba1689c4bcd951d085c7688962c678.png)
 
 ## Take a break
 
-You’ve completed all the necessary set up steps and are ready to start learning and building with D3! The next chapter introduces D3 and gives a broad overview of what it is and what it can be used for. You’ll then learn about using D3 to load data into the browser and will put that into action by loading the World Bank energy data into your application.
+You’ve completed all the necessary set up steps and are ready to start learning and building with D3! The next chapter introduces D3 and gives a broad overview of what it is and what it can be used for.
