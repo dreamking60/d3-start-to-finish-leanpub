@@ -1,4 +1,4 @@
-## Practical 3: Draw the data
+# Practical 3: Draw the data
 
 In this chapter we modify the Energy Explorer to draw a **single circle for each country**.
 
@@ -49,7 +49,7 @@ markua-start-insert
     <svg width="1200" height="1200">
       <g id="chart"></g>
     </svg>
-markua-start-insertEND
+markua-end-insert
     <script src="js/lib/d3.min.js"></script>
     <script src="js/main.js"></script>
   </body>
@@ -82,13 +82,13 @@ function update() {
         .attr('cy', 100)
         .attr('r', 2);
 }
-:ENDINSERT
+markua-end-insert
 
 function dataIsReady(csv) {
 markua-start-insert
     data = csv;
     update();
-:ENDINSERT
+markua-end-insert
 }
 
 d3.csv('data/data.csv')

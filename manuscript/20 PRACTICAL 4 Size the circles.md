@@ -1,4 +1,4 @@
-## Practical: Size the circles
+# Practical 4: Size the circles
 
 In this chapter we modify the Energy Explorer to size each circle according to its **renewable energy** percentage. (This is the percentage of a country’s energy mix that comes from renewable energy.)
 
@@ -52,7 +52,7 @@ function transformRow(d) {
 }
 
 d3.csv('data/data.csv', transformRow)
-markua-start-insertEND
+markua-end-insert
     .then(dataIsReady);
 ```
 
@@ -94,7 +94,7 @@ markua-start-insert
 var radiusScale = d3.scaleSqrt()
     .domain([0, 100])
     .range([0, 20]);
-markua-start-insertEND
+markua-end-insert
 
 function update() {
     d3.select('#chart')
@@ -109,7 +109,7 @@ markua-start-insert
     	  .attr('r', function(d) {
             return radiusScale(d.renewable);
         });
-markua-start-insertEND
+markua-end-insert
 }
 
 function dataIsReady(csv) {
