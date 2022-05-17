@@ -40,7 +40,7 @@ return layoutData;
 
 This function iterates through `data` and computes `x`, `y` and `r` for each array element. It then returns a new array containing the position and radius data.
 
-> See the [JavaScript iteration section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/javascript-iteration/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization if you’re not familiar with `map`.
+> See the [JavaScript iteration section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/javascript-iteration/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation if you’re not familiar with `map`.
 
 Typically you’d assign the output of `layout(myData)` to a new variable:
 
@@ -75,7 +75,7 @@ Navigate to [https://codepen.io/createwithdata/pen/gOaezWJ](https://codepen.io/c
 
 The layout function `layout` calls `.map` on the array of data and returns an object containing `x`, `y` and `r` for each array element.
 
-You don’t **have** to use layout functions but for more complex visualizations they can make your code easier to understand and maintain.
+You don’t **have** to use layout functions but for more complex visualisations they can make your code easier to understand and maintain.
 
 D3 also provides a number of layout functions but it adds geometric information directly on each array element. The approach in this section creates a new array and doesn’t change (or mutate) the original array. This is more in keeping with modern JavaScript practice.
 

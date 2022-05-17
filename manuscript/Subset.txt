@@ -1,9 +1,3 @@
 01 Introduction.md
 02 Energy Explorer.md
-03 PRACTICAL 1 Setting up.md
-04 Introduction to D3.md
-05 D3 Requests.md
-06 PRACTICAL 2 Load the data.md
-07 D3 Selections.md
-08 Data Joins.md
-09 PRACTICAL 3 Draw the Data.md
+03 PRACTICAL Setting up.md

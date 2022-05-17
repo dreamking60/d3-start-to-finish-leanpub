@@ -2,11 +2,11 @@
 
 In this practical you’ll add code that **sorts the countries** according to the chosen indicator.
 
-To recap, the indicator that determines the sort order is chosen using the menu at the top of the visualization:
+To recap, the indicator that determines the sort order is chosen using the menu at the top of the visualisation:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-16.png)
 
-When an indicator is clicked, the `action` function in `store.js` is called. This will set the `state.selectedIndicator` property to the indicator’s id (for example `'oilgascoal'`) and the whole visualization is redrawn.
+When an indicator is clicked, the `action` function in `store.js` is called. This will set the `state.selectedIndicator` property to the indicator’s id (for example `'oilgascoal'`) and the whole visualisation is redrawn.
 
 In this practical you’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method.
 

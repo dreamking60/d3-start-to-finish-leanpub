@@ -2,7 +2,7 @@
 
 The ‘state’ of an application is information that describes what the application is currently doing.
 
-For example the state of a data visualization might include things like:
+For example the state of a data visualisation might include things like:
 
 * the **data** that’s being visualized
 * the **type of chart** (bar, line, pie etc.) that the user has chosen
@@ -197,4 +197,4 @@ There are two main aspects:
 * an object (named `state`) which contains application state
 * a function (named `action`) which modifies `state` and triggers a redraw
 
-This is a simple pattern but it’s surprisingly powerful. It’s by far the pattern I use the most when building interactive data visualizations.
+This is a simple pattern but it’s surprisingly powerful. It’s by far the pattern I use the most when building interactive data visualisations.

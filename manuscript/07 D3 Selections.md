@@ -20,7 +20,7 @@ d3.select(selector);
 
 where `selector` is a string containing a CSS selector string (for example `'#chart'`).
 
-(If you’re not familiar with CSS selectors take a look at the [CSS section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/css/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization book.)
+(If you’re not familiar with CSS selectors take a look at the [CSS section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/css/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book.)
 
 `d3.select` returns an object which has a number of methods (such as `.attr` and `.style`) that modify the selected HTML/SVG element. (A method is a function that’s been assigned to a property of an object.)
 
@@ -70,7 +70,7 @@ Here’s a summary of each method:
 
 <table class=""><tbody><tr><td><code>.style</code></td><td>Adds CSS rules to the selection’s elements</td></tr><tr><td><code>.attr</code></td><td>Adds attributes to the selection’s elements</td></tr><tr><td><code>.classed</code></td><td>Adds a class attribute to the selection’s elements</td></tr><tr><td><code>.text</code></td><td>Sets the text content of the selection’s elements</td></tr></tbody></table>
 
-(If you’re not familiar with CSS you can read up on it in the [CSS section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/css/) of the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization book. Likewise, you can familiarize yourself with HTML or SVG attributes by reading the [SVG section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/svg/).)
+(If you’re not familiar with CSS you can read up on it in the [CSS section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/css/) of the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book. Likewise, you can familiarize yourself with HTML or SVG attributes by reading the [SVG section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/svg/).)
 
 Let’s look at each method in turn.
 

@@ -581,4 +581,4 @@ You’ve also seen that joining an array of objects gives you a wide range of po
 
 We’ve covered a large amount of material over the past few sections and hopefully most of it made sense.
 
-The next practical puts this material into practice and you’re going to start visualizing the energy data!
+The next practical puts this material into practice and you’re going to start visualising the energy data!

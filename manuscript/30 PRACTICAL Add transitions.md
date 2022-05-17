@@ -300,11 +300,11 @@ The completed code containing the transitions added in this practical can be fou
 
 ### Summing up
 
-You’ve added transitions to Energy Explorer. Adding a basic transition to the group `transform` attribute was a relatively straightforward change but it made a huge difference to the visualization. Country groups animate to new positions and fade in or out if their visibility changes.
+You’ve added transitions to Energy Explorer. Adding a basic transition to the group `transform` attribute was a relatively straightforward change but it made a huge difference to the visualisation. Country groups animate to new positions and fade in or out if their visibility changes.
 
 You also fine tuned the transitions, modifying the duration and adding a staggered transition for a nice visual effect.
 
-You also saw how the transitions when the visualization first loads can be fine tuned. You added code to fade in each group and initialized each group’s transform so that they didn’t fly in from the top left.
+You also saw how the transitions when the visualisation first loads can be fine tuned. You added code to fade in each group and initialized each group’s transform so that they didn’t fly in from the top left.
 
 If you’ve made it this far and are reasonably happy with what you’ve learned and built then you’ve done really well. Most of the Energy Explorer is finished now and all that’s left to add is a legend and some detailed styling.
 

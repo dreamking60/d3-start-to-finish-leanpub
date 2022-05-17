@@ -10,7 +10,7 @@ Later on you’ll use it in the Energy Explorer to sort the countries.
 
 One of the advantages of using a library such as Lodash is that it overcomes **web browser differences**. It’s perhaps not as prevalent as it once was, but some commonly used functions might weren’t available in certain web browsers. Using Lodash was a convenient way of overcoming this issue.
 
-It’s beyond this book to show everything that Lodash can do, but we’ll look at some of the functions I commonly use when building data visualizations.
+It’s beyond this book to show everything that Lodash can do, but we’ll look at some of the functions I commonly use when building data visualisations.
 
 If you wish to try any of the following examples out you can do so by clicking this [jsconsole link](https://jsconsole.com) and entering:
 

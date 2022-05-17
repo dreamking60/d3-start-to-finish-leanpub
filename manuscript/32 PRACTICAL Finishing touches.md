@@ -4,7 +4,7 @@
 
 At the moment the Energy Explorer is using the web browser’s **default font** for all text elements. This is usually a serif font such as Times or Times New Roman.
 
-In general sans-serif fonts (such as Helvetica) are recommended for data visualization text because they tend to be clearer (they have less visual ‘noise’).
+In general sans-serif fonts (such as Helvetica) are recommended for data visualisation text because they tend to be clearer (they have less visual ‘noise’).
 
 Font support varies across platforms. For example, Helvetica is built into MacOS but not Windows. For this reason **I tend to use Google Fonts** as this ensures the same font is used regardless of operating system.
 
@@ -17,7 +17,7 @@ In the case of the Energy Explorer I’ve chosen Open Sans. Feel free to choose 
 In this practical you’ll:
 
 * **install** Google Fonts’ Open Sans font
-* **add CSS** so that the new font is used throughout the visualization.
+* **add CSS** so that the new font is used throughout the visualisation.
 
 In your code editor open the `step15` directory of the `d3-start-to-finish` code.
 
@@ -63,7 +63,7 @@ cursor: default;
 }
 ```
 
-This will result in Open Sans being used througout the visualization.
+This will result in Open Sans being used througout the visualisation.
 
 `sans-serif` is also added the the list of fonts as a fallback in case Open Sans doesn’t load.
 
@@ -131,7 +131,7 @@ In this practical you’ll style the menu so that’ll it’ll look like:
 
 You’ll **add a circle to each indicator** (except for Country) that shows the style used for that indicator in the chart.
 
-For example, in the visualization the circle representing renewable energy is solid green. The same style will be used for the Renewable item in the menu.
+For example, in the visualisation the circle representing renewable energy is solid green. The same style will be used for the Renewable item in the menu.
 
 You’ll also **add a ‘Sort by’ label** to the left of the menu and add some CSS to vertically align the menu items.
 
@@ -460,7 +460,7 @@ opacity: 1;
 }
 ```
 
-However we’d like all the **menu item circles** to have an opacity of 1 so that the menu circle style always matches the circles in the visualization.
+However we’d like all the **menu item circles** to have an opacity of 1 so that the menu circle style always matches the circles in the visualisation.
 
 You’ll:
 
@@ -504,7 +504,7 @@ Furthermore the labels should be gray unless hovered or selected, in which case 
 
 The menu is now complete. You added circles to the menu items indicating which energy type each circle style represents.
 
-There was quite a lot of detailed CSS to add. This is fairly typical when adding finishing touches to a data visualization. It’s often a significant portion of the work and sometimes requires a lot of experimentation and iteration.
+There was quite a lot of detailed CSS to add. This is fairly typical when adding finishing touches to a data visualisation. It’s often a significant portion of the work and sometimes requires a lot of experimentation and iteration.
 
 You’re nearly there. The remaining steps are to add a header and footer and a few final bits of CSS styling.
 
@@ -685,7 +685,7 @@ You’re very nearly finished now. In the next practical you’ll add the final 
 
 You’re nearly finished! This practical adds a few finishing touches to the Energy Explorer.
 
-The text style throughout the visualization will be tweaked, hover effects will be added to links (such as the footer data source) and the popup content will be styled.
+The text style throughout the visualisation will be tweaked, hover effects will be added to links (such as the footer data source) and the popup content will be styled.
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-29-1024x427.png)
 
@@ -720,7 +720,7 @@ cursor: default;
 
 ### Set margin and padding sizes
 
-Add a little bit of left and right padding to the controls section (`#controls`) so that the menu and legend sit more inside the visualization:
+Add a little bit of left and right padding to the controls section (`#controls`) so that the menu and legend sit more inside the visualisation:
 
 {caption: "style.css", line-numbers: false}
 ```
@@ -735,7 +735,7 @@ align-items: center;
 
 (The padding value of `0 1rem` is a abbreviated way to set the top and bottom padding to zero and the left and right padding to `1rem`.)
 
-Also set the `margin` on the `body` element to zero. This is something I always do so that there’s no additional space around the visualization:
+Also set the `margin` on the `body` element to zero. This is something I always do so that there’s no additional space around the visualisation:
 
 {caption: "style.css", line-numbers: false}
 ```
@@ -756,7 +756,7 @@ Currently the Energy Explorer only has a couple of effects when items are hovere
 * when a menu item is hovered it becomes darker
 * when a country is hovered the popup appears
 
-Hover effects are relatively straightforward to add and they are an effective way to add some final polish to a visualization.
+Hover effects are relatively straightforward to add and they are an effective way to add some final polish to a visualisation.
 
 Let’s start by adding a hover effect to the links (represented by `a` elements) in the footer.
 
@@ -845,7 +845,7 @@ stroke-dasharray: 4,2;
 
 Currently the country labels are quite dominant so let’s make them a bit smaller and a bit lighter in color.
 
-Let’s also set their font weight to semi bold (which equates to a weight of 600). This adds a bit of typology contrast (if there is such a thing!) to the visualization:
+Let’s also set their font weight to semi bold (which equates to a weight of 600). This adds a bit of typology contrast (if there is such a thing!) to the visualisation:
 
 {caption: "style.css", line-numbers: false}
 ```
@@ -940,9 +940,9 @@ Save `style.css` and refresh the browser. Hover over a country and popup should 
 
 In this practical you made several changes to the CSS.
 
-The text colors were adjusted in order to improve the tonal balance of the visualization. Hover over effects were added, including adding a CSS transition. The transition softens the hover over effect and brings a degree of sophistication to the visualization.
+The text colors were adjusted in order to improve the tonal balance of the visualisation. Hover over effects were added, including adding a CSS transition. The transition softens the hover over effect and brings a degree of sophistication to the visualisation.
 
-Finally the popup content was styled to match the rest of the visualization.
+Finally the popup content was styled to match the rest of the visualisation.
 
 You’re now all done! It’s been a long journey and hopefully you were able to follow most of the process.
 

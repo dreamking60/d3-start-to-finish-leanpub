@@ -285,4 +285,4 @@ This section has shown how you can create an **update function** which updates H
 
 Typically the update function is called whenever the **data changes** or when some **user interaction** has occurred.
 
-This pattern is very common when building data visualizations with D3 and will be used in the Energy Explorer.
+This pattern is very common when building data visualisations with D3 and will be used in the Energy Explorer.

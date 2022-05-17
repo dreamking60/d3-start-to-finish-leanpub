@@ -6,7 +6,7 @@ The end result will look like:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-2.png)
 
-It’s not the most exciting of data visualizations, but each circle represents a country. Later on we show how to set the radius of each circle according to a data variable.
+It’s not the most exciting of data visualisations, but each circle represents a country. Later on we show how to set the radius of each circle according to a data variable.
 
 ## Overview
 

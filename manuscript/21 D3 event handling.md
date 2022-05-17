@@ -128,7 +128,7 @@ Navigate to [https://codepen.io/createwithdata/pen/zYBoxpy](https://codepen.io/c
 
 ### Event types
 
-The most common event types you’ll use when building data visualizations are `click`, `mouseover` and `mouseout`.
+The most common event types you’ll use when building data visualisations are `click`, `mouseover` and `mouseout`.
 
 This table shows when each event type occurs:
 

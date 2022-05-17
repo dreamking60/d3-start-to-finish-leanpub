@@ -12,13 +12,13 @@ You’ll need three things:
 
 You probably already have a web browser. I recommend using Chrome or Firefox. You’re probably fine using other browsers so long as they’re modern and up to date.
 
-If you’re a developer and already using a preferred code editor then please stick with that. If you don’t have a preferred code editor I recommend [Atom](https://atom.io/), [VS Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/). These are covered in the [Web Development Tools section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization book.
+If you’re a developer and already using a preferred code editor then please stick with that. If you don’t have a preferred code editor I recommend [Atom](https://atom.io/), [VS Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/). These are covered in the [Web Development Tools section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book.
 
 Finally you’ll need to have a web server running on your machine. This is so that the data can be loaded without running into browser security restrictions.
 
 If you’re a web developer there’s a good chance you’re familiar with setting up a server using Node, Python or similar.
 
-If not I recommend using Brackets as your code editor as this has a built-in server. For futher information read the [Web](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) [](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/)[Development Tools section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization book.
+If not I recommend using Brackets as your code editor as this has a built-in server. For futher information read the [Web](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) [](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/)[Development Tools section](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) in the Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book.
 
 ## Get set up
 
@@ -32,7 +32,7 @@ The aim of this section is to:
 * **run a web server** to serve the first code step
 * **view the page** in your web browser
 
-If at any point these steps don’t make sense, I suggest going through the [Web Development Tools](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) and [Example set-up](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/example-set-up/) sections in my [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book.
+If at any point these steps don’t make sense, I suggest going through the [Web Development Tools](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) and [Example set-up](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/example-set-up/) sections in my [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book.
 
 ### Download the code
 

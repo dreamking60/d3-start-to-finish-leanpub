@@ -11,7 +11,7 @@ The chart will look like:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-12-1024x361.png)
 
-This book is primarily about building an interactive visualization using D3 but we’ll also have a brief look at the **design choices** surrounding the color scheme.
+This book is primarily about building an interactive visualisation using D3 but we’ll also have a brief look at the **design choices** surrounding the color scheme.
 
 In this section:
 
@@ -24,7 +24,7 @@ In your code editor open the `step9` directory of the `d3-start-to-finish` c
 
 Each country is represent by four overlapping circles so we need a color scheme that makes identifying a circle’s energy type simple.
 
-Also, when designing data visualizations it’s recommended that a color scheme is chosen that works for the **color blind**.
+Also, when designing data visualisations it’s recommended that a color scheme is chosen that works for the **color blind**.
 
 There are a few visual variables we can use including:
 
@@ -140,12 +140,12 @@ In the next section you’ll add some more CSS to center and set the background 
 
 In this practical you’ll:
 
-* **center the visualization** within the page
+* **center the visualisation** within the page
 * change the **background color**
 
 In your code editor open the `step9` directory of the `d3-start-to-finish` code. (It’ll already be open if you’ve just finished the previous practical.)
 
-### Center the visualization
+### Center the visualisation
 
 Start by opening `index.html` and wrap the `svg` element in a `div` element. Add a class attribute named `wrapper` to the `div` element:
 
@@ -185,7 +185,7 @@ fill: #7FB069;
 ...
 ```
 
-Save `index.html` and `css/style.css` and refresh the browser (making sure it’s pointing at `step9`) and the visualization should now be centred horizontally.
+Save `index.html` and `css/style.css` and refresh the browser (making sure it’s pointing at `step9`) and the visualisation should now be centred horizontally.
 
 ### Change the background color
 
@@ -211,7 +211,7 @@ The complete code for this practical is in `step9-complete`.
 
 ### Summing up
 
-A major part of the visualization is finished now. Each country is represented by 4 circles and you can now begin to compare the energy mixes of different countries.
+A major part of the visualisation is finished now. Each country is represented by 4 circles and you can now begin to compare the energy mixes of different countries.
 
 I’m personally drawn to the solid green circles. The larger they are, the more renewables contribute to that country’s energy mix. Denmark’s a good example. Albania’s an interesting case as it looks like the vast majority of its energy comes from hydroelectric (blue outline). And not surprisingly for many countries, the biggest contributor is oil, gas and coal (gray outline).
 

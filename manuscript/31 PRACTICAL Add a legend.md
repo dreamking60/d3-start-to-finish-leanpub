@@ -6,7 +6,7 @@ In this practical you’ll add a legend that indicates how the **circle size rel
 
 The legend circle is sized such that it represents 100%.
 
-You’ll code the legend such that the circle radius is computed in the same manner as the circles in the visualization. This means that if `config.width` or `config.numColumns` changes the country circles **and** the legend circle resize accordingly.
+You’ll code the legend such that the circle radius is computed in the same manner as the circles in the visualisation. This means that if `config.width` or `config.numColumns` changes the country circles **and** the legend circle resize accordingly.
 
 The steps are:
 
@@ -256,6 +256,6 @@ The completed code for this practical can be found in `step14-complete`.
 
 In this practical you added a legend to show the relationship between circle size and percentage value.
 
-You added code so that the legend radius is updated using the same logic as the actual circles in the visualization. This ensures that the legend stays in step with any changes in visualization width and number of columns.
+You added code so that the legend radius is updated using the same logic as the actual circles in the visualisation. This ensures that the legend stays in step with any changes in visualisation width and number of columns.
 
 You’re very nearly there. The functionality of the Energy Explorer is largely complete. There’s just some finishing touches to be done now.

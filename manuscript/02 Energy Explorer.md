@@ -22,7 +22,7 @@ The CSV file is loaded into the application using D3. We then use D3 selections 
 
 A mouse over event handler is added to each country. This triggers a popup containing additional information.
 
-At the top of the visualization is a menu which allows the user to choose how the countries are sorted.
+At the top of the visualisation is a menu which allows the user to choose how the countries are sorted.
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-32.png)
 
@@ -52,7 +52,7 @@ js
 └── update.js
 ```
 
-This is a typical web application structure. It’s a static application, meaning there’s no server-side code. All files are loaded into the browser when the visualization first loads.
+This is a typical web application structure. It’s a static application, meaning there’s no server-side code. All files are loaded into the browser when the visualisation first loads.
 
 (In order to stay focused, this book doesn’t use any build tools such as Webpack.)
 

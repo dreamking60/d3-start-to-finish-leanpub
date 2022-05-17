@@ -390,7 +390,7 @@ return text.length < 10 ? text : text.slice(0, 9) + '...';
 }
 ```
 
-> The above code uses JavaScript’s ternary operator. You can read more about it in the [JavaScript Operators](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/javascript-operators/) section of my Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualization book.
+> The above code uses JavaScript’s ternary operator. You can read more about it in the [JavaScript Operators](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/javascript-operators/) section of my Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book.
 
 Now use `getTruncatedLabel` when setting `labelText` in the `layout` function:
 

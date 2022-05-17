@@ -139,7 +139,7 @@ Now if you enter `myScale(0)` you should see `0` output. If you enter `myScale(1
 
 `d3.scaleSqrt` is similar to `d3.scaleLinear` except the **square root** of the input value is used. This is particularly useful when using circles to represent a quantity.
 
-It’s widely accepted when visualizing data that the **area** of a circle (rather than the radius of a circle) should be proportional to a value.
+It’s widely accepted when visualising data that the **area** of a circle (rather than the radius of a circle) should be proportional to a value.
 
 This potentially tricky calculation is taken care of by D3’s `scaleSqrt` scale.
 

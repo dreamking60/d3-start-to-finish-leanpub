@@ -2,7 +2,7 @@
 
 ## Practical: Add update module
 
-In this practical you’ll create a new module that’ll contain the code for updating the visualization. (Currently this is just the `update` function.)
+In this practical you’ll create a new module that’ll contain the code for updating the visualisation. (Currently this is just the `update` function.)
 
 The steps are:
 
@@ -311,7 +311,7 @@ return d.radius;
 }
 ```
 
-You’ve separated the geometric calculations from the update code. Can you see that the update code is simpler now? This will be even more apparent as your visualization increases in complexity!
+You’ve separated the geometric calculations from the update code. Can you see that the update code is simpler now? This will be even more apparent as your visualisation increases in complexity!
 
 To recap:
 
@@ -323,7 +323,7 @@ Now when you save `update.js` and refresh your browser (making sure it’s loadi
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
 
-It’s worth checking that the layout function is now driving the visualization.
+It’s worth checking that the layout function is now driving the visualisation.
 
 In `layout.js` change:
 

@@ -76,7 +76,7 @@ g.classed('country', true)
 }
 ```
 
-In addition, move the `g.classed('country', true)` call into `initializeGroup` because this only needs to be called during initialization:
+In addition, move the `g.classed('country', true)` call into `initializeGroup` because this only needs to be called during initialisation:
 
 {caption: "update.js", line-numbers: false}
 ```

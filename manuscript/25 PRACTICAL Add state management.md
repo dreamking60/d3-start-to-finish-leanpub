@@ -110,7 +110,7 @@ update();
 
 The data array (`data`) can also be thought of as state. (This makes sense because the `data` array describes what the Energy Explorer needs to display.)
 
-Therefore let’s move `data` to the `state` object. Start by removing its declaration and initialization from `main.js`:
+Therefore let’s move `data` to the `state` object. Start by removing its declaration and initialisation from `main.js`:
 
 {caption: "main.js", line-numbers: false}
 ```

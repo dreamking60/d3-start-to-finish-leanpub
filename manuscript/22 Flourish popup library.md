@@ -1,6 +1,6 @@
 # Flourish popup library
 
-One of the most useful features you can add to a data visualization is an **information popup**. This is a box that displays more information about an HTML or SVG element that represents a piece of data.
+One of the most useful features you can add to a data visualisation is an **information popup**. This is a box that displays more information about an HTML or SVG element that represents a piece of data.
 
 For example the final version of the Energy Explorer has a popup that shows the energy mix as numbers:
 

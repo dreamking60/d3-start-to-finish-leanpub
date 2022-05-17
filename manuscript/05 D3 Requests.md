@@ -14,7 +14,7 @@ Beware that things get more complicated if the resource has a different domain (
 
 D3’s request methods make the HTTP request for you and parse the incoming data so that it’s ready to use. (Parsing CSV files is non trivial so this saves a lot of work.)
 
-In this section we’ll look at four of D3’s request methods: `d3.csv`, `d3.tsv`, `d3.dsv` and `d3.json`. These are the most common methods used when visualizing data. (In fact, `d3.csv` and `d3.json` are by far the most commonly used.)
+In this section we’ll look at four of D3’s request methods: `d3.csv`, `d3.tsv`, `d3.dsv` and `d3.json`. These are the most common methods used when visualising data. (In fact, `d3.csv` and `d3.json` are by far the most commonly used.)
 
 Let’s look at `d3.csv` first.
 
@@ -241,7 +241,7 @@ You’ll see later in this book that we use CSV to represent the data for the En
 
 ## Static resources and APIs
 
-If the data your’re visualizing doesn’t change very often then hosting it **statically** should suffice. Static hosting is where files (be it HTML, JavaScript, CSV or JSON files) live on a server’s hard drive and are sent to a web browser when requested.
+If the data your’re visualising doesn’t change very often then hosting it **statically** should suffice. Static hosting is where files (be it HTML, JavaScript, CSV or JSON files) live on a server’s hard drive and are sent to a web browser when requested.
 
 For example the CSV file (at `https://assets.codepen.io/2814973/my-csv.csv`) is statically hosted.
 

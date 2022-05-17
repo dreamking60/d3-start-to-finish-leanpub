@@ -1,10 +1,10 @@
 # D3 transitions
 
-A powerful effect that adds visual flair to a data visualization is **animation**.
+A powerful effect that adds visual flair to a data visualisation is **animation**.
 
-Not only can animation make a visualization **more engaging** it also serves a practical purpose.
+Not only can animation make a visualisation **more engaging** it also serves a practical purpose.
 
-Suppose you’ve a visualization consisting of a number of circles and the positions of the circles change (for example, a new indicator has been selected).
+Suppose you’ve a visualisation consisting of a number of circles and the positions of the circles change (for example, a new indicator has been selected).
 
 If the circles **animate into their new positions** it’s possible to **track individual circles** and to see where they move to. Without animation it’s not obvious where each circle has moved to.
 

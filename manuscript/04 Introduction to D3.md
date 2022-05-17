@@ -1,13 +1,13 @@
 # Introduction to D3
 
-[D3](https://d3js.org/) is a JavaScript library that helps you build **custom**, **interactive** and **beautiful** data visualizations.
+[D3](https://d3js.org/) is a JavaScript library that helps you build **custom**, **interactive** and **beautiful** data visualisations.
 
 Rather than providing a library of chart types (which is what libraries like [Highcharts](https://www.highcharts.com/) and [Chart.js](https://www.chartjs.org/) do) it provides **building blocks** for creating custom (and standard) charts.
 
 D3 primarily consists of:
 
 * a mechanism for joining (or binding) arrays of data to HTML or SVG elements
-* a vast number of modules that help build data visualizations
+* a vast number of modules that help build data visualisations
 
 This section gives an overview of D3 joins and some of D3’s modules. Don’t worry too much if you don’t follow everything because we’ll cover a lot of this material in more depth throughout the book.
 
@@ -40,7 +40,7 @@ Each array element **corresponds** to a circle. Furthermore each circle is **siz
 
 The data join ensures that the circles ‘mirror’ the array.
 
-This is the basis for creating data visualizations using D3. Array elements are represented by shapes. The shapes may be sized, positioned and styled according to the corresponding array value.
+This is the basis for creating data visualisations using D3. Array elements are represented by shapes. The shapes may be sized, positioned and styled according to the corresponding array value.
 
 Imagine the above circles are swapped with rectangles and the rectangle height is determined by the array values. Can you see that this forms a very basic bar chart?
 
@@ -56,7 +56,7 @@ We’ll cover D3 joins in more detail later in this book. For now just remember 
 
 ## D3 modules
 
-D3 has a large number of modules that help you build interactive data visualizations. Let’s look at some of the more commonly used ones.
+D3 has a large number of modules that help you build interactive data visualisations. Let’s look at some of the more commonly used ones.
 
 ### Data requests
 
@@ -220,11 +220,11 @@ This results in this path:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2020/06/image-6.png)
 
-D3 provides generators for other shapes commonly found in data visualizations. You can find out more at [D3 in Depth](https://www.d3indepth.com/shapes/).
+D3 provides generators for other shapes commonly found in data visualisations. You can find out more at [D3 in Depth](https://www.d3indepth.com/shapes/).
 
 ### Transitions
 
-Animations between different chart states add flair to a data visualization but they also achieve **object constancy**. Object constancy is a technique that helps someone viewing a chart keep track of points of interest, even if they move to new positions.
+Animations between different chart states add flair to a data visualisation but they also achieve **object constancy**. Object constancy is a technique that helps someone viewing a chart keep track of points of interest, even if they move to new positions.
 
 For example look at the chart below. Choose a circle then click _Update data_. Did you see where your circle moved? Probably not.
 
@@ -242,7 +242,7 @@ Transitions are very well implemented in D3 and its one of the features that sta
 
 ### Summary
 
-Hopefully this section has given you a flavour of what D3 is and what it can do. One of the key takeaways is that D3 provides modules to help you build data visualizations. It doesn’t provide ready built charts – use a library such as Chart.js for that.
+Hopefully this section has given you a flavour of what D3 is and what it can do. One of the key takeaways is that D3 provides modules to help you build data visualisations. It doesn’t provide ready built charts – use a library such as Chart.js for that.
 
 This book covers a cross section of D3 functionality. It doesn’t cover everything, but it covers enough to get you started building your own custom charts.
 

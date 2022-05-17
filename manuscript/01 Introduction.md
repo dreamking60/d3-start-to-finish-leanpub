@@ -2,21 +2,15 @@
 
 Welcome!
 
-First of all, I’d like to thank you for deciding to buy this book. The aim of this book is to teach you how to build a real-world interactive data visualization using D3 called **Energy Explorer**.
+First of all, I’d like to thank you for buying this book. The aim is to teach you how to build a real-world interactive data visualisation using D3 called **Energy Explorer** and for you to learn about D3 along the way.
 
-![](http://learn.createwithdata.com/wp-content/uploads/2020/08/image-29-1024x427.png)
+![Energy Explorer](efcd4cbf87a2c746360581deb9c38f1b.png)
 
-This book uses a mix of **theory** and **practice**. Typically you’ll learn a particular aspect of D3 then you’ll put that theory into practice during the build of the data visualization.
-
-The book is divided into several sections and each section contains **sections** and **practicals**.
-
-A **section** covers theoretical material and usually contains examples. Some examples are hosted on CodePen, in which case you’re encouraged to explore the example by modifying the code.
-
-A **practical** takes you through the steps required to make the Energy Explorer. Each practical is marked ‘Practical’, for example ‘Practical: What You’ll Need’.
+This book uses a mix of **theory** and **practice**. You’ll learn an aspect of D3 then put it into practice during the build of Energy Explorer. The book is divided into several chapters. Some contain theoretical information and others contain practical steps to build Energy Explorer. Each practical chapter has the name 'Practical' in its title, for example ‘Practical: What You’ll Need’.
 
 ## Prerequisites
 
-To get the most out of D3 Start to Finish I recommend that you’ve enough experience to be able to build a front-end web application.
+To get the most out of this book I recommend that you’re experienced enough to build a simple front-end web application.
 
 Specifically you need to be familiar with:
 
@@ -25,81 +19,73 @@ Specifically you need to be familiar with:
 * CSS
 * JavaScript
 
-You should also be comfortable opening and editing code in a code editor (such as Atom, VS Code or Sublime Text) and setting up a local web server.
+You should also be comfortable opening and editing code in a code editor (such as VS Code, Atom or Brackets) and setting up a local web server.
 
-If you need to get up to speed on the above languages and tools I suggest completing my free [HTML, SVG, CSS & JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book. If you understand everything in the HTML, SVG, CSS & JavaScript for Data Visualisation book then you should be ready for D3 Start to Finish.
+If you need to get up to speed on the above languages and tools I suggest reading my [HTML, SVG, CSS & JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book. If you understand everything in that book you'll be ready for this one.
 
 ## What you’ll learn
 
-This book aims to teach you enough D3 to build a **custom data visualization** from the ground up.
+This book aims to teach you enough D3 to build a **custom data visualisation** from the ground up. Broadly speaking we’ll cover:
 
-Broadly speaking we’ll cover:
+* **D3 selections and joins** (these are used to update HTML and SVG elements in a data-driven fashion).
+* **D3 modules** (such as scale functions and transitions).
+* **Third party libraries** such as Lodash that are useful when building data visualisations.
+* General **web development patterns** that are helpful when building interactive data visualisations.
 
-* **D3 selections and joins** (these are used to update HTML and SVG elements in a data-driven fashion)
-* **D3 modules** (such as scale functions and transitions)
-* **third party libraries** such as Lodash that are useful when building data visualizations
-* general **web development patterns** that are helpful when building interactive data visualizations
+### D3 selections and joins
 
-#### D3 selections and joins
+D3 has a powerful mechanism for adding, removing and updating HTML/SVG elements in a data-driven fashion known as selections and joins. You’ll learn how to use **selections** to select and update HTML/SVG elements. You’ll also learn how to update the elements in a data-driven fashion using D3 **joins**. For example, given an array of data, you’ll learn how to keep a group of SVG circles synchronised with the data.
 
-D3 has a powerful mechanism for adding, removing and updating HTML/SVG elements in a data-driven fashion known as selections and joins.
+### D3 modules
 
-You’ll learn how to use **selections** to select and update HTML/SVG elements. You’ll also learn how to update the elements in a data-driven fashion using D3 **joins**.
+D3 has a large number of modules that help you build data visualisations. We cover the following D3 modules (and concepts) in this book:
 
-For example, given an array of data, you’ll learn how to keep a group of SVG circles in sync with the data.
+| Name | Description |
+| --- | --- |
+| **Scale functions** | Scale functions transform data values (e.g. percentages) into visual values (e.g. position, size or colours) |
+| **Data requests** | Data requests let you load CSV and JSON files |
+| **Event handling** | Event handling lets you respond to clicks and hovers from the user |
+| **Transitions** | Transitions let you animate the position, size and color of HTML/SVG elements |
 
-#### D3 modules
+### Third party libraries
 
-D3 has a large number of modules that help you build data visualizations. We’ll cover the following D3 modules (and concepts) in this book:
-
-<table class=""><tbody><tr><td><strong>Scale functions</strong></td><td>Scale functions transform data values (e.g. percentages) into visual values (e.g. position, size or colours)</td></tr><tr><td><strong>Data requests</strong></td><td>Data requests let you load CSV and JSON files</td></tr><tr><td><strong>Event handling</strong></td><td>Event handling lets you respond to clicks and hovers from the user</td></tr><tr><td><strong>Transitions</strong></td><td>Transitions let you animate the position, size and color of HTML/SVG elements</td></tr></tbody></table>
-
-#### Third party libraries
-
-We’ll look at a couple of JavaScript libraries in this book, namely Flourish’s [popup component](https://github.com/kiln/flourish-popup) and [Lodash](https://lodash.com/).
+We look at a couple of JavaScript libraries in this book: Flourish’s [popup component](https://github.com/kiln/flourish-popup) and [Lodash](https://lodash.com/).
 
 Flourish’s popup library helps you add an information popup to a web page and Lodash provides functions for processing data (such as sorting and filtering).
 
-![](http://learn.createwithdata.com/wp-content/uploads/2020/07/image-38.png)
+![Flourish’s information popup (appears when an item is hovered)](63892c2867de54d6b5c62a8aa13ae64b.png)
 
-Flourish’s information popup (appears when an item is hovered)
 
-#### Web development patterns
+### Web development patterns
 
-We’ll also cover some general web development topics which are useful when building interactive data visualizations:
+We also cover web development techniques that are useful when building interactive data visualisations:
 
-<table class=""><tbody><tr><td><strong>Modules</strong></td><td>You’ll learn to split your code up into separate modules rather than having all your code in a single file</td></tr><tr><td><strong>State management</strong></td><td>You’ll learn to implement a state management pattern so that user interaction can be handled in a clean and easy to understand manner</td></tr><tr><td><strong>Data manipulation</strong></td><td>You’ll learn how the lodash library can be used to process (sort, filter etc.) data</td></tr></tbody></table>
+| Name | Description |
+| --- | --- |
+| **Modules** | Split your code up into separate modules rather than having all your code in a single file. |
+| **State management** | Implement a state management pattern so that user interaction can be handled in a clean and easy to understand manner. |
+| **Data manipulation** | Use the lodash library to process (sort, filter etc.) data. |
 
-All of the above will be put into practice by building an interactive data visualization. We’ll look at what you’ll be building in the next section.
+The above techniques will be used during the build of Energy Explorer.
 
 ## What you’ll build
 
-In this book you’ll build an interactive data visualization called **Energy Explorer** which shows the energy mix of 141 countries.
+In this book we’ll build an interactive data visualisation called **Energy Explorer** which shows the energy mix of 141 countries. You can visit a live version at [https://d3-start-to-finish-energy-explorer.surge.sh/](https://d3-start-to-finish-energy-explorer.surge.sh/).
 
-You can visit a live version at [https://d3-start-to-finish-energy-explorer.surge.sh/](https://d3-start-to-finish-energy-explorer.surge.sh/).
+Each country is represented by 4 circles and each circle shows the amount of **renewable**, **fossil fuel**, **hydroelectric** and **nuclear** energy produced by a country:
 
-Each country is represented by 4 circles. Each circle shows the amount of **renewable**, **fossil fuel**, **hydroelectric** and **nuclear** energy produced by a country.
-
-![](https://lh6.googleusercontent.com/y-Vcm_h4Akcpsdh2u5Q3IjO9zgBZ_2Mmyc2w0tOBGiNF9pf-nXCpujdlZXGwe3P8jzEfnAhgCwS7kJQ_h0wRu8a-HMBOV0cOoBS8C5lMUwu8obZTiOSlDbyxDBjGKe1lzF3YfFrDDAY)
+![Energy Explorer](1550e6d5d7d6eac7e9535976ed8cef10.png)
 
 The chart is interactive. When a country is hovered a popup appears showing detailed information.
 
-![](http://learn.createwithdata.com/wp-content/uploads/2020/08/image-29-1024x427.png)
+![Information popup when a country is hovered](46264c633143dfe564920d04128200f6.png)
 
-The countries can be sorted by name or one of the energy types. When the circles sort they animate into their new positions.
+The countries can be sorted by name or one of the energy types. When the circles sort they animate into their new positions. The following image shows the view when Renewable has been selected. The countries are sorted by the percentage of renewable energy in their energy mix:
 
-The following image shows the view when Renewable has been selected. The countries are sorted by the percentage of renewable energy in their energy mix:
+![Countries sorted by renewable energy](31da3d4cde47ee1d75afd37a837576ed.png)
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-31-1024x380.png)
+The visualisation is styled to look clean, modern and fresh. Colors, fonts, line widths, spacing etc. have been carefully selected to make the chart attractive and easy to digest.
 
-The chart is styled to look clean, modern and fresh. Colors, fonts, line widths, spacing etc. have been carefully selected to make the chart attractive and easy to digest.
+Energy Explorer will be built using **HTML**, **SVG**, **CSS**, **JavaScript** and **D3**. HTML, SVG, CSS and JavaScript are standard technologies used to build websites and web applications. Practically every website (or web application) you visit is built from these four technologies. D3 is a JavaScript library that helps you build interactive data visualisations. It offers advanced functionality such as adding, removing and updating DOM elements, transforming data into shapes and animating between application states.
 
-## HTML, SVG, CSS, JavaScript and D3
-
-The energy explorer will be built using **HTML**, **SVG**, **CSS**, **JavaScript** and **D3**.
-
-HTML, SVG, CSS and JavaScript are standard technologies used to build websites and web applications. Practically every website (or web application) you visit is built from these four technologies.
-
-D3 is a JavaScript library that helps you build interactive data visualizations. It offers advanced functionality such as adding, removing and updating DOM elements, transforming data into shapes and animating between application states.
-
-This book expects that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you feel your knowledge of these technologies needs a boost I strongly recommend taking my free [HTML, SVG, CSS & JavaScript for Data Visualisation book](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/).
+This book requires that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you think your knowledge of these technologies needs a boost I  recommend reading my [HTML, SVG, CSS & JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book.

@@ -393,6 +393,6 @@ The `action` function updates `state.selectedIndicator` and calls `update` which
 
 Currently only the menu responds to `state.selectedIndicator` changing. However in an upcoming practical you’ll add code so that the circles are sorted according to the selected indicator.
 
-Another thing to note is that the menu was created using D3. This shows that D3 is actually a general purpose library that can create user interfaces, as well as data visualizations.
+Another thing to note is that the menu was created using D3. This shows that D3 is actually a general purpose library that can create user interfaces, as well as data visualisations.
 
 For simple interfaces such as this menu, D3 is fine to use. However I’d recommend a library such as React or Vue for more complicated interfaces.

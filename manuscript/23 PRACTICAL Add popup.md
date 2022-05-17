@@ -357,7 +357,7 @@ In your code editor open the `step10` directory of the `d3-start-to-finish` 
 
 In `initializeGroup` in `update.js` append a new circle and give it a class attribute of `popup-center`.
 
-You also need to set its radius to a non-zero value. (This is to deal with a rendering optimization in Firefox.)
+You also need to set its radius to a non-zero value. (This is to deal with a rendering optimisation in Firefox.)
 
 {caption: "update.js", line-numbers: false}
 ```

@@ -156,7 +156,7 @@ Set it to 8 and you’ll see:
 
 Notice that the circles adapt their size to the cell size. (This is enabled by the `maxRadius` variable in the `layout` function.)
 
-Hopefully you can also see the benefit of the architecture we’ve chosen. You’re able to change a single number in a configuration object and the visualization layout adapts in a sensible manner. You were also able to change the arrangement of the circles without having to touch the data join code.
+Hopefully you can also see the benefit of the architecture we’ve chosen. You’re able to change a single number in a configuration object and the visualisation layout adapts in a sensible manner. You were also able to change the arrangement of the circles without having to touch the data join code.
 
 ## The build so far
 
