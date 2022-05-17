@@ -1,8 +1,6 @@
 # Introduction
 
-Welcome!
-
-First of all, I’d like to thank you for buying this book. The aim is to teach you how to build a real-world interactive data visualisation using D3 called **Energy Explorer** and for you to learn about D3 along the way.
+Welcome! First of all, I’d like to thank you for buying this book. The aim is to teach you how to build a real-world interactive data visualisation using D3 called **Energy Explorer** and for you to learn about D3 along the way.
 
 ![Energy Explorer](efcd4cbf87a2c746360581deb9c38f1b.png)
 
@@ -53,6 +51,7 @@ We look at a couple of JavaScript libraries in this book: Flourish’s [popup co
 
 Flourish’s popup library helps you add an information popup to a web page and Lodash provides functions for processing data (such as sorting and filtering).
 
+{width: 25%}
 ![Flourish’s information popup (appears when an item is hovered)](63892c2867de54d6b5c62a8aa13ae64b.png)
 
 
@@ -72,7 +71,7 @@ The above techniques will be used during the build of Energy Explorer.
 
 In this book we’ll build an interactive data visualisation called **Energy Explorer** which shows the energy mix of 141 countries. You can visit a live version at [https://d3-start-to-finish-energy-explorer.surge.sh/](https://d3-start-to-finish-energy-explorer.surge.sh/).
 
-Each country is represented by 4 circles and each circle shows the amount of **renewable**, **fossil fuel**, **hydroelectric** and **nuclear** energy produced by a country:
+Each country is represented by 4 circles and each circle shows the amount of **renewable**, **fossil fuel**, **hydroelectric** and **nuclear** energy produced by a country.
 
 ![Energy Explorer](1550e6d5d7d6eac7e9535976ed8cef10.png)
 

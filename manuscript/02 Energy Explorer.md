@@ -1,5 +1,7 @@
 # Energy Explorer
 
+This chapter gives a technical overview of Energy Explorer and an overview of the build steps.
+
 ## Technical overview
 
 This section gives a broad overview of the energy explorer from a technical perspective. There’s no need to understand this section fully, it’s just here to give you a flavour of what you’ll be building.
