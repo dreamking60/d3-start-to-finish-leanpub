@@ -19,7 +19,7 @@ Specifically you need to be familiar with:
 
 You should also be comfortable opening and editing code in a code editor (such as VS Code, Atom or Brackets) and setting up a local web server.
 
-If you need to get up to speed on the above languages and tools I suggest reading my [HTML, SVG, CSS & JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book. If you understand everything in that book you'll be ready for this one.
+If you need to get up to speed on the above languages and tools I suggest reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book. If you understand everything in that book you'll be ready for this one.
 
 ## What you’ll learn
 
@@ -87,4 +87,4 @@ The visualisation is styled to look clean, modern and fresh. Colors, fonts, line
 
 Energy Explorer will be built using **HTML**, **SVG**, **CSS**, **JavaScript** and **D3**. HTML, SVG, CSS and JavaScript are standard technologies used to build websites and web applications. Practically every website (or web application) you visit is built from these four technologies. D3 is a JavaScript library that helps you build interactive data visualisations. It offers advanced functionality such as adding, removing and updating DOM elements, transforming data into shapes and animating between application states.
 
-This book requires that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you think your knowledge of these technologies needs a boost I  recommend reading my [HTML, SVG, CSS & JavaScript for Data Visualisation](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/) book.
+This book requires that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you think your knowledge of these technologies needs a boost I  recommend reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.
