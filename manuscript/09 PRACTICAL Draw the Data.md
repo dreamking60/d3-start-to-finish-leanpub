@@ -1,4 +1,4 @@
-# Practical 3: Draw the data
+# Practical: Draw the data
 
 In this chapter we modify the Energy Explorer to draw a **single circle for each country**.
 

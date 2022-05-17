@@ -1,2 +1,33 @@
-3 PRACTICAL Draw the Data.md
-4 PRACTICAL Size the circles.md
+01 Introduction.md
+02 Energy Explorer.md
+03 PRACTICAL Setting up.md
+04 Introduction to D3.md
+05 D3 Requests.md
+06 PRACTICAL Load the data.md
+07 D3 Selections.md
+08 Data Joins.md
+09 PRACTICAL Draw the Data.md
+10 Scale functions.md
+11 PRACTICAL Size the circles.md
+12 Architecture for Interactive Charts.md
+13 PRACTICAL Add Modules.md
+14 Arranging items in a grid.md
+15 PRACTICAL  Arrange the data.md
+16 More on D3 selections.md
+17 More on D3 joins.md
+18 PRACTICAL Add labels.md
+19 PRACTICAL Add more circles.md
+20 PRACTICAL Style the circles.md
+21 D3 event handling.md
+22 Flourish popup library.md
+23 PRACTICAL Add popup.md
+24 State management.md
+25 PRACTICAL Add state management.md
+26 PRACTICAL Add a menu.md
+27 Data manipulation.md
+28 PRACTICAL Sort the countries.md
+29 D3 transitions.md
+30 PRACTICAL Add transitions.md
+31 PRACTICAL Add a legend.md
+32 PRACTICAL Finishing touches.md
+33 Wrapping up.md

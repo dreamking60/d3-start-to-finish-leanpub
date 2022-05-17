@@ -1,4 +1,4 @@
-# Practical 1: Setting up
+# Practical: Setting up
 
 ## What you’ll need
 

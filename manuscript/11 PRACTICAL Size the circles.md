@@ -1,4 +1,4 @@
-# Practical 4: Size the circles
+# Practical: Size the circles
 
 In this chapter we modify the Energy Explorer to size each circle according to its **renewable energy** percentage. (This is the percentage of a country’s energy mix that comes from renewable energy.)
 
