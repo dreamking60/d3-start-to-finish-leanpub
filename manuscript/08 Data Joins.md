@@ -396,7 +396,7 @@ An array of objects can be joined to HTML/SVG elements in the same manner as an 
 
 Suppose our SVG looks like:
 
-```svg
+```html
 <g class="cities">
 </g>
 ```
@@ -465,7 +465,7 @@ Here’s the example on CodePen:
 
 ![Joining array of objects to circle elements](295c4e7aa9010691b91fe397ce00c210.png)
 
-D>In the above CodePen example we’re also updating `cx` and `cy`. Note also there’s a transform applied to the `g` element (look inside the HTML tab).
+D>In the above CodePen example we’re also updating `cx` and `cy`. Note also there’s a transform applied to the `g` element to stop the circles getting cropped (look inside the HTML tab).
 
 We can begin to see the power of D3 as we now have multiple variables which can drive the position, size and style of HTML/SVG elements. For example we can create a simple scatter plot by setting the x coordinate of each circle relative to `indicator1` and the y coordinate relative to `indicator2`:
 

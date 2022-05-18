@@ -23,7 +23,7 @@ step2
     └── main.js
 ```
 
-Recall that in the previous practical we used D3's `.csv` function to load `data.csv` (see `js/main.js`).
+Recall that in the previous practical we used D3's `.csv` function to load `data/data.csv`.
 
 In this practical we:
 
@@ -34,7 +34,7 @@ In this practical we:
 
 In `index.html` add a container for the SVG `<circle>` elements. Set its width and height to 1200.
 
-Add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles. 
+Add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles:
 
 {caption: "index.html", line-numbers: false}
 ```
@@ -69,7 +69,7 @@ Create a new function `update()` that uses D3 to join `data` to `<circle>` eleme
 {caption: "main.js", line-numbers: false}
 ```js
 markua-start-insert
-var data;
+let data;
 
 function update() {
     d3.select('#chart')

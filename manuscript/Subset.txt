@@ -7,3 +7,7 @@
 07 D3 Selections.md
 08 Data Joins.md
 09 PRACTICAL Draw the Data.md
+10 Scale functions.md
+11 PRACTICAL Size the circles.md
+12 Architecture for Interactive Charts.md
+13 PRACTICAL Add Modules.md

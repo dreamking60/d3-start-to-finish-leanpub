@@ -86,11 +86,11 @@ We now request `data/data.csv` using `d3.csv`. Open `js/main.js` and add the fol
 {caption: "main.js", line-numbers: false}
 ```js
 function dataIsReady(csv) {
-  console.log(csv);
+    console.log(csv);
 }
 
 d3.csv('data/data.csv')
-  .then(dataIsReady);
+    .then(dataIsReady);
 ```
 
 This code is very similar to the code in the D3 Requests chapter. `d3.csv` requests a CSV file at `data/data.csv`. (This URL is relative to `index.html` and it points at the `data.csv` file.) D3 converts the CSV file into an array of objects then calls `dataIsReady` which outputs the array to the console.

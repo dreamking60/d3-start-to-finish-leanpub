@@ -1,344 +1,249 @@
 # Practical: Add modules
 
-## Practical: Add update module
+This practical modularises Energy Explorer by splitting it into separate JavaScript files. It also adds a layout function that'll be used by the update function. This is very much a refactoring exercise and there won't be any difference in the output. However it sets the groundwork for subsequent additions.
 
-In this practical you’ll create a new module that’ll contain the code for updating the visualisation. (Currently this is just the `update` function.)
+## Overview
 
-The steps are:
+Open step5. The file structure is:
 
-* create a **new module** named `update.js`
-* **move** the `update` function from `main.js` into `update.js`
-
-In your code editor open the `step5` directory of the `d3-start-to-finish` code.
-
-### Create a new module
-
-Start by creating a new file within the `js` directory and name it `update.js`.
-
-Your directory structure should now look like:
-
-```
-step5
-├── data
-│   └── data.csv
-├── index.html
-└── js
-├── lib
-│   └── d3.min.js
-├── main.js
-└── update.js
-```
-
-Include the new file `update.js` in the application by adding a new `<script>` tag to `index.html`:
-
-{caption: "index.html", line-numbers: false}
-```
-<!DOCTYPE html>
-<html lang="en">
-...
-<body>
-...
-<script src="js/lib/d3.min.js"></script>
-<script src="js/update.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
-```
-
-Now save `update.js` and `index.html`.
-
-### Move update function
-
-Now copy and delete the `update` function from `main.js`:
-
-{caption: "main.js", line-numbers: false}
-```
-var data;
-// Remove update function
-function dataIsReady(csv) {
-data = csv;
-update();
-}
-```
-
-and paste it into `update.js`:
-
-{caption: "update.js", line-numbers: false}
-```
-function update() {
-d3.select('#chart')
-.selectAll('circle')
-.data(data)
-.join('circle')
-.attr('cx', function(d, i) {
-return i * 10;
-})
-.attr('cy', 100)
-.attr('r', function(d) {
-return radiusScale(d.renewable);
-});
-}
-```
-
-Save both `main.js` and `update.js` and check that the Energy Explorer is working as before:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
-
-## Practical: Add layout module
-
-In this practical you’ll add a [layout function](https://learn.createwithdata.com/books/d3-start-to-finish/sections/layout-functions/) that’ll calculate the position and size of the circles in the Energy Explorer.
-
-This is an ‘under the hood’ change, so you won’t see any difference in how the circles are rendered:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
-
-However, this practical sets the groundwork for laying out the circles in a grid:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-3.png)
-
-The layout function will be added as a new [module](https://learn.createwithdata.com/books/d3-start-to-finish/sections/modules/).
-
-The steps are:
-
-* create a **new module**
-* add a new **layout function** to the new module
-* compute `x`, `y` and `radius` **properties** in the new layout function
-* **call** the new layout function in the update function
-
-In your code editor, if you haven’t already, open the `step5` directory of the `d3-start-to-finish` code.
-
-### Create a new module
-
-Create a new file within the `js` directory and name it `layout.js`.
-
-Your directory structure should now look like:
-
-```
+```text
 step5
 ├── data
 │   └── data.csv
 ├── index.html
 └── js
-├── layout.js
-├── lib
-│   └── d3.min.js
-├── main.js
-└── update.js
+    ├── lib
+    │   └── d3.min.js
+    └── main.js
 ```
 
-Include the new file `layout.js` in the application by adding a new `<script>` tag to `index.html`:
+In this practical we:
+
+1. Add two new empty modules: `layout.js` and `update.js`.
+2. Add a layout function to `layout.js`.
+3. Move the update code from `main.js` to `update.js`
+4. Modify the update function to use the layout function
+
+## Add new modules
+
+Create two new files `layout.js` and `update.js` in the `js` directory. The file structure should now look like:
+
+```text
+step5-complete
+├── data
+│   └── data.csv
+├── index.html
+└── js
+markua-start-insert
+    ├── layout.js
+markua-end-insert
+    ├── lib
+    │   └── d3.min.js
+    ├── main.js
+markua-start-insert
+    └── update.js
+markua-end-insert
+```
+
+Now link to these modules in `index.html`:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-...
-<body>
-...
-<script src="js/lib/d3.min.js"></script>
-<script src="js/layout.js"></script>
-<script src="js/update.js"></script>
-<script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+  </head>
+
+  <body>
+    <svg width="1200" height="1200">
+      <g id="chart"></g>
+    </svg>
+
+    <script src="js/lib/d3.min.js"></script>
+
+markua-start-insert
+    <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+markua-end-insert
+    <script src="js/main.js"></script>
+  </body>
 </html>
 ```
 
-Now save `layout.js` and `index.html`.
+## Add a layout function
 
-## Add layout function
+Add a layout function to `js/layout.js`:
 
-You’ll now add a layout function to `layout.js` that computes an array containing the positions and radii of each country. The output of the function will look something like:
+{caption: "js/layout.js", line-numbers: false}
+```js
+function layout(data) {
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, 20]);
 
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+        item.x = i * 10;
+        item.y = 100;
+        item.radius = radiusScale(d.renewable);
+
+        return item;
+    });
+
+    return layoutData;
+}
 ```
-[
+
+This takes a similar form to the layout functions in the previous chapter. The scale function `radiusScale` and the geometric calculations for `x`, `y` and `radius` are lifted from the update function (`js/main.js`).
+
+The layout function accepts the energy data and outputs a new array where each object represents the position and radius of the country's circle and looks something like:
+
+```js
 {
-radius: 0,
-​​​x: 0,
-​​​y: 100
-​​  },
-{​
-radius: 0.6324555320336758,
-​​​x: 10,
-​​​y: 100
-​​  },
-{​
-radius: 0,
-x: 20,
-y: 100
+  radius: 0.6324555320336758,
+  x: 10,
+  y: 100
 }
-]
 ```
 
-The first object corresponds to Albania, the next to Algeria and so on.
+The output of `layout` will be used in the new update function (see later).
 
-Currently the positions and radii are computed within the `update` function in `update.js`:
+## Move update code
 
-{caption: "update.js", line-numbers: false}
+Delete `radiusScale` from `js/main.js` (because it's now defined in `js/layout.js`).
+
+Then cut the update function (highlighted in red) from `js/main.js` :
+
+{caption: "js/main.js", line-numbers: false}
+```js
+let data;
+
+markua-start-delete
+let radiusScale = d3.scaleSqrt()
+    .domain([0, 100])
+    .range([0, 20]);
+markua-end-delete
+
+markua-start-insert
+function update() {
+    d3.select('#chart')
+        .selectAll('circle')
+        .data(data)
+        .join('circle')
+        .attr('cx', function(d, i) {
+            return i * 10;
+        })
+        .attr('cy', 100)
+        .attr('r', function(d) {
+            return radiusScale(d.renewable);
+        });
+}
+markua-end-insert
+
+function dataIsReady(csv) {
+    data = csv;
+    update();
+}
+
+function transformRow(d) {
+    return {
+        name: d.name,
+        id: d.id,
+        hydroelectric: parseFloat(d.hydroelectric),
+        nuclear: parseFloat(d.nuclear),
+        oilgascoal: parseFloat(d.oilgascoal),
+        renewable: parseFloat(d.renewable)
+    };
+}
+
+d3.csv('data/data.csv', transformRow)
+    .then(dataIsReady);
+```
+
+and paste it into `js/update.js`:
+
+{caption: "js/update.js"}
 ```
 function update() {
-d3.select('#chart')
-.selectAll('circle')
-.data(data)
-.join('circle')
-.attr('cx', function(d, i) {
-return i * 10;
-})
-.attr('cy', 100)
-.attr('r', function(d) {
-return radiusScale(d.renewable);
-});
+    d3.select('#chart')
+        .selectAll('circle')
+        .data(data)
+        .join('circle')
+        .attr('cx', function(d, i) {
+            return i * 10;
+        })
+        .attr('cy', 100)
+        .attr('r', function(d) {
+            return radiusScale(d.renewable);
+        });
 }
 ```
 
-Our aim is to move the code that computes `cx`, `cy` and `r` into the layout function.
+Check that `js/main.js` looks like:
 
-Open `layout.js` and add the following layout function skeleton code:
+{caption: "js/main.js", line-numbers: false}
+```js
+let data;
 
-{caption: "layout.js", line-numbers: false}
-```
-function layout(data) {
-var layoutData = data.map(function(d, i) {
-var item = {};
-// add properties such as x, y, length, width, radius to item
-return item;
-});
-return layoutData;
+function dataIsReady(csv) {
+    data = csv;
+    update();
 }
-```
 
-Now cut `radiusScale` from `main.js` and paste it into `layout`:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout(data) {
-var radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, 20]);
-var layoutData = data.map(function(d, i) {
-var item = {};
-// add properties such as x, y, length, width, radius to item
-return item;
-});
-return layoutData;
+function transformRow(d) {
+    return {
+        name: d.name,
+        id: d.id,
+        hydroelectric: parseFloat(d.hydroelectric),
+        nuclear: parseFloat(d.nuclear),
+        oilgascoal: parseFloat(d.oilgascoal),
+        renewable: parseFloat(d.renewable)
+    };
 }
+
+d3.csv('data/data.csv', transformRow)
+    .then(dataIsReady);
 ```
 
-Now add properties for `x`, `y` and `radius` to the `item` object in the `layout` function. Each of the calculations is taken from the `update` function in `update.js`:
+## Use layout function
 
-{caption: "layout.js", line-numbers: false}
-```
-function layout(data) {
-var radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, 20]);
-var layoutData = data.map(function(d, i) {
-var item = {};
-item.x = i * 10;
-item.y = 100;
-item.radius = radiusScale(d.renewable);
-return item;
-});
-return layoutData;
-}
-```
+Modify the update function `update` (in `js/update.js`) so that it uses the layout function:
 
-That’s the layout function complete so save `layout.js`. Now we need to modify `update` in `update.js` to use the new layout function.
-
-### Use the layout function
-
-In `update.js` call `layout` at the beginning of `update` and assign its output to a new variable named `layoutData`:
-
-{caption: "update.js", line-numbers: false}
-```
+{caption: "js/update.js"}
+```js
 function update() {
-var layoutData = layout(data);
-d3.select('#chart')
-...
+markua-start-insert
+	let layoutData = layout(data);
+markua-end-insert
+
+    d3.select('#chart')
+        .selectAll('circle')
+        .data(layoutData)
+        .join('circle')
+markua-start-insert
+	      .attr('cx', function(d) {
+            return d.x;
+        })
+        .attr('cy', function(d) {
+            return d.y;
+        })
+        .attr('r', function(d) {
+            return d.radius;
+        });
+markua-end-insert
 }
 ```
 
-Then use `layoutData` instead of `data` when creating the data join:
 
-{caption: "update.js", line-numbers: false}
-```
-function update() {
-...
-.selectAll('circle')
-.data(layoutData)
-.join('circle')
-...
-} 
-```
+## Save and refresh
 
-Finally modify the `.attr` methods so that the **layout properties** `x`, `y` and `radius` are used:
+Save all the modified files: `index.html`, `js/main.js`, `js/update.js` and `js/layout.js`.
 
-{caption: "update.js", line-numbers: false}
-```
-function update() {
-...
-.join('circle')
-.attr('cx', function(d) {
-return d.x;
-})
-.attr('cy', function(d) {
-return d.y;
-})
-.attr('r', function(d) {
-return d.radius;
-});
-}
-```
+Refresh your browser (making sure it’s loading `step5`) and you should see the same circles as before:
 
-The complete `update` function should now look like:
+![cc586c1a36fc02369e4d9cba86a9c290.png](cc586c1a36fc02369e4d9cba86a9c290.png)
 
-{caption: "update.js", line-numbers: false}
-```
-function update() {
-var layoutData = layout();
-d3.select('#chart')
-.selectAll('circle')
-.data(layoutData)
-.join('circle')
-.attr('cx', function(d) {
-return d.x;
-})
-.attr('cy', function(d) {
-return d.y;
-})
-.attr('r', function(d) {
-return d.radius;
-});
-}
-```
-
-You’ve separated the geometric calculations from the update code. Can you see that the update code is simpler now? This will be even more apparent as your visualisation increases in complexity!
-
-To recap:
-
-* you created a new `layout` function (within a new module `layout.js`) which computes the position and size of each circle
-* you joined `layoutData` instead of `data` to the circles
-* you updated the `.attr` methods so that the layout properties are used
-
-Now when you save `update.js` and refresh your browser (making sure it’s loading `step5`) you should see the same circles as before:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
-
-It’s worth checking that the layout function is now driving the visualisation.
-
-In `layout.js` change:
-
-{caption: "layout.js", line-numbers: false}
-```
-item.x = i * 10;
-```
-
-to
-
-{caption: "layout.js", line-numbers: false}
-```
-item.x = i * 30;
-```
-
-and verify that the circles are now spaced further apart.
-
-The completed code for this section is in `step5-complete`.
+If this hasn't worked for you, see if you can spot the problem. Perhaps you can add `console.log(layoutData)` after calling `layout(data)` in the update function. Check that it outputs an array of objects with position information. Failing that, compare your code with `step5-complete`.

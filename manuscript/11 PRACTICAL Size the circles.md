@@ -26,13 +26,15 @@ In this practical we:
 1. Convert the indicator values into **numbers**.
 2. Create a `scaleSqrt` **scale function** and use it to **set the radius** of each circle.
 
-### Convert indicator values from strings into numbers
+## Convert indicator values from strings into numbers
 
 When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting data with D3 chapter):
 
 {caption: "main.js", line-numbers: false}
 ```js
-var data;
+let data;
+
+...
 
 function dataIsReady(csv) {
     data = csv;
@@ -82,16 +84,16 @@ the following is returned:
 ```
 
 
-### Create a sqrtScale function and set the circle radii
+## Create a sqrtScale function and set the circle radii
 
 In `js/main.js` create a D3 `scaleSqrt` scale function with domain `[0, 100]` and range `[0, 20]` and assign it to a global variable `radiusScale`. Use the `radiusScale` function to set the circle radii:
 
 {caption: "main.js", line-numbers: false}
 ```js
-var data;
+let data;
 
 markua-start-insert
-var radiusScale = d3.scaleSqrt()
+let radiusScale = d3.scaleSqrt()
     .domain([0, 100])
     .range([0, 20]);
 markua-end-insert
