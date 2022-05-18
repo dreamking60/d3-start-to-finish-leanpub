@@ -4,3 +4,5 @@
 04 Introduction to D3.md
 05 D3 Requests.md
 06 PRACTICAL Load the data.md
+07 D3 Selections.md
+08 Data Joins.md

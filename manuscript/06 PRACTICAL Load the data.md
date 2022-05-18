@@ -27,15 +27,15 @@ There are also three new files: `data.csv`, `d3.min.js` and `main.js`. The first
 
 In this practical we:
 
-1. Take a look at the CSV file `data/data.csv`.
+1. Inspect the CSV file `data/data.csv`.
 2. Link to `js/main.js` and `js/lib/d3.min.js` in `index.html`.
 3. Load `data/data.csv` using D3.
 
-## The data
+## Inspect the data
 
-Open `data/data.csv` which looks like:
+Open `data/data.csv` in your text editor. It should look like:
 
-{caption: "data.csv", line-numbers: false}
+{caption: "data/data.csv", line-numbers: false}
 ```text
 id,name,oilgascoal,nuclear,hydroelectric,renewable
 AGO,Angola,46.8,,53.2,0.0
@@ -77,7 +77,7 @@ When the page loads, the browser will open each JavaScript file in turn and exec
 
 `d3.min.js` is the minified version of D3 and is located in the `js/lib` directory. (Minified means that the size of the library has been reduced by, for example, shortening the names of variables.) We use version 7 of D3 in this book. `main.js` is where Energy Explorer’s code will live.
 
-D>There's a number of different ways of including D3 in your project. We've opted for one of the simplest approaches which is to download the library from the [D3 homepage](https://d3js.org/) and link to it in `index.html`. For larger projects you can use 'bundlers' such as Webpack that can obtain library code for you and package it all together. Such tools add a layer of complexity and to minimise distraction I don't use them in this book.
+D>There's a number of ways to include D3 in your project. We've opted for one of the simpler approaches which is to download the library from the [D3 homepage](https://d3js.org/) and link to it in `index.html`. For larger projects you can use 'bundlers' such as Webpack that can obtain library code for you and package it all together. Such tools add a layer of complexity and to minimise distraction I don't use them in this book.
 
 ## Request data
 
@@ -99,7 +99,7 @@ Now save `main.js` and refresh your browser.
 
 D>Make sure your browser is showing `step2`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step2`. If you’re using Brackets, select Live Preview from the File menu.
 
-You’ll just see a blank page in your browser. However if you open the Console within the Developer Tools of the browser you should see something like:
+You’ll see a blank page in your browser. However if you open the Console within the Developer Tools of the browser you should see something like:
 
 {width: 75%}
 ![Developer Tools console showing the output of `dataIsReady`](39b4553046d04fbfe4b158c846ac04f5.png)
