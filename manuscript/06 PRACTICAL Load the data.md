@@ -4,17 +4,21 @@ You learned about D3 requests in the previous section. In this practical we intr
 
 ## Overview
 
-Open `d3-start-to-finish/step2` in your text editor. The file structure is:
+Open `d3-start-to-finish/step2` in your text editor. The file structure is (new directories and files shown in red):
 
 ```
 step2
+markua-start-insert
 ├── data
 │   └── data.csv
+markua-end-insert
 ├── index.html
+markua-start-insert
 └── js
     ├── lib
     │   └── d3.min.js
     └── main.js
+markua-end-insert
 ```
 
 There are three new directories: `data`, `js` and `js/lib`. `data` is where the data is located and `js` is where JavaScript files live. `js/lib` contains libraries such as D3.
@@ -49,7 +53,7 @@ The data originates from the [World Bank’s World Development Indicators](http
 
 ## Include JavaScript files in index.html
 
-Now open `index.html`. We'll include the two JavaScript files `d3.min.js` and `main.js`:
+Now open `index.html`. We'll include the two JavaScript files `d3.min.js` and `main.js` in our webpage using the `<script>` element. This uses an attribute `src` to specify the path of the JavaScript file:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -69,13 +73,13 @@ markua-end-insert
 </html>
 ```
 
-We can include JavaScript files in a webpage using the `<script>` element. This uses an attribute `src` to specify the path of the JavaScript file.
+When the page loads, the browser will open each JavaScript file in turn and execute it.
 
 `d3.min.js` is the minified version of D3 and is located in the `js/lib` directory. (Minified means that the size of the library has been reduced by, for example, shortening the names of variables.) We use version 7 of D3 in this book. `main.js` is where Energy Explorer’s code will live.
 
 D>There's a number of different ways of including D3 in your project. We've opted for one of the simplest approaches which is to download the library from the [D3 homepage](https://d3js.org/) and link to it in `index.html`. For larger projects you can use 'bundlers' such as Webpack that can obtain library code for you and package it all together. Such tools add a layer of complexity and to minimise distraction I don't use them in this book.
 
-## Data request
+## Request data
 
 We now request `data/data.csv` using `d3.csv`. Open `js/main.js` and add the following:
 
@@ -93,23 +97,20 @@ This code is very similar to the code in the D3 Requests chapter. `d3.csv` reque
 
 Now save `main.js` and refresh your browser.
 
-> Make sure that your browser is showing `step2`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step2`. If you’re using Brackets, select Live Preview from the File menu.
+D>Make sure your browser is showing `step2`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step2`. If you’re using Brackets, select Live Preview from the File menu.
 
 You’ll just see a blank page in your browser. However if you open the Console within the Developer Tools of the browser you should see something like:
 
-{width: 50%}
+{width: 75%}
 ![Developer Tools console showing the output of `dataIsReady`](39b4553046d04fbfe4b158c846ac04f5.png)
 
-In Google Chrome you can open the Developer Tools by either:
+D>In Google Chrome you can open the Developer Tools by either pressing F12 or pressing ctrl-shift-j (Windows) or cmd-option-j (Mac). (See [here](https://developers.google.com/web/tools/chrome-devtools/open) for further information on opening the console in Chrome’s developer tools. Similar instructions for Firefox are [here](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console).)
 
-* pressing F12
-* pressing ctrl-shift-j (Windows) cmd-option-j (Mac)
+The Console allows you to inspect useful information while you develop your application. You can write to the console using `console.log`. In our case, `dataIsReady` calls `console.log(csv)` which outputs the `csv` variable.
 
-(See [here](https://developers.google.com/web/tools/chrome-devtools/open) for further information on opening the console in Chrome’s developer tools. Similar instructions for Firefox are [here](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console).)
+Within the console, expand the array and the first few elements. You should see something like:
 
-The Console allows you to inspect useful information while you develop your application. In this case you’re using `console.log` to output the `csv` variable. Within the console, expand the array and the first few elements. You should see something like:
-
-{width: 50%}
+{width: 75%}
 ![Inspecting the data array](b6a045dc22ee9aa25983ed73aaf868b6.png)
 
 Can you see that this array corresponds to the `data.csv` file? (Each array object corresponds to a row of data.)
@@ -123,6 +124,7 @@ If not, check the following:
 * try opening the Network tab of the developer tools and refreshing. You should see a list of files that the browser has loaded (see below). Make sure that `data.csv` is one of them
 * try opening `step2-complete` which is the completed version of this section
 
+{width: 50%}
 ![Inspecting the Network tab in Chrome's developer tools](af5718a5115a48b016f2f0e037350bc8.png)
 
 This is one of the trickier steps to get working, so don’t worry if you’re having difficulty. Once this has been solved the remaining practicals shouldn’t present similar issues.
