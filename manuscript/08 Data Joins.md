@@ -190,6 +190,8 @@ Here’s the example on CodePen:
 
 [https://codepen.io/createwithdata/pen/LYGBOGx](https://codepen.io/createwithdata/pen/LYGBOGx)
 
+![Joined (overlapping) circles updated with constant value](e9df105a6f045b5be6ef413f5a9424d6.png)
+
 Although there are three circles, they are on top of one another because they have the same center point. As an exercise, try changing the `r`, `cx`, `cy` and `fill` values.
 
 ### Joined value (or ‘data-driven’) update
@@ -212,7 +214,7 @@ d3.select('g.chart')
   }); 
 ```
 
-This results in the first circle getting a radius of 10, the second circle 40 and so on. This is known as a **data-driven update** and is a **cornerstone of D3**.
+This results in the first circle getting a radius of 10, the second circle 40 and so on. This is known as a **data-driven update** and is a cornerstone of D3.
 
 Let’s look at another example. You might want to set the circle radii to twice the joined value:
 
@@ -255,6 +257,8 @@ Now the circles will be colored red if the joined value is greater or equal to 4
 
 [https://codepen.io/createwithdata/pen/pogZdYj](https://codepen.io/createwithdata/pen/pogZdYj)
 
+![Joined circles with data-driven update](26d786dc9d6594e9909d2fec14e03a29.png)
+
 The circles are on top of one other so you can’t see all the circles in this example. Ideally we’d space the circles evenly and this is when array index updates are used.
 
 ### Array index update
@@ -281,6 +285,8 @@ d3.select('g.chart')
 This spaces the circles 100 pixels apart. (The first circle will have an x coordinate of `0`, the second `100` and so on.) Here’s the example on CodePen:
 
 [https://codepen.io/createwithdata/pen/oNbMoOq](https://codepen.io/createwithdata/pen/oNbMoOq)
+
+![Joined circles with array index update](5c6e3d6becb9ca7d0e072ecf422ab757.png)
 
 (The circles are cut off because the `cy` attribute hasn’t been set and defaults to zero.) As an exercise, try changing the value of `circleSpacing`. Can you guess what will happen to the circle positions?
 
@@ -317,6 +323,8 @@ The above code is a very typical pattern in D3. Here it is on CodePen:
 
 [https://codepen.io/createwithdata/pen/ZEQxXwO](https://codepen.io/createwithdata/pen/ZEQxXwO)
 
+![Joined circles with constant, data-driven and index based updates](c1722fb7217afa4b27d4165d4ea31047.png)
+
 (The first circle is clipped because it’s x coordinate is 0.)
 
 Here’s another example where a simple horizontal bar chart is created. The same array `myData` is used but `rect` elements are joined to the array rather than circles. Here’s the SVG:
@@ -350,11 +358,13 @@ You can view this example at:
 
 [https://codepen.io/createwithdata/pen/ZEQxXNp](https://codepen.io/createwithdata/pen/ZEQxXNp)
 
+![Joined rectangles with constant, data-driven and index based updates](1f16d7e4b9dcf9765f0104615612d75f.png)
+
 Try changing the array values and you’ll see the bar chart update accordingly. (Bear in mind that each time you modify code in CodePen, it automatically re-runs which is why you see the bars update.)
 
 Hopefully you can begin to understand D3’s data-driven philosophy. Unlike libraries such as Chart.js where you choose a chart type (bar chart, line chart etc.) D3 let’s you choose HTML or SVG elements and manipulate them in a data-driven fashion. You can still create standard charts using this approach but the real power is that it allows you to create **custom charts of your own design**. The only limit is your imagination!
 
-In the next section we’ll delve a bit deeper and learn how to join **arrays of objects**.
+In the next section we delve deeper and learn how to join **arrays of objects**.
 
 ## Joining arrays of objects
 
@@ -382,7 +392,9 @@ In the previous two sections we showed how to join an array of numbers to HTML/S
 
 D>It’s worth noting that `d3.csv` (which we met in the Requesting data with D3 section) converts CSV files into this format.
 
-An array of objects can be joined to HTML/SVG elements in the same manner as an array of values. The difference is that the **joined value is an object** rather than a number. Let’s look at an example. Suppose our SVG looks like:
+An array of objects can be joined to HTML/SVG elements in the same manner as an array of values. The difference is that the **joined value is an object** rather than a number. Let’s look at an example.
+
+Suppose our SVG looks like:
 
 ```svg
 <g class="cities">
@@ -433,7 +445,7 @@ Each array element is an object so when we pass a function into `.attr` the firs
 }
 ```
 
-This means we need to access the **object’s properties** (for example`d.name` or `d.indicator1`) instead of `d` alone. Let’s use `indicator2` to set the radius of the circles:
+This means we need to access the **object’s properties** (for example `d.name` or `d.indicator1`) instead of `d` alone. Let’s use `indicator2` to set the radius of the circles:
 
 ```js
 d3.select('g.cities')
@@ -450,6 +462,8 @@ markua-end-insert
 Here’s the example on CodePen:
 
 [https://codepen.io/createwithdata/pen/MWKVNMx](https://codepen.io/createwithdata/pen/MWKVNMx)
+
+![Joining array of objects to circle elements](295c4e7aa9010691b91fe397ce00c210.png)
 
 D>In the above CodePen example we’re also updating `cx` and `cy`. Note also there’s a transform applied to the `g` element (look inside the HTML tab).
 
@@ -474,6 +488,8 @@ d3.select('g.cities')
 You can view this example on Codepen at:
 
 [https://codepen.io/createwithdata/pen/vYLjBBx](https://codepen.io/createwithdata/pen/vYLjBBx)
+
+![Joining array of objects to create (upside down) scatter plot](88176a76a7830592b636bb8998e8ccdc.png)
 
 D>Note the above example creates an ‘upside down’ scatter plot because an SVG’s y-axis points downwards.
 
@@ -502,7 +518,7 @@ In this example we’re joining `myArray` to `text` elements. The `x` and `y` at
 
 We’re using `.classed` to set add a `high` class attribute if `indicator1` is greater than 10,000. We’re also using `.text` to set the content of the `text` element to the city name.
 
-![`<text>` elements joined to an array of objects](9ab35cca62fd7eefbd6dcca5b726dfa3.png)
+![`<text>` elements joined to an array of objects](ccc3d7c7e4c61994606446bd7a0664b8.png)
 
 Here’s the example on CodePen:
 
