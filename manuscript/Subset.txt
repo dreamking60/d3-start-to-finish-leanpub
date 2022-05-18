@@ -6,3 +6,4 @@
 06 PRACTICAL Load the data.md
 07 D3 Selections.md
 08 Data Joins.md
+09 PRACTICAL Draw the Data.md

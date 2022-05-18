@@ -4,7 +4,9 @@ D3 selections are basically **arrays of HTML or SVG elements**. They let you **m
 
 ## Creating a selection
 
-D3 has two functions for making selections: `d3.select` and `d3.selectAll`. `d3.select` selects a single element while `d3.selectAll` selects multiple elements.
+D3 has two functions for making selections: `d3.select` and `d3.selectAll`.
+
+`d3.select` selects a single element while `d3.selectAll` selects multiple elements.
 
 ### d3.select
 
@@ -139,7 +141,11 @@ d3.selectAll('circle')
   .style('stroke', '#333');
 ```
 
-Here’s a CodePen example that demonstrates `.style`: [https://codepen.io/createwithdata/pen/abvYowg](https://codepen.io/createwithdata/pen/abvYowg). As an exercise, try adding another `.style` call to change the `stroke` of the circles to `#333`.
+Here’s a CodePen example that demonstrates `.style`:
+
+[https://codepen.io/createwithdata/pen/abvYowg](https://codepen.io/createwithdata/pen/abvYowg).
+
+As an exercise, try adding another `.style` call to change the `stroke` of the circles to `#333`.
 
 ### .attr
 
@@ -185,7 +191,11 @@ d3.selectAll('circle')
   .attr('r', 50);
 ```
 
-Here’s a CodePen example that uses `.attr` to set all the circle radii to 30: [https://codepen.io/createwithdata/pen/GRZWPjM](https://codepen.io/createwithdata/pen/GRZWPjM). As an exercise, try using `.attr` to change the circles’ vertical position (use the attribute `cy`) to 30.
+Here’s a CodePen example that uses `.attr` to set all the circle radii to 30:
+
+[https://codepen.io/createwithdata/pen/GRZWPjM](https://codepen.io/createwithdata/pen/GRZWPjM)
+
+As an exercise, try using `.attr` to change the circles’ vertical position (use the attribute `cy`) to 30.
 
 ### .classed
 
@@ -226,7 +236,11 @@ Under the hood `.classed` adds a class attribute to a selection’s element(s):
 <circle class="item highlighted"></circle>
 ```
 
-Here’s a CodePen example that uses `.classed` to add a class attribute named `highlighted` to each circle: [https://codepen.io/createwithdata/pen/WNwpLog](https://codepen.io/createwithdata/pen/WNwpLog). The CSS contains a rule that sets the fill color for elements with class `highlighted`.
+Here’s a CodePen example that uses `.classed` to add a class attribute named `highlighted` to each circle:
+
+[https://codepen.io/createwithdata/pen/WNwpLog](https://codepen.io/createwithdata/pen/WNwpLog)
+
+The CSS contains a rule that sets the fill color for elements with class `highlighted`.
 
 ### .text
 
@@ -259,7 +273,9 @@ This results in the following change to the HTML:
 <div>Some content</div>
 ```
 
-Here’s an example in CodePen: [https://codepen.io/createwithdata/pen/ExKWGWj](https://codepen.io/createwithdata/pen/ExKWGWj).
+Here’s an example in CodePen:
+
+[https://codepen.io/createwithdata/pen/ExKWGWj](https://codepen.io/createwithdata/pen/ExKWGWj)
 
 ## Multiple updates
 
@@ -307,7 +323,9 @@ d3.select('div.second')
   .selectAll('p');
 ```
 
-Here’s a Codepen containing these examples: [https://codepen.io/createwithdata/pen/xxZYvBZ](https://codepen.io/createwithdata/pen/xxZYvBZ).
+Here’s a Codepen containing these examples:
+
+[https://codepen.io/createwithdata/pen/xxZYvBZ](https://codepen.io/createwithdata/pen/xxZYvBZ)
 
 You might be wondering whether you can achieve something similar using a nested CSS selector. For example, you might think:
 
@@ -322,6 +340,6 @@ d3.select('div.second')
   .selectAll('p');
 ```
 
-They’re similar but there is a difference: when selections are chained **the selection keeps a record of the parent element**. In the previous example the selection keeps a record of the parent element (`div.second`) of the selected `p` elements.
+They’re similar but there is a difference: when selections are chained **the selection keeps a record of the parent element**. In the previous code snippet the selection keeps a record of the parent element (`div.second`) of the selected `p` elements.
 
 This will come in useful when joining data. For now, don’t worry too much about this, but just remember that selections can be chained.
