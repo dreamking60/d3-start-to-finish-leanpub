@@ -2,7 +2,7 @@
 
 Scale functions help you transform your **data values** into **visual values**.
 
-For example, in Energy Explorer **data values** are percentage values, so they vary between 0 and 100.
+For example, in Energy Explorer the **data values** are the four energy mix percentages.
 
 **Visual values** are properties such as position, size and color. For example an x coordinate of `50px`, a height of `100px` or a color of `#aaa`.
 
@@ -14,7 +14,7 @@ let data = [15, 76, 41, 67, 97];
 
 and you want to create a bar chart where the maximum length of the bars is `500px`.
 
-A scale function which takes a number between 0 and 100 as input and ouputs a value between 0 and 500 would help you here. D3 has a module dedicated to scale functions. It creates scale functions for you and lets you configure them. It saves you having to do a lot of mathematics!
+A scale function which takes a number between 0 and 100 and returns a value between 0 and 500 would help you here. D3 has a module dedicated to scale functions. It creates scale functions for you and lets you configure them. It saves you having to do a lot of mathematics!
 
 D3 has around twelve scale types. Some accept **numbers** as input, others accept **strings**. Some output **numbers**, others ouput **colors**. In this book we cover two scale types `scaleLinear` and `scaleSqrt`.
 
@@ -116,6 +116,7 @@ myScale.domain([0, 100]).range([0, 1000]);
 
 Now if you enter `myScale(0)` you should see `0` output. If you enter `myScale(100)` you should see `1000` output.
 
+{width: 50%}
 ![Exploring `scaleLinear` in jsconsole](24a62193337572020db080c712f48d15.png)
 
 ## scaleSqrt
@@ -161,7 +162,9 @@ d3.select('g.chart')
   .data(myData)
   .join('circle')
   .attr('r', function(d) {
+markua-start-insert
     return radiusScale(d);
+markua-end-insert
   });
 ```
 

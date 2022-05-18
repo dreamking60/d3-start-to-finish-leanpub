@@ -163,7 +163,7 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-and paste it into `js/update.js`:
+Paste the update function into `js/update.js`:
 
 {caption: "js/update.js"}
 ```
@@ -216,7 +216,7 @@ Modify the update function `update` (in `js/update.js`) so that it uses the layo
 ```js
 function update() {
 markua-start-insert
-	let layoutData = layout(data);
+    let layoutData = layout(data);
 markua-end-insert
 
     d3.select('#chart')
@@ -224,7 +224,7 @@ markua-end-insert
         .data(layoutData)
         .join('circle')
 markua-start-insert
-	      .attr('cx', function(d) {
+        .attr('cx', function(d) {
             return d.x;
         })
         .attr('cy', function(d) {
@@ -244,6 +244,6 @@ Save all the modified files: `index.html`, `js/main.js`, `js/update.js` and `js/
 
 Refresh your browser (making sure it’s loading `step5`) and you should see the same circles as before:
 
-![cc586c1a36fc02369e4d9cba86a9c290.png](cc586c1a36fc02369e4d9cba86a9c290.png)
+![Output after modularising Energy Explorer (step 5)](cc586c1a36fc02369e4d9cba86a9c290.png)
 
 If this hasn't worked for you, see if you can spot the problem. Perhaps you can add `console.log(layoutData)` after calling `layout(data)` in the update function. Check that it outputs an array of objects with position information. Failing that, compare your code with `step5-complete`.

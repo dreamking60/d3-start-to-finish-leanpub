@@ -1,8 +1,8 @@
 # Architecture for Web-based Data Visualisation
 
-This chapter introduces two techniques for architecting interactive data visualisations that increase code clarity and maintainability. These techniques become increasingly important as an application's size increases and they are of significant benefit to Energy Explorer.
+This chapter introduces two techniques for architecting interactive data visualisations for increased code clarity and maintainability. These techniques become increasingly important as an application's size increases and they are of significant benefit to Energy Explorer.
 
-The first technique is layout functions which take an array of data and output a new array containing information (such as position and size) for rendering the visualisation. The benefit is that the (often complex) logic for calculating the visual variables (such as position, size and colour) is separate to the rendering code. This makes maintaining and understanding the code easier and also makes porting the code from D3 to a different rendering engine (such as React) simpler.
+The first technique is to use a layout function that takes an array of data and outputs a new array containing information (such as position and size) for rendering the visualisation. The benefit is that the (often complex) logic for calculating the visual variables (such as position, size and colour) is separate to the rendering code. This makes maintaining and understanding the code easier and also makes porting the code from D3 to a different rendering engine (such as React) simpler.
 
 The second technique is to modularise the code. This means that the code is split over several files, with each file responsible for a particular aspect of the application. This makes the application easier to understand and maintain.
 
@@ -25,9 +25,7 @@ a layout function could return an array containing position and radius data:
 ]
 ```
 
-Each object in the above array corresponds to an element in `myData`.
-
-The layout function that produces the above is:
+Each object in the above array corresponds to an element in `myData`. The layout function that produces the above is:
 
 ```js
 function layout(data) {
@@ -39,13 +37,13 @@ function layout(data) {
     return item;
   });
 
-	return layoutData;
+  return layoutData;
 }
 ```
 
 This function iterates through `data` and computes `x`, `y` and `r` for each array element. It then returns a new array containing the position and radius data.
 
-> See the JavaScript Iteration chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) if you’re not familiar with `map`.
+D>See the JavaScript Iteration chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) if you’re not familiar with `map`.
 
 Typically you’d assign the output of `layout(myData)` to a new variable:
 
@@ -53,7 +51,7 @@ Typically you’d assign the output of `layout(myData)` to a new variable:
 let layoutData = layout(myData);
 ```
 
-and then join `layoutData` to HTML or SVG elements:
+and join `layoutData` to HTML or SVG elements:
 
 ```js
 d3.select('#chart')

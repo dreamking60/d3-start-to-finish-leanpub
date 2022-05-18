@@ -30,7 +30,7 @@ In this practical we:
 
 When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting data with D3 chapter):
 
-{caption: "main.js", line-numbers: false}
+{caption: "js/main.js", line-numbers: false}
 ```js
 let data;
 
@@ -88,7 +88,7 @@ the following is returned:
 
 In `js/main.js` create a D3 `scaleSqrt` scale function with domain `[0, 100]` and range `[0, 20]` and assign it to a global variable `radiusScale`. Use the `radiusScale` function to set the circle radii:
 
-{caption: "main.js", line-numbers: false}
+{caption: "js/main.js", line-numbers: false}
 ```js
 let data;
 
@@ -108,7 +108,7 @@ function update() {
         })
         .attr('cy', 100)
 markua-start-insert
-    	  .attr('r', function(d) {
+        .attr('r', function(d) {
             return radiusScale(d.renewable);
         });
 markua-end-insert
@@ -134,7 +134,7 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-A `scaleSqrt` scale function is created with domain `[0, 100]` (because the data value varies between 0 and 100). The range is set to `[0, 20]` meaning the maximum circle radius is 20. You’ll set this to a more suitable value later in the book. We saw in the previous chapter the `scaleSqrt` is the correct scale to use when using circle area to represent a quantity.
+A `scaleSqrt` scale function is created with domain `[0, 100]` (because the data value varies between 0 and 100). The range is set to `[0, 20]` meaning the maximum circle radius is 20. We’ll set this to a more suitable value later in the book. We saw in the previous chapter that `scaleSqrt` is the correct scale to use when using circle area to represent a quantity.
 
 We now pass a function into `.attr('r', ...)` so that the radius is set according to the joined value (instead of a constant value). For now we use the `renewable` property and apply the `radiusScale` scale function to it.
 
@@ -146,4 +146,4 @@ Save `main.js` and point your browser at `step4` (if necessary) or select Live P
 
 Each circle represents a county and is sized according to its renewable energy percentage. We can already see that there’s a few countries that appear to have quite a high percentage and plenty others with a low percentage.
 
-Later on in this book you’ll arrange the circles out more effectively and add labels so that you’ll be able to see the individual countries more clearly.
+Later on in this book you’ll arrange the circles out more effectively and add labels so that you can see the individual countries more clearly.
