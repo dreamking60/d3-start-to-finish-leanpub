@@ -2,3 +2,5 @@
 02 Energy Explorer.md
 03 PRACTICAL Setting up.md
 04 Introduction to D3.md
+05 D3 Requests.md
+06 PRACTICAL Load the data.md

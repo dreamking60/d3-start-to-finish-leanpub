@@ -122,7 +122,7 @@ markua-end-insert
 Refresh your browser and verify that the greeting has updated.
 
 {width: 50%}
-![Greeting after edit](3eba1689c4bcd951d085c7688962c678.png)
+![Greeting after editing index.html](3eba1689c4bcd951d085c7688962c678.png)
 
 ## Take a break
 
