@@ -4,7 +4,7 @@ The ‘state’ of an application is information that describes what the applica
 
 For example the state of a data visualisation might include things like:
 
-* the **data** that’s being visualized
+* the **data** that’s being visualised
 * the **type of chart** (bar, line, pie etc.) that the user has chosen
 * the **color palette** the user has chosen
 * **zoom level** and **pan position**

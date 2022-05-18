@@ -1,8 +1,8 @@
 # Requesting data with D3
 
-This chapter covers data requests using D3. This is a nice topic to start your D3 journey as it’s not too hard to understand and it allows you to load some data into the browser (in order to visualize it).
+This chapter covers data requests using D3. This is a nice topic to start your D3 journey as it’s not too hard to understand and it allows you to load some data into the browser (in order to visualise it).
 
-First let’s learn about HTTP requests. **HTTP** stands for **Hypertext Transfer Protocol** and is a protocol (or ‘agreement’) used for communication between a web browser and web server. Any time a web browser wishes to request a resource, be it an HTML file, a JPEG image or a CSV file, it uses an HTTP request. Typically the data (or resource) will have a URL (Uniform Resource Locator) such as `https://assets.codepen.io/2814973/my-csv.csv`. (The URL can also be relative to the `index.html` of your web application, so it’ll often look like `data/my-csv.csv`.)
+First let’s look at HTTP requests. **HTTP** stands for **Hypertext Transfer Protocol** and is a protocol (or ‘agreement’) used for communication between a web browser and web server. Any time a web browser needs to request a resource, be it an HTML file, a JPEG image or a CSV file, it uses an HTTP request. Typically the data (or resource) will have a URL (Uniform Resource Locator) such as `https://assets.codepen.io/2814973/my-csv.csv`. (The URL can also be relative to the `index.html` of your web application, so it’ll often look like `data/my-csv.csv`.)
 
 D>Beware that things get more complicated if the resource has a different domain (i.e. the `assets.codepen.io` part) to your web application due to [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) restrictions. In this book, the data will be hosted on the same server so this isn’t an issue.
 
@@ -12,17 +12,17 @@ In this chapter we look at four request methods: `d3.csv`, `d3.tsv`, `d3.dsv` an
 
 ## d3.csv
 
-`d3.csv` makes an HTTP request for a comma-separated value (CSV) file and converts the incoming file into an array of objects. The syntax of `d3.csv` is:
+`d3.csv` makes an HTTP request for a comma-separated value (CSV) file and converts it into an array of objects. The syntax of `d3.csv` is:
 
 ```js
 d3.csv(url [, row])
 ```
 
-`url` is a string containing the URL while `row` is an optional function that transforms each row of the CSV file. (The square brackets denote an optional argument.)
+`url` is a string containing the URL and `row` is an optional function that transforms each row of the CSV file. (The square brackets denote an optional argument.)
 
 For example given a CSV file with URL `https://assets.codepen.io/2814973/my-csv.csv`:
 
-{caption: 'https://assets.codepen.io/2814973/my-csv.csv'}
+{caption: "https://assets.codepen.io/2814973/my-csv.csv"}
 ```text
 name,indicator1,indicator2
 Paris,4030,13.45
@@ -44,7 +44,7 @@ d3.csv('https://assets.codepen.io/2814973/my-csv.csv').then(dataIsReady);
 
 D>A more detailed explanation is: `d3.csv` evaluates to a ‘promise’. A [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) is an object that represents an ‘asynchronous’ operation. This means `d3.csv` makes the request **but doesn’t wait for the resource to arrive**. Instead the program continues to execute while the resource loads. The promise object has a method `.then` which lets you specify a callback function that’s called when the CSV file loads.
 
-D3 converts the CSV file into an **array of objects**. Each object corresponds to a row in the CSV file (excluding the header) and has properties corresponding to each name in the CSV header:
+D3 converts the CSV file into an **array of objects** and passes it into the callback function. Each object corresponds to a row in the CSV file (excluding the header) and has properties corresponding to each name in the CSV header:
 
 ```js
 [
@@ -81,15 +81,15 @@ function transformRow(row) {
     indicator2: parseFloat(row.indicator2)
   };
 
-	return ret;
+  return ret;
 }
 
 d3.csv('https://assets.codepen.io/2814973/my-csv.csv', transformRow)
 markua-end-insert
-	.then(dataIsReady);
+  .then(dataIsReady);
 ```
 
-The `transformRow` function gets called for each array element. Its parameter is an element from the array of objects that D3 generated from the CSV file. For example the first time `transformRow` is called, `row` is:
+The `transformRow` function gets called for each row. Its parameter is an element from the array of objects that D3 generated from the CSV file. For example the first time `transformRow` is called, `row` is:
 
 ```js
 {
@@ -152,7 +152,7 @@ d3.csv('my-url', transformRow);
 
 `d3.json` makes a request for a JSON file and parses it into a JavaScript array or object. Given a JSON file at `https://assets.codepen.io/2814973/my-json.json`:
 
-{caption: 'https://assets.codepen.io/2814973/my-json.json'}
+{caption: "https://assets.codepen.io/2814973/my-json.json"}
 ```js
 [
   {
