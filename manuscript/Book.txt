@@ -12,7 +12,7 @@
 12 Architecture for Interactive Charts.md
 13 PRACTICAL Add Modules.md
 14 Arranging items in a grid.md
-15 PRACTICAL  Arrange the data.md
+15 PRACTICAL Arrange the data.md
 16 More on D3 selections.md
 17 More on D3 joins.md
 18 PRACTICAL Add labels.md

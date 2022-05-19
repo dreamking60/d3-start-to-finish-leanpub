@@ -116,7 +116,7 @@ myScale.domain([0, 100]).range([0, 1000]);
 
 Now if you enter `myScale(0)` you should see `0` output. If you enter `myScale(100)` you should see `1000` output.
 
-{width: 50%}
+{width: 75%}
 ![Exploring `scaleLinear` in jsconsole](24a62193337572020db080c712f48d15.png)
 
 ## scaleSqrt
