@@ -2,6 +2,7 @@
 
 In this practical you’ll arrange the countries in a grid format:
 
+{width: 66%}
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-3.png)
 
 The [previous section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/arranging-items-in-a-grid/) explained the mathematics and code to arrange an array of data in a grid and we’ll use a similar approach in Energy Explorer.
@@ -136,12 +137,14 @@ Now save `index.html`, `config.js`,  `main.js` and `layout.js` and refresh your 
 
 You should see:
 
+{width: 66%}
 ![Country circles arranged in a grid](06b15073e0eb9be6d4abd941a5676373.png)
 
 By modifying the layout function you’ve changed the way in which the circles are arranged. Notice that you didn’t have to change any of the data join code in `update.js`!
 
 Try changing the value of `numColumns` in `config.js`. For example, set it to 30 and you should see:
 
+{width: 66%}
 ![Grid of circles with 30 columns](b79a2bd2d04186428d1ef3a4a8950aad.png)
 
 Notice that the circles adapt their size to the cell size. (This is because `maxRadius` is derived from the cell size.)

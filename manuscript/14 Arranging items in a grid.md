@@ -10,10 +10,12 @@ Given an array of numbers such as:
 
 we’d like to represent the array using a grid of circles:
 
+{width: 66%}
 ![Circles arranged in a grid (with 4 columns)](4a336aec62a1d1661056d9b0888e201e.png)
 
 The number within each circle indicates the array index. The first circle is top left and represents the first element of the array. The grid has 4 columns and we’d like to calculate the centers of each circle relative to the origin (where the x and y axes meet). Let’s start by figuring out the row number and column number of each cell. The first row and first column are numbered zero:
 
+{width: 66%}
 ![Grid of circles with row and column numbers](b2f7bd870b8ead0fe8a17d81bd2e0a69.png)
 
 We can calculate the column number using JavaScript’s modulo operator `%`. This returns the **remainder** of a division.
@@ -22,6 +24,7 @@ For example, for the 9th circle, `9 % 4` returns `1` because the remainder of 9 
 
 If we evaluate the modulo operator with divisor 4 on numbers up to 10 we get:
 
+{width: 50%}
 | Modulo operation | Result |
 | --- | --- |
 | 0 % 4 | 0   |
@@ -36,9 +39,7 @@ If we evaluate the modulo operator with divisor 4 on numbers up to 10 we get:
 | 9 % 4 | 1   |
 | 10 % 4 | 2   |
 
-The result of the modulo operation wraps around every `n` times (where `n` is the divisor).
-
-This is equivalent to the column number which wraps around every `n` times where `n` is the number of columns. Thus we can use `%` to compute the column number from the array index `i`:
+The result of the modulo operation wraps around every `n` times (where `n` is the divisor). Thus we can use `%` to compute the column number from the array index `i`:
 
 ```js
 let column = i % numColumns;
@@ -54,6 +55,7 @@ Math.floor(7.65); // returns 7
 
 If we divide (using a divisor of 4) each number up to 10 and apply `Math.floor` we get:
 
+{width: 66%}
 | Operation | Result of i ÷ n | Result of Math.floor(i ÷ n) |
 | --- | --- | --- |
 | 0 ÷ 4 | 0   | 0   |

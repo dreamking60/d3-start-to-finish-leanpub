@@ -246,4 +246,4 @@ Refresh your browser (making sure it’s loading `step5`) and you should see the
 
 ![Output after modularising Energy Explorer (step 5)](cc586c1a36fc02369e4d9cba86a9c290.png)
 
-If this hasn't worked for you, see if you can spot the problem. Perhaps you can add `console.log(layoutData)` after calling `layout(data)` in the update function. Check that it outputs an array of objects with position information. Failing that, compare your code with `step5-complete`.
+If this hasn't worked for you, see if you can spot the problem. Perhaps you can add `console.log(layoutData)` after calling `layout(data)` in the update function. Check that it outputs an array of objects containing position information. Failing that, compare your code with `step5-complete`.
