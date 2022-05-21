@@ -1,14 +1,14 @@
 # More on D3 selections
 
-This chapter covers additional methods you can call on a D3 selection. It also covers update functions which are a handy technique for keeping your HTML/SVG elements synchronised with your data.
+This chapter covers additional methods you can call on a D3 selection. It also covers the **update function** which is a handy technique that keeps your HTML/SVG elements synchronised with your data.
 
 ## More selection methods
 
-In this section we’ll look at some more methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later on when creating nested joins.
+In this section we’ll look at some additional methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later on.
 
 ### .size, .empty, .node & .nodes
 
-In the following code samples, assume the SVG looks like:
+In the following code samples assume the SVG looks like:
 
 ```html
 <circle r="10"></circle>
@@ -16,38 +16,40 @@ In the following code samples, assume the SVG looks like:
 <circle r="30"></circle>
 ```
 
-Given a selection you can query the number of elements in the selection using `.size`.
+and that you select the circles and assign the selection to variable `s`:
 
 ```js
-var s = d3.selectAll('circle');
+let s = d3.selectAll('circle');
+```
+
+You can query the number of elements in a selection using `.size`:
+
+```js
 s.size();  // 3
 ```
 
 You can check whether a selection is empty using `.empty`:
 
 ```js
-var s = d3.selectAll('circle');
 s.empty();  // false
 ```
 
-You can get the first element in the selection using `.node`:
+You can get the first element in a selection using `.node`:
 
 ```js
-var s = d3.selectAll('circle');
 s.node();  // <circle r="10"></circle>
 ```
 
 Finally you can get an array containing all the elements using `.nodes`:
 
 ```
-var s = d3.selectAll('circle');
 s.nodes();  // [<circle r="10" />, <circle r="20" />, <circle r="30" />]
 ```
 
 You can see these four methods in action at [https://codepen.io/createwithdata/pen/NWxaZyM](https://codepen.io/createwithdata/pen/NWxaZyM). (Open your browser’s Developer Tools console to see the output.)
 
-{width: 33%}
-![Example of .size, .empty, .node and .nodes selection methods](fa560c54ab380c618d05ee9c2c6a70a7.png)
+{width: 50%}
+![Example output of .size, .empty, .node and .nodes selection methods](fa560c54ab380c618d05ee9c2c6a70a7.png)
 
 ### .append & .remove
 
@@ -69,7 +71,7 @@ For example suppose the HTML and SVG looks like:
 You can append an SVG circle to each `g` element using:
 
 ```js
-var s = d3.selectAll('g');
+let s = d3.selectAll('g');
 s.append('circle');
 ```
 
@@ -169,7 +171,7 @@ d3.select('g.circles')
   etc.
 ```
 
-If the array changes length or its values change you might expect the joined HTML/SVG elements to update accordingly. However **D3 doesn’t automatically update the HTML/SVG elements** each time the array changes. Instead you have to re-join the array and update the style and attributes each time the array changes. Therefore a common pattern is to put the join and update code in its own function (known as an _update function_):
+If the array changes length or its values change you might expect the joined HTML/SVG elements to update accordingly. However **D3 doesn’t automatically update the HTML/SVG elements** each time the array changes. Instead you have to re-join the array and update the style and attributes each time the array changes. Therefore a common pattern is to put the join and update code in its own function (known as an **update function**):
 
 ```js
 function update() {
@@ -246,7 +248,7 @@ D>`window.setInterval` sets up a timer that calls the supplied function at regul
 
 Each time the timer fires (once every second) `updateData` and `update` are called. `updateData` clears `myData` and then adds a random number of random values to `myData`. `update` performs the data join which adds or removes circles so that there are `n` circles where `n` is the length of `myData`. The `cx`, `cy` and `r` attributes of each circle are also updated.
 
-Navigate to [https://codepen.io/createwithdata/pen/Yzwaarg](https://codepen.io/createwithdata/pen/Yzwaarg) to view the example in CodePen. You'll see that every second, circles appear or disappear and change size.
+Navigate to [https://codepen.io/createwithdata/pen/Yzwaarg](https://codepen.io/createwithdata/pen/Yzwaarg) to view the example in CodePen. You'll see that every time the timer fires, circles appear or disappear and change size.
 
 ## Summing up
 

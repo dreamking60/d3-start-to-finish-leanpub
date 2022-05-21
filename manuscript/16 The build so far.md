@@ -31,7 +31,7 @@ ARM,Armenia,35.9,,28.3,0.1
 
 Not including D3, there are four JavaScript files in the `js` directory: `main.js`, `update.js`, `layout.js` and `config.js`.
 
-The first statement that executes is the call to `data.csv` in `main.js` which loads `data/data.csv`:
+The first statement that executes is the call to `d3.csv` in `main.js` which loads `data/data.csv`:
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -57,7 +57,7 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-When the data loads D3 converts the CSV into an array of objects and calls `dataIsReady`. This assigns the array to the global variable `data`: `dataIsReady` also calls `update` which is responsible for creating the circles.
+When the data loads, D3 converts the CSV into an array of objects and calls `dataIsReady`. This assigns the array to the global variable `data`. `dataIsReady` also calls `update` which is responsible for updating the circles.
 
 `update` (`js/update.js`) starts by calling the `layout` function and assigning the output to `layoutData`:
 
@@ -100,25 +100,60 @@ function layout(data) {
 }
 ```
 
-The output of `layout` looks like:
+The input of `layout` looks like:
 
 ```js
 [
   {
-    radius: 0,
-    x: 42.857142857142854,
-    y: 42.857142857142854
+    "name": "Angola",
+    "id": "AGO",
+    "hydroelectric": 53.2,
+    "nuclear": null,
+    "oilgascoal": 46.8,
+    "renewable": 0
   },
   {
-    radius: 0.9486832980505137,
-    x: 128.57142857142856,
-    y: 42.857142857142854
+    "name": "Albania",
+    "id": "ALB",
+    "hydroelectric": 100,
+    "nuclear": null,
+    "oilgascoal": 0,
+    "renewable": 0
   },
-...
+  {
+    "name": "United Arab Emirates",
+    "id": "ARE",
+    "hydroelectric": 0,
+    "nuclear": null,
+    "oilgascoal": 99.8,
+    "renewable": 0.2
+  },
+	...
 ]
 ```
 
-The first object in the array corresponds to Albania, the next to Algeria and so on.
+and the output of `layout` looks like:
+
+```js
+[
+  {
+    "x": 42.857142857142854,
+    "y": 42.857142857142854,
+    "radius": 0
+  },
+  {
+    "x": 128.57142857142856,
+    "y": 42.857142857142854,
+    "radius": 0
+  },
+  {
+    "x": 214.28571428571428,
+    "y": 42.857142857142854,
+    "radius": 1.3416407864998736
+  },
+	...
+]
+```
 
 In `update` the output of `layout` is assigned to `layoutData`. `update` then joins `layoutData` to a selection of circles and updates the circle attributes using `layoutData`‘s `x`, `y` and `radius` properties:
 
