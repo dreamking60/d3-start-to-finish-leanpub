@@ -1,14 +1,17 @@
 # More on D3 joins
 
-## Joining an array to multiple elements
+This chapter covers a couple of advanced techniques when joining data.
 
-The Energy Explorer currently displays a **single circle** for each country.
+We first look at joining arrays to groups of elements, so that each array element corresponds to a group of elements. This is a common scenario because you often need to represent data points with more than one element (for example, a labelled circle requires two elements). Energy Explorer uses this technique so it's worth taking some time to understand. (This is one of the most advanced topics in this book.)
 
-However we would like each country to be represented by **4 circles** (one for each of the energy types) and a **text label**.
+The second technique is for joining nested arrays to nested elements. This is quite an advanced technique and isn't used by Energy Explorer so feel free to skip.
 
-For example, Canada which uses all 4 energy types should look like:
+## Joining an array to groups of elements
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-18.png)
+The Energy Explorer currently displays a **single circle** for each country. However we would like each country to be represented by **4 circles** (one for each of the energy types) and a **text label**. For example, Canada which uses all 4 energy types should look like:
+
+{width: 15%}
+![Each country is represented by 4 circles and a text element](1438e1a4117895d9fa2cfb0ffe646ab7.png)
 
 A sensible approach is to:
 
@@ -17,66 +20,62 @@ A sensible approach is to:
 
 so that each country looks something like:
 
-```
+```html
 <g class="country">
-<circle class="renewable"></circle>
-<circle class="oilgascoal"></circle>
-<circle class="hydroelectric"></circle>
-<circle class="nuclear"></circle>
-<text class="label"></text>
+  <circle class="renewable"></circle>
+  <circle class="oilgascoal"></circle>
+  <circle class="hydroelectric"></circle>
+  <circle class="nuclear"></circle>
+  <text class="label"></text>
 </g>
 ```
 
-> Remember that a `g` element represents a group of SVG elements.
+D>Remember a `g` element represents a group of SVG elements.
 
-There’s more than one way of achieving this using D3 and we’ll look at a simple approach that doesn’t require any additional D3 knowledge.
+There’s more than one way of achieving this using D3 and we’ll look at a simple approach that doesn’t require any additional D3 knowledge. Let’s start with an easier example. Suppose you have some data:
 
-Let’s start with an easier example.
-
-Suppose you have some data:
-
-```
-var myData = [10, 40, 30];
+```js
+let myData = [10, 40, 30];
 ```
 
-and you’d like to join each array element to a `g` element that contains a `circle` element and a `text` element.
+and you’d like to join the array to `g` elements containing a `circle` and `text` element. And suppose you’d also like to size the circle using the data value and populate the text element with the data value (so that it acts as a label):
 
-And suppose you’d also like to size the circle using the data value and populate the text element with the data value (so that it acts as a label):
-
-![](http://learn.createwithdata.com/wp-content/uploads/2020/07/image-20.png)
+{width: 25%}
+![Array of numbers joined to a `g` element containing a `circle` and `text` element](7f0c1e6af8b4838947197508746e648e.png)
 
 The resulting HTML/SVG should look something like:
 
-```
+```html
 <g class="chart">
-<g transform="translate(0, 0)">
-<circle r="10"></circle>
-<text y="60">10</text>
-</g>
-<g transform="translate(100, 0)">
-<circle r="40"></circle>
-<text y="60">40</text>
-</g>
-<g transform="translate(200, 0)">
-<circle r="30"></circle>
-<text y="60">30</text>
-</g>
+  <g transform="translate(0, 0)">
+    <circle r="10"></circle>
+    <text y="60">10</text>
+  </g>
+  <g transform="translate(100, 0)">
+    <circle r="40"></circle>
+    <text y="60">40</text>
+  </g>
+  <g transform="translate(200, 0)">
+    <circle r="30"></circle>
+    <text y="60">30</text>
+  </g>
 </g>
 ```
 
 Let’s start by joining `myData` to `g` elements:
 
-```
-var myData = [10, 40, 30];
+```js
+let myData = [10, 40, 30];
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g');
+  .selectAll('g')
+  .data(myData)
+  .join('g');
 ```
 
 The above is similar to the join code seen in previous sections but the array is joined to `g` elements instead of `circle` elements. This will create the following elements:
 
-```
+```html
 <g></g>
 <g></g>
 <g></g>
@@ -86,47 +85,54 @@ We now need to add a `circle` and `text` element to each of the `g` elements.
 
 We can do this by adding a new function `updateGroup` which gets called on each `g` element using D3’s `.each` function:
 
-```
-var myData = [10, 40, 30];
+```js
+let myData = [10, 40, 30];
+
+markua-start-insert
 function updateGroup() {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-g.append('text')
-.attr('y', 60);
+  var g = d3.select(this);
+
+	if(g.selectAll('*').empty()) {
+    g.append('circle');
+    g.append('text')
+      .attr('y', 60);
+  }
 }
-}
+markua-end-insert
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
+  .selectAll('g')
+  .data(myData)
+  .join('g')
+markua-start-insert
+  .each(updateGroup);
+markua-end-insert
 ```
 
-> Read more about `.each` in the [More selection methods](https://learn.createwithdata.com/books/d3-start-to-finish/sections/more-selection-functions/) section.
+> We covered the `.each` method and `d3.select(this)` in the previous chapter.
 
-`updateGroup` gets called for each `g` element and starts by making a selection containing `this` (which represents the `g` element) and assigns it to the variable `g`. (This is explained in more detail in the [More selection methods](https://learn.createwithdata.com/books/d3-start-to-finish/sections/more-selection-functions/) section.)
+`updateGroup` gets called for each `g` element. It begins by selecting `this` (which represents the `g` element `updateGroup` has been called on) and assigns the resulting selection to the variable `g`.
 
-`updateGroup` then checks whether `g` has any members and if not, it appends a `circle` and `text` element. It also sets the `y` atttribute of the `text` element.
+`updateGroup` then checks whether `g` has any members and if not, it appends a `circle` and `text` element. It also sets the `y` atttribute of the `text` element. In effect we're initialising each of the `g` elements.
 
-> `g.selectAll('*')` makes a selection containing all the members of `g`.
-> 
-> `g.selectAll('*').empty()` returns `true` if `g` has no members.
+D> `g.selectAll('*')` makes a selection containing all the members of `g`.
+D> 
+D> `g.selectAll('*').empty()` returns `true` if `g` has no members.
 
 This code creates the following SVG:
 
-```
+```html
 <g>
-<circle></circle>
-<text y="60"></text>
+  <circle></circle>
+  <text y="60"></text>
 </g>
 <g>
-<circle></circle>
-<text y="60"></text>
+  <circle></circle>
+  <text y="60"></text>
 </g>
 <g>
-<circle></circle>
-<text y="60"></text>
+  <circle></circle>
+  <text y="60"></text>
 </g>
 ```
 
@@ -136,375 +142,293 @@ Now we’ll modify `updateGroup` to update:
 * the radius of the `circle` to the joined value `d`
 * the content of the `text` element to the joined value `d`:
 
-```
-var myData = [10, 40, 30];
+```js
+let myData = [10, 40, 30];
+
 function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-g.append('text')
-.attr('y', 60);
+  let g = d3.select(this);
+
+	if(g.selectAll('*').empty()) {
+    g.append('circle');
+    g.append('text')
+      .attr('y', 60);
+  }
+	
+markua-start-insert
+  let x = i * 100;
+  g.attr('transform', 'translate(' + x + ', 0)');
+
+	g.select('circle')
+    .attr('r', d);
+
+	g.select('text')
+    .text(d);
+markua-end-insert
 }
-var x = i * 100;
-g.attr('transform', 'translate(' + x + ', 0)');
-g.select('circle')
-.attr('r', d);
-g.select('text')
-.text(d);
-}
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
+  .selectAll('g')
+  .data(myData)
+  .join('g')
+  .each(updateGroup);
 ```
 
-> Remember that D3 passes in the joined data `d` and index `i` to `updateGroup`. The first time `updateGroup` is called, `d` will be `10` and `i` will be `0`.
+D>Remember that D3 passes in the joined data `d` and index `i` to `updateGroup`. The first time `updateGroup` is called, `d` will be `10` and `i` will be `0`.
 
 This results in the following SVG:
 
-```
+```html
 <g class="chart">
-<g transform="translate(0, 0)">
-<circle r="10"></circle>
-<text y="60">10</text>
-</g>
-<g transform="translate(100, 0)">
-<circle r="40"></circle>
-<text y="60">40</text>
-</g>
-<g transform="translate(200, 0)">
-<circle r="30"></circle>
-<text y="60">30</text>
-</g>
+  <g transform="translate(0, 0)">
+    <circle r="10"></circle>
+    <text y="60">10</text>
+  </g>
+  <g transform="translate(100, 0)">
+    <circle r="40"></circle>
+    <text y="60">40</text>
+  </g>
+  <g transform="translate(200, 0)">
+    <circle r="30"></circle>
+    <text y="60">30</text>
+ </g>
 </g>
 ```
 
-and the following output:
+and looks like:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-20.png)
+{width: 25%}
+![An array of numbers joined to a `g` element containing `circle` and `text` elements](34d411b8783dce8bdf04d1c28c754fc7.png)
 
-Notice that we **transform** the `g` element rather than setting the x coordinate of the `circle` and `text` elements individually.
+D>Notice we **transform** the `g` element rather than setting the x coordinate of the `circle` and `text` elements individually. This is a common technique when working with a group of elements. It’s usually easier (and more expressive) to **transform the group as a whole** and position the constituent elements relative to the group.
 
-This is a common technique when working with a group of elements. It’s usually easier (and more expressive) to **transform the group as a whole** and position the constituent elements relative to the group.
+Navigate to [https://codepen.io/createwithdata/pen/RwWmweL](https://codepen.io/createwithdata/pen/RwWmweL) to view the example in CodePen. (There’s a bit of additional CSS and the `g.chart` element has been transformed in the order to prevent clipping.)
 
-Here’s the example on CodePen:
-
-Navigate to [https://codepen.io/createwithdata/pen/RwWmweL](https://codepen.io/createwithdata/pen/RwWmweL) to view the example in CodePen
-
-(There’s a bit of additional CSS and the `g.chart` element has been transformed in the order to prevent clipping.)
-
-The same example but using an update function (so that the data join is called each time the data changes) is [here](https://codepen.io/createwithdata/pen/abdXJYv).
+The same example but using an update function (so that the data join is called each time the data changes) is at [https://codepen.io/createwithdata/pen/abdXJYv](https://codepen.io/createwithdata/pen/abdXJYv).
 
 ## Nested joins
 
 This section shows how to join a nested array (in other words, an array of arrays) to HTML or SVG elements.
 
-> Although the Energy Explorer doesn’t use this technique, it’s a useful technique that isn’t widely known. Feel free to skip ahead if it’s not of interest!
+D>Although the Energy Explorer doesn’t use this technique, it’s a useful technique that isn’t widely known. Feel free to skip ahead if it’s not of interest!
 
-Suppose you have the array:
+Suppose you have this nested array (an array of arrays):
 
-```
+```js
 [
-[10, 30, 20],
-[40, 10, 30, 20]
+  [10, 30, 20],
+  [40, 10, 30, 20]
 ]
 ```
 
 The aim is to join this to nested HTML/SVG elements. For example, you might want to join the outer array to `g` elements and the inner arrays to `circle` elements:
 
-```
+```html
 <g transform="translate(0,0)">
-<circle cx="0" r="10"></circle>
-<circle cx="100" r="30"></circle>
-<circle cx="200" r="20"></circle>
+  <circle cx="0" r="10"></circle>
+  <circle cx="100" r="30"></circle>
+  <circle cx="200" r="20"></circle>
 </g>
 <g transform="translate(0,100)">
-<circle cx="0" r="40"></circle>
-<circle cx="100" r="10"></circle>
-<circle cx="200" r="30"></circle>
-<circle cx="300" r="20"></circle>
+  <circle cx="0" r="40"></circle>
+  <circle cx="100" r="10"></circle>
+  <circle cx="200" r="30"></circle>
+  <circle cx="300" r="20"></circle>
 </g>
 ```
 
-This looks like:
+This would look like:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-17.png)
+{width: 50%}
+![Nested array joined to `g` and `circle` elements](1a8c4def0472090a052c3de9930af8c0.png)
 
 Each `g` element is translated down the page by 100 pixels. Each `circle` element is translated horizontally by 100 pixels and sized according to the inner array values.
 
 ### Overview
 
-The approach is to join the outer array to `g` elements. This means that each `g`‘s joined value is one of the inner arrays.
+The approach is to join the outer array to `g` elements. This means that each `g`‘s joined value is one of the inner arrays. We then iterate through the `g` elements and join the inner arrays to `circle` elements.
 
-(This may feel a bit unusual because you’re used to joining arrays of numbers to HTML/SVG elements. However it doesn’t really matter what type the array elements are. They can be numbers, strings, objects or arrays.)
+D>This may feel a bit unusual because you’re used to joining arrays of numbers to HTML/SVG elements. However it doesn’t matter what type the array elements are. They can be numbers, strings, objects or arrays.
 
-We then iterate through the two `g` elements and join the inner arrays to `circle` elements.
 
 ### Join outer array to `g` elements
 
 Assume there’s an `svg` and `g` element on the page that’ll act as the container:
 
-```
+```html
 <svg width="1200" height="1200">
-<g class="chart" transform="translate(50, 50)"></g>
+  <g class="chart" transform="translate(50, 50)"></g>
 </svg>
 ```
 
 Let’s join an array of arrays named `myData` to `g` elements:
 
-```
-var myData = [
-[10, 30, 20],
-[40, 10, 30, 20]
+```js
+let myData = [
+  [10, 30, 20],
+  [40, 10, 30, 20]
 ];
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g');
+  .selectAll('g')
+  .data(myData)
+  .join('g');
 ```
 
-The above is similar to the join code seen in previous sections but the array is joined to `g` elements instead of `circle` elements. This will create the following elements:
+The above is similar to the join code seen in previous sections but the array is joined to `g` elements instead of `circle` elements. We’ll name this join the **outer** join. This will create the following elements:
 
-```
+```html
 <g></g>
 <g></g>
 ```
 
-(The first `g` element’s joined value is the array `[10, 30, 20]`. The second `g` element’s joined value is the array `[40, 10, 30, 20]`.)
+D>The first `g` element’s joined value is the array `[10, 30, 20]`. The second `g` element’s joined value is the array `[40, 10, 30, 20]`.
 
-We’ll name this join the **outer** join.
 
 ### Add `updateGroup` function
 
-Now add a new function `updateGroup` and call it on each `g` element using D3’s `each` method:
+Now we add a new function `updateGroup` and call it on each `g` element using D3’s `each` method. This is similar to what we did when joining arrays to groups of elements in the previous section.
 
-```
-var myData = [
-[10, 30, 20],
-[40, 10, 30, 20]
+```js
+let myData = [
+  [10, 30, 20],
+  [40, 10, 30, 20]
 ];
+
+markua-start-insert
 function updateGroup(d, i) {
+  let g = d3.select(this);
+  g.attr('transform', 'translate(0,' + i * 100 + ')');
 }
+markua-end-insert
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
+  .selectAll('g')
+  .data(myData)
+  .join('g')
+markua-start-insert
+	.each(updateGroup);
+markua-end-insert
 ```
 
-`updateGroup` will get called for each element in `myData`. Each time it’s called, the joined value is passed in as the first parameter and the index as the second parameter.
+`updateGroup` gets called for each element in `myData`. Each time it’s called, the joined value is passed in as the first parameter and the index as the second parameter. Therefore the first time `updateGroup` is called, `d` is the array `[10, 30, 20]` and `i` is `0`. The second time it’s called, `d` is the array `[40, 10, 30, 20]` and `i` is `1`.
 
-Therefore the first time `updateGroup` is called, `d` is the array `[10, 30, 20]` and `i` is `0`. The second time it’s called, `d` is the array `[40, 10, 30, 20]` and `i` is `1`.
+The `g` element is assigned to the variable `g` (using `d3.select(this)`). Each `g` element is then translated by `(0, i * 100)` where `i` is the index of the `g` element. (The variable `g` is a D3 selection containing the current `g` element.)
 
-`updateGroup` has a couple of tasks:
+The resulting SVG looks like:
 
-* position the `g` elements
-* join `d` to `circle` elements
-
-### Position the `g` elements
-
-Each `g` element is translated by `(0, i * 100)` where `i` is the index of the `g` element:
-
-```
-var myData = [
-[10, 30, 20],
-[40, 10, 30, 20]
-];
-function updateGroup(d, i) {
-var g = d3.select(this);
-g.attr('transform', 'translate(0,' + i * 100 + ')');
-}
-d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
-```
-
-`updateGroup` starts by selecting the current `g` element (represented by `this`) and assigning it to the variable `g`. (See the `.each` section in the [More selection methods](https://learn.createwithdata.com/books/d3-start-to-finish/sections/more-selection-functions/) section for a reminder.)
-
-We then transform the `g` element using D3’s `.attr` method. (The variable `g` is a D3 selection containing the current `g` element.)
-
-The resulting SVG will look like:
-
-```
+```html
 <g class="chart" transform="translate(50, 50)">
-<g transform="translate(0,0)"></g>
-<g transform="translate(0,100)"></g>
+  <g transform="translate(0,0)"></g>
+  <g transform="translate(0,100)"></g>
 </g>
 ```
 
 ### Join `d` to `circle` elements
 
-We’ll now join `d` to `circle` elements using standard join code:
+We now join `d` to `circle` elements using standard join code. We'll name this the **inner join**:
 
-```
+```js
 var myData = [
-[10, 30, 20],
-[40, 10, 30, 20]
+  [10, 30, 20],
+  [40, 10, 30, 20]
 ];
+
 function updateGroup(d, i) {
-var g = d3.select(this);
-g.attr('transform', 'translate(0,' + i * 100 + ')');
-g.selectAll('circle')
-.data(d)
-.join('circle');
+  var g = d3.select(this);
+  g.attr('transform', 'translate(0,' + i * 100 + ')');
+
+markua-start-insert
+  g.selectAll('circle')
+    .data(d)
+    .join('circle')
+    .attr('cx', function(d, i) {
+      return i * 100;
+    })
+    .attr('r', function(d) {
+      return d;
+    });
+markua-end-insert
 }
+
 d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
+  .selectAll('g')
+  .data(myData)
+  .join('g')
+  .each(updateGroup);
 ```
 
-This may take a bit of getting used to! The key thing to remember is that each time `updateGroup` is called, `d` is one of the inner arrays. The first time `updateGroup` is called, `d` will be `[10, 30, 20]`. The second time, `d` will be `[40, 10, 30, 20]`.
+The important thing to note is we're now joining one of the **inner arrays** to `<circle>` elements.
 
-Remember that the variable `g` is a D3 selection containing the current `g` element. (The first time `updateGroup` is called, this selection contains the first `g` element.)
+`g.selectAll('circle')` selects all `circle` elements within the `g` element. (The first time this is called, this will be an empty selection. Return to the D3 Selections chapter to read more on this.)
 
-The join code is:
+The next line `.data(d)` specifies that we're joining one of the inner arrays. (Remember that `d` is one of the inner arrays such as `[10, 30, 20]`.)
 
-```
-g.selectAll('circle')
-.data(d)
-.join('circle');
-```
-
-We’ll name this join the **inner** join.
-
-It’s helpful to know it’s equivalent to:
-
-```
-d3.select(this)
-.selectAll('circle')
-.data(d)
-.join('circle');
-```
-
-which is similar to the join code you encountered in the [Data joins](https://learn.createwithdata.com/books/d3-start-to-finish/sections/how-to-join/) section:
-
-* the first line selects the container element (a `g` element in this case)
-* the second line selects the elements we’re joining (`circle` elements in this case)
-* the third line specifies the array we’re joining
-* the last line specifies the type of element we’re joining (`circle` elements in this case)
-
-A key thing to remember is that `d` is an array, because the `g` elements have been joined to arrays: see the join code beginning `d3.select('g.chart')`.
-
-The resulting SVG will look like:
-
-```
-<g class="chart" transform="translate(50, 50)">
-<g transform="translate(0,0)">
-<circle></circle>
-<circle></circle>
-<circle></circle>
-</g>
-<g transform="translate(0,100)">
-<circle></circle>
-<circle></circle>
-<circle></circle>
-<circle></circle>
-</g>
-</g>
-```
-
-### Update the circles
-
-The final step is to update the position and radius of each circle.
-
-We only need to set the `x` position of the circle because the translate transform on the `g` element takes care of vertical positioning:
-
-```
-var myData = [
-[10, 30, 20],
-[40, 10, 30, 20]
-];
-function updateGroup(d, i) {
-var g = d3.select(this);
-g.attr('transform', 'translate(0,' + i * 100 + ')');
-
-g.selectAll('circle')
-.data(d)
-.join('circle')
-.attr('cx', function(d, i) {
-return i * 100;
-})
-.attr('r', function(d) {
-return d;
-});
-}
-d3.select('g.chart')
-.selectAll('g')
-.data(myData)
-.join('g')
-.each(updateGroup);
-```
-
-Note that the `i` parameter in the function that sets `cx` refers to the inner join. In other words, it’s the index of an element of the inner array.
+The next line `.join('circle')` specifies the type of element we're joining. The `cx` attribute is then updated using the element index `i` (so that they're evenly spaced). The `r` attribute is updated using the joined value.
 
 This produces the output:
 
-```
+```html
 <g class="chart" transform="translate(50, 50)">
-<g transform="translate(0,0)">
-<circle cx="0" r="10"></circle>
-<circle cx="100" r="30"></circle>
-<circle cx="200" r="20"></circle>
-</g>
-<g transform="translate(0,100)">
-<circle cx="0" r="40"></circle>
-<circle cx="100" r="10"></circle>
-<circle cx="200" r="30"></circle>
-<circle cx="300" r="20"></circle>
-</g>
+  <g transform="translate(0,0)">
+    <circle cx="0" r="10"></circle>
+    <circle cx="100" r="30"></circle>
+    <circle cx="200" r="20"></circle>
+  </g>
+  <g transform="translate(0,100)">
+    <circle cx="0" r="40"></circle>
+    <circle cx="100" r="10"></circle>
+    <circle cx="200" r="30"></circle>
+    <circle cx="300" r="20"></circle>
+  </g>
 </g>
 ```
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-17.png)
+![Array of arrays joined to `<g>` and `<circle>` elements](e2f830fa221696db4a5aa02860c54f83.png)
 
-Here’s the example on CodePen:
+Navigate to [https://codepen.io/createwithdata/pen/dyNgzqJ](https://codepen.io/createwithdata/pen/dyNgzqJ) to view this example in CodePen.
 
-Navigate to [https://codepen.io/createwithdata/pen/dyNgzqJ](https://codepen.io/createwithdata/pen/dyNgzqJ) to view the example in CodePen
+To summarise, there's two data joins: the outside one joins `myData` to `<g>` elements and the inside one joins the inner arrays (e.g. `myData[0]`) to `<circle>` elements. This can be quite tricky to understand, so don't worry too much if you don't get it at first!
 
 ### Update function with nested join
 
-The nested join introduced in this section can be adapted to an update function. (If you’ve forgotten what an update function I suggest revisiting the [Update functions section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/update-loops/).)
+The nested join can be put inside an update function (see the More on D3 selections chapter).
 
-A function named `getData` is added which creates a randomized array of arrays. (See the upcoming CodePen example for this function’s body.)
+A function named `getData` is added which creates a randomised array of arrays. The outer join is moved to a function named `update` and we use `window.setInterval` to call `getData` and `update` at regular intervals:
 
-Wrap the outer join in a function named `update` and use `window.setInterval` to call `getData` and `update` at regular intervals:
-
-```
+```js
 function getData() {
-// Return a randomized array of arrays
+  // Return a randomized array of arrays
 }
-function updateGroup(d, i) {
-var g = d3.select(this);
-g.attr('transform', 'translate(0,' + i * 100 + ')');
 
-g.selectAll('circle')
-.data(d)
-.join('circle')
-.attr('cx', function(d, i) {
-return i * 100;
-})
-.attr('r', function(d) {
-return d;
-});
+function updateGroup(d, i) {
+  var g = d3.select(this);
+  g.attr('transform', 'translate(0,' + i * 100 + ')');
+
+  g.selectAll('circle')
+    .data(d)
+    .join('circle')
+    .attr('cx', function(d, i) {
+      return i * 100;
+    })
+    .attr('r', function(d) {
+      return d;
+    });
 }
+
 function update() {
-d3.select('g.chart')
-.selectAll('g')
-.data(data)
-.join('g')
-.each(updateGroup);
+  d3.select('g.chart')
+    .selectAll('g')
+    .data(data)
+    .join('g')
+    .each(updateGroup);
 }
+
 window.setInterval(function() {
-data = getData();
-update();
+  data = getData();
+  update();
 }, 1000);
 ```
 
-Here’s the example on CodePen:
+Navigate to [https://codepen.io/createwithdata/pen/gOLmMrg](https://codepen.io/createwithdata/pen/gOLmMrg) to view the example in CodePen.
 
-Navigate to [https://codepen.io/createwithdata/pen/gOLmMrg](https://codepen.io/createwithdata/pen/gOLmMrg) to view the example in CodePen
+Every second, `getData` randomises the nested array. The update function is then called and this performs the nested join, resulting in the `<circle>` elements being added, removed and resized.

@@ -1,10 +1,6 @@
 # The build so far
 
-This chapter gives an overview of the Energy Explorer build so far.
-
-You can follow along by opening `step6-complete`.
-
-The directory structure of `step6-complete` is:
+This chapter gives an overview of the Energy Explorer build so far. The directory structure of `step6-complete` is:
 
 ```text
 step6-complete
@@ -35,7 +31,7 @@ ARM,Armenia,35.9,,28.3,0.1
 
 Not including D3, there are four JavaScript files in the `js` directory: `main.js`, `update.js`, `layout.js` and `config.js`.
 
-`main.js` loads `data.csv` using `d3.csv`. When the data loads D3 converts the CSV into an array of objects and calls `dataIsReady`. This assigns the array to the global variable `data`:
+The first statement that executes is the call to `data.csv` in `main.js` which loads `data/data.csv`:
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -61,7 +57,7 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-`dataIsReady` also calls `update` which is responsible for creating the circles.
+When the data loads D3 converts the CSV into an array of objects and calls `dataIsReady`. This assigns the array to the global variable `data`: `dataIsReady` also calls `update` which is responsible for creating the circles.
 
 `update` (`js/update.js`) starts by calling the `layout` function and assigning the output to `layoutData`:
 
@@ -73,9 +69,38 @@ function update() {
 }
 ```
 
-The `layout` function (`js/layout.js`) iterates through `data` and returns an array of circle positions and radii.
+The `layout` function (`js/layout.js`) iterates through `data` and returns an array of circle positions and radii:
 
-The output of the layout function looks something like:
+{caption: "js/layout.js"}
+```js
+function layout(data) {
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth;
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+        let column = i % config.numColumns;
+        let row = Math.floor(i / config.numColumns);
+
+        item.x = column * cellWidth + 0.5 * cellWidth;
+        item.y = row * cellHeight + 0.5 * cellHeight;
+        item.radius = radiusScale(d.renewable);
+
+        return item;
+    });
+
+    return layoutData;
+}
+```
+
+The output of `layout` looks like:
 
 ```js
 [
