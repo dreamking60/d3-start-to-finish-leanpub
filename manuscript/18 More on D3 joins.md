@@ -40,7 +40,7 @@ let myData = [10, 40, 30];
 
 and you’d like to join the array to `<g>` elements containing a `<circle>` and `<text>` element. And suppose you’d also like to size the circle using the data value and populate the text element with the data value (so that it acts as a label):
 
-{width: 25%}
+{width: 50%}
 ![Array of numbers joined to a `<g>` element containing a `<circle>` and `<text>` element](7f0c1e6af8b4838947197508746e648e.png)
 
 We'd like the HTML/SVG to look like:
@@ -220,7 +220,7 @@ Suppose you have this nested array:
 ]
 ```
 
-The aim is to join this to nested HTML/SVG elements. For example, you might want to join the outer array to `<g>` elements and the inner arrays to `<circle>` elements:
+The aim is to join this to nested HTML/SVG elements. For example, you might want to join the outer array to `<g>` elements and the inner arrays to `<circle>` elements. This would result in something like:
 
 ```html
 <g transform="translate(0,0)">
@@ -241,13 +241,11 @@ This would look like:
 {width: 50%}
 ![Nested array joined to `g` and `circle` elements](1a8c4def0472090a052c3de9930af8c0.png)
 
-Each `<g>` element is translated down the page by 100 pixels. Each `<circle>` element is translated horizontally by 100 pixels and sized according to the inner array values.
+Each `<g>` element represents a row of circles. Each `<circle>` element is spaced horizontally by 100 pixels and sized according to the inner array values.
 
 ### Overview
 
 The approach is to join the outer array to `<g>` elements. This means that each `<g>`‘s joined value is one of the inner arrays. We then iterate through the `<g>` elements and join the inner arrays to `<circle>` elements.
-
-D>This may feel a bit unusual because you’re used to joining arrays of numbers to HTML/SVG elements. However it doesn’t matter what type the array elements are. They can be numbers, strings, objects or arrays.
 
 
 ### Join outer array to `<g>` elements
@@ -286,7 +284,7 @@ D>The first `<g>` element’s joined value is the array `[10, 30, 20]`. The seco
 
 ### Add `updateGroup` function
 
-Now we add a new function `updateGroup` and call it on each `<g>` element using D3’s `each` method. This is similar to what we did when joining arrays to groups of elements in the previous section.
+Now we add a new function `updateGroup` and call it on each `<g>` element using D3’s `.each` method. This is similar to what we did when joining arrays to groups of elements earlier in this chapter.
 
 ```js
 let myData = [
@@ -306,13 +304,13 @@ d3.select('g.chart')
   .data(myData)
   .join('g')
 markua-start-insert
-	.each(updateGroup);
+  .each(updateGroup);
 markua-end-insert
 ```
 
 `updateGroup` gets called for each element in `myData`. Each time it’s called, the joined value is passed in as the first parameter and the index as the second parameter. Therefore the first time `updateGroup` is called, `d` is the array `[10, 30, 20]` and `i` is `0`. The second time it’s called, `d` is the array `[40, 10, 30, 20]` and `i` is `1`.
 
-A selection containing the `<g>` element is assigned to the variable `g` (using `d3.select(this)`). Each `<g>` element is then translated by `(0, i * 100)` where `i` is the index of the `<g>` element. (The variable `g` is a D3 selection containing the current `<g>` element.)
+A selection containing the `<g>` element is assigned to the variable `g` (using `d3.select(this)`). The `<g>` element is then translated by `(0, i * 100)` where `i` is the index of the `<g>` element. Therefore the first `<g>` element is translated by `(0,0)` and the second one by `(0,100)`.
 
 The resulting SVG looks like:
 
@@ -361,7 +359,7 @@ The important thing to note is we're now joining one of the **inner arrays** to 
 
 `g.selectAll('circle')` selects all `circle` elements within the `<g>` element. (The first time this is called, this will be an empty selection. Return to the D3 Selections chapter to read more on this.)
 
-The next line `.data(d)` specifies that we're joining one of the inner arrays. (Remember that `d` is one of the inner arrays such as `[10, 30, 20]`.)
+The next line `.data(d)` specifies that we're joining `d` (which is one of the inner arrays such as `[10, 30, 20]`.)
 
 The next line `.join('circle')` specifies the type of element we're joining. The `cx` attribute is then updated using the element index `i` (so that they're evenly spaced). The `r` attribute is updated using the joined value.
 
@@ -383,22 +381,23 @@ This produces the output:
 </g>
 ```
 
+{width: 50%}
 ![Array of arrays joined to `<g>` and `<circle>` elements](e2f830fa221696db4a5aa02860c54f83.png)
 
 Navigate to [https://codepen.io/createwithdata/pen/dyNgzqJ](https://codepen.io/createwithdata/pen/dyNgzqJ) to view this example in CodePen.
 
-To summarise, there's two data joins: the outside one joins `myData` to `<g>` elements and the inside one joins the inner arrays (e.g. `myData[0]`) to `<circle>` elements. This can be quite tricky to understand, so don't worry too much if you don't get it at first!
+To summarise, there's two data joins: the outer one joins `myData` to `<g>` elements and the inner one joins the inner arrays (e.g. `[10, 30, 20]`) to `<circle>` elements. This can be quite tricky to understand, so don't worry too much if you don't get it at first!
 
 ### Update function with nested join
 
-The nested join can be put inside an update function (see the More on D3 selections chapter).
-
-A function named `getData` is added which creates a randomised array of arrays. The outer join is moved to a function named `update` and we use `window.setInterval` to call `getData` and `update` at regular intervals:
+The nested join can be also put inside an update function (see the More on D3 selections chapter). For example:
 
 ```js
+markua-start-insert
 function getData() {
   // Return a randomized array of arrays
 }
+markua-end-insert
 
 function updateGroup(d, i) {
   var g = d3.select(this);
@@ -415,6 +414,7 @@ function updateGroup(d, i) {
     });
 }
 
+markua-start-insert
 function update() {
   d3.select('g.chart')
     .selectAll('g')
@@ -427,7 +427,10 @@ window.setInterval(function() {
   data = getData();
   update();
 }, 1000);
+markua-end-insert
 ```
+
+A function named `getData` is added which creates a randomised array of arrays. The outer join is moved to a function named `update` and we use `window.setInterval` to call `getData` and `update` at regular intervals:
 
 Navigate to [https://codepen.io/createwithdata/pen/gOLmMrg](https://codepen.io/createwithdata/pen/gOLmMrg) to view the example in CodePen.
 

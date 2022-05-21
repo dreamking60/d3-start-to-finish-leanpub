@@ -48,7 +48,7 @@ s.nodes();  // [<circle r="10" />, <circle r="20" />, <circle r="30" />]
 
 You can see these four methods in action at [https://codepen.io/createwithdata/pen/NWxaZyM](https://codepen.io/createwithdata/pen/NWxaZyM). (Open your browser’s Developer Tools console to see the output.)
 
-{width: 50%}
+{width: 66%}
 ![Example output of .size, .empty, .node and .nodes selection methods](fa560c54ab380c618d05ee9c2c6a70a7.png)
 
 ### .append & .remove
@@ -59,9 +59,7 @@ You can add a new element to each element of a selection using `.append`. The sy
 s.append(elementType)
 ```
 
-where `s` is a selection and `elementType` is the type of element you wish to append.
-
-For example suppose the HTML and SVG looks like:
+where `s` is a selection and `elementType` is the type of element you wish to append. For example suppose the HTML and SVG looks like:
 
 ```html
 <g></g>

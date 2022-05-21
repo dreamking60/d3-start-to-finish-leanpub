@@ -1,18 +1,6 @@
-01 Introduction.md
-02 Energy Explorer.md
-03 PRACTICAL Setting up.md
-04 Introduction to D3.md
-05 D3 Requests.md
-06 PRACTICAL Load the data.md
-07 D3 Selections.md
-08 Data Joins.md
-09 PRACTICAL Draw the Data.md
-10 Scale functions.md
-11 PRACTICAL Size the circles.md
-12 Architecture for Interactive Charts.md
-13 PRACTICAL Add Modules.md
-14 Arranging items in a grid.md
 15 PRACTICAL Arrange the data.md
 16 The build so far.md
 17 More on D3 selections.md
 18 More on D3 joins.md
+19 PRACTICAL Add labels.md
+20 PRACTICAL Add more circles.md

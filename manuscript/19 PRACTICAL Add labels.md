@@ -1,422 +1,244 @@
 # Practical: Add labels
 
-## Practical: Join data to multiple elements
+In this practical we add a label to each circle by joining the data to a `<g>` element containing a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
 
-In this practical you’ll join `data` to `g` elements. Each `g` element will contain a single `circle` element. This technique was covered in the [Joining an array to multiple elements section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/joining-an-array-to-multiple-elements/).
+Currently each country is represented by a single `<circle>` element. For example:
 
-Currently each country is represented by a single `circle` element. For example:
-
-```
-<circle cx="471" cy="264" r="24"></circle>
+```html
+<circle cx="471" cy="264" r="24.26"></circle>
 ```
 
-The aim of this practical is to represent each country with a `g` element that contains a `circle` element:
+By the end of this practical, each country will be represented by a `<g>` element containing a `<circle>` and `<text>` element:
 
-```
+```html
 <g class="country" transform="translate(471,264)">
-<circle r="24"></circle>
+  <circle r="24.26"></circle>
+	<text class="label" y="50">Denmark</text>
 </g>
 ```
 
-Instead of positioning the circle (using `cx` and `cy` attributes) we position the `g` element using the `transform` attribute.
+## Overview
 
-In your code editor open the `step7` directory of the `d3-start-to-finish` code.
+Open step7. The file structure is:
 
-### Join layoutData to `g` elements
-
-The existing join code is in the `update` function (`update.js)`:
-
-{caption: "update.js", line-numbers: false}
+```text
+step7
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   └── d3.min.js
+    ├── main.js
+    └── update.js
 ```
-function update() {
-var layoutData = layout(data);
-d3.select('#chart')
-.selectAll('circle')
-.data(layoutData)
-.join('circle')
-.attr('cx', function(d) {
-return d.x;
-})
-.attr('cy', function(d) {
-return d.y;
-})
-.attr('r', function(d) {
-return d.radius;
-});
+
+In this practical we:
+
+1. Add label information to the layout function (`js/layout.js`).
+2. Modify the update function (`js/update.js`) so that it joins `layoutData` to `<g>` elements instead of `<circle>` elements.
+3. Add a CSS file containing a rule to center the labels.
+
+## Add label information to layout.js
+
+Make the following changes to `js/layout.js`:
+
+{caption: "js/layout.js"}
+```js
+markua-start-insert
+function getTruncatedLabel(text) {
+    return text.length <= 10 ? text : text.slice(0, 10) + '...';
+}
+markua-end-insert
+
+function layout(data) {
+markua-start-insert
+    let labelHeight = 20;
+markua-end-insert
+    let cellWidth = config.width / config.numColumns;
+markua-start-insert
+    let cellHeight = cellWidth + labelHeight;
+markua-end-insert
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+        let column = i % config.numColumns;
+        let row = Math.floor(i / config.numColumns);
+
+        item.x = column * cellWidth + 0.5 * cellWidth;
+        item.y = row * cellHeight + 0.5 * cellHeight;
+        item.radius = radiusScale(d.renewable);
+
+markua-start-insert
+        item.labelText = getTruncatedLabel(d.name);
+        item.labelOffset = maxRadius + labelHeight;
+markua-end-insert
+
+        return item;
+    });
+
+    return layoutData;
 }
 ```
 
-Start by removing all the `.attr` calls and replacing `circle` with `g`:
+Two new properties `labelText` and `labelOffset` are added to each object. `labelText` represents the label text. Some of labels will overlap due to their length so we also add a function `getTruncatedLabel` which truncates a label to a maximum of 10 characters. `labelOffset` is the vertical position of each label (with respect to the circle center) and is computed from `cellWidth` and `labelHeight`.
 
-{caption: "update.js", line-numbers: false}
+Now `layoutData` looks like:
+
+```js
+[
+  {
+    "x": 42.857142857142854,
+    "y": 52.857142857142854,
+    "radius": 0,
+    "labelText": "Angola",
+    "labelOffset": 50
+  },
+  {
+    "x": 128.57142857142856,
+    "y": 52.857142857142854,
+    "radius": 0,
+    "labelText": "Albania",
+    "labelOffset": 50
+  },
+  {
+    "x": 214.28571428571428,
+    "y": 52.857142857142854,
+    "radius": 1.3416407864998736,
+    "labelText": "United Ara...",
+    "labelOffset": 50
+  },
+	...
+]
 ```
-function update() {
-var layoutData = layout(data);
-d3.select('#chart')
-.selectAll('g')
-.data(layoutData)
-.join('g');
-}
-```
 
-### Add `circle` element to `g` element
 
-We want to add a `circle` element to each `g` element so add a call to `.each` and pass in a function named `updateGroup`:
+### Modify update function to join data to `<g>` elements
 
-{caption: "update.js", line-numbers: false}
-```
-function update() {
-var layoutData = layout();
-d3.select('#chart')
-.selectAll('g')
-.data(layoutData)
-.join('g')
-.each(updateGroup);
-}
-```
+The following changes are made to `js/update.js`:
 
-`updateGroup` will be similar to the function of the same name in the [Joining an array to multiple elements](https://learn.createwithdata.com/books/d3-start-to-finish/sections/joining-an-array-to-multiple-elements/) section. Add it above `update`:
-
-{caption: "update.js", line-numbers: false}
-```
+{caption: "js/update.js"}
+```js
+markua-start-insert
 function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
+    let g = d3.select(this);
+
+    if(g.selectAll('*').empty()) {
+        g.append('circle');
+
+        g.append('text')
+            .classed('label', true);
+    }
+
+    g.classed('country', true)
+        .attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+
+    g.select('circle')
+        .attr('r', d.radius);
+
+    g.select('.label')
+        .attr('y', d.labelOffset)
+        .text(d.labelText);
 }
-}
+markua-end-insert
+
 function update() {
-var layoutData = layout();
-d3.select('#chart')
-.selectAll('g')
-.data(layoutData)
-.join('g')
-.each(updateGroup);
+    let layoutData = layout(data);
+
+    d3.select('#chart')
+markua-start-insert
+        .selectAll('g')
+markua-end-insert
+        .data(layoutData)
+markua-start-insert
+        .join('g')
+        .each(updateGroup);
+markua-end-insert
 }
 ```
 
-Now add code to update:
+The changes follow the same pattern as in the Joining an array to groups of elements section of the More on D3 Joins chapter.
 
-* the class and transform of the `g` element
-* the radius of the `circle`:
+The join code in function `update` now joins `<g>` elements instead of `<circle>` elements. A new function `updateGroup` is called on each joined element.
 
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-}
-g.classed('country', true)
-.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('circle')
-.attr('r', d.radius);
-}
-...
-```
+`updateGroup` appends a `<circle>` and `<text>` element to the current `<g>` element (if it's empty). The `<g>` element is given a class attribute with value `country` (which helps us later on when we style each country).
 
-The `g` element is translated using `d.x` and `d.y` which is the circle’s center position. This means that **everything in the group is positioned relative to the circle center**. This is why there’s no need to set the `cx` and `cy` attributes of the circle.
+Instead of setting the center of each circle we now apply a transform to each `<g>` element. We set the circle radius as before. Finally we set the `y` attribute of the label and its text content using the two properties we added in the previous section.
 
-The entire `update.js` file should now look like:
+Now save `js/layout.js` and `js/update.js` and load Step 7 in your browser. You should see:
 
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-}
-g.classed('country', true)
-.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('circle')
-.attr('r', d.radius);
-}
-function update() {
-var layoutData = layout(data);
-d3.select('#chart')
-.selectAll('g')
-.data(layoutData)
-.join('g')
-.each(updateGroup);
-}
+![Each country is now represented by a `<circle>` and `<text>` element](700624f4266152a6bd0373a62df060fb.png)
+
+### Center the labels using CSS
+
+Finally we horizontally center the labels so that they're aligned with the circles.
+
+Add a new directory to `step7` named `css` and add a new file `style.css`. Your directory structure should now look like:
+
+```text
+step7
+markua-start-insert
+├── css
+│   └── style.css
+markua-end-insert
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   └── d3.min.js
+    ├── main.js
+    └── update.js
 ```
 
-Save `update.js` and refresh your browser (making sure it’s loading `step7`).
-
-You should see the same output as before:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-3.png)
-
-If you right click on a circle and select ‘Inspect element’ you should see that each country is now represented by a `g` element containing a `circle` element.
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/Peek-2021-04-13-16-07.gif)
-
-## Practial: Add label
-
-In this practical you’ll **add a label** to each country group:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-6.png)
-
-Currently each country is represented by a `g` element containing a single `circle` element and looks something like:
-
-```
-<g class="country" transform="translate(471,264)">
-<circle r="24"></circle>
-</g>
-```
-
-The aim of this practical is to add a `text` element containing the country name:
-
-```
-<g class="country" transform="translate(471,264)">
-<circle r="24"></circle>
-<text class="label" y="50">Denmark</text>
-</g>
-```
-
-The `text` element has a `y` attribute that positions the label below the circle.
-
-The steps are:
-
-* **add** a `text` element to each country group
-* add **layout properties** for positioning and populating the label
-* **update** the label position and content using the new layout properties
-* **center** the labels
-* **truncate** long labels
-
-Open the `step7` directory of the `d3-start-to-finish` code. (This will already be open if you’ve just completed the previous practical.)
-
-### Append text element
-
-In `updateGroup` (update`.js`) append a `text` element to the `g` element and give it a class attribute with the name `label`:
-
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-g.append('text')
-.classed('label', true);
-}
-g.classed('country', true)
-.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('circle')
-.attr('r', d.radius);
-}
-...
-```
-
-### Add label properties to layout
-
-You’ll now add **two new properties** to the layout:
-
-* the label text (e.g. `'Chile'`)
-* the vertical position of the label
-
-In the `layout` function in `layout.js` add a new property named `labelText` containing the country name (see the [loading data](https://learn.createwithdata.com/books/d3-start-to-finish/sections/load-the-data/) practical to remind yourself of the original data structure):
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-...
-var layoutData = data.map(function(d, i) {
-var item = {};
-...
-item.radius = radiusScale(d.renewable);
-item.labelText = d.name;
-
-return item;
-});
-return layoutData;
-}
-```
-
-You’ll now increase `cellHeight` to accomodate the label. At the start of the `layout` function:
-
-* add a new variable named `labelHeight` that defines the amount of vertical space for the label
-* increase `cellHeight` by `labelHeight`
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-...
-}
-```
-
-Now add a property named `labelOffset` to `item` for the label’s vertical position. This is relative to the circle center:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-...
-var layoutData = data.map(function(d, i) {
-var item = {};
-...
-item.labelText = d.name;
-item.labelOffset = maxRadius + labelHeight;
-
-return item;
-});
-return layoutData;
-}
-```
-
-We use `maxRadius + labelHeight` so that the label is positioned below the circle. (Remember that a `text` element’s position refers to the bottom left of the text element.)
-
-The entire `layout` function now looks like:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = 0.35 * cellWidth;
-var radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-var layoutData = data.map(function(d, i) {
-var item = {};
-var column = i % config.numColumns;
-var row = Math.floor(i / config.numColumns);
-item.x = column * cellWidth + 0.5 * cellWidth;
-item.y = row * cellHeight + 0.5 * cellHeight;
-item.radius = radiusScale(d.renewable);
-item.labelText = d.name;
-item.labelOffset = maxRadius + labelHeight;
-
-return item;
-});
-return layoutData;
-}
-```
-
-### Update label position and content
-
-In `updateGroup` in `update.js` select the `text` element and set:
-
-* its y coordinate to `d.labelOffset`
-* its content to `d.labelText`
-
-(these are the two properties you added in the previous section)
-
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-g.append('text')
-.classed('label', true);
-}
-g.classed('country', true)
-.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('circle')
-.attr('r', d.radius);
-g.select('.label')
-.attr('y', d.labelOffset)
-.text(d.labelText);
-}
-```
-
-Now if you save `main.js` and `layout.js` and refresh your browser you should see:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-7.png)
-
-The labels are added and there’s just two more things to do:
-
-* add a CSS rule so that the labels are center aligned
-* truncate the labels so that they don’t overlap
-
-### Center align the labels
-
-Add a new directory to `step7` named `css` and add a new file called `style.css`. Your directory structure should now look like:
-
-```
-step7/
-css/
-style.css
-data/
-js/
-index.html
-```
-
-Include the CSS file in `index.html`:
+Include the CSS file in `index.html` using a `<link>` element:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Energy mix by Country 2015</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-...
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+markua-start-insert
+	  <link rel="stylesheet" href="css/style.css">
+markua-end-insert
+	</head>
+
+  <body>
+  ...
+  </body>
 </html>
 ```
 
-Add a rule to `style.css` to center the text labels:
+Now add a rule to `style.css` to center the text labels:
 
-{caption: "style.css", line-numbers: false}
-```
+{caption: "css/style.css", line-numbers: false}
+```css
 .country .label {
-text-anchor: middle;
+  text-anchor: middle;
 }
 ```
 
-Save `style.css` and refresh the browser.
+The CSS classes `.country` and `.label` were added to each `<g>` and `<text>` element in `js/update.js`. The `text-anchor` property applies to SVG `<text>` elements and sets the horizontal alignment of the text.
 
-The labels should now be centered:
+Save `index.html` and `css/style.css` and refresh your browser. The labels should now be centered:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-8.png)
-
-### Truncate long labels
-
-Finally you’ll add a bit of code to truncate long labels so that the labels don’t overlap.
-
-First add a function to the beginning of `layout.js` that takes a string and returns it if it’s less than 10 characters long otherwise truncates the string and adds some dots:
-
-{caption: "layout.js", line-numbers: false}
-```
-function getTruncatedLabel(text) {
-return text.length < 10 ? text : text.slice(0, 9) + '...';
-}
-```
-
-> The above code uses JavaScript’s ternary operator. You can read more about it in the [JavaScript Operators](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/javascript-operators/) section of my Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book.
-
-Now use `getTruncatedLabel` when setting `labelText` in the `layout` function:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-...
-item.radius = radiusScale(d.energyMix.renewable);
-item.labelText = getTruncatedLabel(d.name);
-item.labelOffset = maxRadius + labelHeight;
-...
-}
-```
-
-Save `layout.js` and refresh your browser.
-
-You should now see that some of the longer names such as Bosnia and Herzegovina have been truncated:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-9.png)
+![Centered labels](05d0481a0c21af96882eb5bb246f26ad.png)
 
 The completed code for this practical can be found in `step7-complete`.
 
 ### Wrapping up
 
-If you’ve got to this point you’ve done well!
-
-You’ve completed a major part of the Energy Explorer build. Converting the data join to a nested join was quite a hard thing to do but hopefully it mostly made sense.
-
-In the next section you’ll add the remaining circles so that each country has four circles.
+If you’ve got to this point you’ve done well! You’ve completed a major part of the Energy Explorer build. Converting the data join to a nested join was quite a hard thing to do but hopefully it mostly made sense. In the next section you’ll add the remaining circles so that each country has four circles.

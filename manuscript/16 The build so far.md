@@ -155,7 +155,7 @@ and the output of `layout` looks like:
 ]
 ```
 
-In `update` the output of `layout` is assigned to `layoutData`. `update` then joins `layoutData` to a selection of circles and updates the circle attributes using `layoutData`‘s `x`, `y` and `radius` properties:
+In function `update` the output of `layout` is assigned to `layoutData`. `update` then joins `layoutData` to a selection of circles and updates the circle attributes using `layoutData`'s `x`, `y` and `radius` properties:
 
 {caption: "js/update.js", line-numbers: false}
 ```js
