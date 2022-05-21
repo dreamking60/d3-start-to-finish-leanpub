@@ -115,6 +115,37 @@ Within the console, expand the array and the first few elements. You should see 
 
 Can you see that this array corresponds to the `data.csv` file? (Each array object corresponds to a row of data.)
 
+For example the first object in the array represents Angola:
+
+```js
+[
+  {
+    "name": "Angola",
+    "id": "AGO",
+    "hydroelectric": "53.2",
+    "nuclear": "",
+    "oilgascoal": "46.8",
+    "renewable": "0.0"
+  },
+  ...
+]
+```
+
+and corresponds to the first row of data in `data/data.csv`:
+
+{caption: "data/data.csv", line-numbers: false}
+```text
+id,name,oilgascoal,nuclear,hydroelectric,renewable
+markua-start-insert
+AGO,Angola,46.8,,53.2,0.0
+markua-end-insert
+ALB,Albania,0.0,,100.0,0.0
+ARE,United Arab Emirates,99.8,,0.0,0.2
+ARG,Argentina,66.9,,26.2,1.9
+ARM,Armenia,35.9,,28.3,0.1
+...
+```
+
 If you got this far congratulations – you’ve loaded the data into your application!
 
 If not, check the following:

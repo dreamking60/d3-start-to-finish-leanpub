@@ -1,259 +1,223 @@
-# Practical: Add the other circles
+# Practical: Add More Circles
 
-In this practical you’ll **add three more circles** so that each country has four circles. Each circle represents an energy type.
+In this practical we **add three more circles** so that each country has four circles. Each circle represents an energy type.
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-10-1024x363.png)
+{width: 75%}
+![Each country represented by four circles](148995046a809d8710b2ae2ccbfb65a0.png)
 
 Currently each country group looks like:
 
-```
+```html
 <g class="country" transform="translate(471,264)">
-<circle r="24"></circle>
-<text class="label" y="50">Denmark</text>
+  <circle r="24"></circle>
+  <text class="label" y="50">Denmark</text>
 </g>
 ```
 
 At the end of this practical each country group will look like:
 
-```
+```html
 <g class="country" transform="translate(471,264)">
-<circle class="renewable" r="24"></circle>
-<circle class="oilgascoal" r="17"></circle>
-<circle class="hydroelectric" r="1"></circle>
-<circle class="nuclear" r="0"></circle>
-<text class="label" y="50">Denmark</text>
+  <circle class="renewable" r="24"></circle>
+  <circle class="oilgascoal" r="17"></circle>
+  <circle class="hydroelectric" r="1"></circle>
+  <circle class="nuclear" r="0"></circle>
+  <text class="label" y="50">Denmark</text>
 </g>
 ```
 
 There’s three additional circles. Each circle also has a class attribute indicating which energy type it represents.
 
-The circles will be added in a similar manner to the text label in the previous practical. You will:
+## Overview
 
-* create a **new function** `initializeGroup` for creating the `circle` and `text` elements
-* **add** another 3 circle elements to each circle group
-* add a **radius property** for each of the 4 energy types in the layout function
-* **update** the radius of all 4 circles
-* **style** the circles
+Open step8. The file structure is:
 
-In your code editor open the `step8` directory of the `d3-start-to-finish` code.
-
-### Add initializeGroup function
-
-You’ll start by creating a new function `initializeGroup` which will get called from `updateGroup`. This function will be responsible for initializing each `g` element. This means that it will add the `circle` and `text` elements to the `g` element.
-
-Start by adding a new function `initializeGroup` to the top of `update.js`:
-
-{caption: "update.js", line-numbers: false}
+```text
+step8
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   └── d3.min.js
+    ├── main.js
+    └── update.js
 ```
-function initializeGroup(g) {
+
+In this practical we:
+
+1. Add properties for each energy type in the layout function (`js/layout.js`).
+2. Modify the update function (`js/update.js`) to append and update four circles.
+3. Style the circles in `css/style.css`.
+
+## Add properties for each energy type in the layout function
+
+In `js/layout.js` add new properties for each of the energy type values:
+
+{caption: "js/layout.js"}
+```js
+function getTruncatedLabel(text) {
+    return text.length <= 10 ? text : text.slice(0, 10) + '...';
 }
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) {
-g.append('circle');
-g.append('text')
-.classed('label', true);
-}
-...
-}
-```
 
-Now move the `circle` and `text` append statements from `updateGroup` into `initializeGroup` and call `initializeGroup` if the `g` element has no members:
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.append('circle');
-g.append('text')
-.classed('label', true);
-}
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.classed('country', true)
-.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-...
-}
-```
-
-In addition, move the `g.classed('country', true)` call into `initializeGroup` because this only needs to be called during initialisation:
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.classed('country', true);
-g.append('circle');
-g.append('text')
-.classed('label', true);
-}
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-...
-}
-```
-
-Now we have two functions `initializeGroup` and `updateGroup`. `initializeGroup` is responsible for populating the `g` elements when they’re first created. `updateGroup` is responsible for updating a `g` element and its members.
-
-### Append new circle elements
-
-In `initializeGroup` (`update.js`) remove the append statement for the circle:
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.classed('country', true);
-// Remove the circle append
-g.append('text')
-.classed('label', true);
-}
-```
-
-Now append 4 circles and give them class attributes of `renewable`, `oilgascoal`, `hydroelectric` and `nuclear`:
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.classed('country', true);
-g.append('circle')
-.classed('renewable', true);
-g.append('circle')
-.classed('oilgascoal', true);
-g.append('circle')
-.classed('hydroelectric', true);
-g.append('circle')
-.classed('nuclear', true);
-g.append('text')
-.classed('label', true);
-}
-```
-
-### Add a radius property for each circle to the layout
-
-Currently the radius of the existing circle is computed in the `layout` function (`layout.js`) using:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = 0.35 * cellWidth;
-var radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-var layoutData = data.map(function(d, i) {
-var item = {};
-var column = i % config.numColumns;
-var row = Math.floor(i / config.numColumns);
-item.x = column * cellWidth + 0.5 * cellWidth;
-item.y = row * cellHeight + 0.5 * cellHeight;
-item.radius = radiusScale(d.renewable);
-item.labelText = getTruncatedLabel(d.name);
-item.labelOffset = maxRadius + labelHeight;
-
-return item;
-});
-return layoutData;
-}
-```
-
-Start by changing the property name from `radius` to `renewableRadius`:
-
-{caption: "layout.js", line-numbers: false}
-```
 function layout(data) {
-...
-item.renewableRadius = radiusScale(d.renewable);
-...
+    let labelHeight = 20;
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth + labelHeight;
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+        let column = i % config.numColumns;
+        let row = Math.floor(i / config.numColumns);
+
+        item.x = column * cellWidth + 0.5 * cellWidth;
+        item.y = row * cellHeight + 0.5 * cellHeight;
+
+markua-start-insert
+        item.renewableRadius = radiusScale(d.renewable);
+        item.oilGasCoalRadius = radiusScale(d.oilgascoal);
+        item.hydroelectricRadius = radiusScale(d.hydroelectric);
+        item.nuclearRadius = radiusScale(d.nuclear);
+markua-end-insert
+
+        item.labelText = getTruncatedLabel(d.name);
+        item.labelOffset = maxRadius + labelHeight;
+
+        return item;
+    });
+
+    return layoutData;
 }
 ```
 
-Now add radius properties for the `oilgascoal`, `hydroelectric` and `nuclear` indicators:
+As a reminder, each object in `data` looks similar to:
 
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-...
-item.radius = radiusScale(d.renewable);
-item.oilGasCoalRadius = radiusScale(d.oilgascoal);
-item.hydroelectricRadius = radiusScale(d.hydroelectric);
-item.nuclearRadius = radiusScale(d.nuclear);
-...
+```js
+{
+  "name": "Angola",
+  "id": "AGO",
+  "hydroelectric": 53.2,
+  "nuclear": null,
+  "oilgascoal": 46.8,
+  "renewable": 0
 }
 ```
 
-(You can recap the data structure in the [data loading section](http://learn.createwithdata.com/books/d3-start-to-finish/sections/load-the-data/).)
+In the above changes the layout function takes each of the four energy indicators (hydroelectric, nuclear, oilgascoal and renewable), applies the radius scale and assigns the radius to new properties `renewableRadius`, `oilGasCoalRadius`, `hydroelectricRadius` and `nuclearRadius`.
 
-### Update the circles
+## Add four circles in the update function
 
-Now in `updateGroup` remove the code that updates the circle:
+Currently the update function (`js/update.js`) adds a single circle. We make the following changes to add circles for each of the four energy types:
 
-{caption: "update.js", line-numbers: false}
-```
+{caption: "js/update.js"}
+```js
+markua-start-insert
+function initializeGroup(g) {
+    g.classed('country', true);
+
+    g.append('circle')
+        .classed('renewable', true);
+
+    g.append('circle')
+        .classed('oilgascoal', true);
+
+    g.append('circle')
+        .classed('hydroelectric', true);
+
+    g.append('circle')
+        .classed('nuclear', true);
+
+    g.append('text')
+        .classed('label', true);
+}
+markua-end-insert
+
 function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-// Remove the circle radius update
-g.select('.label')
-.attr('y', d.labelOffset)
-.text(d.labelText);
+    let g = d3.select(this);
+
+markua-start-insert
+    if(g.selectAll('*').empty()) initializeGroup(g);
+markua-end-insert
+
+    g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+
+markua-start-insert
+    g.select('.renewable')
+        .attr('r', d.renewableRadius);
+
+    g.select('.oilgascoal')
+        .attr('r', d.oilGasCoalRadius);
+
+    g.select('.hydroelectric')
+        .attr('r', d.hydroelectricRadius);
+
+    g.select('.nuclear')
+        .attr('r', d.nuclearRadius);
+markua-end-insert
+
+    g.select('.label')
+        .attr('y', d.labelOffset)
+        .text(d.labelText);
+}
+
+function update() {
+    let layoutData = layout(data);
+
+    d3.select('#chart')
+        .selectAll('g')
+        .data(layoutData)
+        .join('g')
+        .each(updateGroup);
 }
 ```
 
-Add code to update the radius of all four circles using the new radius properties in the layout:
+We add a new function `initializeGroup` to take care of initialising each `<g>` element. This function sets the class attribute of each `<g>` element to `country`, adds a circle for each energy type and adds the `<text>` element for the label. Each of the circles also gets a class attribute that describes the energy type it refers to.
 
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('.renewable')
-.attr('r', d.renewableRadius);
-g.select('.oilgascoal')
-.attr('r', d.oilGasCoalRadius);
-g.select('.hydroelectric')
-.attr('r', d.hydroelectricRadius);
-g.select('.nuclear')
-.attr('r', d.nuclearRadius);
-g.select('.label')
-.attr('y', d.labelOffset)
-.text(d.labelText);
-}
-```
+`updateGroup` now selects each of the four circles and updates its radius using the new properties we added in the previous section.
 
-Now save `update.js` and `layout.js`.
+## Style the circles
 
-### Style the circles
+By default SVG circles have a fill colour of black, so let's set the fill to `none` and the stroke to `#aaa`:
 
-Now add a CSS rule so that the circle has a stroke (the outline of the circle) but no fill:
-
-{caption: "style.css", line-numbers: false}
-```
+{caption: "css/style.css"}
+```css
 .country .label {
-text-anchor: middle;
+    text-anchor: middle;
 }
+
+markua-start-insert
 circle {
-fill: none;
-stroke: #aaa;
+    fill: none;
+    stroke: #aaa;
 }
+markua-end-insert
 ```
 
-Save `style.css` and refresh the browser (making sure it’s loading `step8`).
+
+## Save and refresh
+
+Save `css/style.css`, `js/layout.js` and `js/update.js` and load step 8 in your browser.
 
 You should see:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-11-1024x363.png)
+{width: 75%}
+![Energy Explorer with a circle for each energy type](18eaca30a5e3a178e078dba084d4cc66.png)
 
 The completed code is in `step8-complete` of the code download.
 
-### Summing up
+## Summing up
 
-Adding the nested join in the previous section was fairly complicated, but once it’s done adding further elements to the `g` element is fairly straightforward.
+Adding the nested join in the previous section was fairly complicated but it made adding further elements to the `g` element fairly straightforward. Each country now has 4 circles (each of which represents one of the four energy types) and a text label. It's beginning to take shape!
 
-**Each country now has 4 circles** (each of which represents one of the four energy types) and a **text label**.
-
-It’s not possible to see which circle relates to which energy type so in the next section you’ll **style each circle** in accordance with its energy type.
+It’s not possible to see which circle relates to which energy type so in the next section you’ll style each circle in accordance with its energy type.

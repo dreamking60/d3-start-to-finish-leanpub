@@ -1,12 +1,6 @@
 # Practical: Add labels
 
-In this practical we add a label to each circle by joining the data to a `<g>` element containing a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
-
-Currently each country is represented by a single `<circle>` element. For example:
-
-```html
-<circle cx="471" cy="264" r="24.26"></circle>
-```
+Currently in Energy Explorer we join the `layoutData` array to `<circle>` elements (see `js/update.js`). We would now like to add a label to the circle indicating the country name. In this practical we'll achieve this by joining `layoutData` to `<g>` elements instead of `<circle>` elements. Each `<g>` element will contain a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
 
 By the end of this practical, each country will be represented by a `<g>` element containing a `<circle>` and `<text>` element:
 
@@ -90,7 +84,7 @@ markua-end-insert
 }
 ```
 
-Two new properties `labelText` and `labelOffset` are added to each object. `labelText` represents the label text. Some of labels will overlap due to their length so we also add a function `getTruncatedLabel` which truncates a label to a maximum of 10 characters. `labelOffset` is the vertical position of each label (with respect to the circle center) and is computed from `cellWidth` and `labelHeight`.
+Two new properties `labelText` and `labelOffset` are added to each item. `labelText` represents the label text. Some of labels will overlap due to their length so we also add a function `getTruncatedLabel` which truncates a label to a maximum of 10 characters. `labelOffset` is the vertical position of each label (with respect to the circle center) and is computed from `maxRadius` and `labelHeight`. We also add `labelHeight` to  `cellHeight` to make each grid cell taller to accomodate the label.
 
 Now `layoutData` looks like:
 
@@ -100,22 +94,28 @@ Now `layoutData` looks like:
     "x": 42.857142857142854,
     "y": 52.857142857142854,
     "radius": 0,
+markua-start-insert
     "labelText": "Angola",
     "labelOffset": 50
+markua-end-insert
   },
   {
     "x": 128.57142857142856,
     "y": 52.857142857142854,
     "radius": 0,
+markua-start-insert
     "labelText": "Albania",
     "labelOffset": 50
+markua-end-insert
   },
   {
     "x": 214.28571428571428,
     "y": 52.857142857142854,
     "radius": 1.3416407864998736,
+markua-start-insert
     "labelText": "United Ara...",
     "labelOffset": 50
+markua-end-insert
   },
 	...
 ]
@@ -166,13 +166,13 @@ markua-end-insert
 }
 ```
 
-The changes follow the same pattern as in the Joining an array to groups of elements section of the More on D3 Joins chapter.
+The changes follow the same pattern as in the 'Joining an array to groups of elements' section of the More on D3 Joins chapter.
 
 The join code in function `update` now joins `<g>` elements instead of `<circle>` elements. A new function `updateGroup` is called on each joined element.
 
 `updateGroup` appends a `<circle>` and `<text>` element to the current `<g>` element (if it's empty). The `<g>` element is given a class attribute with value `country` (which helps us later on when we style each country).
 
-Instead of setting the center of each circle we now apply a transform to each `<g>` element. We set the circle radius as before. Finally we set the `y` attribute of the label and its text content using the two properties we added in the previous section.
+Instead of setting the center of each circle we now apply a translate transform to each `<g>` element. We set the circle radius as before. Finally we set the `y` attribute of the label and its text content using the two properties we added in the previous section.
 
 Now save `js/layout.js` and `js/update.js` and load Step 7 in your browser. You should see:
 
@@ -212,9 +212,9 @@ Include the CSS file in `index.html` using a `<link>` element:
     <meta charset="utf-8">
     <title>Energy mix by Country 2015</title>
 markua-start-insert
-	  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 markua-end-insert
-	</head>
+  </head>
 
   <body>
   ...
@@ -241,4 +241,4 @@ The completed code for this practical can be found in `step7-complete`.
 
 ### Wrapping up
 
-If you’ve got to this point you’ve done well! You’ve completed a major part of the Energy Explorer build. Converting the data join to a nested join was quite a hard thing to do but hopefully it mostly made sense. In the next section you’ll add the remaining circles so that each country has four circles.
+If you’ve got to this point you’ve done well! You’ve completed a major part of the Energy Explorer build. Converting the data join to a nested join was quite tricky but it creates a good foundation for the remaining practicals. In the next section you’ll add the remaining circles so that each country has four circles.

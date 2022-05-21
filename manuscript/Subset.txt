@@ -4,3 +4,4 @@
 18 More on D3 joins.md
 19 PRACTICAL Add labels.md
 20 PRACTICAL Add more circles.md
+21 PRACTICAL Style the circles.md
