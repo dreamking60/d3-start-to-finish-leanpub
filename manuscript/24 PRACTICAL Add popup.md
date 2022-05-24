@@ -1,6 +1,6 @@
 # Practical: Add a popup
 
-In this practical we **add a popup** to the Energy Explorer using the Flourish popup component:
+In this practical we **add a popup** to Energy Explorer using the Flourish popup component:
 
 {width: 33%}
 ![Energy Explorer with Flourish popup](7253c5359b08f6d4fc7f52559fa5c94b.png)
@@ -156,15 +156,17 @@ function handleMouseout() {
 }
 ```
 
-This code is similar to what we covered in the 'Florish popup library' chapter. We see in a moment that `this` represents the country `<g>` element that receives the mouse event. (The bounding box of each `<g>` element contains the circles **and** the label, so the center is a bit below the circle centers.) For now we pass the `labelText` property into the popup, just so we can get something up and running quickly.
+This code is similar to what we covered in the 'Flourish Popup Library' chapter.
 
-Let's register the event handlers using D3's `.on` method:
+In `handleMouseover`, `this` represents the `<g>` element that triggered the mouse event. We pass the `labelText` property into the popup, just so we can get something up and running quickly.
+
+Let's register the event handlers in the update function using D3's `.on` method:
 
 {caption: "js/update.js"}
 ```js
 function initialiseGroup(g) {
 markua-start-insert
-  	g.classed('country', true)
+    g.classed('country', true)
         .on('mouseover', handleMouseover)
         .on('mouseout', handleMouseout);
 markua-end-insert
@@ -192,11 +194,9 @@ markua-end-insert
 ...
 ```
 
-There's also a couple of CSS rules we need to add. (These aren't very obvious things to add, and knowing to do these really comes with experience.) By default, circles with a fill colour of `none` don't trigger events. We can change this by setting `pointer-events` to `all` on each country group.
+There's also a couple of CSS rules we need to add. By default, circles with a fill colour of `none` don't trigger events. We can change this by setting `pointer-events` to `all` on each country group. We also set `pointer-events` to `none` on the popup itself so that `mouseover` events aren't triggered if the mouse pointer moves over the popup itself. (These aren't very obvious things to add, and knowing to do these comes with experience.)
 
-We also set `pointer-events` to `none` on the popup itself so that `mouseover` events aren't triggered if the mouse pointer moves over the popup itself.
-
-{caption: "css/style.js"}
+{caption: "css/style.css"}
 ```css
 body {
     background-color: #FFFFF7;
@@ -229,6 +229,7 @@ markua-end-insert
 
 Save `js/popup.js`, `js/update.js` and `css/style.css`. Now when you hover over a country you should see a popup displaying the country name.
 
+{width: 33%}
 ![Popup showing country name](217f3f1916a6f8a788ad2018dfa8b96e.png)
 
 
@@ -329,14 +330,17 @@ function handleMouseout() {
 }
 ```
 
-In `handleMouseover` we now pass `popupTemplate(d)` into the `.html` method. `popupTemplate` is a function that constructs a string containing HTML code that represents the popup content. We build up the string line by line starting with a heading containing the country name. (Remember `.popupData` was added to the layout object items in the previous step.) A helper function `getPopupEntry` constructs a single line that displays the indicator name and value. If the value is Nan (which means it was missing from the CSV file) the indicator is omitted.
+In `handleMouseover` we now pass `popupTemplate(d)` into the `.html` method. `popupTemplate` is a function that constructs a string containing HTML code that represents the popup content. We build up the string line by line starting with a heading containing the country name. (`.popupData` was added to the layout object items in the previous step.) A helper function `getPopupEntry` constructs a single line that displays an indicator name and associated value. If the value is NaN (which means it was missing from the CSV file) the indicator is omitted.
 
+Save `js/layout.js` and `js/popup.js` and refresh your browser. You should now see the energy indicators when you hover over a country:
+
+{width: 33%}
 ![Popup with all four energy indicators](0ee5f3e76b3d4430bb08d27e2adae4a9.png)
 
 
 ## Offset the popup
 
-Currently the popup appears just below the circle center because this is the center of the group element (which contains the circles **and** the label). This obscures most of the country's circles so we’d like it to appear **towards the top** of the circle. We’ll do this by adding a hidden element, placing it where we’d like the popup to appear. This element gets passed into the popup’s `.position` method. 
+Currently the popup is positioned in the center of the `<g>` element (which contains the circles and the label). Most of the country's circles are obscured so we’d like the popup to appear **towards the top** of the circles. We’ll do this by adding a hidden element, placing it where we’d like the popup to appear. This element will get passed into the popup’s `.position` method. 
 
 We start by adding a new property `popupOffset` to the layout items. This specifies where the popup pointer (the triangle underneath the popup) should appear in relation to the circle centers:
 
@@ -360,7 +364,7 @@ function layout(data) {
     let layoutData = data.map(function(d, i) {
         let item = {};
 
-...
+    ...
 
         item.labelText = getTruncatedLabel(d.name);
         item.labelOffset = maxRadius + labelHeight;
@@ -383,7 +387,7 @@ markua-end-insert
 }
 ```
 
-We position the popup pointer `0.8 * maxRadius` above the circle centers. This value was arrived at after experimentation and strikes a balance between the popup being high enough to reveal the underlying circles but not so high it disconnects from smaller circles. Ideally we'd position the popup according to the largest circle, but we're keeping things simple and focused for the benefit of learning.
+We position the popup pointer `0.8 * maxRadius` above the circle centers. This value was arrived at by experimentation and strikes a balance between the popup being high enough to reveal the underlying circles but not so high it disconnects from smaller circles. Ideally we'd position the popup according to the largest circle, but we're keeping things simple and focused for the benefit of learning.
 
 Now in `js/update.js` we add a new circle to each group: 
 
@@ -431,11 +435,11 @@ markua-end-insert
     g.select('.renewable')
         .attr('r', d.renewableRadius);
 
-...
+    ...
 }
 ```
 
-The new circle is added in `initialiseGroup` and given a class attribute of `popup-center`. In `updateGroup` this circle's `cy` attribute is updated using the new layout item property `.popupOffset`.
+The new circle is added in `initialiseGroup` and given a class attribute of `popup-center`. It doesn't really matter what its radius is, so long as it isn't zero. In `updateGroup` the circle's `cy` attribute is updated using the new layout item property `.popupOffset`.
 
 Now we need to use the new circle to position the popup:
 
@@ -487,6 +491,7 @@ In `handleMouseover` we select the new circle and pass it into the popup's `.poi
 
 Save `js/layout.js`, `js/update.js` and `js/popup.js` and refresh your browser. The popup should now appear a bit higher up:
 
+{width: 33%}
 ![Popup positioned with a new circle](52676cc44e50fc530a2071f3a46df13c.png)
 
 We also need to hide the new circles, so we add the following to `css/style.css`:

@@ -78,13 +78,13 @@ markua-end-insert
 
 When a circle is clicked, the event handler `handleClick` is called and the **joined value is passed in as the second parameter** (usually named `d`). The index of the element is passed in as the third parameter (usually named `i`).
 
-> Event handlers in D3 versions up to including 5 look like `function(d, i) {...}` where the **first** parameter is the joined value and the second parameter is the index.
-> 
-> In version 6 of D3 the browser `MouseEvent` object is passed in as the first parameter to an event handler function.
+D> Event handlers in D3 versions up to including 5 look like `function(d, i) {...}` where the **first** parameter is the joined value and the second parameter is the index.
+D> 
+D> In version 6 of D3 the browser `MouseEvent` object is passed in as the first parameter to an event handler function. (This is a breaking change.)
 
 Navigate to [https://codepen.io/createwithdata/pen/jOWogEr](https://codepen.io/createwithdata/pen/jOWogEr) to view this example in CodePen
 
-This approach lets you create **data-driven interactions**. In other words you can create interactivity that uses data that’s been joined to HTML/SVG elements. Here’s another example where a simple information panel is updated when an element is clicked. Here’s the HTML:
+This approach lets you create **data-driven interactions**. In other words you can create interactivity that uses the joined data. Here’s another example where a simple information panel is updated when an element is clicked. Here’s the HTML:
 
 ```html
 <div id="info"></div>
@@ -96,7 +96,7 @@ This approach lets you create **data-driven interactions**. In other words you c
 </div>
 ```
 
-Notice there’s a `div` element (with class attribute `info`) that acts as an information panel. The JavaScript is:
+Notice there’s a `div` element (with id `info`) that acts as an information panel. The JavaScript is:
 
 ```js
 let myData = [10, 40, 30];
@@ -143,6 +143,7 @@ You can call the `.on` method more than once if you want to react to more than o
 ```js
 let myData = [10, 40, 30];
 
+markua-start-insert
 function handleMouseover(e, d) {
   d3.select('#info')
     .text("Value is " + d);
@@ -152,10 +153,13 @@ function handleMouseout(e, d) {
   d3.select('#info')
     .text(null);
 }
+markua-end-insert
 
 function handleClick(e, d) {
   d3.select('#info')
+markua-start-insert
     .text("Clicked element with value " + d);
+markua-end-insert
 }
 
 d3.select('g.circles')
@@ -169,8 +173,10 @@ d3.select('g.circles')
     let circleSpacing = 100;
     return i * circleSpacing;
   })
+markua-start-insert
   .on('mouseover', handleMouseover)
   .on('mouseout', handleMouseout)
+markua-end-insert
   .on('click', handleClick);
 ```
 
