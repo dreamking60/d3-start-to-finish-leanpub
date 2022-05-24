@@ -8,3 +8,6 @@
 22 D3 event handling.md
 23 Flourish popup library.md
 24 PRACTICAL Add popup.md
+25 State management.md
+26 PRACTICAL Add state management.md
+27 PRACTICAL Add a menu.md

@@ -492,7 +492,7 @@ In `handleMouseover` we select the new circle and pass it into the popup's `.poi
 Save `js/layout.js`, `js/update.js` and `js/popup.js` and refresh your browser. The popup should now appear a bit higher up:
 
 {width: 33%}
-![Popup positioned with a new circle](52676cc44e50fc530a2071f3a46df13c.png)
+![Popup positioned with the 'popupCenter' circle (which is visible)](52676cc44e50fc530a2071f3a46df13c.png)
 
 We also need to hide the new circles, so we add the following to `css/style.css`:
 

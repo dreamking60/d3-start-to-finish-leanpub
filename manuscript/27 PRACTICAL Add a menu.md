@@ -1,398 +1,362 @@
 # Practical: Add a menu
 
-In this practical you’ll add the **menu** that appears at the top of the energy explorer:
+In this practical we add a **menu** to Energy Explorer that lets the user select which indicator to sort the countries by:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-14.png)
+![Energy Explorer menu](2c402e21e967d37bbca528118e1a2661.png)
 
-The menu consists of 5 items:
+The menu consists of 5 items: 'Country', 'Renewable', 'Oil, Gas & Coal', 'Hydroelectric' and 'Nuclear'. In this practical we add a property to the state object that stores which indicator has been selected. When a menu item is clicked we update the state accordingly. We'll implement the sorting in a later practical.
 
-* Country
-* Renewable
-* Oil, Gas & Coal
-* Hydroelectric
-* Nuclear
+## Overview
 
-When an item is clicked the circles will be sorted in **alphabetical order** (if Country is selected) or in **descending order of the selected indicator**. (The sorting will be implemented in an upcoming practical.)
+A new module named `menu.js` will be added which contains an array of menu items and two functions `handleMenuClick` and `updateMenu`. The array of menu items looks something like:
 
-You’ll only add basic styling to the menu in this practical, so it’ll look like:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-15.png)
-
-The steps are:
-
-* add a **container** for the menu in `index.html`
-* add a **new module** named `menu.js`
-* add code to **create and manage** the menu
-* **style** the menu
-* **modify** the `update` function in `update.js` so that it updates the menu
-
-The menu itself will be created using D3. It’s not the only way of creating a menu (using a library such as React or Vue springs to mind) but to avoid introducing another library it’ll be created using D3.
-
-If you’ve just completed the previous practical you’ll have `step11` already open. Otherwise in your code editor open the `step11` directory of the `d3-start-to-finish` code and make sure you’ve completed the previous practical.
-
-### Overview of how the menu works
-
-A new module named `menu.js` will be added which contains an array of menu items and two functions `handleMenuClick` and `updateMenu`.
-
-The array of menu items looks something like:
-
-```
+```js
 [
-{
-id: 'country',
-label: 'Country'
-},
-{
-id: 'renewable',
-label: 'Renewable'
-},
-...
+  {
+    id: 'country',
+    label: 'Country'
+  },
+  {
+    id: 'renewable',
+    label: 'Renewable'
+  },
+  ...
 ]
 ```
 
-`updateMenu` is an update function which uses D3 to join the menu item array to `div` elements. The resulting HTML will look something like:
+A function `updateMenu` uses D3 to join the menu item array to `div` elements. The resulting HTML will look something like:
 
-```
+```html
 <div class="menu">
-<div class="items">
-<div class="item">Country</div>
-<div class="item">Renewable</div>
-<div class="item">Oil, Gas & Coal</div>
-<div class="item">Hydroelectric</div>
-<div class="item">Nuclear</div>
-</div>
+  <div class="items">
+    <div class="item">Country</div>
+    <div class="item">Renewable</div>
+    <div class="item">Oil, Gas & Coal</div>
+    <div class="item">Hydroelectric</div>
+    <div class="item">Nuclear</div>
+  </div>
 </div>
 ```
 
-When a menu item is clicked, a new event handler `handleMenuClick` is called. `handleMenuClick` calls `action` (which you added in the previous practical) passing in `'setSelectedIndicator'` as the action type and the menu item id (e.g. `'country'`) as the action parameter. For example:
+When a menu item is clicked, an event handler `handleMenuClick` is called. `handleMenuClick` calls `action` (which was added in the previous practical) passing in `'setSelectedIndicator'` as the action type and the menu item id (e.g. `'country'`) as the action parameter. For example:
 
-```
+```js
 action('setSelectedIndicator', 'country');
 ```
 
-The `action` function in `store.js` updates the state object and calls `update` (in `update.js`). You’ll modify `update` so that it calls `updateMenu` **and** `updateChart` (which updates the chart).
+The `action` function in `store.js` updates the state object and calls `update` (in `update.js`). We modify `update` so that it calls `updateMenu` **and** `updateChart`.
 
-`updateMenu` also sets a class attribute of `selected` on the selected menu item. You’ll set some CSS rules such that the selected menu item is highlighted.
+`updateMenu` also sets a class attribute of `selected` on the selected menu item. We’ll set some CSS rules such that the selected menu item is highlighted.
 
-### Add menu container
+The menu itself will be created using D3. It’s not the only way of creating a menu (using a library such as React or Vue springs to mind) but to avoid introducing another library it’ll be created using D3.
 
-In `index.html` wrap the `svg` element in a new `div` element. Give the `div` element a class attribute of `chart-wrapper`:
+Open step11. The file structure is:
 
-{caption: "index.html", line-numbers: false}
-```
-    ...
-<div id="wrapper">
-<div id="chart-wrapper">
-<svg width="1200" height="1200">
-<g id="chart"></g>
-</svg>
-</div>
-</div>
-...
-```
-
-Now add a section to contain the menu and legend. This’ll come just before the chart wrapper and have an id of `controls`:
-
-{caption: "index.html", line-numbers: false}
-```
-    ...
-<div id="wrapper">
-<div id="controls">
-</div>
-<div id="chart-wrapper">
-<svg width="1200" height="1200">
-<g id="chart"></g>
-</svg>
-</div>
-</div>
-...
-```
-
-Now add a `div` element for the menu and another `div` element for the menu items:
-
-{caption: "index.html", line-numbers: false}
-```
-    ...
-<div id="wrapper">
-<div id="controls">
-<div class="menu">
-<div class="items"></div>
-</div>
-</div>
-<div id="chart-wrapper">
-<svg width="1200" height="1200">
-<g id="chart"></g>
-</svg>
-</div>
-</div>
-...
-```
-
-Now save `index.html`.
-
-### Add a new module for the menu
-
-Create a new file within the `js` directory and name it `menu.js`.
-
-Your directory structure should now look like:
-
-```
+```text
 step11
 ├── css
 │   └── style.css
 ├── data
-│   └── data.json
+│   └── data.csv
 ├── index.html
 └── js
-├── config.js
-├── layout.js
-├── lib
-│   ├── d3.min.js
-│   └── popup-v1.1.1.min.js
-├── main.js
-├── menu.js
-├── popup.js
-├── store.js
-└── update.js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+    ├── popup.js
+    ├── store.js
+    └── update.js
 ```
 
-Include the new file `menu.js` in the application by adding a new `<script>` tag to `index.html`:
+`js/store.js` was added in the previous practical.
+
+In this practical we:
+
+1. Add a **container** for the menu in `index.html`.
+2. Add a new module `js/menu.js`.
+3. Add a new property `selectedIndicator` to the state object.
+4. Add code to construct and manage the menu.
+5. Add basic styling to the menu.
+6. Modify the update function so that it also updates the menu.
+
+
+
+
+## Add a container for the menu
+
+In `index.html` we make the following changes:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-...
-<body>
-...
-<script src="js/lib/d3.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/store.js"></script>
-<script src="js/layout.js"></script>
-<script src="js/update.js"></script>
-<script src="js/popup.js"></script>
-<script src="js/menu.js"></script>
-<script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id="wrapper">
+markua-start-insert
+  	  <div id="controls">
+        <div class="menu">
+          <div class="items"></div>
+        </div>
+      </div>
+      <div id="chart-wrapper">
+markua-end-insert
+        <svg width="1200" height="1200">
+          <g id="chart"></g>
+        </svg>
+markua-start-insert
+      </div>
+markua-end-insert
+    </div>
+
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
+```
+
+We add two new `<div>` elements to the main wrapper `<div id="wrapper">`. The first acts as a container for Energy Explorer's controls (including the menu). The second `<div>` acts as a container for the chart's `<svg>` element.
+
+## Add a new module for the menu
+
+Create a new file within the `js` directory and name it `menu.js`. Your directory structure should now look like:
+
+```text
+step11
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+markua-start-insert
+    ├── menu.js
+markua-end-insert
+    ├── popup.js
+    ├── store.js
+    └── update.js
+```
+
+In `index.html` link to the new file:
+
+{caption: "index.html", line-numbers: false}
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  ...
+  </head>
+
+  <body>
+    ...
+
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/popup.js"></script>
+markua-start-insert
+    <script src="js/menu.js"></script>
+markua-end-insert
+    <script src="js/main.js"></script>
+  </body>
 </html>
 ```
 
 Now save `menu.js` and `index.html`.
 
-### Add menu code
+## Add selectedIndicator state property
 
-The `menu.js` module will contain code to:
+In `js/store.js` add a new property `selectedIndicator` which indicates which energy indicator the user has selected. We also add a new action type `setSelectedIndicator` which updates `state.selectedIndicator`.
 
-* **create** and **update** the menu items using a D3 join
-* **handle** menu item clicks
+{caption: "js/store.js"}
+```js
+let state = {
+markua-start-insert
+    selectedIndicator: 'country'
+markua-end-insert
+};
 
-You’ll use D3 to create the menu. (This is a good example of where D3 can be used to create standard HTML elements.)
+function action(type, param) {
+    switch(type) {
+markua-start-insert
+        case 'setSelectedIndicator':
+            state.selectedIndicator = param;
+            break;
+markua-end-insert
+    }
 
-An array specifying the menu items will be created and this will be joined to `div` elements.
-
-The selected menu item will have a class attribute of `selected` (so that it can be styled appropriately). An event handler `handleMenuClick` will be attached to each menu item.
-
-Start by adding an array to `menu.js` that specifies the menu items:
-
-{caption: "menu.js", line-numbers: false}
+    update();
+}
 ```
+
+## Add code to construct and manage the menu
+
+The `menu.js` module contains code to: **create** and **update** the menu items using a D3 join. It also handles menu item clicks:
+
+{caption: "js/menu.js"}
+```js
 let menuItems = [
-{
-id: 'country',
-label: 'Country'
-},
-{
-id: 'renewable',
-label: 'Renewable'
-},
-{
-id: 'oilgascoal',
-label: 'Oil, Gas & Coal'
-},
-{
-id: 'hydroelectric',
-label: 'Hydroelectric'
-},
-{
-id: 'nuclear',
-label: 'Nuclear'
-}
+    {
+        id: 'country',
+        label: 'Country'
+    },
+    {
+        id: 'renewable',
+        label: 'Renewable'
+    },
+    {
+        id: 'oilgascoal',
+        label: 'Oil, Gas & Coal'
+    },
+    {
+        id: 'hydroelectric',
+        label: 'Hydroelectric'
+    },
+    {
+        id: 'nuclear',
+        label: 'Nuclear'
+    }
 ];
-```
 
-Each menu item is represented by an object that has two properties `id` and `label`. The `id` property uniquely identifies each menu item and is used when setting `state.selectedIndicator`.
-
-Now add a new function named `updateMenu` which joins the `menuItems` array to `div` elements:
-
-{caption: "menu.js", line-numbers: false}
-```
-let menuItems = [...];
-function updateMenu() {
-d3.select('#controls .menu .items')
-.selectAll('.item')
-.data(menuItems)
-.join('div')
-.classed('item', true)
-.text(function(d) {
-return d.label;
-});
-}
-```
-
-> Notice that the join code for the menu is fundamentally the same as what you learned in the [D3 joins section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/how-to-join/).
-
-Now attach an event handler named `handleMenuClick` to each menu item (you’ll define `handleMenuClick` later):
-
-{caption: "menu.js", line-numbers: false}
-```
-function updateMenu() {
-d3.select('#controls .menu .items')
-.selectAll('.item')
-.data(menuItems)
-.join('div')
-.classed('item', true)
-.text(function(d) {
-return d.label;
-})
-.on('click', handleMenuClick);
-}
-```
-
-When a menu item is clicked, `handleMenuClick` is called and the joined value is passed in as the first parameter. (See the [Event Handling](https://learn.createwithdata.com/books/d3-start-to-finish/sections/d3-event-handling) section for a reminder.)
-
-The joined value will be an element from `menuItems` so will look similar to:
-
-```
-{
-id: 'renewable',
-label: 'Renewable'
-}
-```
-
-Now add the `handleMenuClick` function. `handleMenuClick`‘s second parameter `d` is a single menu item object that contains two properties `id` and `label` (see above).
-
-`handleMenuClick` calls `action` with action type `'setSelectedIndicator'`. Pass `d.id` (which is the id of the clicked menu item) as the action parameter:
-
-{caption: "menu.js", line-numbers: false}
-```
-let menuItems = [...];
 function handleMenuClick(e, d) {
-action('setSelectedIndicator', d.id);
+    action('setSelectedIndicator', d.id);
 }
-function updateMenu() {...}
-```
 
-Finally add a call to the `.classed` method that sets a class attribute of `selected` if the menu item’s id matches `state.selectedIndicator`:
-
-{caption: "menu.js", line-numbers: false}
-```
 function updateMenu() {
-d3.select('#controls .menu .items')
-.selectAll('.item')
-.data(menuItems)
-.join('div')
-.classed('item', true)
-.classed('selected', function(d) {
-return state.selectedIndicator === d.id;
-})
-.text(function(d) {
-return d.label;
-})
-.on('click', handleMenuClick);
+    d3.select('#controls .menu .items')
+        .selectAll('.item')
+        .data(menuItems)
+        .join('div')
+        .classed('item', true)
+        .classed('selected', function(d) {
+            return state.selectedIndicator === d.id;
+        })
+        .text(function(d) {
+            return d.label;
+        })
+        .on('click', handleMenuClick);
 }
 ```
 
-Now save `menu.js`.
+`menuItems` is an array containing objects for each menu item. Each object consists of an id and label. `updateMenu` uses D3 to join `menuItems` to `<div>` elements. You might be surprised to see D3 used in this way - D3 can be used to join arrays to HTML elements, not just SVG elements! This code is standard join code, as covered in the Data Joins chapter. We also register an event handler `handleMenuClick` for click events.
 
-### Add style
+When a menu item is clicked, `handleMenuClick` is called. This calls `action` which updates `state.selectedIndicator` and calls `update`. We'll modify `update` later on to call `updateMenu`. When `updateMenu` is called, it'll add a class attribute `selected` to the selected menu item. This'll allow us to style the selected menu item accordingly.
 
-In `css/style.css` add the following CSS to style the menu:
+## Basic styling of the menu
 
-{caption: "style.css", line-numbers: false}
-```
-#wrapper { ... }
+We add some CSS rules to `css/style.css` for styling the menu:
+
+{caption: "css/style.css"}
+```css
+body {
+    background-color: #FFFFF7;
+markua-start-insert
+    cursor: default;
+markua-end-insert
+}
+
+#wrapper {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+markua-start-insert
 .menu .items {
-display: flex;
+    display: flex;
 }
+
 .menu .item {
-padding: 0 1rem;
-color: #333;
-opacity: 0.5;
+    padding: 0 1rem;
+    color: #333;
+    opacity: 0.5;
 }
+
 .menu .item.selected, .menu .item:hover {
-opacity: 1;
+    opacity: 1;
 }
+markua-end-insert
+
+circle.renewable {
+    fill: #7FB069;
+}
+
 ...
 ```
 
-The `display: flex;` declaration causes the items to be displayed in a horizontal row.
+We set `cursor` to `default` on the `body` element so that the cursor pointer always displays as an arrow. (Without this, the text select pointer is displayed when menu items are hovered.)
 
-Each item is given some horizontal padding, a color of `#333` and an opacity of 0.5.
+The menu item container (selected by `.menu .items`) is given a `display` of `flex` which arranges the menu items in a row. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.) Each menu item is given some horizontal padding and given an opacity of 0.5. If a menu item is hovered or selected it's given an opacity of 1.
 
-If a menu item has a class attribute `selected` or it’s hovered, its opacity is set to 1.
 
-Finally add the following declaration to the `body` rule which ensures the cursor keeps its default shape (an arrow) even when its hovering over text:
+## Add menu to update function
 
-{caption: "style.css", line-numbers: false}
-```
-body {
-background-color: #FFFFF7;
-cursor: default;
+Finally we need to make sure the menu is redrawn each time the state changes. In `js/update.js` we create two new functions `updateChart` and `updateMenu`, both of which are called from a new `update` function. `updateChart` is a new function that replaces the old `update` function:
+
+{caption: "js/update.js"}
+```js
+function initialiseGroup(g) {
+    ...
 }
-```
 
-Save `style.css` and refresh the browser.
+function updateGroup(d, i) {
+    ...
+}
 
-### Modify update function
-
-Finally you’ll modify the `update` function in `update.js` so that it updates both the chart and the menu.
-
-Start by renaming `update` to `updateChart`:
-
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) { ... }
+markua-start-insert
 function updateChart() {
-let layoutData = layout(state.data);
-d3.select('#chart')
-.selectAll('g')
-.data(layoutData)
-.join('g')
-.each(updateGroup);
+    let layoutData = layout(data);
+
+    d3.select('#chart')
+        .selectAll('g')
+        .data(layoutData)
+        .join('g')
+        .each(updateGroup);
 }
-```
 
-Then add a new function named `update` which calls `updateChart` and `updateMenu`:
-
-{caption: "update.js", line-numbers: false}
-```
-function updateChart() { ... }
 function update() {
-updateChart();
-updateMenu();
+    updateChart();
+    updateMenu();
 }
+markua-end-insert
 ```
 
-Now save `update.js`.
+Whenever `update` is called, the chart and menu are updated. For example, when the `setSelectedIndicator` action is invoked the chart and menu are both updated.
 
-Refresh the browser (making sure it’s loading `step11`) and you should see the menu at the top of the window. When you click an item it should highlight in a darker gray:
+Now make sure `index.html`, `css/style.css`, `js/store.js`, `js/update.js` and `js/menu.js` are saved and view Step 11 in your browser. There should now be a menu at the top. When you click an item it should highlight in a darker gray:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-16.png)
+![Energy Explorer menu with Oil, Gas & Coal selected](a1a6b29666e04b7ebefd9784489c67d8.png)
 
 The chart itself won’t change when a menu item is clicked – that’ll be added in an upcoming practical.
 
-The complete code for this practical is in `step11-complete`.
-
 ### Summing up
 
-In this practical you added the sort menu to the energy explorer.
+In this practical you added a menu to Energy Explorer. When a menu item is clicked the `handleMenuClick` event handler (in `js/menu.js`) is called. This event handler calls `action` and passes in an action type of `setSelectedIndicator` and an action parameter of the menu item’s id (e.g. `'renewable'`). The `action` function updates `state.selectedIndicator` and calls `update` which causes the chart and menu to be redrawn.
 
-When a menu item is clicked the `handleMenuClick` event handler (in `menu.js`) is called. This event handler calls `action` and passes in an action type of `setSelectedIndicator` and an action parameter of the menu item’s id (e.g. `'renewable'`).
-
-The `action` function updates `state.selectedIndicator` and calls `update` which causes the **chart and menu** to be redrawn.
-
-Currently only the menu responds to `state.selectedIndicator` changing. However in an upcoming practical you’ll add code so that the circles are sorted according to the selected indicator.
-
-Another thing to note is that the menu was created using D3. This shows that D3 is actually a general purpose library that can create user interfaces, as well as data visualisations.
+Currently only the menu responds to `state.selectedIndicator` changing. However in an upcoming practical you’ll add code so that the circles are sorted according to the selected indicator. Another thing to note is that the menu was created using D3. This shows that D3 is actually a general purpose library that can create simple user interfaces, as well as data visualisations.
 
 For simple interfaces such as this menu, D3 is fine to use. However I’d recommend a library such as React or Vue for more complicated interfaces.
