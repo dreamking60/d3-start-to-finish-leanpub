@@ -1,13 +1,13 @@
 # Practical: Add labels
 
-Currently in Energy Explorer we join the `layoutData` array to `<circle>` elements (see `js/update.js`). We would now like to add a label to the circle indicating the country name. In this practical we'll achieve this by joining `layoutData` to `<g>` elements instead of `<circle>` elements. Each `<g>` element will contain a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
+Currently in Energy Explorer we join the `layoutData` array to `<circle>` elements (see `js/update.js`). We would now like to add a label to the circle indicating the country name. In this practical we'll do this by joining `layoutData` to `<g>` elements instead of `<circle>` elements. Each `<g>` element will contain a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
 
 By the end of this practical, each country will be represented by a `<g>` element containing a `<circle>` and `<text>` element:
 
 ```html
 <g class="country" transform="translate(471,264)">
   <circle r="24.26"></circle>
-	<text class="label" y="50">Denmark</text>
+  <text class="label" y="50">Denmark</text>
 </g>
 ```
 
@@ -84,9 +84,9 @@ markua-end-insert
 }
 ```
 
-Two new properties `labelText` and `labelOffset` are added to each item. `labelText` represents the label text. Some of labels will overlap due to their length so we also add a function `getTruncatedLabel` which truncates a label to a maximum of 10 characters. `labelOffset` is the vertical position of each label (with respect to the circle center) and is computed from `maxRadius` and `labelHeight`. We also add `labelHeight` to  `cellHeight` to make each grid cell taller to accomodate the label.
+Two new properties `labelText` and `labelOffset` are added to each item. `labelText` represents the label text. Some of labels will overlap due to their length so we add a function `getTruncatedLabel` which truncates a label to a maximum of 10 characters. `labelOffset` is the vertical position of each label (with respect to the circle center) and is computed from `maxRadius` and `labelHeight`. We also increase `cellHeight` to accomodate the label.
 
-Now `layoutData` looks like:
+Now `layoutData` has label information and looks like:
 
 ```js
 [
@@ -122,7 +122,7 @@ markua-end-insert
 ```
 
 
-### Modify update function to join data to `<g>` elements
+## Modify update function to join data to `<g>` elements
 
 The following changes are made to `js/update.js`:
 
@@ -170,15 +170,15 @@ The changes follow the same pattern as in the 'Joining an array to groups of ele
 
 The join code in function `update` now joins `<g>` elements instead of `<circle>` elements. A new function `updateGroup` is called on each joined element.
 
-`updateGroup` appends a `<circle>` and `<text>` element to the current `<g>` element (if it's empty). The `<g>` element is given a class attribute with value `country` (which helps us later on when we style each country).
+`updateGroup` appends a `<circle>` and `<text>` element to the current `<g>` element if it's empty. The `<g>` element is given a class attribute of value `country` (which helps us later on when we style each country).
 
-Instead of setting the center of each circle we now apply a translate transform to each `<g>` element. We set the circle radius as before. Finally we set the `y` attribute of the label and its text content using the two properties we added in the previous section.
+Instead of setting the center of each circle we now apply a translate transform to each `<g>` element. Next we set the circle radius. Finally we set the `y` attribute of the label and its text content using the two properties we added in the previous section.
 
 Now save `js/layout.js` and `js/update.js` and load Step 7 in your browser. You should see:
 
 ![Each country is now represented by a `<circle>` and `<text>` element](700624f4266152a6bd0373a62df060fb.png)
 
-### Center the labels using CSS
+## Center the labels using CSS
 
 Finally we horizontally center the labels so that they're aligned with the circles.
 

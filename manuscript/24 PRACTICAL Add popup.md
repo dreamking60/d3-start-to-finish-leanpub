@@ -1,452 +1,531 @@
 # Practical: Add a popup
 
-In the next two practicals you’ll **add a popup** to the Energy Explorer using the Flourish popup component:
+In this practical we **add a popup** to the Energy Explorer using the Flourish popup component:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image.png)
+{width: 33%}
+![Energy Explorer with Flourish popup](7253c5359b08f6d4fc7f52559fa5c94b.png)
 
 When a country is hovered a popup will appear containing the country name together with the country’s energy mix.
 
-In this practical you’ll add the popup that and populate it with the country name:
+## Overview
 
-![](http://learn.createwithdata.com/wp-content/uploads/2020/07/image-42.png)
+Open step10. The file structure is:
 
-(You’ll add the energy mix data to the popup in the next practical.)
+```text
+step10
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+markua-start-insert
+    │   └── popup-v1.1.1.min.js
+markua-end-insert
+    ├── main.js
+    └── update.js
+```
 
-There are a few steps in this practical:
+The Flourish popup library has been added so you don't need to download it yourself. (It was downloaded from `https://cdn.flourish.rocks/popup-v1.full.min.js`.)
 
-* **install** the Flourish popup component
-* add a **new module** for managing the popup
-* add mouseover and mouseout **event handlers** and attach them to the countries
-* set `pointer-events` **CSS rule** for the popup and the circles
-* **populate the popup** with the country name
+In this practical we:
 
-In your code editor open the `step10` directory of the `d3-start-to-finish` code.
+1. Link to the popup library in `index.html`.
+2. Add new module `js/popup.js`.
+3. Add event handlers to the country groups that show/hide the popup.
+4. Populate the popup with the energy data.
+5. Offset the popup (so that it's above the circle center).
 
-### Install the Flourish popup component
+## Link to the popup library
 
-The `js/lib` directory in `step10` already contains the Flourish popup component. (It was downloaded from `https://cdn.flourish.rocks/popup-v1.full.min.js`.)
-
-In `index.html` add `script` tags to load the popup component:
+In `index.html` add `script` tags to load the popup library:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-...
-</head>
-<body>
-...
-<script src="js/lib/d3.min.js"></script>
-<script src="js/lib/popup-v1.1.1.min.js"></script>
-...
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <svg width="1200" height="1200">
+        <g id="chart"></g>
+      </svg>
+    </div>
+
+    <script src="js/lib/d3.min.js"></script>
+markua-start-insert
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+markua-end-insert
+
+    <script src="js/config.js"></script>
+	  <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
 ```
 
-### Create module for popup code
+Save `index.html`.
 
-Now create a new file within the `js` directory and name it `popup.js`. This will contain popup related code.
+## Add new module for popup
 
-Include the new file `popup.js` in the application by adding a new `<script>` tag to `index.html`:
+Create a new file `popup.js` in the `js` directory that'll contain the popup related code:
 
-{caption: "index.html", line-numbers: false}
 ```
+step10
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+markua-start-insert
+    ├── popup.js
+markua-end-insert
+    └── update.js
+```
+
+Link to this new file in `index.html`:
+
+{caption: "index.html"}
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-...
-</head>
-<body>
-...
-<script src="js/layout.js"></script>
-<script src="js/popup.js"></script>
-<script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <svg width="1200" height="1200">
+        <g id="chart"></g>
+      </svg>
+    </div>
+
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+markua-start-insert
+    <script src="js/popup.js"></script>
+markua-end-insert
+    <script src="js/main.js"></script>
+  </body>
 </html>
 ```
 
-### Initialize the popup
+Save `index.html`.
 
-In the new file `popup.js` initialize the popup:
 
-{caption: "popup.js", line-numbers: false}
-```
-var popup = Popup();
-```
+## Add event handlers
 
-### Create event handlers
+We now create a popup object and add mouseover and mouseout event handlers to `js/popup.js`:
 
-You’ll now create **event handlers** for when the mouse moves over (and out of) a country.
+{caption: "js/popup.js"}
+```js
+let popup = Popup();
 
-Start by adding event listeners to each country group in `initializeGroup` (`update.js`). Use D3’s `.on` method which was covered in the [D3 Event Handling](https://learn.createwithdata.com/books/d3-start-to-finish/sections/d3-event-handling/) section:
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.classed('country', true)
-.on('mouseover', handleMouseover)
-.on('mouseout', handleMouseout);
-g.append('circle')
-.classed('renewable', true);
-...
-}
-```
-
-Now in `popup.js` add the `handleMouseover` event handler:
-
-{caption: "popup.js", line-numbers: false}
-```
-var popup = Popup();
 function handleMouseover(e, d) {
+    popup
+        .point(this)
+        .html(d.labelText)
+        .draw();
 }
-```
 
-We saw in the [event handling section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/d3-event-handling/) that D3 passes the joined value into `handleMouseover` as the second parameter. In our case the joined value is an object from `layoutData` (see `update` in `main.js` for a reminder) and will have the following structure:
-
-```
-{
-"x": 814.2857142857142,
-"y": 264.2857142857143,
-"renewableRadius": 17.79887636902959,
-"oilGasCoalRadius": 19.488458122694055,
-"hydroelectricRadius": 14.261837188805655,
-"nuclearRadius": 0,
-"labelText": "El Salvad...",
-"labelOffset": 50
-}
-```
-
-Start by setting the popup’s content using the `labelText` property:
-
-{caption: "popup.js", line-numbers: false}
-```
-function handleMouseover(e, d) {
-popup
-.html(d.labelText);
-}
-```
-
-We saw in the event handling section that D3 assigns the element that triggered the event to the `this` keyword. Let’s use this to position the popup:
-
-{caption: "popup.js", line-numbers: false}
-```
-function handleMouseover(e, d) {
-popup
-.point(this)
-.html(d.labelText);
-}
-```
-
-Finally call `.draw` to draw the popup:
-
-{caption: "popup.js", line-numbers: false}
-```
-function handleMouseover(e, d) {
-popup
-.point(this)
-.html(d.labelText)
-.draw();
-}
-```
-
-The `mouseout` handler will hide the popup:
-
-{caption: "popup.js", line-numbers: false}
-```
-var popup = Popup();
-function handleMouseover(e, d) {...}
 function handleMouseout() {
-popup.hide();
+    popup.hide();
 }
 ```
 
-### Set pointer-events
+This code is similar to what we covered in the 'Florish popup library' chapter. We see in a moment that `this` represents the country `<g>` element that receives the mouse event. (The bounding box of each `<g>` element contains the circles **and** the label, so the center is a bit below the circle centers.) For now we pass the `labelText` property into the popup, just so we can get something up and running quickly.
 
-As explained in the previous section it’s important to switch off pointer events on the popup itself (to eliminate flickering).
+Let's register the event handlers using D3's `.on` method:
 
-In `css/style.css` add the following at the bottom:
+{caption: "js/update.js"}
+```js
+function initialiseGroup(g) {
+markua-start-insert
+  	g.classed('country', true)
+        .on('mouseover', handleMouseover)
+        .on('mouseout', handleMouseout);
+markua-end-insert
 
-{caption: "style.css", line-numbers: false}
-```
-.country .label {
-text-anchor: middle;
+    g.append('circle')
+        .classed('popup-center', true)
+        .attr('r', 1);
+
+    g.append('circle')
+        .classed('renewable', true);
+
+    g.append('circle')
+        .classed('oilgascoal', true);
+
+    g.append('circle')
+        .classed('hydroelectric', true);
+
+    g.append('circle')
+        .classed('nuclear', true);
+
+    g.append('text')
+        .classed('label', true);
 }
-.flourish-popup {
-pointer-events: none;
+
+...
+```
+
+There's also a couple of CSS rules we need to add. (These aren't very obvious things to add, and knowing to do these really comes with experience.) By default, circles with a fill colour of `none` don't trigger events. We can change this by setting `pointer-events` to `all` on each country group.
+
+We also set `pointer-events` to `none` on the popup itself so that `mouseover` events aren't triggered if the mouse pointer moves over the popup itself.
+
+{caption: "css/style.js"}
+```css
+body {
+    background-color: #FFFFF7;
 }
-```
 
-By default SVG shapes with a `fill` of `none` do not trigger pointer events. This means that **only the renewable circle** **triggers events**.
+...
 
-You can make **all four circles** respond to pointer events by setting `pointer-events` to `all` on the `g` element containing the circles:
+circle.nuclear {
+    fill: none;
+    stroke: #F6AE2D;
+    stroke-dasharray: 4,2;
+}
 
-{caption: "style.css", line-numbers: false}
-```
-circle.nuclear {...}
+markua-start-insert
 .country {
-pointer-events: all;
+    pointer-events: all;
 }
+markua-end-insert
+
 .country .label {
-text-anchor: middle;
+    text-anchor: middle;
 }
-```
 
-Save `index.html`, `popup.js`, `main.js` and `style.css` and refresh your browser (making sure it’s loading `step10`).
-
-Hover over a country and you should see a simple popup appear:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-42.png)
-
-In the next practical you’ll add the energy mix data to the popup.
-
-## Practical: Populate the popup
-
-In this practical you’ll **add the energy mix data** to the popup.
-
-The end result will look like:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-43.png)
-
-In your code editor open the `step10` directory of the `d3-start-to-finish` code. (This will already be open if you’ve just completed the previous practical.)
-
-### Add energy mix data to popup
-
-Recall that each `g` element in the chart is joined to an object that the layout function generates:
-
-```
-{
-"x": 814.2857142857142,
-"y": 264.2857142857143,
-"renewableRadius": 17.79887636902959,
-"oilGasCoalRadius": 19.488458122694055,
-"hydroelectricRadius": 14.261837188805655,
-"nuclearRadius": 0,
-"labelText": "El Salvad...",
-"labelOffset": 50
-}
-```
-
-An object with this structure is passed into `handleMouseover` which is where the popup will be populated.
-
-You need the name and energy mix for each country so add them to the `layout` function in `layout.js`:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout() {
-...
-var layoutData = data.map(function(d, i) {
-...
-item.labelText = getTruncatedLabel(d.name);
-item.labelOffset = maxRadius + labelHeight;
-item.popupData = {
-name: d.name,
-renewable: d.renewable,
-oilgascoal: d.oilgascoal,
-hydroelectric: d.hydroelectric,
-nuclear: d.nuclear
-};
-return item;
-});
-...
-}
-```
-
-Each layout item will now look something like:
-
-```
-{
-"x": 814.2857142857142,
-"y": 264.2857142857143,
-"renewableRadius": 17.79887636902959,
-"oilGasCoalRadius": 19.488458122694055,
-"hydroelectricRadius": 14.261837188805655,
-"nuclearRadius": 0,
-"labelText": "El Salvad...",
-"labelOffset": 50,
-"popupData": {
-"name": "El Salvador",
-"renewable": 35.2,
-"oilgascoal": 42.2,
-"hydroelectric": 22.6,
-"nuclear": null
-}
-}
-```
-
-> It’s not strictly necessary to put the country name and indicator values inside a separate object but it does keep things tidier.
-
-Now in `popup.js` add a new function named `popupTemplate` which takes the joined data (it’ll have a structure like the above object) and outputs an HTML string representing the popup content. This function calls another new function `getPopupEntry` which generates the HTML for a single indicator (such as Renewable) in the popup:
-
-{caption: "popup.js", line-numbers: false}
-```
-var popup = Popup();
-function getPopupEntry(d, type, label) {
-if (d.popupData[type] !== null) {
-return '<div>' + label + ': ' + d.popupData[type] + '%</div>';
-}
-return '';
-}
-function popupTemplate(d) {
-var html = '';
-html += '<h3>' + d.popupData.name + '</h3>';
-html += getPopupEntry(d, 'renewable', 'Renewable');
-html += getPopupEntry(d, 'oilgascoal', 'Oil, Gas & Coal');
-html += getPopupEntry(d, 'hydroelectric', 'Hydroelectric');
-html += getPopupEntry(d, 'nuclear', 'Nuclear');
-return html;
-}
-function handleMouseover(e, d) {...}
-function handleMouseout() {...}
-```
-
-`popupTemplate` creates a variable `html` which is initialized with an empty string.
-
-The country name (`d.popupData.name`) is then enclosed within `<h3>` tags and appended to the `html` string.
-
-`getPopupEntry` is then called for each energy type. This checks whether the energy type value (e.g. `d.popupData.renewable`) is non-null and if so returns an HTML string consisting of the energy type and it’s percentage value. (A `null` value indicates there was no data for that particular country and energy type.)
-
-The output of `getPopupEntry` will look something like:
-
-```
-"<div>Renewable: 1.9%</div>"
-```
-
-Finally in `handleMouseover` replace `d.labelText` with a call to `popupTemplate`. Pass `d` into `popupTemplate`:
-
-{caption: "popup.js", line-numbers: false}
-```
-function handleMouseover(e, d) {
-popup
-.point(this)
-.html(popupTemplate(d))
-.draw();
-}
-```
-
-Now save `layout.js` and `popup.js` and hover over a country. You should see something like:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-43.png)
-
-The popup is positioned towards the bottom of the circle. This is because the Flourish popup positions the popup at the center of the country group. Each country group consists of four circles **and the text label** which is why the center is just below the circle center.
-
-You’ll fix this in the next practical by adding another (hidden) element that determines the popup location.
-
-## Practical: Position the popup
-
-Currently the popup appears just below the circle center:
-
-![](http://learn.createwithdata.com/wp-content/uploads/2020/07/image-43.png)
-
-We’d like the popup to appear **towards the top** of the circle. You’ll do this by adding a hidden element, placing it where you’d like the popup to appear and pass this element into the popup’s `.position` method.
-
-At the end of this practical the popup will appear just above the circle center:
-
-![](http://learn.createwithdata.com/wp-content/uploads/2020/07/image-44.png)
-
-You’ll:
-
-* **add another circle** to each country that will determine the popup’s position
-* **add a property** `popupOffset` to the layout function that specifies where the new circle will be positioned
-* **position the new circle** according to the new layout property `popupOffset`
-* use the new circle to **position the popup**
-
-In your code editor open the `step10` directory of the `d3-start-to-finish` code. (This will already be open if you’ve just completed the previous practical.)
-
-### Add another circle to each country group
-
-In `initializeGroup` in `update.js` append a new circle and give it a class attribute of `popup-center`.
-
-You also need to set its radius to a non-zero value. (This is to deal with a rendering optimisation in Firefox.)
-
-{caption: "update.js", line-numbers: false}
-```
-function initializeGroup(g) {
-g.classed('country', true)
-.on('mouseover', handleMouseover)
-.on('mouseout', handleMouseout);
-g.append('circle')
-.classed('popup-center', true)
-.attr('r', 1);
-g.append('circle')
-.classed('renewable', true);
-...
-}
-```
-
-In `style.css` set the new circle’s opacity to zero:
-
-{caption: "style.css", line-numbers: false}
-```
-...
-.popup-center {
-opacity: 0;
-}
+markua-start-insert
 .flourish-popup {
-pointer-events: none;
+    pointer-events: none;
 }
+markua-end-insert
 ```
 
-### Add popupOffset property to the layout
+Save `js/popup.js`, `js/update.js` and `css/style.css`. Now when you hover over a country you should see a popup displaying the country name.
 
-In the `layout` function (`layout.js`) add a new property named `popupOffset` to `item`. Set it to half of `maxRadius` and make it negative so that the popup is positioned above (rather than below) the circle center:
+![Popup showing country name](217f3f1916a6f8a788ad2018dfa8b96e.png)
 
-{caption: "layout.js", line-numbers: false}
-```
+
+## Populate popup with energy data
+
+We'll now add the four energy indicators to the popup. We start by adding a new property `popupData` to each item in `js/layout.js`: 
+
+{caption: "js/layout.js"}
+```js
+function getTruncatedLabel(text) {
+    return text.length <= 10 ? text : text.slice(0, 10) + '...';
+}
+
 function layout(data) {
-...
-item.labelOffset = maxRadius + labelHeight;
-item.popupOffset = -0.5 * maxRadius;
-...
+    let labelHeight = 20;
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth + labelHeight;
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+        let column = i % config.numColumns;
+        let row = Math.floor(i / config.numColumns);
+
+        item.x = column * cellWidth + 0.5 * cellWidth;
+        item.y = row * cellHeight + 0.5 * cellHeight;
+
+        item.renewableRadius = radiusScale(d.renewable);
+        item.oilGasCoalRadius = radiusScale(d.oilgascoal);
+        item.hydroelectricRadius = radiusScale(d.hydroelectric);
+        item.nuclearRadius = radiusScale(d.nuclear);
+
+        item.labelText = getTruncatedLabel(d.name);
+        item.labelOffset = maxRadius + labelHeight;
+
+markua-start-insert
+        item.popupData = {
+            name: d.name,
+            renewable: d.renewable,
+            oilgascoal: d.oilgascoal,
+            hydroelectric: d.hydroelectric,
+            nuclear: d.nuclear
+        };
+markua-end-insert
+
+        return item;
+    });
+
+    return layoutData;
 }
 ```
 
-### Position the popup center circle
+The new property `.popupData` is an object that contains the information that'll be displayed by the popup. We now modify `js/popup.js` so that each energy indicator is displayed:
 
-In `updateGroup` select the popup center circle and set its `cy` attribute to `d.popupOffset`:
+{caption: "js/popup.js"}
+```js
+let popup = Popup();
 
-{caption: "update.js", line-numbers: false}
-```
-function updateGroup(d, i) {
-var g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-g.select('.popup-center')
-.attr('cy', d.popupOffset);
+markua-start-insert
+function getPopupEntry(d, type, label) {
+    if (!isNaN(d.popupData[type])) {
+        return '<div>' + label + ': ' + d.popupData[type] + '%</div>';
+    }
 
-...
+    return '';
 }
-```
 
-### Use the popup center circle to position the popup
+function popupTemplate(d) {
+    let html = '';
+    html += '<h3>' + d.popupData.name + '</h3>';
 
-Finally in `handleMouseover` select the popup center circle and get its SVG element using the `.node` method. (See the [More selection functions](https://learn.createwithdata.com/books/d3-start-to-finish/sections/more-selection-functions/) section for more about the `.node` method.)
+    html += getPopupEntry(d, 'renewable', 'Renewable');
+    html += getPopupEntry(d, 'oilgascoal', 'Oil, Gas & Coal');
+    html += getPopupEntry(d, 'hydroelectric', 'Hydroelectric');
+    html += getPopupEntry(d, 'nuclear', 'Nuclear');
 
-Use this element to set the popup position:
+    return html;
+}
+markua-end-insert
 
-{caption: "popup.js", line-numbers: false}
-```
 function handleMouseover(e, d) {
-var popupCenter = d3.select(this)
-.select('.popup-center')
-.node();
-popup
-.point(popupCenter)
-.html(popupTemplate(d.datum))
-.draw();
+    popup
+        .point(this)
+markua-start-insert
+        .html(popupTemplate(d))
+markua-end-insert
+        .draw();
+}
+
+function handleMouseout() {
+    popup.hide();
 }
 ```
 
-Now save `layout.js`, `main.js` and `popup.js` and refresh the browser.
+In `handleMouseover` we now pass `popupTemplate(d)` into the `.html` method. `popupTemplate` is a function that constructs a string containing HTML code that represents the popup content. We build up the string line by line starting with a heading containing the country name. (Remember `.popupData` was added to the layout object items in the previous step.) A helper function `getPopupEntry` constructs a single line that displays the indicator name and value. If the value is Nan (which means it was missing from the CSV file) the indicator is omitted.
 
-The popup should now appear towards the top of the circles:
+![Popup with all four energy indicators](0ee5f3e76b3d4430bb08d27e2adae4a9.png)
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-44.png)
 
-### Summing up
+## Offset the popup
 
-In this and the previous two practicals you added an information popup to the Energy Explorer. This allows users to get precise information for each country.
+Currently the popup appears just below the circle center because this is the center of the group element (which contains the circles **and** the label). This obscures most of the country's circles so we’d like it to appear **towards the top** of the circle. We’ll do this by adding a hidden element, placing it where we’d like the popup to appear. This element gets passed into the popup’s `.position` method. 
+
+We start by adding a new property `popupOffset` to the layout items. This specifies where the popup pointer (the triangle underneath the popup) should appear in relation to the circle centers:
+
+{caption: "js/layout.js"}
+```js
+function getTruncatedLabel(text) {
+    return text.length <= 10 ? text : text.slice(0, 10) + '...';
+}
+
+function layout(data) {
+    let labelHeight = 20;
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth + labelHeight;
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let layoutData = data.map(function(d, i) {
+        let item = {};
+
+...
+
+        item.labelText = getTruncatedLabel(d.name);
+        item.labelOffset = maxRadius + labelHeight;
+
+markua-start-insert
+        item.popupOffset = -0.8 * maxRadius;
+markua-end-insert
+        item.popupData = {
+            name: d.name,
+            renewable: d.renewable,
+            oilgascoal: d.oilgascoal,
+            hydroelectric: d.hydroelectric,
+            nuclear: d.nuclear
+        };
+
+        return item;
+    });
+
+    return layoutData;
+}
+```
+
+We position the popup pointer `0.8 * maxRadius` above the circle centers. This value was arrived at after experimentation and strikes a balance between the popup being high enough to reveal the underlying circles but not so high it disconnects from smaller circles. Ideally we'd position the popup according to the largest circle, but we're keeping things simple and focused for the benefit of learning.
+
+Now in `js/update.js` we add a new circle to each group: 
+
+{caption: "js/update.js"}
+```js
+function initialiseGroup(g) {
+    g.classed('country', true)
+        .on('mouseover', handleMouseover)
+        .on('mouseout', handleMouseout);
+
+markua-start-insert
+    g.append('circle')
+        .classed('popup-center', true)
+        .attr('r', 1);
+markua-end-insert
+
+    g.append('circle')
+        .classed('renewable', true);
+
+    g.append('circle')
+        .classed('oilgascoal', true);
+
+    g.append('circle')
+        .classed('hydroelectric', true);
+
+    g.append('circle')
+        .classed('nuclear', true);
+
+    g.append('text')
+        .classed('label', true);
+}
+
+function updateGroup(d, i) {
+    let g = d3.select(this);
+
+    if(g.selectAll('*').empty()) initialiseGroup(g);
+
+    g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+
+markua-start-insert
+    g.select('.popup-center')
+        .attr('cy', d.popupOffset);
+markua-end-insert
+
+    g.select('.renewable')
+        .attr('r', d.renewableRadius);
+
+...
+}
+```
+
+The new circle is added in `initialiseGroup` and given a class attribute of `popup-center`. In `updateGroup` this circle's `cy` attribute is updated using the new layout item property `.popupOffset`.
+
+Now we need to use the new circle to position the popup:
+
+{caption: "js/popup.js"}
+```js
+let popup = Popup();
+
+function getPopupEntry(d, type, label) {
+    if (!isNaN(d.popupData[type])) {
+        return '<div>' + label + ': ' + d.popupData[type] + '%</div>';
+    }
+
+    return '';
+}
+
+function popupTemplate(d) {
+    let html = '';
+    html += '<h3>' + d.popupData.name + '</h3>';
+
+    html += getPopupEntry(d, 'renewable', 'Renewable');
+    html += getPopupEntry(d, 'oilgascoal', 'Oil, Gas & Coal');
+    html += getPopupEntry(d, 'hydroelectric', 'Hydroelectric');
+    html += getPopupEntry(d, 'nuclear', 'Nuclear');
+
+    return html;
+}
+
+function handleMouseover(e, d) {
+markua-start-insert
+    let popupCenter = d3.select(this)
+        .select('.popup-center')
+        .node();
+markua-end-insert
+
+    popup
+markua-start-insert
+        .point(popupCenter)
+markua-end-insert
+        .html(popupTemplate(d))
+        .draw();
+}
+
+function handleMouseout() {
+    popup.hide();
+}
+```
+
+In `handleMouseover` we select the new circle and pass it into the popup's `.point` method.
+
+Save `js/layout.js`, `js/update.js` and `js/popup.js` and refresh your browser. The popup should now appear a bit higher up:
+
+![Popup positioned with a new circle](52676cc44e50fc530a2071f3a46df13c.png)
+
+We also need to hide the new circles, so we add the following to `css/style.css`:
+
+{caption: "css/style.css"}
+```css
+body {
+    background-color: #FFFFF7;
+}
+
+...
+
+.country {
+    pointer-events: all;
+}
+
+.country .label {
+    text-anchor: middle;
+}
+
+markua-start-insert
+.popup-center {
+    opacity: 0;
+}
+markua-end-insert
+
+.flourish-popup {
+    pointer-events: none;
+}
+```
+
+Now the Energy Explorer with popup looks like:
+
+{width: 33%}
+![Energy Explorer with Flourish popup](7253c5359b08f6d4fc7f52559fa5c94b.png)
+
+
+## Wrapping up
+
+In this practical we added an information popup to Energy Explorer. This allows users to get precise information for each country.
 
 Although there was quite a lot of work to get the popup up and running, using an existing library has saved a lot of work. For instance, the popup library automatically positions the popup so that it doesn’t disappear off the edges of the screen.
-
-In the next section you’ll learn how about state management.

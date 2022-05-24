@@ -48,29 +48,29 @@ Each country is represent by four overlapping circles so we need a colour scheme
 Let’s start with the renewable energy type. An obvious choice for this circle is **green**:
 
 {width: 15%}
-![6cc95d1a7b2bf7d04816352145e94496.png](6cc95d1a7b2bf7d04816352145e94496.png)
+![Solid green circle for renewable energy](6cc95d1a7b2bf7d04816352145e94496.png)
 
-Similarly, an obvious choice for Oil, Gas and Coal is **black** or **gray**. Black is probably too strong a color, so let’s use gray. If we use a filled gray circle we have to make sure smaller circles are drawn in front of larger circles. An easier approach is to use an empty circle with a gray stroke:
+Similarly, an obvious choice for Oil, Gas and Coal is **black** or **grey**. Black is probably too strong a color, so let’s use grey. If we use a filled grey circle we have to make sure smaller circles are drawn in front of larger circles. An easier approach is to use an empty circle with a grey stroke:
 
 {width: 15%}
-![db13edf95e7a18db402c8953b7b7a180.png](db13edf95e7a18db402c8953b7b7a180.png)
+![Grey outlined circle for oil, gas and coal](db13edf95e7a18db402c8953b7b7a180.png)
 
 Hydroelectric refers to energy produced from water pressure (think of water behind a dam). **Blue**‘s an obvious choice for anything related to water so let’s choose blue for hydroelectric power:
 
 {width: 15%}
-![03f6f971423838cfe8e9aac726a51cfe.png](03f6f971423838cfe8e9aac726a51cfe.png)
+![Blue outlined circle for hydroelectric](03f6f971423838cfe8e9aac726a51cfe.png)
 
 Finally we have nuclear. The nuclear power symbol has a yellow background so yellow might be a good choice. A yellow outline won’t show up very well against a light background so perhaps **orange** works well:
 
 {width: 15%}
-![be83c4a8ec8f5d1508f1da165b0fed05.png](be83c4a8ec8f5d1508f1da165b0fed05.png)
+![Orange outlined circle for nuclear](be83c4a8ec8f5d1508f1da165b0fed05.png)
 
 We’re using **three colours** (green, blue and orange) which might not be colour blind safe so let’s also change the stroke style of the circles.
 
 Let’s use a **short dashes** for the hydroelectric circles and **long dashes** for the nuclear circles:
 
 {width: 15%}
-![e735b05075d732ba6b61acbd55693f79.png](e735b05075d732ba6b61acbd55693f79.png)
+![Use dashed outlines to further distinguish the circles](e735b05075d732ba6b61acbd55693f79.png)
 
 It should now be possible to identify the energy type of each circle even if color blind.
 
@@ -218,6 +218,6 @@ Save `index.html` and `style.css` and load Step 9 in your browser. You should se
 
 A major part of the visualisation is finished now. Each country is represented by four circles and you can now begin to compare the energy mixes of different countries.
 
-I’m personally drawn to the solid green circles. The larger they are, the more renewables contribute to that country’s energy mix. Denmark’s a good example. Albania’s an interesting case as it looks like the vast majority of its energy comes from hydroelectric (blue outline). And not surprisingly for many countries, the biggest contributor is oil, gas and coal (gray outline).
+I’m personally drawn to the solid green circles. The larger they are, the more renewables contribute to that country’s energy mix. Denmark’s a good example. Albania’s an interesting case as it looks like the vast majority of its energy comes from hydroelectric (blue outline). And not surprisingly for many countries, the biggest contributor is oil, gas and coal (grey outline).
 
 In the next few chapters we look at adding an information popup that’ll appear when a country is hovered over.

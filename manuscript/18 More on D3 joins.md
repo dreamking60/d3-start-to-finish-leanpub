@@ -1,8 +1,8 @@
-# More on D3 joins
+# More on D3 Joins
 
 This chapter covers a couple of advanced techniques when joining data.
 
-We first look at joining arrays to groups of elements, so that each array element corresponds to a group of elements. This is a common scenario because you often need to represent data points with more than one element (for example, a labelled circle requires two elements). Energy Explorer uses this technique so it's worth taking some time to understand. (This is one of the most advanced topics in this book.)
+We first look at joining arrays to groups of elements, so that each array element corresponds to a group of elements. This is a common scenario because you often need to represent data points with more than one HTML/SVG element (for example, a labelled circle requires two elements). Energy Explorer uses this technique so it's worth taking some time to understand. (This is one of the most advanced topics in this book.)
 
 The second technique is for joining nested arrays to nested elements. This is quite an advanced technique and isn't used by Energy Explorer so feel free to skip.
 
@@ -40,7 +40,7 @@ let myData = [10, 40, 30];
 
 and you’d like to join the array to `<g>` elements containing a `<circle>` and `<text>` element. And suppose you’d also like to size the circle using the data value and populate the text element with the data value (so that it acts as a label):
 
-{width: 50%}
+{width: 33%}
 ![Array of numbers joined to a `<g>` element containing a `<circle>` and `<text>` element](7f0c1e6af8b4838947197508746e648e.png)
 
 We'd like the HTML/SVG to look like:
@@ -113,7 +113,7 @@ D>We covered the `.each` method and `d3.select(this)` in the previous chapter.
 
 `updateGroup` gets called for each `<g>` element. It begins by selecting `this` (which represents the `<g>` element `updateGroup` has been called on) and assigns the resulting selection to the variable `g`.
 
-`updateGroup` then checks whether `g` has any child elements and if not, it appends a `<circle>` and `<text>` element. It also sets the `y` atttribute of the `<text>` element. In effect we're initialising each of the `<g>` elements.
+`updateGroup` then checks whether the group `<g>` is empty. If it is, it appends a `<circle>` and `<text>` element to the group. It also sets the `y` atttribute of the `<text>` element. In effect we're **initialising** each of the `<g>` elements.
 
 D> `g.selectAll('*')` makes a selection containing all the child elements of the `<g>` element.
 D> 
@@ -275,8 +275,12 @@ d3.select('g.chart')
 The above is similar to the join code seen in previous sections but the array is joined to `<g>` elements instead of `<circle>` elements. We’ll name this join the **outer** join. This will create the following elements:
 
 ```html
-<g></g>
-<g></g>
+<g class="chart" transform="translate(50, 50)">
+markua-start-insert
+  <g></g>
+  <g></g>
+markua-end-insert
+</g>
 ```
 
 D>The first `<g>` element’s joined value is the array `[10, 30, 20]`. The second `<g>` element’s joined value is the array `[40, 10, 30, 20]`.

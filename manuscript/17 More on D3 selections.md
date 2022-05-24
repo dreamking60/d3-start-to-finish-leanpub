@@ -4,11 +4,11 @@ This chapter covers additional methods you can call on a D3 selection. It also c
 
 ## More selection methods
 
-In this section we’ll look at some additional methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later on.
+In this section we’ll look at some additional methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later on in Energy Explorer.
 
 ### .size, .empty, .node & .nodes
 
-In the following code samples assume the SVG looks like:
+The following code examples assume the SVG is:
 
 ```html
 <circle r="10"></circle>
@@ -16,7 +16,7 @@ In the following code samples assume the SVG looks like:
 <circle r="30"></circle>
 ```
 
-and that you select the circles and assign the selection to variable `s`:
+and that `s` is a D3 selection of all the circles:
 
 ```js
 let s = d3.selectAll('circle');
@@ -42,7 +42,7 @@ s.node();  // <circle r="10"></circle>
 
 Finally you can get an array containing all the elements using `.nodes`:
 
-```
+```js
 s.nodes();  // [<circle r="10" />, <circle r="20" />, <circle r="30" />]
 ```
 
@@ -87,7 +87,7 @@ This will result in a circle inside both `g` elements:
 You can also remove elements using `.remove`. For example:
 
 ```js
-var s = d3.selectAll('g');
+let s = d3.selectAll('g');
 s.remove();
 ```
 
@@ -101,7 +101,7 @@ which removes both `g` elements.
 s.each(fn)
 ```
 
-where `s` is a D3 selection and `fn` is a function. Within the function, the current HTML or SVG element is assigned to the `this` keyword. Suppose your HTML and SVG looks like:
+where `s` is a D3 selection and `fn` is a function. Within the function, the current HTML or SVG element is assigned to the `this` keyword. Suppose you have:
 
 ```html
 <circle r="10"></circle>
@@ -112,7 +112,8 @@ where `s` is a D3 selection and `fn` is a function. Within the function, the cur
 You can iterate over each circle using:
 
 ```js
-var s = d3.selectAll('circle');
+let s = d3.selectAll('circle');
+
 s.each(function() {
   console.log(this);
 });
@@ -135,7 +136,7 @@ d3.select(this);
 The above allows you to modify the element. For example:
 
 ```js
-var s = d3.selectAll('circle');
+let s = d3.selectAll('circle');
 s.each(function() {
   d3.select(this)
     .style('fill', 'red');
@@ -145,7 +146,7 @@ s.each(function() {
 changes the `fill` of each circle to `red`. This is equivalent to:
 
 ```js
-var s = d3.selectAll('circle')
+let s = d3.selectAll('circle')
   .style('fill', 'red');
 ```
 
@@ -158,7 +159,7 @@ Another selection method of interest is `.on` which lets you attach event handle
 You’ve learned how to join an array of values to HTML/SVG elements using code similar to:
 
 ```js
-var myData = [10, 40, 30];
+let myData = [10, 40, 30];
 
 d3.select('g.circles')
   .selectAll('circle')
@@ -197,19 +198,19 @@ Let’s look at an example. Suppose the SVG is:
 Now let’s add an array `myData` and a function that updates `myData` with random data:
 
 ```js
-var myData = [];
+let myData = [];
 
 function updateData() {
-  var maxItems = 5, maxValue = 25;
+  let maxItems = 5, maxValue = 25;
   myData = [];
-  var numItems = Math.ceil(Math.random() * maxItems);
-  for(var i = 0; i < numItems; i++) {
+  let numItems = Math.ceil(Math.random() * maxItems);
+  for(let i = 0; i < numItems; i++) {
     myData.push(Math.random() * maxValue);
   }
 }
 ```
 
-D> `updateData` updates `myData` with an array with a random number of elements. Each element is a random number between `0` and `maxValue`.
+D> `updateData` updates `myData` with an array of random length. Each array element is a random number between `0` and `maxValue`.
 
 Now we’ll define an update function that joins `myData` to `circle` elements. Each circle has a radius that’s 2 times it’s joined value and will be equally spaced in a horizontal direction:
 
@@ -224,7 +225,7 @@ function update() {
       return 2 * d;
     })
     .attr('cx', function(d, i) {
-      var circleSpacing = 100;
+      let circleSpacing = 100;
       return i * circleSpacing;
     })
     .style('fill', '#aaa');

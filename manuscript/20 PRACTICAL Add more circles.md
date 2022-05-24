@@ -2,7 +2,7 @@
 
 In this practical we **add three more circles** so that each country has four circles. Each circle represents an energy type.
 
-{width: 75%}
+{width: 100%}
 ![Each country represented by four circles](148995046a809d8710b2ae2ccbfb65a0.png)
 
 Currently each country group looks like:
@@ -114,7 +114,7 @@ As a reminder, each object in `data` looks similar to:
 }
 ```
 
-In the above changes the layout function takes each of the four energy indicators (hydroelectric, nuclear, oilgascoal and renewable), applies the radius scale and assigns the radius to new properties `renewableRadius`, `oilGasCoalRadius`, `hydroelectricRadius` and `nuclearRadius`.
+In the above changes the layout function takes each of the four energy indicators (hydroelectric, nuclear, oilgascoal and renewable), applies the radius scale and assigns the result to new properties `renewableRadius`, `oilGasCoalRadius`, `hydroelectricRadius` and `nuclearRadius`.
 
 ## Add four circles in the update function
 
@@ -123,7 +123,7 @@ Currently the update function (`js/update.js`) adds a single circle. We make the
 {caption: "js/update.js"}
 ```js
 markua-start-insert
-function initializeGroup(g) {
+function initialiseGroup(g) {
     g.classed('country', true);
 
     g.append('circle')
@@ -147,7 +147,7 @@ function updateGroup(d, i) {
     let g = d3.select(this);
 
 markua-start-insert
-    if(g.selectAll('*').empty()) initializeGroup(g);
+    if(g.selectAll('*').empty()) initialiseGroup(g);
 markua-end-insert
 
     g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
@@ -182,13 +182,13 @@ function update() {
 }
 ```
 
-We add a new function `initializeGroup` to take care of initialising each `<g>` element. This function sets the class attribute of each `<g>` element to `country`, adds a circle for each energy type and adds the `<text>` element for the label. Each of the circles also gets a class attribute that describes the energy type it refers to.
+We add a new function `initialiseGroup` to take care of initialising each `<g>` element. This function sets the class attribute of each `<g>` element to `country`, adds a circle for each energy type and adds the `<text>` element for the label. Each of the circles also gets a class attribute that describes the energy type it refers to.
 
 `updateGroup` now selects each of the four circles and updates its radius using the new properties we added in the previous section.
 
 ## Style the circles
 
-By default SVG circles have a fill colour of black, so let's set the fill to `none` and the stroke to `#aaa`:
+By default SVG circles have a fill colour of black meaning we can't distinguish the circles, so let's set the fill to `none` and the stroke to `#aaa`:
 
 {caption: "css/style.css"}
 ```css
@@ -211,13 +211,13 @@ Save `css/style.css`, `js/layout.js` and `js/update.js` and load step 8 in your 
 
 You should see:
 
-{width: 75%}
+{width: 100%}
 ![Energy Explorer with a circle for each energy type](18eaca30a5e3a178e078dba084d4cc66.png)
 
 The completed code is in `step8-complete` of the code download.
 
 ## Summing up
 
-Adding the nested join in the previous section was fairly complicated but it made adding further elements to the `g` element fairly straightforward. Each country now has 4 circles (each of which represents one of the four energy types) and a text label. It's beginning to take shape!
+Adding the nested join in the previous section was fairly complicated it made adding further elements to the `g` element fairly straightforward. Each country now has 4 circles (each of which represents one of the four energy types) and a text label. It's beginning to take shape!
 
 It’s not possible to see which circle relates to which energy type so in the next section you’ll style each circle in accordance with its energy type.
