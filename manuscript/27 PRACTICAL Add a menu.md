@@ -196,7 +196,7 @@ Start by adding an array to `menu.js` that specifies the menu items:
 
 {caption: "menu.js", line-numbers: false}
 ```
-var menuItems = [
+let menuItems = [
 {
 id: 'country',
 label: 'Country'
@@ -226,7 +226,7 @@ Now add a new function named `updateMenu` which joins the `menuItems` array to `
 
 {caption: "menu.js", line-numbers: false}
 ```
-var menuItems = [...];
+let menuItems = [...];
 function updateMenu() {
 d3.select('#controls .menu .items')
 .selectAll('.item')
@@ -275,7 +275,7 @@ Now add the `handleMenuClick` function. `handleMenuClick`‘s second parameter `
 
 {caption: "menu.js", line-numbers: false}
 ```
-var menuItems = [...];
+let menuItems = [...];
 function handleMenuClick(e, d) {
 action('setSelectedIndicator', d.id);
 }
@@ -353,7 +353,7 @@ Start by renaming `update` to `updateChart`:
 ```
 function updateGroup(d, i) { ... }
 function updateChart() {
-var layoutData = layout(state.data);
+let layoutData = layout(state.data);
 d3.select('#chart')
 .selectAll('g')
 .data(layoutData)

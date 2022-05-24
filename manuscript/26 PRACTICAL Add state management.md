@@ -82,7 +82,7 @@ Open `store.js` and add a state object that contains a single property `selected
 
 {caption: "store.js", line-numbers: false}
 ```
-var state = {
+let state = {
 selectedIndicator: 'country'
 };
 ```
@@ -93,7 +93,7 @@ Now add an action function which handles a single action type `setSelectedIndica
 
 {caption: "store.js", line-numbers: false}
 ```
-var state = {
+let state = {
 selectedIndicator: 'country'
 };
 function action(type, param) {
@@ -114,7 +114,7 @@ Therefore let’s move `data` to the `state` object. Start by removing its decla
 
 {caption: "main.js", line-numbers: false}
 ```
-// Remove: var data;
+// Remove: let data;
 function dataIsReady(csv) {
 // Remove: data = csv;
 update();
@@ -126,7 +126,7 @@ In `store.js` add a `data` property to the `state` object and add a new action `
 
 {caption: "store.js", line-numbers: false}
 ```
-var state = {
+let state = {
 data: null,
 selectedIndicator: 'country'
 };
@@ -158,7 +158,7 @@ You’ll also need to change `data` to `state.data` in the `update` function (in
 {caption: "update.js", line-numbers: false}
 ```
 function update() {
-var layoutData = layout(state.data);
+let layoutData = layout(state.data);
 d3.select('#chart')
 .selectAll('g')
 .data(layoutData)

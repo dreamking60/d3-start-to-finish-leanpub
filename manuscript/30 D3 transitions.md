@@ -47,10 +47,10 @@ Let’s look at a more substantial example.
 Suppose you have the following code which repeatedly draws a set of circles at random positions:
 
 ```
-var myData = [];
-var width = 800, height = 600, numCircles = 20;
+let myData = [];
+let width = 800, height = 600, numCircles = 20;
 function updateData() {
-for(var i=0; i<numCircles; i++) {
+for(let i=0; i<numCircles; i++) {
 myData[i] = {
 x: Math.floor(Math.random() * width),
 y: Math.floor(Math.random() * height),
@@ -212,11 +212,11 @@ In a lot of cases this doesn’t cause issues but if you’re positioning the HT
 For example, examine the following code:
 
 ```
-var myData;
+let myData;
 function updateData() {
 myData = [];
 
-for(var i=0; i<7; i++) {
+for(let i=0; i<7; i++) {
 myData[i] = {
 id: i,
 value: Math.floor(Math.random() * 50)

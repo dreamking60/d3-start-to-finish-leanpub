@@ -111,7 +111,7 @@ To avoid this, we can set the return value of `sortAccessor` to 0 if the indicat
 
 ```
 function sortAccessor(d) {
-var value = d[state.selectedIndicator];
+let value = d[state.selectedIndicator];
 if(value === null) value = 0;
 return value;
 }
@@ -127,7 +127,7 @@ Open `layout.js` and add the sort accessor function at the top of the file:
 {caption: "layout.js", line-numbers: false}
 ```
 function sortAccessor(d) {
-var value = d[state.selectedIndicator];
+let value = d[state.selectedIndicator];
 if(value === null) value = 0;
 return value;
 }
@@ -142,12 +142,12 @@ Now add a new function named `getSortedData` which returns a sorted copy of `dat
 {caption: "layout.js", line-numbers: false}
 ```
 function sortAccessor(d) {
-var value = d[state.selectedIndicator];
+let value = d[state.selectedIndicator];
 if(value === null) value = 0;
 return value;
 }
 function getSortedData(data) {
-var sorted;
+let sorted;
 if(state.selectedIndicator === 'country') {
 sorted = _.orderBy(data, 'name');
 } else {
@@ -170,16 +170,16 @@ Then use `sortedData` instead of `data` when computing `layoutData`:
 {caption: "layout.js", line-numbers: false}
 ```
 function layout(data) {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = 0.35 * cellWidth;
-var radiusScale = d3.scaleSqrt()
+let labelHeight = 20;
+let cellWidth = config.width / config.numColumns;
+let cellHeight = cellWidth + labelHeight;
+let maxRadius = 0.35 * cellWidth;
+let radiusScale = d3.scaleSqrt()
 .domain([0, 100])
 .range([0, maxRadius]);
-var sortedData = getSortedData(data);
-var layoutData = sortedData.map(function(d, i) {
-var item = {};
+let sortedData = getSortedData(data);
+let layoutData = sortedData.map(function(d, i) {
+let item = {};
 ...
 return item;
 });
@@ -223,16 +223,16 @@ Now add a new property named `visible` to `item` in the `layout` function:
 {caption: "layout.js", line-numbers: false}
 ```
 function layout(data) {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = 0.35 * cellWidth;
-var radiusScale = d3.scaleSqrt()
+let labelHeight = 20;
+let cellWidth = config.width / config.numColumns;
+let cellHeight = cellWidth + labelHeight;
+let maxRadius = 0.35 * cellWidth;
+let radiusScale = d3.scaleSqrt()
 .domain([0, 100])
 .range([0, maxRadius]);
-var sortedData = getSortedData(data);
-var layoutData = sortedData.map(function(d, i) {
-var item = {};
+let sortedData = getSortedData(data);
+let layoutData = sortedData.map(function(d, i) {
+let item = {};
 ...
 item.y = row * cellHeight + 0.5 * cellHeight;
 item.visible = isVisible(d);
@@ -249,7 +249,7 @@ Now in the `updateGroup` function (`update.js`) add a couple of `.style` calls t
 {caption: "update.js", line-numbers: false}
 ```
 function updateGroup(d, i) {
-var g = d3.select(this);
+let g = d3.select(this);
 if(g.selectAll('*').empty()) initializeGroup(g);
 g.attr('transform', 'translate(' + d.x + ',' + d.y + ')')
 .style('opacity', d.visible ? 1 : 0)

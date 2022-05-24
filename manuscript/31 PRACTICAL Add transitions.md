@@ -33,10 +33,10 @@ Open `layout.js` and add an `id` property to `item` in the `layout` function:
 ```
 function layout(data) {
 ...
-var layoutData = sortedData.map(function(d, i) {
-var item = {};
+let layoutData = sortedData.map(function(d, i) {
+let item = {};
 item.id = d.id;
-var column = i % config.numColumns;
+let column = i % config.numColumns;
 ...
 return item;
 });
@@ -55,7 +55,7 @@ In `update.js` add a key function to the data join in `updateChart`:
 {caption: "update.js", line-numbers: false}
 ```
 function updateChart() {
-var layoutData = layout();
+let layoutData = layout();
 d3.select('#chart')
 .selectAll('g')
 .data(layoutData, function(d) {
@@ -77,7 +77,7 @@ In `updateGroup` (`update.js`) add a call to `.transition()` before the `.attr` 
 {caption: "update.js", line-numbers: false}
 ```
 function updateGroup(d, i) {
-var g = d3.select(this);
+let g = d3.select(this);
 if(g.selectAll('*').empty()) initializeGroup(g);
 g.transition()
 .attr('transform', 'translate(' + d.x + ',' + d.y + ')')
@@ -99,7 +99,7 @@ Add a new property named `transitionDuration` to the `config` object in `config.
 
 {caption: "config.js", line-numbers: false}
 ```
-var config = {
+let config = {
 width: 1200,
 numColumns: 14,
 transitionDuration: 500
@@ -111,7 +111,7 @@ Now add a call to `.duration` after the `.transition` call you added in `updateG
 {caption: "update.js", line-numbers: false}
 ```
 function updateGroup(d, i) {
-var g = d3.select(this);
+let g = d3.select(this);
 if(g.selectAll('*').empty()) initializeGroup(g);
 g.transition()
 .duration(config.transitionDuration)
@@ -130,7 +130,7 @@ Add a new property named `transitionDelay` to `config`:
 
 {caption: "config.js", line-numbers: false}
 ```
-var config = {
+let config = {
 width: 1200,
 numColumns: 14,
 transitionDuration: 500,
@@ -143,7 +143,7 @@ and add a call to `.delay` just after the call to `.duration` you added in the p
 {caption: "update.js", line-numbers: false}
 ```
 function updateGroup(d, i) {
-var g = d3.select(this);
+let g = d3.select(this);
 if(g.selectAll('*').empty()) initializeGroup(g);
 g.transition()
 .duration(config.transitionDuration)
@@ -228,7 +228,7 @@ g.append('circle')
 ...
 }
 function updateGroup(d, i) {
-var g = d3.select(this);
+let g = d3.select(this);
 if(g.selectAll('*').empty()) initializeGroup(g, d);
 ...
 }

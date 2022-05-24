@@ -1,6 +1,4 @@
-# Practical: Finishing touches
-
-## Practical: Add Google font
+# Practical: Add Google font
 
 At the moment the Energy Explorer is using the web browser’s **default font** for all text elements. This is usually a serif font such as Times or Times New Roman.
 
@@ -236,9 +234,9 @@ Next you’ll create another new function named `getCircle` which returns the fo
 
 {caption: "menu.js", line-numbers: false}
 ```
-var menuItems = [ ... ];
+let menuItems = [ ... ];
 function getCircle(id) {
-var svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
+let svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
 return svg;
 }
 function getHtml(d) { ... }
@@ -266,12 +264,12 @@ Now modify `getHtml` so that it returns a string containing the output of `getCi
 {caption: "menu.js", line-numbers: false}
 ```
 function getCircle(id) {
-var svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
+let svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
 return svg;
 }
 function getHtml(d) {
-var circle = d.id === 'country' ? '' : getCircle(d.id);
-var html = circle + '<div class="label">' + d.label + '</div>';
+let circle = d.id === 'country' ? '' : getCircle(d.id);
+let html = circle + '<div class="label">' + d.label + '</div>';
 return html;
 }
 function handleMenuClick(d) { ... }
@@ -281,7 +279,7 @@ The finished `menu.js` looks like:
 
 {caption: "menu.js", line-numbers: false}
 ```
-var menuItems = [
+let menuItems = [
 {
 id: 'country',
 label: 'Country'
@@ -304,12 +302,12 @@ label: 'Nuclear'
 }
 ];
 function getCircle(id) {
-var svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
+let svg = '<svg width="18" height="18"><circle class="' + id + '" cx="9" cy="9" r="8"></svg>';
 return svg;
 }
 function getHtml(d) {
-var circle = d.id === 'country' ? '' : getCircle(d.id);
-var html = circle + '<div class="label">' + d.label + '</div>';
+let circle = d.id === 'country' ? '' : getCircle(d.id);
+let html = circle + '<div class="label">' + d.label + '</div>';
 return html;
 }
 function handleMenuClick(e, d) {

@@ -17,7 +17,7 @@ There’s several approaches to managing state in an application and we’ll loo
 The basic idea is that **the application state is stored in a single JavaScript object**. For example:
 
 ```
-var state = {
+let state = {
 selectedIndicator: 'GDP',
 filterType: 'region',
 filterValue: 'East Asia',
@@ -67,7 +67,7 @@ Let’s look at a full example.
 Suppose you’ve an [update function](https://learn.createwithdata.com/books/d3-start-to-finish/sections/update-loops/) that joins an array of data to SVG circle elements:
 
 ```
-var data = [30, 10, 20, 40];
+let data = [30, 10, 20, 40];
 function update() {
 d3.select('#chart')
 .selectAll('circle')
@@ -89,8 +89,8 @@ Let’s add a feature whereby a circle is selected by clicking it. Only one circ
 Let’s start by adding a state object containing a property `selectedCircle` which indicates which circle has been selected:
 
 ```
-var data = [30, 10, 20, 40];
-var state = {
+let data = [30, 10, 20, 40];
+let state = {
 selectedCircle: null
 };
 function update() { ... }
@@ -101,8 +101,8 @@ function update() { ... }
 Now let’s add a function named `action` which handles a single action type named `setSelectedCircle`:
 
 ```
-var data = [30, 10, 20, 40];
-var state = {
+let data = [30, 10, 20, 40];
+let state = {
 selectedCircle: null
 };
 function action(type, param) {
@@ -122,8 +122,8 @@ When `action` is called with action type `'setSelectedCircle'` it’ll set `stat
 Now let’s add a click event handler named `handleClick` and attach it to each circle. `handleClick` calls `action`, passing in `'setSelectedCircle'` as the action type and the circle index `i` as the action parameter:
 
 ```
-var data = [30, 10, 20, 40];
-var state = {
+let data = [30, 10, 20, 40];
+let state = {
 selectedCircle: null
 };
 function action(type, param) { ... }

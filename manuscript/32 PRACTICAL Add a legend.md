@@ -61,11 +61,11 @@ Currently in the `layout` function (`layout.js`) we compute `maxRadius`:
 {caption: "layout.js", line-numbers: false}
 ```
 function layout(data) {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = 0.35 * cellWidth;
-var radiusScale = d3.scaleSqrt()
+let labelHeight = 20;
+let cellWidth = config.width / config.numColumns;
+let cellHeight = cellWidth + labelHeight;
+let maxRadius = 0.35 * cellWidth;
+let radiusScale = d3.scaleSqrt()
 .domain([0, 100])
 .range([0, maxRadius]);
 ...
@@ -83,8 +83,8 @@ Just above the `layout` function add a new function `getMaxRadius`:
 ```
 function getTruncatedLabel(text) { ... }
 function getMaxRadius() {
-var cellWidth = config.width / config.numColumns;
-var maxRadius = 0.35 * cellWidth;
+let cellWidth = config.width / config.numColumns;
+let maxRadius = 0.35 * cellWidth;
 return maxRadius;
 }
 function layout(data) { ... }
@@ -95,11 +95,11 @@ and in `layout` use the new function to set `maxRadius`:
 {caption: "layout.js", line-numbers: false}
 ```
 function layout(data) {
-var labelHeight = 20;
-var cellWidth = config.width / config.numColumns;
-var cellHeight = cellWidth + labelHeight;
-var maxRadius = getMaxRadius();
-var radiusScale = d3.scaleSqrt()
+let labelHeight = 20;
+let cellWidth = config.width / config.numColumns;
+let cellHeight = cellWidth + labelHeight;
+let maxRadius = getMaxRadius();
+let radiusScale = d3.scaleSqrt()
 .domain([0, 100])
 .range([0, maxRadius]);
 ...

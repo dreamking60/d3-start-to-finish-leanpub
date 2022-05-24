@@ -1,6 +1,4 @@
-# Data manipulation
-
-## Using lodash to manipulate data
+# Using lodash to manipulate data
 
 This section introduces another JavaScript library called [Lodash](https://lodash.com/).
 
@@ -35,7 +33,7 @@ Lodash is an **object** that’s represented by the symbol `_` (underscore) and 
 For example there’s a method `_.sortBy` which takes an array and returns a sorted copy of the array. You invoke it using:
 
 ```
-var sortedNumbers = _.sortBy([10, 50, 30, 20]);
+let sortedNumbers = _.sortBy([10, 50, 30, 20]);
 ```
 
 > It may seem strange to have a library named `_` but `_` is a valid character as far as variable names are concerned.
@@ -64,7 +62,7 @@ The `_.includes` method takes an array and a value and returns `true` if the val
 For example:
 
 ```
-var data = [10, 20, 40, 50];
+let data = [10, 20, 40, 50];
 _.includes(data, 20);  // returns true
 _.includes(data, 30);  // returns false
 ```
@@ -96,7 +94,7 @@ return d > 30;
 `_.filter` can also operate across arrays of objects. For example:
 
 ```
-var data = [
+let data = [
 {
 name: "Paris",
 region: "Europe",
@@ -162,7 +160,7 @@ _.sortBy([50, 30, 100, 3, 20])
 If you have an array of objects you can specify which property to sort by, by passing in a function as the second argument:
 
 ```
-var data = [
+let data = [
 {
 name: "Paris",
 region: "Europe",
@@ -220,7 +218,7 @@ _.sortBy(data, 'indicator1');
 JavaScript has a built in sort function but `_.sortBy` has two differences: it returns a new array (rather than replacing the original array) and its number sorting is sane:
 
 ```
-var data = [50, 30, 100, 3, 20];
+let data = [50, 30, 100, 3, 20];
 _.sortBy(data);
 > returns [ 3, 20, 30, 50, 100 ]
 data.sort()
@@ -236,7 +234,7 @@ The `_.orderBy` method is similar to `_.sortBy` except a string `'asc'` or `'des
 For example:
 
 ```
-var data = [
+let data = [
 {
 name: "Paris",
 region: "Europe",

@@ -1,4 +1,4 @@
-# Wrapping up
+# Summary of the book
 
 First of all, congratulations for completing the book. It’s been a long journey and hopefully you’ve learned a lot along the way.
 
