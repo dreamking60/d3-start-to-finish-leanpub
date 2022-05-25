@@ -1,13 +1,3 @@
-15 PRACTICAL Arrange the data.md
-16 The build so far.md
-17 More on D3 selections.md
-18 More on D3 joins.md
-19 PRACTICAL Add labels.md
-20 PRACTICAL Add more circles.md
-21 PRACTICAL Style the circles.md
-22 D3 event handling.md
-23 Flourish popup library.md
-24 PRACTICAL Add popup.md
 25 State management.md
 26 PRACTICAL Add state management.md
 27 PRACTICAL Add a menu.md
@@ -15,3 +5,6 @@
 29 PRACTICAL Sort the countries.md
 30 D3 transitions.md
 31 PRACTICAL Add transitions.md
+32 PRACTICAL Add a legend.md
+33 PRACTICAL Finishing touches.md
+34 Wrapping up.md
