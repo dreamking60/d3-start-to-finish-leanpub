@@ -1,261 +1,237 @@
-# Practical: Add a legend
+# Practical: Add a Legend
 
-In this practical you’ll add a legend that indicates how the **circle size relates to the percentage value**. It’ll be located in the top right of the display and consists of a circle and label.
+In this practical we add a legend that indicates how the circle size relates to the percentage value. It’ll be located in the top right of the display and consists of a circle and label.
 
-![](http://learn.createwithdata.com/wp-content/uploads/2020/08/image-13-1024x175.png)
+![Energy Explorer legend (top right)](d0537c27e242a3029044d5b646fba7c4.png)
 
-The legend circle is sized such that it represents 100%.
+The legend circle is sized such that it represents a value of 100%.
 
-You’ll code the legend such that the circle radius is computed in the same manner as the circles in the visualisation. This means that if `config.width` or `config.numColumns` changes the country circles **and** the legend circle resize accordingly.
+## Overview
 
-The steps are:
+Open `step14`. The file structure is:
 
-* **add the legend** to `index.html`
-* add a function to **calculate the maximum circle radius**. (This’ll be used by the `layout` function and the function that updates the legend circle radius)
-* add a function to **update the radius of the legend circle**
-* **style** the legend
+```text
+step14
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+    │   ├── lodash.min.js
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+    ├── menu.js
+    ├── popup.js
+    ├── store.js
+    └── update.js
+```
 
-In your code editor open the `step14` directory of the `d3-start-to-finish` code.
+In this practical we:
 
-### Add HTML and SVG for the legend
+1. Add the legend to `index.html`.
+2. Add a function to update the radius of legend circle.
+3. Style the legend.
 
-Open `index.html` and add the following HTML and SVG for the legend:
+## Add the legend to index.html
+
+In `index.html` we add the following HTML and SVG for the legend:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-...
-<body>
-<div id="wrapper">
-<div id="controls">
-<div class="menu">
-<div class="items"></div>
-</div>
-<div class="legend">
-<svg width="70" height="70">
-<g transform="translate(35,35)">
-<circle />
-<text>100%</text>
-</g>
-</svg>
-</div>
-</div>
-<div id="chart-wrapper">
-...
-</div>
-</div>
-...
-</body>
+  <head>
+  ...
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div id="controls">
+        <div class="menu">
+          <div class="items"></div>
+        </div>
+markua-start-insert
+        <div class="legend">
+          <svg width="70" height="70">
+            <g transform="translate(35,35)">
+              <circle />
+              <text>100%</text>
+            </g>
+          </svg>
+        </div>
+markua-end-insert
+      </div>
+      <div id="chart-wrapper">
+        <svg width="1200" height="1200">
+          <g id="chart"></g>
+        </svg>
+      </div>
+    </div>
+
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+    <script src="js/lib/lodash.min.js"></script>
+
+    <script src="js/config.js"></script>
+    ...
+  </body>
 </html>
 ```
 
-The legend is added to `div#controls` and consists of an SVG element. The SVG element contains a `g` element which is centred within the SVG element. The `g` element contains a `circle` element and a `text` element.
+The legend is added to `div#controls` and consists of an SVG element. The SVG element contains a `<g>` element which is centred within the SVG element. The `<g>` element contains a `<circle>` element and a `<text>` element.
 
 Save `index.html`.
 
-### Add a function to compute the maximum circle radius
+## Add a function to update the radius of the legend circle
 
-Currently in the `layout` function (`layout.js`) we compute `maxRadius`:
+In `js/layout.js` we create a new function that returns the maximum radius of the country circles. This value is based on the width and number of columns of the chart:
 
-{caption: "layout.js", line-numbers: false}
-```
-function layout(data) {
-let labelHeight = 20;
-let cellWidth = config.width / config.numColumns;
-let cellHeight = cellWidth + labelHeight;
-let maxRadius = 0.35 * cellWidth;
-let radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-...
-return layoutData;
-}
-```
+{caption: "js/layout.js", line-numbers: false}
+```js
+function sortAccessor(d) { ... }
 
-`maxRadius` depends on `cellWidth` which in turn depends on `config.width` and `config.numColumns`.
+function getSortedData(data) { ... }
 
-We’d like to use `maxRadius` to set the radius of the legend circle. There’s a few ways to achieve this and the approach we’ll take is to add a new function named `getMaxRadius` which computes and returns the maximum radius. This function will be used by `layout` **and** the function that’ll update the legend radius.
+function isVisible(d) { ... }
 
-Just above the `layout` function add a new function `getMaxRadius`:
-
-{caption: "layout.js", line-numbers: false}
-```
 function getTruncatedLabel(text) { ... }
+
+markua-start-insert
 function getMaxRadius() {
-let cellWidth = config.width / config.numColumns;
-let maxRadius = 0.35 * cellWidth;
-return maxRadius;
+    let cellWidth = config.width / config.numColumns;
+    let maxRadius = 0.35 * cellWidth;
+    return maxRadius;
 }
-function layout(data) { ... }
-```
+markua-end-insert
 
-and in `layout` use the new function to set `maxRadius`:
-
-{caption: "layout.js", line-numbers: false}
-```
 function layout(data) {
-let labelHeight = 20;
-let cellWidth = config.width / config.numColumns;
-let cellHeight = cellWidth + labelHeight;
-let maxRadius = getMaxRadius();
-let radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-...
+    let labelHeight = 20;
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth + labelHeight;
+
+markua-start-insert
+    let maxRadius = getMaxRadius();
+markua-end-insert
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+    let sortedData = getSortedData(data);
+
+    let layoutData = sortedData.map(function(d, i) { ... });
+
+    return layoutData;
 }
 ```
 
-Now save `layout.js`.
+`getMaxRadius` computes the maximum circle radius in Energy Explorer using the same calculation as before. We call `getMaxRadius` in function `layout` and we'll also use it when updating the legend circle.
 
-### Add a function to update the radius of the legend
+In `update.js` we add a new function `updateLegend` which uses D3 to update the legend circle:
 
-In `update.js` add a new function `updateLegend` which uses D3 to select the legend circle.
+{caption: "js/update.js", line-numbers: false}
+```js
+...
 
-Update the circle’s radius using the `getMaxRadius` function you added previously.
+function updateChart() {
+    let layoutData = layout(data);
 
-{caption: "update.js", line-numbers: false}
-```
-function updateChart() { ... }
+    d3.select('#chart')
+        .selectAll('g')
+        .data(layoutData, function(d) {
+            return d.id;
+        })
+        .join('g')
+        .each(updateGroup);
+}
+
+markua-start-insert
 function updateLegend() {
-d3.select('.legend circle')
-.attr('r', getMaxRadius());
+    d3.select('.legend circle')
+        .attr('r', getMaxRadius());
 }
-function update() { ... }
-```
+markua-end-insert
 
-Now add a call to `updateLegend` in `update`:
-
-{caption: "update.js", line-numbers: false}
-```
-function updateLegend() { ... }
 function update() {
-updateChart();
-updateMenu();
-updateLegend();
+    updateChart();
+    updateMenu();
+markua-start-insert
+    updateLegend();
+markua-end-insert
 }
 ```
 
-Save `update.js`.
+`updateLegend` selects the legend circle and sets its radius using `getMaxRadius`. This means that if we change the chart width or number of columns, the legend circle will still display the correct radius.
 
-### Add CSS for the legend
+## Style the legend
 
-In `style.css` add style for the legend’s `circle` and `text` element.
+We add some CSS rules for the legend in `css/style.css`:
 
-The `circle` will have a stroke of `#aaa` and a fill of `none`.
+{caption: "css/style.css"}
+```css
+body { ... }
 
-The `text` element will have a fill of `#777`. To center the label horizontally set `text-anchor` to `middle` and to center the label vertically set `dominant-baseline` to `middle`:
+#wrapper { ... }
 
-{caption: "style.css", line-numbers: false}
-```
+markua-start-insert
+#controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+markua-end-insert
+
+.menu .items {
+    display: flex;
+}
+
+.menu .item {
+    padding: 0 1rem;
+    color: #333;
+    opacity: 0.5;
+}
+
 .menu .item.selected, .menu .item:hover {
-opacity: 1;
+    opacity: 1;
 }
+
+markua-start-insert
 .legend circle {
-stroke: #aaa;
-fill: none;
+    stroke: #aaa;
+    fill: none;
 }
+
 .legend text {
-fill: #777;
-text-anchor: middle;
-dominant-baseline: middle;
+    fill: #777;
+    text-anchor: middle;
+    dominant-baseline: middle;
 }
+markua-end-insert
+
 circle.renewable {
-fill: #7FB069;
+    fill: #7FB069;
 }
-```
 
-Now save `style.css`.
-
-Refresh your browser (making sure its loading `step14`). You should see:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-11-1024x185.png)
-
-The legend itself looks fine, but it needs to be aligned to the right. You’ll add some CSS to achieve this in the next section.
-
-### Add CSS to position the legend
-
-The controls section consists of the menu and the legend:
-
-{caption: "index.html", line-numbers: false}
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
 ...
-</head>
-<body>
-<div id="wrapper">
-<div id="controls">
-<div class="menu">
-...
-</div>
-<div class="legend">
-...
-</div>
-</div>
-<div id="chart-wrapper">
-...
-</div>
-</div>
-...
-</body>
-</html>
 ```
 
-We’d like the menu to appear on the **left of the wrapper** (`div#wrapper`) and the legend to appear on the **right of the wrapper**.
+The `div#controls` element contains the menu and legend. We'd like the menu to be to the left and the legend to the right and we use Flexbox to achieve this. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.)
 
-There’s various ways this can be done and we’ll use CSS’s flexbox layout because it’s fairly straightforward to achieve. If you’re not familiar with the flexbox layout I recommend CSS-Tricks’ [tutorial](https://css-tricks.com/snippets/css/a-guide-to-flexbox/). I’ve also built [Flexplorer](https://app.peterrcook.com/flexplorer/) which allows you to experiment with different layouts.
+We set `display` to `flex` on the controls container. We also set `justify-content` to `space-between` to maximise the horizontal space between the menu and legend. Setting `align-items` to `center` aligns the menu and legend vertically.
 
-Let’s start by making the menu appear to the left and the legend to the right.
+On the legend itself we set the circle stroke to `#aaa` and `fill` to `none`. The legend's `<text>` element has a `fill` of `#777`. To center the label horizontally `text-anchor` is set to `middle` and to center the label vertically `dominant-baseline` is set to `middle`.
 
-This can be done by setting the following rules on the controls container:
+Now save `index.html`, `js/layout.js`, `js/update.js` and `css/style.css`. Load `step14` in the browser and the legend looks like:
 
-{caption: "style.css", line-numbers: false}
-```
-body { ... }
-#wrapper { ... }
-#controls {
-display: flex;
-justify-content: space-between;
-}
-.menu .items { ... }
-```
+![Energy Explorer legend (top right)](d0537c27e242a3029044d5b646fba7c4.png)
 
-Setting `display` to `flex` on an element indicates that we’d like that element to act as a flexbox container.
+The completed code for this practical is in `step14-complete`.
 
-Setting `justify-content` to `space-between` indicates that we’d like the element’s content to occupy the entire width with any spare space being placed in between the content.
+## Summary
 
-Save `style.css` and refresh the browser (making sure it’s loading `step14`) and you should see:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-12-1024x168.png)
-
-To vertically align the menu and legend you can set flexbox’s `align-items` property to center:
-
-{caption: "style.css", line-numbers: false}
-```
-body { ... }
-#wrapper { ... }
-#controls {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.menu .items { ... }
-```
-
-Now when you save and refresh you should see:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-13-1024x175.png)
-
-The menu and legend are now vertically aligned.
-
-The completed code for this practical can be found in `step14-complete`.
-
-## Summing up
-
-In this practical you added a legend to show the relationship between circle size and percentage value.
-
-You added code so that the legend radius is updated using the same logic as the actual circles in the visualisation. This ensures that the legend stays in step with any changes in visualisation width and number of columns.
-
-You’re very nearly there. The functionality of the Energy Explorer is largely complete. There’s just some finishing touches to be done now.
+In this practical we added a legend to show the relationship between circle size and percentage value. We added code so that the legend radius is updated using the same logic as the circles in the visualisation. This ensures that the legend stays in step with any changes in visualisation width and number of columns.

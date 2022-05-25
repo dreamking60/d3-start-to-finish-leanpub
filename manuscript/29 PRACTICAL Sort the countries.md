@@ -1,13 +1,11 @@
 # Practical: Sort the Countries
 
-In this practical we add code that sorts the countries according to the selected indicator. The indicator that determines the sort order is chosen using the menu at the top of the visualisation:
+In this practical you’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method. Remember that `state.selectedIndicator` is updated whenever a menu item is clicked.
 
 {width: 75%}
 ![Energy Explorer menu](14b99904fd0c49ddbe35d100a23eede4.png)
 
-In this practical you’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method.
-
-You’ll also add a feature whereby countries which have a **zero value (or no data) for the selected indicator will be hidden**. This isn’t an essential feature but I think it’s a nice one to have. It’s also an opportunity to add a simple filter to Energy Explorer. For example, when Nuclear is selected you’ll see:
+We also add a feature whereby countries which have a zero value (or no data) for the selected indicator will be hidden. This isn’t an essential feature but I think it’s a nice one to have. It’s also an opportunity to add a simple filter to Energy Explorer. For example, when Nuclear is selected you’ll see:
 
 ![When Nuclear is selected countries with no nuclear energy are filtered out](c28217c2aa67ca3db0355636f1e97163.png)
 
@@ -106,7 +104,7 @@ Recall that `data` looks something like:
 ]
 ```
 
-The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. If the first menu item 'country' is selected we sort using the `name` property (this is a special case).
+The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. A special case is that If the first menu item 'country' is selected we sort using the `name` property.
 
 We make the following changes in `js/layout.js`:
 
@@ -192,10 +190,9 @@ markua-end-insert
 }
 ```
 
-Near the top of `layout` (before iterating through the data) we call `getSortedData` and assign the output to `sortedData`.
+Near the top of function `layout`, before iterating through the data, we call `getSortedData` and assign the output to `sortedData`.
 
-`getSortedData` uses lodash's `orderBy` function to create a sorted copy of `data`. If `state.selectedIndicator` is `'country'` it sorts by the 
-`name` property (so the countries are sorted alphabetically). Otherwise it sorts using the `sortAccessor` function which extracts the selected indicator value from a data item. (This was covered in the Data Manipulation chapter.)
+`getSortedData` uses lodash's `orderBy` function to create a sorted copy of `data`. If `state.selectedIndicator` is `'country'` it sorts by the `name` property (so the countries are sorted alphabetically). Otherwise it sorts using the `sortAccessor` function which extracts the selected indicator value from a data item. (This was covered in the Data Manipulation chapter.)
 
 For example `sortAccessor` might get called with `d` equal to:
 
@@ -203,14 +200,14 @@ For example `sortAccessor` might get called with `d` equal to:
 {
   "name": "Angola",
   "id": "AGO",
-  "hydroelectric": "53.2",
-  "nuclear": "",
-  "oilgascoal": "46.8",
-  "renewable": "0.0"
+  "hydroelectric": 53.2,
+  "nuclear": NaN,
+  "oilgascoal": 46.8,
+  "renewable": 0.0
 }
 ```
 
-If `state.selectedIndicator` is `'oilgascoal'`, we evaluate `d['oilgascoal']` which'll return `46.8`. This value gets assigned to `value`. If the value is `NaN` we return zero, which results in the items with no data appearing at the end of the sorted array.
+If `state.selectedIndicator` is `'oilgascoal'`, we evaluate `d['oilgascoal']` which returns `46.8`. This value gets assigned to `value`. If `value` is `NaN` we return zero, which results in the items with no data appearing at the end of the sorted array.
 
 To summarise, `getSortedData` returns a sorted copy of `data`. If 'Country' is selected in the menu, the data is sorted alphabetically. Otherwise it's sorted by the selected indicator, in descending order. Countries with missing data are placed at the end of the sorted array.
 
@@ -262,13 +259,13 @@ function update() {
 }
 ```
 
-We set the opacity of the country group according to the new `visible` property. We could’ve set the `display` CSS property to `inline` or `none` in order to show or hide the country group but we’re using `opacity` so that it can be animated later on.
+We set the opacity of the country group according to the new `visible` property. We could’ve set the `display` CSS property to `inline` or `none` in order to show or hide the country group but we use `opacity` so that it can be animated later on.
 
 We also need to set the `pointer-events` property so that the popup doesn’t appear on hidden groups. (Pointer events are still active if the opacity is zero.)
 
-Now save `layout.js` and `update.js`. Refresh your browser and you should see that countries with a zero or missing indicator value are hidden.
+Now save `layout.js` and `update.js`. Load `step12` in your browser and click on the menu items. The circles should sort according to the selected indicaator. You should also see that countries with a zero or missing indicator value are hidden.
 
-For example click on 'Nuclear' and you should see:
+For example click on 'Nuclear' and you'll see:
 
 {width: 75%}
 ![Countries sorted by Nuclear energy](be052962082d88af9f313532f28f0f53.png)
@@ -277,4 +274,4 @@ For example click on 'Nuclear' and you should see:
 
 In this practical we added sort functionality to the Energy Explorer. All the important sort logic was added to the layout module and we didn’t need to change any of the rendering code in `update.js`. This is a nice separation of concerns.
 
-We also added some filtering so that if an energy indicator such as 'Oil, Gas & Coal' is selected only countries with a value above zero are visible. We used the `opacity` property to show or hide country groups. This is so that when animations are added (which will be done in an upcoming practical) the countries will fade in or out.
+We also added filtering so that if an energy indicator such as 'Oil, Gas & Coal' is selected only countries with a value above zero are visible. We used the `opacity` property to show or hide country groups. This is so that when animations are added (which will be done in an upcoming practical) the countries will fade in or out.

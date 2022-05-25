@@ -38,9 +38,9 @@ In this practical we:
 4. Initialise the country group positions.
 5. Add a transition to the circle radii (so they expand when the page loads).
 
-### Add a key function to the data join
+## Add a key function to the data join
 
-In the previous section we discussed the importance of adding a key function to the data join if:
+In the previous chapter we discussed the importance of adding a key function to the data join if:
 
 * the **array is sorted**
 * the elements are **positioned according to array index** and
@@ -117,7 +117,7 @@ function update() {
 
 The key function returns the `id` property which we added in the previous step. Adding this key function ensures that each array item remains associated with the same HTML/SVG element whenever the join occurs, even if the array is in a different order.
 
-### Add transition to the country groups
+## Add transition to the country groups
 
 We now add a transition to the country groups (the `<g>` elements that contain the 4 circles). This will result in the countries animating into new positions when the sort order changes. The opacity will also animate if its value changes, such as when the country's `visible` property changes.
 
@@ -133,7 +133,7 @@ function updateGroup(d, i) {
     if(g.selectAll('*').empty()) initialiseGroup(g, d);
 
 markua-start-insert
-  	g.transition()
+    g.transition()
         .attr('transform', 'translate(' + d.x + ',' + d.y + ')')
 markua-end-insert
         .style('opacity', d.visible ? 1 : 0)
@@ -154,7 +154,7 @@ markua-end-insert
 ...
 ```
 
-Save `js/layout.js` and `js/update.js` and load step13 in the browser. Now when Energy Explorer loads the circles animate into view and when you choose a new indicator the circles animate into new positions. Also notice that the circles fade out if they have a zero value (or no data) for the chosen indicator.
+Save `js/layout.js` and `js/update.js` and load `step13` in the browser. Now when Energy Explorer loads the circles animate into view and when you choose a new indicator the circles animate into new positions. Also notice that the circles fade out if they have a zero value (or no data) for the chosen indicator.
 
 The transition feels a bit too quick so we'll change the duration in the next section.
 
@@ -176,7 +176,7 @@ markua-end-insert
 
 `transitionDuration` specifies transition duration and `transitionDelay` specifies the transition delay.
 
-We now add a calls to `.duration` and `.delay` after the `.transition` in `updateGroup`:
+We now add calls to `.duration` and `.delay` after the `.transition` in `updateGroup`:
 
 {caption: "js/update.js", line-numbers: false}
 ```js
@@ -187,7 +187,7 @@ function updateGroup(d, i) {
 
     if(g.selectAll('*').empty()) initialiseGroup(g, d);
 
-  	g.transition()
+    g.transition()
 markua-start-insert
         .duration(config.transitionDuration)
         .delay(i * config.transitionDelay)
@@ -215,7 +215,7 @@ Now save `js/config.js` and `js/update.js` and refresh the browser. The transiti
 
 ## Initialise the country group positions
 
-Each country group flies in from the top left. This is because the initial translation transform of each country group is `(0,0)`. Rather than flying in we'll fade in each group in its final position. This is achieved by initialising the `opacity` and `transform` of each `g` element:
+Each country group flies in from the top left. This is because the initial translation transform of each country group is `(0,0)`. Rather than flying in we'll fade in each group in its actual position. This is achieved by initialising the `opacity` and `transform` of each `g` element:
 
 {caption: "js/update.js"}
 ```js
@@ -378,10 +378,10 @@ Save `js/update.js` and refresh the browser. Now each circle should transition f
 
 The completed code containing the transitions added in this practical can be found in `step13-complete`.
 
-### Summary
+## Summary
 
 We added transitions to Energy Explorer. Adding a basic transition to the group `transform` attribute was a relatively straightforward change but it made a huge difference to the visualisation. Country groups animate to new positions and fade in or out if their visibility changes. We also fine tuned the transitions, modifying the duration and adding a staggered transition for a nice visual effect.
 
-We also saw how the transitions can be fine tuned. We added code to fade in each group in its final position (rather than flying in).
+We also saw how the transitions can be fine tuned. We added code to fade in each group in its actual position (rather than flying in).
 
 If you’ve made it this far and are reasonably happy with what you’ve learned you deserve a big well done! Most of Energy Explorer is complete and all that’s left is adding a legend and some detailed styling.

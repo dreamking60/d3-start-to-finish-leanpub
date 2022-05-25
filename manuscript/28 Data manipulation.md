@@ -2,7 +2,7 @@
 
 This chapter introduces another JavaScript library called Lodash ([https://lodash.com/](https://lodash.com/)). Lodash is a general purpose utility library that provides a large number of functions that perform common tasks. It’s especially useful when working with data (in particular arrays and objects). Later on you’ll use it in the Energy Explorer to sort the countries.
 
-One of the advantages of using a library such as Lodash is that it overcomes web browser differences. It’s perhaps not as prevalent as it once was, but some commonly used functions might weren’t available in certain web browsers. Using Lodash was a convenient way of overcoming this issue. It’s beyond this book to show everything that Lodash can do, but we’ll look at some of the functions I commonly use when building data visualisations.
+One of the advantages of using a library such as Lodash is that it overcomes web browser differences. It’s perhaps not as prevalent as it once was, but some commonly used functions weren’t available in certain web browsers. Using Lodash was a convenient way of overcoming this issue. It’s beyond this book to show everything that Lodash can do, but we’ll look at some of the functions I commonly use when building data visualisations.
 
 If you wish to try any of the following examples out you can do so by visiting jsconsole at [https://jsconsole.com](https://jsconsole.com) and entering:
 
@@ -16,8 +16,6 @@ This loads Lodash into jsconsole and you can type in statements like `_.uniq([40
 
 Lodash can be installed in a number of ways. In this book, we’ll keep things simple and include it by downloading it from the home page at [https://lodash.com/](https://lodash.com/) and including it using a `script` tag in `index.html`.
 
-Let’s start by looking at Lodash’s syntax.
-
 ## Lodash syntax
 
 Lodash is an **object** that’s represented by the symbol `_` (underscore) and has a large number of **methods** defined on it. (A method is a function that’s been assigned to an object property.) For example there’s a method `_.sortBy` which takes an array and returns a sorted copy of the array. You invoke it using:
@@ -26,7 +24,7 @@ Lodash is an **object** that’s represented by the symbol `_` (underscore) and 
 let sortedNumbers = _.sortBy([10, 50, 30, 20]);
 ```
 
-D>It may seem strange to have a library named `_` but `_` is a valid character as far as variable names are concerned.
+D>It may seem strange to have a library named `_` but it's a valid character as far as variable names are concerned.
 
 Typically Lodash doesn’t change (or mutate) objects or arrays. Instead it generally returns a new object or array. The fact that it doesn’t change anything (or produce ‘side effects’) makes your code more predictable. Let’s look at some of the most useful Lodash methods when working with data.
 

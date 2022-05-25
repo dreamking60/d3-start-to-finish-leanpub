@@ -4,9 +4,7 @@ A powerful effect that adds visual flair to a data visualisation is animation. T
 
 ![Before and after positions. Can you determine where each circle has moved to?](82c0a3dc64d341a8e88595c224249c46.png)
 
-Here’s a CodePen example that illustrates this: [https://codepen.io/createwithdata/pen/pogPwOy](https://codepen.io/createwithdata/pen/pogPwOy).
-
-If animations are switched off ('Use transitions' is unchecked) the circles jump immediately to their new positions. It’s not possible to track the movement of each circle. Furthermore, it’s not discernable whether you’re seeing circle movement, or an entirely new set of circles. With animations switched on, it’s clear that the circles are changing position. This is known as **object constancy**.
+Here’s a CodePen example that illustrates this: [https://codepen.io/createwithdata/pen/pogPwOy](https://codepen.io/createwithdata/pen/pogPwOy). In this example, if animations are switched off ('Use transitions' is unchecked) the circles jump immediately to their new positions. It’s not possible to track the movement of each circle. Furthermore, it’s not discernable whether you’re seeing circle movement, or an entirely new set of circles. With animations switched on, it’s clear that the circles are changing position. This is known as **object constancy**.
 
 D3 has a powerful system for animating (or ‘transitioning’) HTML/SVG elements. You’ll be glad to know you’ve already done a lot of the hard work and adding animations to a selection of elements is relatively straightforward.
 
@@ -121,7 +119,9 @@ d3.select('#chart')
   .attr('cy', function(d) {
     return d.y;
   })
+markua-start-insert
   .transition()
+markua-end-insert
   .attr('r', function(d) {
     return d.r;
   });
@@ -227,7 +227,7 @@ to the previous CodePen example [https://codepen.io/createwithdata/pen/BaKoWQZ](
 
 By default when you join an array to HTML/SVG elements, D3 joins the 1st array element to the 1st HTML/SVG element in the selection, the 2nd array element to the 2nd HTML/SVG element and so on. This means that if you sort the array, and perform the join again, the array elements might get joined to different HTML/SVG elements.
 
-In a lot of cases this doesn’t cause issues but if you’re positioning the HTML/SVG elements according to the array index `i` and using transitions you’ll **lose object constancy**.
+In a lot of cases this doesn’t cause issues but if you’re positioning the HTML/SVG elements according to the array index `i` and using transitions you’ll lose object constancy.
 
 For example, examine the following code:
 
@@ -284,7 +284,7 @@ function update() {
   d3.select('#chart')
     .selectAll('circle')
 markua-start-insert
-	  .data(myData, function(d) {
+    .data(myData, function(d) {
       return d.id;
     })
 markua-end-insert
@@ -309,4 +309,4 @@ Key functions are simple to add but not particularly easy to understand. The sit
 
 This section has shown how you can add animations (or ‘transitions’) to a D3 selection. It’s as simple as preceding the `.style` and `.attr` calls (which you want to animate) with a single `.transition()` call. You can change the duration of transitions using `.duration` and can also create staggered transitions by passing a function into `.delay`. You also saw the importance of adding a key function if your array changes order, you’re positioning by index and are using transitions.
 
-In the next practical you’ll add transitions to the Energy Explorer so that when a new indicator is chosen the country groups animate into their new locations.
+In the next practical you’ll add transitions to Energy Explorer so that when a new indicator is chosen the country groups animate into their new locations.
