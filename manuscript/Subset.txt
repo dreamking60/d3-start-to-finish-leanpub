@@ -11,3 +11,7 @@
 25 State management.md
 26 PRACTICAL Add state management.md
 27 PRACTICAL Add a menu.md
+28 Data manipulation.md
+29 PRACTICAL Sort the countries.md
+30 D3 transitions.md
+31 PRACTICAL Add transitions.md

@@ -2,13 +2,14 @@
 
 In this practical we add a **menu** to Energy Explorer that lets the user select which indicator to sort the countries by:
 
+{width: 75%}
 ![Energy Explorer menu](2c402e21e967d37bbca528118e1a2661.png)
 
 The menu consists of 5 items: 'Country', 'Renewable', 'Oil, Gas & Coal', 'Hydroelectric' and 'Nuclear'. In this practical we add a property to the state object that stores which indicator has been selected. When a menu item is clicked we update the state accordingly. We'll implement the sorting in a later practical.
 
 ## Overview
 
-A new module named `menu.js` will be added which contains an array of menu items and two functions `handleMenuClick` and `updateMenu`. The array of menu items looks something like:
+A new module named `menu.js` will be added which contains an array of menu items:
 
 ```js
 [
@@ -24,7 +25,7 @@ A new module named `menu.js` will be added which contains an array of menu items
 ]
 ```
 
-A function `updateMenu` uses D3 to join the menu item array to `div` elements. The resulting HTML will look something like:
+We use D3 to join the menu item array to `div` elements. The resulting HTML will look something like:
 
 ```html
 <div class="menu">
@@ -38,17 +39,7 @@ A function `updateMenu` uses D3 to join the menu item array to `div` elements. T
 </div>
 ```
 
-When a menu item is clicked, an event handler `handleMenuClick` is called. `handleMenuClick` calls `action` (which was added in the previous practical) passing in `'setSelectedIndicator'` as the action type and the menu item id (e.g. `'country'`) as the action parameter. For example:
-
-```js
-action('setSelectedIndicator', 'country');
-```
-
-The `action` function in `store.js` updates the state object and calls `update` (in `update.js`). We modify `update` so that it calls `updateMenu` **and** `updateChart`.
-
-`updateMenu` also sets a class attribute of `selected` on the selected menu item. We’ll set some CSS rules such that the selected menu item is highlighted.
-
-The menu itself will be created using D3. It’s not the only way of creating a menu (using a library such as React or Vue springs to mind) but to avoid introducing another library it’ll be created using D3.
+When a menu item is clicked a new state property `selectedIndicator` is updated and the chart and menu are redrawn.
 
 Open step11. The file structure is:
 
@@ -75,14 +66,12 @@ step11
 
 In this practical we:
 
-1. Add a **container** for the menu in `index.html`.
-2. Add a new module `js/menu.js`.
-3. Add a new property `selectedIndicator` to the state object.
+1. Add a container for the menu in `index.html`.
+2. Add a new property `selectedIndicator` to the state object.
+3. Add a new module `js/menu.js`.
 4. Add code to construct and manage the menu.
 5. Add basic styling to the menu.
 6. Modify the update function so that it also updates the menu.
-
-
 
 
 ## Add a container for the menu
@@ -102,7 +91,7 @@ In `index.html` we make the following changes:
   <body>
     <div id="wrapper">
 markua-start-insert
-  	  <div id="controls">
+      <div id="controls">
         <div class="menu">
           <div class="items"></div>
         </div>
@@ -130,7 +119,32 @@ markua-end-insert
 </html>
 ```
 
-We add two new `<div>` elements to the main wrapper `<div id="wrapper">`. The first acts as a container for Energy Explorer's controls (including the menu). The second `<div>` acts as a container for the chart's `<svg>` element.
+We add two new `<div>` elements to the main wrapper `<div id="wrapper">`. The first (with `id="controls"`) acts as a container for Energy Explorer's controls (including the menu). The second `<div>` (with `id="chart-wrapper"`) acts as a container for the chart's `<svg>` element.
+
+## Add selectedIndicator state property
+
+In `js/store.js` add a new property `selectedIndicator` which indicates which energy indicator the user has selected. We also add a new action type `setSelectedIndicator` which updates `state.selectedIndicator`.
+
+{caption: "js/store.js"}
+```js
+let state = {
+markua-start-insert
+    selectedIndicator: 'country'
+markua-end-insert
+};
+
+function action(type, param) {
+    switch(type) {
+markua-start-insert
+        case 'setSelectedIndicator':
+            state.selectedIndicator = param;
+            break;
+markua-end-insert
+    }
+
+    update();
+}
+```
 
 ## Add a new module for the menu
 
@@ -189,34 +203,10 @@ markua-end-insert
 
 Now save `menu.js` and `index.html`.
 
-## Add selectedIndicator state property
-
-In `js/store.js` add a new property `selectedIndicator` which indicates which energy indicator the user has selected. We also add a new action type `setSelectedIndicator` which updates `state.selectedIndicator`.
-
-{caption: "js/store.js"}
-```js
-let state = {
-markua-start-insert
-    selectedIndicator: 'country'
-markua-end-insert
-};
-
-function action(type, param) {
-    switch(type) {
-markua-start-insert
-        case 'setSelectedIndicator':
-            state.selectedIndicator = param;
-            break;
-markua-end-insert
-    }
-
-    update();
-}
-```
 
 ## Add code to construct and manage the menu
 
-The `menu.js` module contains code to: **create** and **update** the menu items using a D3 join. It also handles menu item clicks:
+In `menu.js` we add code to create and update the menu items using a D3 join. We also add code to handle menu item clicks:
 
 {caption: "js/menu.js"}
 ```js
@@ -315,7 +305,7 @@ The menu item container (selected by `.menu .items`) is given a `display` of `fl
 
 ## Add menu to update function
 
-Finally we need to make sure the menu is redrawn each time the state changes. In `js/update.js` we create two new functions `updateChart` and `updateMenu`, both of which are called from a new `update` function. `updateChart` is a new function that replaces the old `update` function:
+Finally we need to make sure the menu is redrawn each time the state changes. In `js/update.js` we create two new functions `updateChart` and `updateMenu`, both of which are called from a rewritten `update` function. `updateChart` is a new function that replaces the old `update` function:
 
 {caption: "js/update.js"}
 ```js
@@ -349,6 +339,7 @@ Whenever `update` is called, the chart and menu are updated. For example, when t
 
 Now make sure `index.html`, `css/style.css`, `js/store.js`, `js/update.js` and `js/menu.js` are saved and view Step 11 in your browser. There should now be a menu at the top. When you click an item it should highlight in a darker gray:
 
+{width: 75%}
 ![Energy Explorer menu with Oil, Gas & Coal selected](a1a6b29666e04b7ebefd9784489c67d8.png)
 
 The chart itself won’t change when a menu item is clicked – that’ll be added in an upcoming practical.

@@ -1,6 +1,6 @@
 # State management
 
-The ‘state’ of an application is information that describes what the application is currently doing. For example the state of a data visualisation might include things like:
+The state of an application is information that describes what the application is currently doing. For example the state of a data visualisation might include things like:
 
 * the **data** that’s being visualised
 * the **type of chart** (bar, line, pie etc.) that the user has chosen
@@ -8,9 +8,9 @@ The ‘state’ of an application is information that describes what the applica
 * **zoom level** and **pan position**
 * **sort** and **filter** settings
 
-Typically each time there’s a user interaction (e.g. clicking an item, choosing from a menu) **the state changes**. And each time the state changes, the **display updates** accordingly. 
+Typically each time there’s a user interaction (e.g. clicking an item, choosing from a menu) the state changes. And each time the state changes, the display updates accordingly. 
 
-There’s several approaches to managing state in an application and we’ll look at an approach that is straightforward, effective and based on a very common pattern in web development known as [Flux](https://github.com/facebook/flux/tree/master/examples/flux-concepts). The basic idea is that **the application state is stored in a JavaScript object**. For example:
+There’s several approaches to managing state in an application and we’ll look at an approach that is straightforward, effective and based on a very common pattern in web development known as [Flux](https://github.com/facebook/flux/tree/master/examples/flux-concepts). The basic idea is that the entire application state is stored in a JavaScript object. For example:
 
 ```js
 let state = {
@@ -26,7 +26,7 @@ This goes hand in hand with a function named `action` that’s responsible for u
 * a string that describes the state change that should take place (such as `'setSelectedIndicator'` or `'setFilterType'` )
 * any further information that is required for the state change. Typically this is a string or object
 
-For example `action('setSelectedIndicator', 'CO2_emissions')` sets `state.selectedIndicator` to `'CO2_emissions'`.
+For example, `action('setSelectedIndicator', 'CO2_emissions')` sets `state.selectedIndicator` to `'CO2_emissions'`.
 
 Typically `action` is called when there’s an event such as a button click. The `action` function consists of a `switch` statement containing `case` blocks for each action type:
 
@@ -45,13 +45,13 @@ function action(type, param) {
 }
 ```
 
-Each action has a block of code which **updates the state** accordingly. At the end of `action` the `update` function (or similar) is called which **triggers a redraw** of the **whole** application.
+Each action has a block of code which updates the state accordingly. At the end of `action` the `update` function (or similar) is called which triggers a redraw of the whole application.
 
 Let’s look at a full example.
 
-### State management example
+## State management example
 
-Suppose you’ve an [update function](https://learn.createwithdata.com/books/d3-start-to-finish/sections/update-loops/) that joins an array of data to SVG circle elements:
+Suppose you’ve an update function that joins an array of data to SVG circle elements:
 
 ```js
 let data = [30, 10, 20, 40];
@@ -80,9 +80,11 @@ We start by adding a state object containing a property `selectedCircle` which i
 ```js
 let data = [30, 10, 20, 40];
 
+markua-start-insert
 let state = {
   selectedCircle: null
 };
+markua-end-insert
 
 function update() { ... }
 ```
@@ -224,7 +226,7 @@ markua-end-insert
 
 As an exercise, modify the CodePen example with the modified `action` function. Now when you click a selected circle it’ll get deselected.
 
-### Summary
+## Summary
 
 We’ve introduced a state management pattern based on the Flux pattern. There are two main aspects:
 

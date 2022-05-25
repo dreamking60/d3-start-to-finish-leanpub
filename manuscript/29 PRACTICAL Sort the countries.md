@@ -1,281 +1,280 @@
-# Practical: Sort the countries
+# Practical: Sort the Countries
 
-In this practical you’ll add code that **sorts the countries** according to the chosen indicator.
+In this practical we add code that sorts the countries according to the selected indicator. The indicator that determines the sort order is chosen using the menu at the top of the visualisation:
 
-To recap, the indicator that determines the sort order is chosen using the menu at the top of the visualisation:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-16.png)
-
-When an indicator is clicked, the `action` function in `store.js` is called. This will set the `state.selectedIndicator` property to the indicator’s id (for example `'oilgascoal'`) and the whole visualisation is redrawn.
+{width: 75%}
+![Energy Explorer menu](14b99904fd0c49ddbe35d100a23eede4.png)
 
 In this practical you’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method.
 
-You’ll also add a feature whereby countries which have a **zero value (or no data) for the selected indicator will be hidden**. This isn’t an essential feature but I think it’s a nice one to have. It’s also an opportunity to add a simple filter to the energy explorer.
+You’ll also add a feature whereby countries which have a **zero value (or no data) for the selected indicator will be hidden**. This isn’t an essential feature but I think it’s a nice one to have. It’s also an opportunity to add a simple filter to Energy Explorer. For example, when Nuclear is selected you’ll see:
 
-For example, when Nuclear is selected you’ll see:
+![When Nuclear is selected countries with no nuclear energy are filtered out](c28217c2aa67ca3db0355636f1e97163.png)
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-6-1024x215.png)
+## Overview
 
-The steps for adding sorting to the Energy Explorer are:
+Open step12. The file structure is:
 
-* **include Lodash** in the application
-* add a function that **sorts the data**
-* **use the sort function** in the layout function
-* **hide countries** which have a zero value (or no data) for the selected indicator
+```text
+step12
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+markua-start-insert
+    │   ├── lodash.min.js
+markua-end-insert
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+    ├── menu.js
+    ├── popup.js
+    ├── store.js
+    └── update.js
+```
 
-In your code editor open the `step12` directory of the `d3-start-to-finish` code.
+Note that lodash has been added for you. (It was downloaded from [https://lodash.com/](https://lodash.com/).) In this practical we:
 
-### Include Lodash
+1. Link to lodash in `index.html`.
+2. Add a function to sort the data.
+3. Hide countries which have a zero value (or no data) for the selected indicator.
 
-The `js/lib` directory in `step12` already contains Lodash. (It was downloaded from [https://lodash.com/](https://lodash.com/).)
+## Link to Lodash
 
-In `index.html` add `script` tags to load the Lodash:
+In `index.html` add a `script` tag to load `js/lib/lodash.min.js`:
 
 {caption: "index.html", line-numbers: false}
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-...
-</head>
-<body>
-...
-<script src="js/lib/d3.min.js"></script>
-<script src="js/lib/popup-v1.1.1.min.js"></script>
-<script src="js/lib/lodash.min.js"></script>
-...
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Energy mix by Country 2015</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    ...
+
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/popup-v1.1.1.min.js"></script>
+markua-start-insert
+    <script src="js/lib/lodash.min.js"></script>
+markua-end-insert
+
+    <script src="js/config.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
 ```
 
 Now save `index.html`.
 
-### How the sorting works
+## Sort the data
 
 Recall that `data` looks something like:
 
-```
+```js
 [
-{
-"id": "ALB",
-"name": "Albania",
-"hydroelectric": 100,
-"nuclear": null,
-"oilgascoal": 0,
-"renewable": 0
-},
-{
-"id": "DZA",
-"name": "Algeria",
-"hydroelectric": 0.2,
-"nuclear": null,
-"oilgascoal": 99.7,
-"renewable": 0.1
-},
-etc.
+  {
+    "id": "ALB",
+    "name": "Albania",
+    "hydroelectric": 100,
+    "nuclear": null,
+    "oilgascoal": 0,
+    "renewable": 0
+  },
+  {
+    "id": "DZA",
+    "name": "Algeria",
+    "hydroelectric": 0.2,
+    "nuclear": null,
+    "oilgascoal": 99.7,
+    "renewable": 0.1
+  },
+  ...
 ]
 ```
 
-The selected menu item will determine the property by which the array will be sorted. For example, if _Oil, Gas & Coal_ is selected we’ll sort using the property `oilgascoal`.
+The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. If the first menu item 'country' is selected we sort using the `name` property (this is a special case).
 
-Recall that the selected menu item is stored in `state.selectedIndicator` and the possible values are:
+We make the following changes in `js/layout.js`:
 
-* `'country'`
-* `'renewable'`
-* `'oilgascoal'`
-* `'hydroelectric'`
-* `'nuclear'`
-
-If `state.selectedIndicator` is `'country'` we’ll sort using the `name` property:
-
-```
-sorted = _.orderBy(data, 'name');
-```
-
-Otherwise we’ll sort (in descending order) using the property described by `state.selectedIndicator`:
-
-```
+{caption: "js/layout.js"}
+```js
+markua-start-insert
 function sortAccessor(d) {
-return d[state.selectedIndicator];
+    let value = d[state.selectedIndicator];
+    if(isNaN(value)) value = 0;
+    return value;
 }
-sorted = _.orderBy(data, sortAccessor, 'desc');
-```
 
-For example, suppose `state.selectedIndicator` is `'hydroelectric'`. This would result in the array being sorted by the property `hydroelectric`.
-
-Note we’ve put the sort accessor in a separate function for clarity.
-
-By default, when sorting in descending order `orderBy` will place items with a `null` value at the beginning of the sorted array.
-
-To avoid this, we can set the return value of `sortAccessor` to 0 if the indicator value is `null`:
-
-```
-function sortAccessor(d) {
-let value = d[state.selectedIndicator];
-if(value === null) value = 0;
-return value;
-}
-sorted = _.orderBy(data, sortAccessor, 'desc');
-```
-
-Now let’s add the sorting function to the energy explorer.
-
-### Add a function to sort the data
-
-Open `layout.js` and add the sort accessor function at the top of the file:
-
-{caption: "layout.js", line-numbers: false}
-```
-function sortAccessor(d) {
-let value = d[state.selectedIndicator];
-if(value === null) value = 0;
-return value;
-}
-function getTruncatedLabel(text) {
-return text.length < 10 ? text : text.slice(0, 9) + '...';
-}
-...
-```
-
-Now add a new function named `getSortedData` which returns a sorted copy of `data`:
-
-{caption: "layout.js", line-numbers: false}
-```
-function sortAccessor(d) {
-let value = d[state.selectedIndicator];
-if(value === null) value = 0;
-return value;
-}
 function getSortedData(data) {
-let sorted;
-if(state.selectedIndicator === 'country') {
-sorted = _.orderBy(data, 'name');
-} else {
-sorted = _.orderBy(data, sortAccessor, 'desc');
+    let sorted;
+
+    if(state.selectedIndicator === 'country') {
+        sorted = _.orderBy(data, 'name');
+    } else {
+        sorted = _.orderBy(data, sortAccessor, 'desc');
+    }
+
+    return sorted;
 }
-return sorted;
-}
-function getTruncatedLabel(text) {
-return text.length < 10 ? text : text.slice(0, 9) + '...';
-}
-...
-```
 
-### Use sorted array in layout function
-
-Now in `layout` (in `layout.js`) call `getSortedData` and assign its output to a new variable `sortedData`.
-
-Then use `sortedData` instead of `data` when computing `layoutData`:
-
-{caption: "layout.js", line-numbers: false}
-```
-function layout(data) {
-let labelHeight = 20;
-let cellWidth = config.width / config.numColumns;
-let cellHeight = cellWidth + labelHeight;
-let maxRadius = 0.35 * cellWidth;
-let radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-let sortedData = getSortedData(data);
-let layoutData = sortedData.map(function(d, i) {
-let item = {};
-...
-return item;
-});
-return layoutData;
-}
-```
-
-Now save `layout.js` and refresh the browser (making sure it’s loading `step12`).
-
-If you click on the energy indicators in the menu you should see the circles change position. For example if _Oil, Gas and Coal_ is selected you should see:
-
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-7-1024x401.png)
-
-(_Oil, Gas and Coal_ is represented by the solid gray outlined circles and you can see that the largest of these circles now appear first.)
-
-### Hide countries with zero value or no data
-
-If you select _Nuclear_ the countries with the highest mix of nuclear energy appear first, but **countries with a zero value or no data** **for nuclear energy also appear**. We’d like them to be hidden so that only countries with a greater than 0% nuclear mix are visible.
-
-You’ll achieve this in two steps:
-
-* **add a property** named `visible` to the layout which indicates whether the country is visible
-* **hide the circle** in the chart update code if its `visible` property is `false`
-
-In `layout.js` after the sort functions add a new function named `isVisible` which determines whether a country is visible or not:
-
-{caption: "layout.js", line-numbers: false}
-```
-function getSortedData(data) { ... }
 function isVisible(d) {
-return state.selectedIndicator === 'country' || d[state.selectedIndicator] > 0;
+    return state.selectedIndicator === 'country' || d[state.selectedIndicator] > 0;
 }
-function getTruncatedLabel(text) { ... }
-function layout(data) { ... }
-```
+markua-end-insert
 
-If _Country_ is selected in the menu **all** the countries will be visible. Otherwise a country is only visible if it has an indicator value above zero.
+function getTruncatedLabel(text) {
+    return text.length <= 10 ? text : text.slice(0, 10) + '...';
+}
 
-Now add a new property named `visible` to `item` in the `layout` function:
-
-{caption: "layout.js", line-numbers: false}
-```
 function layout(data) {
-let labelHeight = 20;
-let cellWidth = config.width / config.numColumns;
-let cellHeight = cellWidth + labelHeight;
-let maxRadius = 0.35 * cellWidth;
-let radiusScale = d3.scaleSqrt()
-.domain([0, 100])
-.range([0, maxRadius]);
-let sortedData = getSortedData(data);
-let layoutData = sortedData.map(function(d, i) {
-let item = {};
-...
-item.y = row * cellHeight + 0.5 * cellHeight;
-item.visible = isVisible(d);
-item.renewableRadius = radiusScale(d.energyMix.renewable);
-...
-return item;
-});
-return layoutData;
+    let labelHeight = 20;
+    let cellWidth = config.width / config.numColumns;
+    let cellHeight = cellWidth + labelHeight;
+
+    let maxRadius = 0.35 * cellWidth;
+
+    let radiusScale = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, maxRadius]);
+
+markua-start-insert
+    let sortedData = getSortedData(data);
+
+    let layoutData = sortedData.map(function(d, i) {
+markua-end-insert
+        let item = {};
+
+        let column = i % config.numColumns;
+        let row = Math.floor(i / config.numColumns);
+
+        item.x = column * cellWidth + 0.5 * cellWidth;
+        item.y = row * cellHeight + 0.5 * cellHeight;
+
+markua-start-insert
+        item.visible = isVisible(d);
+markua-end-insert
+
+        item.renewableRadius = radiusScale(d.renewable);
+        item.oilGasCoalRadius = radiusScale(d.oilgascoal);
+        item.hydroelectricRadius = radiusScale(d.hydroelectric);
+        item.nuclearRadius = radiusScale(d.nuclear);
+
+        item.labelText = getTruncatedLabel(d.name);
+        item.labelOffset = maxRadius + labelHeight;
+
+        item.popupOffset = -0.8 * maxRadius;
+        item.popupData = {
+            name: d.name,
+            renewable: d.renewable,
+            oilgascoal: d.oilgascoal,
+            hydroelectric: d.hydroelectric,
+            nuclear: d.nuclear
+        };
+
+        return item;
+    });
+
+    return layoutData;
 }
 ```
 
-Now in the `updateGroup` function (`update.js`) add a couple of `.style` calls to set a country group’s `opacity` and `pointer-events` according to `d.visible`:
+Near the top of `layout` (before iterating through the data) we call `getSortedData` and assign the output to `sortedData`.
 
-{caption: "update.js", line-numbers: false}
+`getSortedData` uses lodash's `orderBy` function to create a sorted copy of `data`. If `state.selectedIndicator` is `'country'` it sorts by the 
+`name` property (so the countries are sorted alphabetically). Otherwise it sorts using the `sortAccessor` function which extracts the selected indicator value from a data item. (This was covered in the Data Manipulation chapter.)
+
+For example `sortAccessor` might get called with `d` equal to:
+
+```js
+{
+  "name": "Angola",
+  "id": "AGO",
+  "hydroelectric": "53.2",
+  "nuclear": "",
+  "oilgascoal": "46.8",
+  "renewable": "0.0"
+}
 ```
+
+If `state.selectedIndicator` is `'oilgascoal'`, we evaluate `d['oilgascoal']` which'll return `46.8`. This value gets assigned to `value`. If the value is `NaN` we return zero, which results in the items with no data appearing at the end of the sorted array.
+
+To summarise, `getSortedData` returns a sorted copy of `data`. If 'Country' is selected in the menu, the data is sorted alphabetically. Otherwise it's sorted by the selected indicator, in descending order. Countries with missing data are placed at the end of the sorted array.
+
+We also add a new property `visible` to the layout items. This indicates whether the country should be visible. If the country's selected indicator value is zero (or missing), we set `visible` to `false`, otherwise it's set to `true`.
+
+## Hide countries with a zero or missing value
+
+In `js/update.js` we update the country's opacity according to the `visible` property:
+
+{caption: "js/update.js"}
+```js
+function initialiseGroup(g) {
+    ...
+}
+
 function updateGroup(d, i) {
-let g = d3.select(this);
-if(g.selectAll('*').empty()) initializeGroup(g);
-g.attr('transform', 'translate(' + d.x + ',' + d.y + ')')
-.style('opacity', d.visible ? 1 : 0)
-.style('pointer-events', d.visible ? 'all' : 'none');
-g.select('.popup-center')
-.attr('cy', d.popupOffset);
-...
+    let g = d3.select(this);
+
+    if(g.selectAll('*').empty()) initialiseGroup(g);
+
+markua-start-insert
+    g.attr('transform', 'translate(' + d.x + ',' + d.y + ')')
+        .style('opacity', d.visible ? 1 : 0)
+        .style('pointer-events', d.visible ? 'all' : 'none');
+markua-end-insert
+	
+    g.select('.popup-center')
+        .attr('cy', d.popupOffset);
+
+    g.select('.renewable')
+        .attr('r', d.renewableRadius);
+
+    ...
+}
+
+function updateChart() {
+    let layoutData = layout(data);
+
+    d3.select('#chart')
+        .selectAll('g')
+        .data(layoutData)
+        .join('g')
+        .each(updateGroup);
+}
+
+function update() {
+    updateChart();
+    updateMenu();
 }
 ```
 
-You could’ve set the `display` CSS property to `inline` or `none` in order to show or hide the country group but we’re using `opacity` so that it can be animated in an upcoming practical.
+We set the opacity of the country group according to the new `visible` property. We could’ve set the `display` CSS property to `inline` or `none` in order to show or hide the country group but we’re using `opacity` so that it can be animated later on.
 
-The `pointer-events` property is also set so that the popup doesn’t appear on hidden groups. (Pointer events are still active if the opacity is zero.)
+We also need to set the `pointer-events` property so that the popup doesn’t appear on hidden groups. (Pointer events are still active if the opacity is zero.)
 
 Now save `layout.js` and `update.js`. Refresh your browser and you should see that countries with a zero or missing indicator value are hidden.
 
-For example click on _Nuclear_ and you should see:
+For example click on 'Nuclear' and you should see:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/08/image-8-1024x215.png)
+{width: 75%}
+![Countries sorted by Nuclear energy](be052962082d88af9f313532f28f0f53.png)
 
-### Summing up
+## Summary
 
-In this practical you added sort functionality to the Energy Explorer.
+In this practical we added sort functionality to the Energy Explorer. All the important sort logic was added to the layout module and we didn’t need to change any of the rendering code in `update.js`. This is a nice separation of concerns.
 
-All the important sort logic was added to the layout module and you didn’t need to change any of the rendering code in `update.js`. This is a nice separation of concerns.
-
-You also added some simple filtering so that if an energy indicator such as _Oil, Gas & Coal_ is selected only countries with a value above zero are visible.
-
-You used the `opacity` property to show or hide country groups. This is so that when animations are added (which will be done in an upcoming practical) the countries will fade in or out.
+We also added some filtering so that if an energy indicator such as 'Oil, Gas & Coal' is selected only countries with a value above zero are visible. We used the `opacity` property to show or hide country groups. This is so that when animations are added (which will be done in an upcoming practical) the countries will fade in or out.

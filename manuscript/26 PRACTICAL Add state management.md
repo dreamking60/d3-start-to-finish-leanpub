@@ -1,6 +1,6 @@
 # Practical: Add state management
 
-In this section you’ll add state management to Energy Explorer in a similar manner to described in the State Management chapter. We’ll add a **state object** (that represents the current state) and an **action function** (for managing state changes).
+In this section you’ll add state management to Energy Explorer in a similar manner to the State Management chapter. We’ll add a state object (that represents the current state) and an action function (for managing state changes).
 
 ## Overview
 
@@ -83,7 +83,7 @@ Now save `store.js` and `index.html`.
 
 ### Add an empty state object and action function
 
-In `js/store.js` we add a new empty state object:
+In `js/store.js` we add a new empty state object and an action function:
 
 {caption: "js/store.js", line-numbers: false}
 ```js
