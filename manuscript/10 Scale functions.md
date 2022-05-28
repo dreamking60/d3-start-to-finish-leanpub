@@ -4,7 +4,7 @@ Scale functions help you transform your **data values** into **visual values**.
 
 For example, in Energy Explorer the **data values** are the percentage values for each of the four energy types.
 
-**Visual values** are properties such as position, size and color. For example an x coordinate of `50px`, a height of `100px` or a color of `#aaa`.
+**Visual values** are properties such as position, size and colour. For example an x coordinate of `50px`, a height of `100px` or a colour of `#aaa`.
 
 Suppose you have an array of numbers representing percentage values:
 
@@ -16,7 +16,7 @@ and you want to create a bar chart where the maximum length of the bars is `500p
 
 A scale function which takes a number between 0 and 100 and returns a value between 0 and 500 would help here and D3 can create it for you. This saves you having to figure out the mathematics and code yourself.
 
-D3 has around twelve scale types. Some accept **numbers** as input, others accept **strings**. Some output **numbers**, others ouput **colors**. In this book we cover two scale types `scaleLinear` and `scaleSqrt`.
+D3 has around twelve scale types. Some accept **numbers** as input, others accept **strings**. Some output **numbers**, others ouput **colours**. In this book we cover two scale types `scaleLinear` and `scaleSqrt`.
 
 `scaleLinear` is by far the most common D3 scale type and has several use cases. `scaleSqrt` is particularly useful when working with circles. We’ll use it to size circles in Energy Explorer.
 
@@ -58,7 +58,7 @@ Our linear scale function `myScale` takes an input between 0 and 100 (the domain
 
 D>If you plot the output against the input of a **linear** scale you get a straight line.
 
-You can also pass colors into the range:
+You can also pass colours into the range:
 
 ```js
 myScale.range(['white', 'red']);
@@ -73,7 +73,7 @@ myScale(50);  // returns "rgb(255, 128, 128)"
 myScale(100);  // returns "rgb(255, 0, 0)"
 ```
 
-Now the scale is returning colors ranging from white (`rgb(255, 255, 255)`) to red (`rgb(255, 0, 0)`).
+Now the scale is returning colours ranging from white (`rgb(255, 255, 255)`) to red (`rgb(255, 0, 0)`).
 
 By default D3 scale functions extrapolate the output if you input values outside of the domain:
 

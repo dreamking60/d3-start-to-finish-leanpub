@@ -297,7 +297,7 @@ Save `js/update.js` and refresh the browser. Now the circles fade in, without fl
 
 ## Add a transition to the circle radii
 
-Our final change is to make the circles grow from zero radius. This is a subtle change but one that adds a final bit of polish to the transtions. The default radius of `circle` elements is zero so we don’t need to initialize the radii. We make the following changes:
+Our final change is to make the circles grow from zero radius. This is a subtle change but one that adds a final bit of polish to the transtions. The default radius of `circle` elements is zero so we don’t need to initialise the radii. We make the following changes:
 
 {caption: "js/update.js", line-numbers: false}
 ```js

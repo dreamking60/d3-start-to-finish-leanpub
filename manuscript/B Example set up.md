@@ -1,6 +1,6 @@
-# Example set-up
+# Appendix B: Example Set-Up
 
-This section takes you through setting up a web development environment and the creation of a simple website (using HTML, CSS and JavaScript).
+This appendix takes you through setting up a web development environment and the creation of a simple website (using HTML, CSS and JavaScript).
 
 The steps are:
 

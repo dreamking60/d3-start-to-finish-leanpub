@@ -43,7 +43,7 @@ D3 has a large number of modules that help you build data visualisations. We cov
 | **Scale functions** | Scale functions transform data values (e.g. percentages) into visual values (e.g. position, size or colours) |
 | **Data requests** | Data requests let you load CSV and JSON files |
 | **Event handling** | Event handling lets you respond to clicks and hovers from the user |
-| **Transitions** | Transitions let you animate the position, size and color of HTML/SVG elements |
+| **Transitions** | Transitions let you animate the position, size and colour of HTML/SVG elements |
 
 ### Third party libraries
 
@@ -83,8 +83,12 @@ The countries can be sorted by name or one of the energy types. When the circles
 
 ![Countries sorted by renewable energy](31da3d4cde47ee1d75afd37a837576ed.png)
 
-The visualisation is styled to look clean, modern and fresh. Colors, fonts, line widths, spacing etc. have been carefully selected to make the chart attractive and easy to digest.
+The visualisation is styled to look clean, modern and fresh. Colours, fonts, line widths, spacing etc. have been carefully selected to make the chart attractive and easy to digest.
 
 Energy Explorer will be built using **HTML**, **SVG**, **CSS**, **JavaScript** and **D3**. HTML, SVG, CSS and JavaScript are standard technologies used to build websites and web applications. Practically every website (or web application) you visit is built from these four technologies. D3 is a JavaScript library that helps you build interactive data visualisations. It offers advanced functionality such as adding, removing and updating DOM elements, transforming data into shapes and animating between application states.
 
 This book requires that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you think your knowledge of these technologies needs a boost I  recommend reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.
+
+## Where to get help
+
+If you need help on anything in this book please tweet me at @createwithdata or email me at help@createwithdata.com.

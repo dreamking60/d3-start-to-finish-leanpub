@@ -286,6 +286,13 @@ markua-start-insert
     opacity: 1;
 }
 markua-end-insert
+
+.legend circle {
+    stroke: #aaa;
+    fill: none;
+}
+
+...
 ```
 
 We've made the following changes:
@@ -547,7 +554,7 @@ markua-end-insert
 
 The following changes were made:
 
-* the global text color has been set to a dark gray (instead of black)
+* the global text colour has been set to a dark gray (instead of black)
 * the `body` element's `margin` has been set to 0 (to remove the default margins around the whole page)
 * the links in the footer are coloured grey and a subtle hover over effect added
 * the controls container padding has been tweaked to bring the menu and legend in a bit

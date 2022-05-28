@@ -17,9 +17,9 @@ The Flourish popup can be installed by downloading it from [https://cdn.flourish
 
 See the [popup’s documentation](https://github.com/kiln/flourish-popup) for other (more modern) ways of installing it.
 
-## Initializing the popup
+## Initialising the popup
 
-Once the popup component has been installed it can be initialized using:
+Once the popup component has been installed it can be initialised using:
 
 ```js
 let popup = Popup();
@@ -107,7 +107,7 @@ d3.select('.circles')
 
 The code is mostly the same as the code in the D3 Event Handling chapter. The main differences are:
 
-* a Flourish popup is initialized and assigned to the variable `popup`
+* a Flourish popup is initialised and assigned to the variable `popup`
 * `handleMouseover` sets the popup position by passing `this` into `.point`. (`this` is the HTML/SVG element that triggered the event.)
 * the content is set using `.html` and `.draw` is called to make the popup visible
 * `handleMouseout` hides the popup using `.hide`

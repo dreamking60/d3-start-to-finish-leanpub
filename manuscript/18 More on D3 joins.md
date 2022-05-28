@@ -399,7 +399,7 @@ The nested join can be also put inside an update function (see the More on D3 se
 ```js
 markua-start-insert
 function getData() {
-  // Return a randomized array of arrays
+  // Return a randomis	ed array of arrays
 }
 markua-end-insert
 

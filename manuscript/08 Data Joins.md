@@ -119,7 +119,7 @@ In the next section we’ll look at how the joined HTML/SVG elements can be modi
 
 ## Updating the joined elements
 
-Once you’ve joined an array to a selection of HTML/SVG elements you can update the position, color, size etc. of each element using `.style`, `.attr`, `.classed` and `.text`. (These are the same four methods introduced in the [Updating a selection’s elements section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/updating-a-selection/).)
+Once you’ve joined an array to a selection of HTML/SVG elements you can update the position, colour, size etc. of each element using `.style`, `.attr`, `.classed` and `.text`. (These are the same four methods introduced in the [Updating a selection’s elements section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/updating-a-selection/).)
 
 Broadly speaking there are three approaches to updating each HTML/SVG element. You can:
 
@@ -247,7 +247,7 @@ d3.select('g.chart')
   });
 ```
 
-Now the circles will be colored red if the joined value is greater or equal to 40 otherwise they’ll be grey. Here’s this example on CodePen:
+Now the circles will be coloured red if the joined value is greater or equal to 40 otherwise they’ll be grey. Here’s this example on CodePen:
 
 [https://codepen.io/createwithdata/pen/pogZdYj](https://codepen.io/createwithdata/pen/pogZdYj)
 

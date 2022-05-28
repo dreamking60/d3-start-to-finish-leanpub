@@ -34,7 +34,9 @@ Each array element **corresponds** to a circle. Furthermore each circle is **siz
 
 ![Modifying array values results in resized circles](fe14440998cdc62b8374dcffdf332836.png)
 
-(You can view an interactive version of this example on Codepen at [https://codepen.io/createwithdata/pen/NWxjKVo](https://codepen.io/createwithdata/pen/NWxjKVo).)
+You can view an interactive version of this example on Codepen at:
+
+[https://codepen.io/createwithdata/pen/NWxjKVo](https://codepen.io/createwithdata/pen/NWxjKVo)
 
 The data join ensures that the circles ‘mirror’ the array. This is the basis for creating data visualisations using D3. In effect array elements are represented by shapes (whether circles, lines, rectangles etc.). The shapes may be sized, positioned and styled according to the corresponding data.
 

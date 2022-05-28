@@ -148,11 +148,9 @@ function updateGroup(d, i) {
 
 markua-start-insert
     if(g.selectAll('*').empty()) initialiseGroup(g);
-markua-end-insert
 
     g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
 
-markua-start-insert
     g.select('.renewable')
         .attr('r', d.renewableRadius);
 
@@ -207,7 +205,7 @@ markua-end-insert
 
 ## Save and refresh
 
-Save `css/style.css`, `js/layout.js` and `js/update.js` and load step 8 in your browser.
+Save `css/style.css`, `js/layout.js` and `js/update.js` and load `step8` in your browser.
 
 You should see:
 

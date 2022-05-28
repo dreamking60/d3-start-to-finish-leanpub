@@ -4,7 +4,7 @@ In this section you’ll add state management to Energy Explorer in a similar ma
 
 ## Overview
 
-Open step11. The file structure is:
+Open `step11`. The file structure is:
 
 ```text
 step11

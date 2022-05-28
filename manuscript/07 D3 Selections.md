@@ -1,6 +1,6 @@
 # D3 Selections
 
-D3 selections are basically **arrays of HTML or SVG elements**. They let you **modify the style and attributes** of the HTML or SVG elements you’ve selected. For instance you can use D3 to select some SVG circles and change their color to red. Selections are also used when **joining an array** to HTML or SVG elements (see the next chapter).
+D3 selections are basically **arrays of HTML or SVG elements**. They let you **modify the style and attributes** of the HTML or SVG elements you’ve selected. For instance you can use D3 to select some SVG circles and change their colour to red. Selections are also used when **joining an array** to HTML or SVG elements (see the next chapter).
 
 ## Creating a selection
 
@@ -100,7 +100,7 @@ let s = d3.selectAll('circle');
 s.style('fill', 'red');
 ```
 
-This will change the fill color of each circle to `red`. An alternative format that omits the variable declaration is:
+This will change the fill colour of each circle to `red`. An alternative format that omits the variable declaration is:
 
 ```js
 d3.selectAll('circle')
@@ -240,7 +240,7 @@ Here’s a CodePen example that uses `.classed` to add a class attribute named `
 
 [https://codepen.io/createwithdata/pen/WNwpLog](https://codepen.io/createwithdata/pen/WNwpLog)
 
-The CSS contains a rule that sets the fill color for elements with class `highlighted`.
+The CSS contains a rule that sets the fill colour for elements with class `highlighted`.
 
 ### .text
 

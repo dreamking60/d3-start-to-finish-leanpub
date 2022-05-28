@@ -137,7 +137,7 @@ To recap:
 
 ## d3.dsv
 
-`d3.dsv` is a generalized version of `d3.csv` and `d3.tsv` which processes the incoming file using a specified separator character. The first argument of `d3.dsv` is the separator character, so:
+`d3.dsv` is a generalised version of `d3.csv` and `d3.tsv` which processes the incoming file using a specified separator character. The first argument of `d3.dsv` is the separator character, so:
 
 ```js
 d3.dsv(',', 'my-url', transformRow);

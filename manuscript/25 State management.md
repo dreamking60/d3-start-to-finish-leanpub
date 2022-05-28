@@ -89,7 +89,7 @@ markua-end-insert
 function update() { ... }
 ```
 
-`state.selectedCircle` is initialized to `null` to indicate that nothing has been selected. Now let’s add a function named `action` which handles a single action type named `setSelectedCircle`:
+`state.selectedCircle` is initialised to `null` to indicate that nothing has been selected. Now let’s add a function named `action` which handles a single action type named `setSelectedCircle`:
 
 ```js
 let data = [30, 10, 20, 40];
@@ -196,7 +196,7 @@ Now when a circle is clicked:
 
 * `handleClick` is called which calls `action` passing in `setSelectedCircle` as the action type and the circle index `i` as the second argument
 * `action` updates `state.selectedCircle` with the circle index and calls `update`
-* `update` updates the fill color of each circle. If the circle index matches `state.selectedCircle` it’ll get coloured red
+* `update` updates the fill colour of each circle. If the circle index matches `state.selectedCircle` it’ll get coloured red
 
 Navigate to [https://codepen.io/createwithdata/pen/YzwGaBw](https://codepen.io/createwithdata/pen/YzwGaBw) to view this example in CodePen.
 

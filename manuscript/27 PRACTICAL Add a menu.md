@@ -41,7 +41,7 @@ We use D3 to join the menu item array to `div` elements. The resulting HTML will
 
 When a menu item is clicked a new state property `selectedIndicator` is updated and the chart and menu are redrawn.
 
-Open step11. The file structure is:
+ Open `step11` (which we already worked on in the previous practical). The file structure is:
 
 ```text
 step11
