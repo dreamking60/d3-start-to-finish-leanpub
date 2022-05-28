@@ -1,4 +1,4 @@
-# More on D3 selections
+# More on D3 Selections
 
 This chapter covers additional methods you can call on a D3 selection. It also covers the **update function** which is a handy technique that keeps your HTML/SVG elements synchronised with your data.
 
@@ -249,7 +249,7 @@ Each time the timer fires (once every second) `updateData` and `update` are call
 
 Navigate to [https://codepen.io/createwithdata/pen/Yzwaarg](https://codepen.io/createwithdata/pen/Yzwaarg) to view the example in CodePen. You'll see that every time the timer fires, circles appear or disappear and change size.
 
-## Summing up
+## Summary
 
 This chapter has introduced some additional methods on D3 selections and has shown how you can create an **update function** which updates HTML/SVG elements in a data-driven fashion. Typically the update function is called whenever the **data changes** or when some **user interaction** has occurred.
 

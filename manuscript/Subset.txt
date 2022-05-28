@@ -32,3 +32,5 @@
 32 PRACTICAL Add a legend.md
 33 PRACTICAL Finishing touches.md
 34 Wrapping up.md
+A Web development tools.md
+B Example set up.md

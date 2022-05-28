@@ -1,4 +1,4 @@
-# Data joins
+# Data Joins
 
 A fundamental concept in D3 is the **data join**. A data join creates a correspondence between an **array of data** and a **selection** of HTML or SVG elements. Joining an array to HTML/SVG elements means that:
 
@@ -22,9 +22,7 @@ where:
 * `element-type` is a string describing the **type** of element you’re joining (e.g. ‘`div'` or `'circle'`)
 * `array` is the name of the **array** you’re joining.
 
-The container is a single element that’ll act as the parent of the HTML/SVG elements that you’re joining.
-
-Let’s look at a specific example. Suppose you’ve an array of values:
+The container is a single element that’ll act as the parent of the HTML/SVG elements that you’re joining. Let’s look at a specific example. Suppose you’ve an array of values:
 
 ```js
 let myData = [10, 40, 30];
@@ -96,9 +94,7 @@ creates the join. You pass in the type of HTML or SVG element you’re wanting D
 
 When these four lines of code are executed `circle` elements are added or removed such that each array element has a corresponding `circle`.
 
-Here’s a example in Codepen:
-
-[https://codepen.io/createwithdata/pen/ZEQxyyJ](https://codepen.io/createwithdata/pen/ZEQxyyJ)
+Here’s an example in Codepen: [https://codepen.io/createwithdata/pen/ZEQxyyJ](https://codepen.io/createwithdata/pen/ZEQxyyJ)
 
 You won’t see any output because each circle has radius zero so will be invisible. However, if you right-click on the SVG element (which has been coloured light grey) and choose Inspect (or similar) you’ll be able to see the page’s elements. Expand the `svg` and `g` elements and you should see the three circles that have been added by D3:
 
@@ -106,9 +102,7 @@ You won’t see any output because each circle has radius zero so will be invisi
 
 ### Recap
 
-A D3 data join creates a correspondence between an **array of values** and a **selection of HTML/SVG elements**.
-
-The general pattern for creating a join is:
+A D3 data join creates a correspondence between an **array of values** and a **selection of HTML/SVG elements**. The general pattern for creating a join is:
 
 ```js
 d3.select(container)
@@ -123,7 +117,7 @@ Each time these four lines are executed D3 adds (or removes) HTML/SVG elements s
 
 In the next section we’ll look at how the joined HTML/SVG elements can be modified using `.style`, `.attr`, `.classed` and `.text`.
 
-## Data-driven updates
+## Updating the joined elements
 
 Once you’ve joined an array to a selection of HTML/SVG elements you can update the position, color, size etc. of each element using `.style`, `.attr`, `.classed` and `.text`. (These are the same four methods introduced in the [Updating a selection’s elements section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/updating-a-selection/).)
 
@@ -354,9 +348,7 @@ d3.select('g.barchart')
   .style('fill', '#aaa');
 ```
 
-You can view this example at:
-
-[https://codepen.io/createwithdata/pen/ZEQxXNp](https://codepen.io/createwithdata/pen/ZEQxXNp)
+You can view this example at: [https://codepen.io/createwithdata/pen/ZEQxXNp](https://codepen.io/createwithdata/pen/ZEQxXNp)
 
 ![Joined rectangles with constant, data-driven and index based updates](1f16d7e4b9dcf9765f0104615612d75f.png)
 
@@ -485,9 +477,7 @@ d3.select('g.cities')
   });
 ```
 
-You can view this example on Codepen at:
-
-[https://codepen.io/createwithdata/pen/vYLjBBx](https://codepen.io/createwithdata/pen/vYLjBBx)
+You can view this example on Codepen at: [https://codepen.io/createwithdata/pen/vYLjBBx](https://codepen.io/createwithdata/pen/vYLjBBx)
 
 ![Joining array of objects to create (upside down) scatter plot](88176a76a7830592b636bb8998e8ccdc.png)
 
@@ -524,7 +514,7 @@ Here’s the example on CodePen:
 
 [https://codepen.io/createwithdata/pen/VwexZvP](https://codepen.io/createwithdata/pen/VwexZvP)
 
-### Summing up
+### Summary
 
 This section has shown how to join an **array of objects** to HTML/SVG elements. We saw the only difference is that the **joined value is now an object** rather than a number.
 

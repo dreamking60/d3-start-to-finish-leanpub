@@ -1,4 +1,4 @@
-# The build so far
+# The Build So Far
 
 This chapter gives an overview of the Energy Explorer build so far. The directory structure of `step6-complete` is:
 

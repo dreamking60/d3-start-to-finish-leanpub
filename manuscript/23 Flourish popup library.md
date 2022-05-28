@@ -1,15 +1,15 @@
-# Flourish popup library
+# Flourish Popup Library
 
 One of the most useful features you can add to a data visualisation is an **information popup**. This is a box that displays information about a selected item.
 
-For example the final version of the Energy Explorer has a popup that shows the energy mix as numbers:
+For example the final version of Energy Explorer has a popup that shows the energy mix as numbers:
 
 {width: 33%}
 ![Information popup in Energy Explorer](ef65fec750293006f48c40ea8d47b67f.png)
 
 It’s possible to implement your own popup using D3 but there are libraries that do this for you.
 
-A good popup library is Flourish’s [popup component](https://github.com/kiln/flourish-popup). This is a popup that’s used in many of Flourish’s templates. (Just so you know, at the time of writing this I’m working at Flourish.)
+A good popup library is Flourish’s [popup component](https://github.com/kiln/flourish-popup). This is a popup that’s used in many of Flourish’s templates.
 
 ## Installing the popup
 
@@ -25,7 +25,7 @@ Once the popup component has been installed it can be initialized using:
 let popup = Popup();
 ```
 
-### Popup methods
+## Popup methods
 
 The Flourish popup’s most interesting methods are: `.point`, `.html`, `.draw` and `.hide`.
 
@@ -38,9 +38,9 @@ I personally find it easier to **pass in an HTML/SVG element** because this save
 
 The `.html` method sets the content of the popup. You pass in a string containing HTML code. The `.draw` method draws (or redraws) the popup. The `.hide` method hides the popup.
 
-### Popup styling
+## Popup styling
 
-In general you need to set `pointer-events` to `none` on the popup, otherwise the **popup might flicker** when the mouse pointer is close to the popup. The popup has a class attribute named `flourish-popup` so you can apply the rule using:
+In general you need to set `pointer-events` to `none` on the popup, otherwise the popup might flicker when the mouse pointer is close to the popup. The popup has a class attribute named `flourish-popup` so you can apply the rule using:
 
 ```css
 .flourish-popup {

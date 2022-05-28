@@ -3,6 +3,7 @@
 In this chapter we add transitions to Energy Explorer so that:
 
 * The countries fade in when the explorer first loads.
+* The circles expand out from zero radius when the explorer loads.
 * The countries animate into new locations when the sort order changes.
 
 ## Overview
@@ -294,7 +295,7 @@ In `updateGroup` we pass the joined data `d` into `initialiseGroup` so that it h
 
 Save `js/update.js` and refresh the browser. Now the circles fade in, without flying in from the top left.
 
-## Add transition to the circle radii
+## Add a transition to the circle radii
 
 Our final change is to make the circles grow from zero radius. This is a subtle change but one that adds a final bit of polish to the transtions. The default radius of `circle` elements is zero so we don’t need to initialize the radii. We make the following changes:
 

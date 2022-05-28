@@ -1,11 +1,11 @@
-# Practical: Arrange the data
+# Practical: Arrange the Data
 
 In this practical you’ll arrange the countries in a grid format:
 
 {width: 66%}
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-3.png)
 
-The [previous section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/arranging-items-in-a-grid/) explained the mathematics and code to arrange an array of data in a grid and we’ll use a similar approach in Energy Explorer.
+The [previous section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/arranging-items-in-a-grid/) explained the mathematics and code to arrange an array of data in a grid and we use a similar approach in Energy Explorer.
 
 ## Overview
 
@@ -133,7 +133,7 @@ In the function that's passed into `data.map`, we compute the column and row num
 
 ## Save and refresh
 
-Now save `index.html`, `config.js`,  `main.js` and `layout.js` and refresh your browser (making sure it’s pointing at `step6`).
+Now save `index.html`, `config.js` and `layout.js` and refresh your browser (making sure it’s pointing at `step6`).
 
 You should see:
 
@@ -148,6 +148,8 @@ Try changing the value of `numColumns` in `config.js`. For example, set it to 30
 ![Grid of circles with 30 columns](b79a2bd2d04186428d1ef3a4a8950aad.png)
 
 Notice that the circles adapt their size to the cell size. (This is because `maxRadius` is derived from the cell size.)
+
+## Summary
 
 Hopefully you can also see the benefit of the architecture we’ve chosen. You’re able to change a single number in a configuration object and the visualisation layout adapts in a sensible manner. You were also able to change the arrangement of the circles without having to touch the data join code.
 

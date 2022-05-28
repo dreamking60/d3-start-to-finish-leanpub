@@ -71,7 +71,7 @@ Once you’ve used `d3.select` or `d3.selectAll` to create a selection of HTML/S
 | `.classed` | Adds a class attribute to the selection’s elements |
 | `.text` | Sets the text content of the selection’s elements |
 
-(If you’re not familiar with CSS, HTML or SVG you can read up on them in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).
+(If you’re not familiar with CSS, HTML or SVG you can read up on them in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).)
 
 ### .style
 
@@ -273,9 +273,7 @@ This results in the following change to the HTML:
 <div>Some content</div>
 ```
 
-Here’s an example in CodePen:
-
-[https://codepen.io/createwithdata/pen/ExKWGWj](https://codepen.io/createwithdata/pen/ExKWGWj)
+Here’s an example in CodePen: [https://codepen.io/createwithdata/pen/ExKWGWj](https://codepen.io/createwithdata/pen/ExKWGWj)
 
 ## Multiple updates
 

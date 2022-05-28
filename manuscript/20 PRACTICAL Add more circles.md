@@ -216,7 +216,7 @@ You should see:
 
 The completed code is in `step8-complete` of the code download.
 
-## Summing up
+## Summary
 
 Adding the nested join in the previous section was fairly complicated it made adding further elements to the `g` element fairly straightforward. Each country now has 4 circles (each of which represents one of the four energy types) and a text label. It's beginning to take shape!
 

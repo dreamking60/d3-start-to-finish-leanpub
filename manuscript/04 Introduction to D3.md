@@ -34,7 +34,7 @@ Each array element **corresponds** to a circle. Furthermore each circle is **siz
 
 ![Modifying array values results in resized circles](fe14440998cdc62b8374dcffdf332836.png)
 
-(You can view an interactive version of this example on Codepen [here](https://codepen.io/createwithdata/pen/NWxjKVo).)
+(You can view an interactive version of this example on Codepen at [https://codepen.io/createwithdata/pen/NWxjKVo](https://codepen.io/createwithdata/pen/NWxjKVo).)
 
 The data join ensures that the circles ‘mirror’ the array. This is the basis for creating data visualisations using D3. In effect array elements are represented by shapes (whether circles, lines, rectangles etc.). The shapes may be sized, positioned and styled according to the corresponding data.
 
@@ -203,7 +203,8 @@ arcGenerator({
 	innerRadius: 50,
 	outerRadius: 100
 });
-// returns "M100,0A100,100,0,0,1,6.123233995736766e-15,100L3.061616997868383e-15,50A50,50,0,0,0,50,0Z"
+// returns "M100,0A100,100,0,0,1,6.123233995736766e-15,
+// 100L3.061616997868383e-15,50A50,50,0,0,0,50,0Z"
 ```
 
 D>The angles are specified in radians, so 90 degrees corresponds to 0.5 * π radians.
@@ -221,7 +222,7 @@ Animations between different chart states add flair to a data visualisation but 
 
 For example look at these two charts containing a number of circles:
 
-![82c0a3dc64d341a8e88595c224249c46.png](82c0a3dc64d341a8e88595c224249c46.png)
+![Before and after circles change position](82c0a3dc64d341a8e88595c224249c46.png)
 
 The left chart is before the circles change position and the right chart is after the circles have changed position. It's impossible to tell which circle has moved where. However if the circles animate to their new positions you stand a chance of following a circle as it moves to its new position.
 
@@ -229,14 +230,14 @@ You can visit [https://codepen.io/createwithdata/pen/pogPwOy](https://codepen.io
 
 D3 has a powerful system for managing transitions. You can alter things such as the animation duration and the easing function (which lets you control how quickly things accelerate and decelerate). You can also add delays to each element in order to achieve staggered transitions.
 
-Transitions are very well implemented in D3 and its one of the features that stands D3 apart. We cover transitions in more detail later and use them in the Energy Explorer.
+Transitions are very well implemented in D3 and its one of the features that stands D3 apart. We cover transitions in more detail later and use them in Energy Explorer.
 
 ### Summary
 
-Hopefully this section has given you a flavour of what D3 is and what it can do. One of the key takeaways is that D3 provides modules to help you build data visualisations. It doesn’t provide ready built charts – use a library such as Chart.js for that.
+Hopefully this chapter has given you a flavour of what D3 is and what it can do. One of the key takeaways is that D3 provides modules to help you build data visualisations. It doesn’t provide ready built charts – use a library such as Chart.js for that.
 
-This book covers a cross section of D3 functionality. It doesn’t cover everything, but it covers enough to get you started building your own custom charts.
+This book covers a cross section of D3 functionality. It doesn’t cover everything, but it covers enough to get you started building your own custom visualisations.
 
-## D3 version
+## D3 versions
 
-Since its inception in 2011, D3 has undergone a number of changes and at the time of writing is at version 7. This book uses **version 7** which was launched in June 2021.
+Since its inception in 2011, D3 has undergone a number of changes and at the time of writing is at version 7. This book uses **version 7** which was launched in June 2021, but the content also applies to version 6.

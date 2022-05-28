@@ -19,7 +19,7 @@ Specifically you need to be familiar with:
 
 You should also be comfortable opening and editing code in a code editor (such as VS Code, Atom or Brackets) and setting up a local web server.
 
-If you need to get up to speed on the above languages and tools I suggest reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book. If you understand everything in that book you'll be ready for this one.
+If you need to get up to speed on the above languages and tools I suggest reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book. If you understand everything in that book you should be ready for this one.
 
 ## What you’ll learn
 
@@ -47,7 +47,7 @@ D3 has a large number of modules that help you build data visualisations. We cov
 
 ### Third party libraries
 
-We look at a couple of JavaScript libraries in this book: Flourish’s [popup component](https://github.com/kiln/flourish-popup) and [Lodash](https://lodash.com/).
+We look at a couple of JavaScript libraries in this book: Flourish’s [popup library](https://github.com/kiln/flourish-popup) and [Lodash](https://lodash.com/).
 
 Flourish’s popup library helps you add an information popup to a web page and Lodash provides functions for processing data (such as sorting and filtering).
 

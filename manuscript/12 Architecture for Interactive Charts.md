@@ -2,7 +2,7 @@
 
 This chapter introduces two techniques for architecting interactive data visualisations for increased code clarity and maintainability. These techniques become increasingly important as an application's size increases and they are of significant benefit to Energy Explorer.
 
-The first technique is to use a layout function that takes an array of data and outputs a new array containing information (such as position and size) for rendering the visualisation. The benefit is that the (often complex) logic for calculating the visual variables (such as position, size and colour) is separate to the rendering code. This makes maintaining and understanding the code easier and also makes porting the code from D3 to a different rendering engine (such as React) simpler.
+The first technique is to use a layout function that takes an array of data and outputs a new array containing information (such as position and size) for rendering the visualisation. The benefit is that the logic for calculating the visual variables (such as position, size and colour) is separate to the rendering code. This makes maintaining and understanding the code easier and also makes porting the code from D3 to a different rendering engine (such as React) simpler.
 
 The second technique is to modularise the code. This means that the code is split over several files, with each file responsible for a particular aspect of the application. This makes the application easier to understand and maintain.
 
@@ -41,11 +41,11 @@ function layout(data) {
 }
 ```
 
-This function iterates through `data` and computes `x`, `y` and `r` for each array element. It then returns a new array containing the position and radius data.
+This function generates a new array `layoutData` by calling `map` on `data`. The map function iterates through `data` and computes `x`, `y` and `r` for each array element. The result is a new array containing the position and radius data.
 
 D>See the JavaScript Iteration chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) if you’re not familiar with `map`.
 
-Typically you’d assign the output of `layout(myData)` to a new variable:
+Typically you assign the output of `layout(myData)` to a new variable:
 
 ```js
 let layoutData = layout(myData);
@@ -66,17 +66,13 @@ d3.select('#chart')
 There are a few benefits of this approach:
 
 * the join code is much **cleaner and easier to read** because it doesn’t contain any code for computing size, positions and other visual variables
-* the **layout and rendering code is decoupled**, so swapping D3 for a different library (such as React or Vue) to update the HTML or SVG elements will have lower impact
+* the **layout and rendering code is decoupled**, so swapping D3 for a different rendering library (such as React or Vue) will have lower impact
 * **debugging is easier** because you can easily inspect the output of the layout function
 * it’s relatively easy to run **automated tests** on the layout function
 
-Here’s a similar example on CodePen:
+Here’s a similar example on CodePen: [https://codepen.io/createwithdata/pen/gOaezWJ](https://codepen.io/createwithdata/pen/gOaezWJ)
 
-[https://codepen.io/createwithdata/pen/gOaezWJ](https://codepen.io/createwithdata/pen/gOaezWJ)
-
-You don’t **have** to use layout functions but for more complex visualisations they can make your code easier to understand and maintain. D3 also provides a number of layout functions but it adds geometric information directly on each array element. The approach in this section creates a new array and doesn’t change (or mutate) the original array. This is more in keeping with modern JavaScript practice.
-
-You’ll have an opportunity to learn more about layout functions when you add one to arrange the circles in the Energy Explorer.
+You don’t have to use layout functions but for more complex visualisations they can make your code easier to understand and maintain. D3 also provides a number of layout functions but it adds geometric information directly on each array element. The approach in this section creates a new array and doesn’t change (or mutate) the original array. This is more in keeping with modern JavaScript practice.
 
 ## Modules
 
@@ -84,14 +80,14 @@ A **module** is a chunk of code that has a **single purpose** and typically occu
 
 ### JavaScript modules
 
-JavaScript modules have a long and complicated history. (If you don’t believe me have a look at [Exploring JS’s section on modules](https://exploringjs.com/es6/ch_modules.html).) In this section we’ll look at two approaches:
+JavaScript modules have a long and complicated history. (To see for yourself, have a look at [Exploring JS’s section on modules](https://exploringjs.com/es6/ch_modules.html).) In this section we look at two approaches:
 
 * script loading
 * ES6 modules
 
 ### Script loading
 
-This is a simple approach to dividing your code into modules. It’s straightforward and reliable but not suitable for large applications. (Once you have more than 5 or 6 modules you ought to look at the other approaches.) You can split your code up into separate files and then load them individually using `<script>` tags in `index.html`. The load order is important: each file is **loaded** and **executed** in the same order as the `<script>` tags.
+This is a simple way to modularise your code. It’s straightforward and reliable but not suitable for large applications. (Once you have more than 5 or 6 modules you ought to look at the other approaches.) You can split your code up into separate files and load them individually using `<script>` tags in `index.html`. The load order is important: each file is **loaded** and **executed** in the same order as the `<script>` tags.
 
 A simple example consists of two JavaScript files `add.js` and `main.js`. Here’s `add.js`:
 
@@ -119,15 +115,15 @@ They can be included in `index.html` using:
 ...
 <body>
 ...
-<script src="add.js"></script>
-<script src="main.js"></script>
+  <script src="add.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
 ```
 
-When the page is loads in the browser `add.js`  loads and executes. This results in the function `add` being defined. Next `main.js` loads and executes. This defines three variables `n1`, `n2` and `sum`. The latter is set using the `add` function. The `sum` variable is output to the browser’s debug console.
+When the page loads in the browser `add.js`  loads and executes. This results in the function `add` being defined. Next `main.js` loads and executes. This defines three variables `n1`, `n2` and `sum`. The latter is set using the `add` function. The `sum` variable is output to the browser’s debug console.
 
-We use this approach when building the Energy Explorer as it’s simple, it’ll work in all browsers and doesn’t require any additional tooling.
+We use this approach in Energy Explorer as it’s simple, it’ll work in all browsers and doesn’t require any additional tooling.
 
 ### ES6 modules
 

@@ -4,13 +4,13 @@ This chapter gives a technical overview of Energy Explorer and an overview of th
 
 ## Technical overview
 
-This section gives a broad overview of the energy explorer from a technical perspective. There’s no need to understand this section fully, it’s just here to give you a flavour of what you’ll be building.
+This section gives a broad overview of Energy Explorer from a technical perspective. There’s no need to understand this section fully, it’s just here to give you a flavour of what you’ll be building.
 
-The energy explorer is built using HTML, SVG, CSS and JavaScript. It uses a few JavaScript libraries namely D3, Lodash and Flourish’s popup library.
+Energy Explorer is built using HTML, SVG, CSS and JavaScript. It uses a few JavaScript libraries namely D3, Lodash and Flourish’s popup library.
 
 The data originates from the [World Bank’s World Development Indicators](http://datatopics.worldbank.org/world-development-indicators/) database and has been transformed into a comma separated value (CSV) file using a Node script. The CSV file looks like:
 
-{caption: 'data.csv'}
+{caption: "data.csv"}
 ```text
 id,name,oilgascoal,nuclear,hydroelectric,renewable
 AGO,Angola,46.8,,53.2,0.0
@@ -36,32 +36,29 @@ The application is split into a few modules. One for the main application and fu
 The final file structure looks like:
 
 ```text
-css
-└── style.css
-data
-└── data.csv
-index.html
-js
-├── config.js
-├── layout.js
-├── lib
-│   ├── d3.min.js
-│   ├── lodash.min.js
-│   └── popup-v1.1.1.min.js
-├── main.js
-├── menu.js
-├── popup.js
-├── store.js
-└── update.js
+energy-explorer
+├── css
+│   └── style.css
+├── data
+│   └── data.csv
+├── index.html
+└── js
+    ├── config.js
+    ├── layout.js
+    ├── lib
+    │   ├── d3.min.js
+    │   ├── lodash.min.js
+    │   └── popup-v1.1.1.min.js
+    ├── main.js
+    ├── menu.js
+    ├── popup.js
+    ├── store.js
+    └── update.js
 ```
 
-This is a typical web application structure. It’s a static application, meaning there’s no server-side code. All files are loaded into the browser when the visualisation first loads.
+This is a typical web application structure. It’s a static application, meaning there’s no server-side code. All files are loaded into the browser when the visualisation first loads. (In order to stay focused, this book doesn’t use any build tools such as Webpack.)
 
-(In order to stay focused, this book doesn’t use any build tools such as Webpack.)
-
-The application consists of a single HTML file (`index.html`). This contains a handful of HTML elements that act as containers for the chart.
-
-The main JavaScript file is  `main.js` and this loads the data from `data/data.csv`. It transforms the data into position and radius information using a function in `layout.js`. The chart is drawn in `update.js`.
+The application consists of a single HTML file (`index.html`). This contains a handful of HTML elements that act as containers for the chart. The main JavaScript file is  `main.js` and this loads the data from `data/data.csv`. It transforms the data into position and radius information using a function in `layout.js`. The chart is drawn in `update.js`.
 
 `menu.js` creates the sort menu and `popup.js` manages the popup. `store.js` helps with state management.
 
@@ -77,18 +74,18 @@ Typically in each practical session you’ll **load** the step’s code into you
 
 | **Step** | **Description** |
 | --- | --- |
-| 1   | Getting started |
-| 2   | Load the data |
-| 3   | Draw the data (you’ll represent each country with a circle) |
-| 4   | Size the circles |
-| 5   | Add layout module |
-| 6   | Arrange the circles in a grid |
-| 7   | Add country name labels (using a nested join) |
-| 8   | Add extra circles (for representing each energy type) |
-| 9   | Basic styling |
-| 10  | Add a popup |
-| 11  | Add state management and a menu |
-| 12  | Add functionality to sort the countries |
-| 13  | Add transitions |
-| 14  | Add a legend |
-| 15  | Finishing touches |
+| 1   | Getting Started |
+| 2   | Load the Data |
+| 3   | Draw the Data (you’ll represent each country with a circle) |
+| 4   | Size the Circles |
+| 5   | Add Modules |
+| 6   | Arrange the Data (in a grid formation) |
+| 7   | Add Labels |
+| 8   | Add More Circles (for representing each energy type) |
+| 9   | Style the Circles |
+| 10  | Add Popup |
+| 11  | Add State Management and a Menu |
+| 12  | Sort the Countries |
+| 13  | Add Transitions |
+| 14  | Add a Legend |
+| 15  | Finishing Touches |

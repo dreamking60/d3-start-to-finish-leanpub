@@ -209,7 +209,7 @@ The same example but using an update function (so that the data join is called e
 
 This section shows how to join a nested array (in other words, an array of arrays) to HTML or SVG elements.
 
-D>Although the Energy Explorer doesn’t use this technique, it’s a useful technique that isn’t widely known. However feel free to skip ahead if it’s not of interest!
+D>Although Energy Explorer doesn’t use this technique, it’s a useful technique that isn’t widely known. However feel free to skip ahead if it’s not of interest!
 
 Suppose you have this nested array:
 
@@ -272,7 +272,7 @@ d3.select('g.chart')
   .join('g');
 ```
 
-The above is similar to the join code seen in previous sections but the array is joined to `<g>` elements instead of `<circle>` elements. We’ll name this join the **outer** join. This will create the following elements:
+We’ll name this join the **outer** join. This will create the following elements:
 
 ```html
 <g class="chart" transform="translate(50, 50)">

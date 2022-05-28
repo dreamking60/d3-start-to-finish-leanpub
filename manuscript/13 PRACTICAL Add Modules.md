@@ -1,4 +1,4 @@
-# Practical: Add modules
+# Practical: Add Modules
 
 This practical modularises Energy Explorer by splitting it into separate JavaScript files. It also adds a layout function that'll be used by the update function. This is very much a refactoring exercise and there won't be any difference in the output. However it sets the groundwork for subsequent additions.
 
@@ -22,7 +22,7 @@ In this practical we:
 1. Add two new empty modules: `layout.js` and `update.js`.
 2. Add a layout function to `layout.js`.
 3. Move the update code from `main.js` to `update.js`
-4. Modify the update function to use the layout function
+4. Modify the update function to use the layout function.
 
 ## Add new modules
 
@@ -99,13 +99,26 @@ function layout(data) {
 
 This takes a similar form to the layout functions in the previous chapter. The scale function `radiusScale` and the geometric calculations for `x`, `y` and `radius` are lifted from the update function (`js/main.js`).
 
-The layout function accepts the energy data and outputs a new array where each object represents the position and radius of the country's circle and looks something like:
+The layout function accepts an array where each element looks something like:
 
 ```js
 {
-  radius: 0.6324555320336758,
-  x: 10,
-  y: 100
+  "name": "United Arab Emirates",
+  "id": "ARE",
+  "hydroelectric": 0,
+  "nuclear": null,
+  "oilgascoal": 99.8,
+  "renewable": 0.2
+}
+```
+
+and outputs a new array where each object represents the position and radius of the country's circle and looks something like:
+
+```js
+{
+  "x": 20,
+  "y": 100,
+  "radius": 0.8944271909999159
 }
 ```
 
@@ -113,9 +126,7 @@ The output of `layout` will be used in the new update function (see later).
 
 ## Move update code
 
-Delete `radiusScale` from `js/main.js` (because it's now defined in `js/layout.js`).
-
-Then cut the update function (highlighted in red) from `js/main.js` :
+We delete `radiusScale` from `js/main.js` (because it's now defined in `js/layout.js`) and **cut** (so we can paste it elsewhere) the update function from `js/main.js` :
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -125,9 +136,7 @@ markua-start-delete
 let radiusScale = d3.scaleSqrt()
     .domain([0, 100])
     .range([0, 20]);
-markua-end-delete
 
-markua-start-insert
 function update() {
     d3.select('#chart')
         .selectAll('circle')
@@ -141,7 +150,7 @@ function update() {
             return radiusScale(d.renewable);
         });
 }
-markua-end-insert
+markua-end-delete
 
 function dataIsReady(csv) {
     data = csv;
@@ -166,7 +175,7 @@ d3.csv('data/data.csv', transformRow)
 Paste the update function into `js/update.js`:
 
 {caption: "js/update.js"}
-```
+```js
 function update() {
     d3.select('#chart')
         .selectAll('circle')
@@ -182,32 +191,6 @@ function update() {
 }
 ```
 
-Check that `js/main.js` looks like:
-
-{caption: "js/main.js", line-numbers: false}
-```js
-let data;
-
-function dataIsReady(csv) {
-    data = csv;
-    update();
-}
-
-function transformRow(d) {
-    return {
-        name: d.name,
-        id: d.id,
-        hydroelectric: parseFloat(d.hydroelectric),
-        nuclear: parseFloat(d.nuclear),
-        oilgascoal: parseFloat(d.oilgascoal),
-        renewable: parseFloat(d.renewable)
-    };
-}
-
-d3.csv('data/data.csv', transformRow)
-    .then(dataIsReady);
-```
-
 ## Use layout function
 
 Modify the update function `update` (in `js/update.js`) so that it uses the layout function:
@@ -221,7 +204,9 @@ markua-end-insert
 
     d3.select('#chart')
         .selectAll('circle')
+markua-start-insert
         .data(layoutData)
+markua-end-insert
         .join('circle')
 markua-start-insert
         .attr('cx', function(d) {
@@ -244,6 +229,6 @@ Save all the modified files: `index.html`, `js/main.js`, `js/update.js` and `js/
 
 Refresh your browser (making sure it’s loading `step5`) and you should see the same circles as before:
 
-![Output after modularising Energy Explorer (step 5)](cc586c1a36fc02369e4d9cba86a9c290.png)
+![Output after modularising Energy Explorer](cc586c1a36fc02369e4d9cba86a9c290.png)
 
 If this hasn't worked for you, see if you can spot the problem. Perhaps you can add `console.log(layoutData)` after calling `layout(data)` in the update function. Check that it outputs an array of objects containing position information. Failing that, compare your code with `step5-complete`.

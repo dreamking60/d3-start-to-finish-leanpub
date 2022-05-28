@@ -1,8 +1,8 @@
-# Scale functions
+# Scale Functions
 
 Scale functions help you transform your **data values** into **visual values**.
 
-For example, in Energy Explorer the **data values** are the four energy mix percentages.
+For example, in Energy Explorer the **data values** are the percentage values for each of the four energy types.
 
 **Visual values** are properties such as position, size and color. For example an x coordinate of `50px`, a height of `100px` or a color of `#aaa`.
 
@@ -14,21 +14,21 @@ let data = [15, 76, 41, 67, 97];
 
 and you want to create a bar chart where the maximum length of the bars is `500px`.
 
-A scale function which takes a number between 0 and 100 and returns a value between 0 and 500 would help you here. D3 has a module dedicated to scale functions. It creates scale functions for you and lets you configure them. It saves you having to do a lot of mathematics!
+A scale function which takes a number between 0 and 100 and returns a value between 0 and 500 would help here and D3 can create it for you. This saves you having to figure out the mathematics and code yourself.
 
 D3 has around twelve scale types. Some accept **numbers** as input, others accept **strings**. Some output **numbers**, others ouput **colors**. In this book we cover two scale types `scaleLinear` and `scaleSqrt`.
 
-`scaleLinear` is by far the most common D3 scale type and has several use cases. `scaleSqrt` is particularly useful when working with circles. We’ll use it to size circles in the Energy Explorer.
+`scaleLinear` is by far the most common D3 scale type and has several use cases. `scaleSqrt` is particularly useful when working with circles. We’ll use it to size circles in Energy Explorer.
 
 ## scaleLinear
 
 `d3.scaleLinear` creates linear scale functions. A linear scale takes a **number** as input and returns a **number**. Use the following to create a very simple linear scale function:
 
 ```
-var myScale = d3.scaleLinear();
+let myScale = d3.scaleLinear();
 ```
 
-The return value of `d3.scaleLinear` is a function. Here we assigned the function to a variable `myScale`. By default this function takes an input value and returns the same value:
+The return value of `d3.scaleLinear` is a function (which we've assigned to `myScale`). By default this function takes an input value and returns the same value:
 
 ```js
 myScale(0);  // returns 0
@@ -58,15 +58,7 @@ Our linear scale function `myScale` takes an input between 0 and 100 (the domain
 
 D>If you plot the output against the input of a **linear** scale you get a straight line.
 
-In effect our linear scale function `myScale` is:
-
-```js
-function myScale(value) {
-  return 10 * value;
-}
-```
-
-but D3 has generated the function according to the domain and range configuration. You can also pass colors into the range:
+You can also pass colors into the range:
 
 ```js
 myScale.range(['white', 'red']);
@@ -99,9 +91,7 @@ myScale(200);  // returns 1000
 myScale(-100);  // returns 0
 ```
 
-You can try out `scaleLinear` at jsconsole.com by visiting [https://jsconsole.com](https://jsconsole.com).
-
-First include D3 using jsconsole.com’s `:load` command:
+You can try out `scaleLinear` at jsconsole.com by visiting [https://jsconsole.com](https://jsconsole.com). First include D3 using jsconsole.com’s `:load` command:
 
 ```js
 :load https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.min.js
@@ -110,7 +100,7 @@ First include D3 using jsconsole.com’s `:load` command:
 Then type (or copy and paste) the following:
 
 ```js
-var myScale = d3.scaleLinear();
+let myScale = d3.scaleLinear();
 myScale.domain([0, 100]).range([0, 1000]);
 ```
 
@@ -129,7 +119,7 @@ myScale(0.5);  // returns 70.71067811865476
 myScale(1);  // returns 100
 ```
 
-D> Recalling circle mathematics, the area of a circle is `𝜋 * radius * radius`. Thus the area of a circle representing a value of 0.5 is `𝜋 * 70.7106 * 70.7106 = 15707.96` and the area of the circle representing 1 is `𝜋 * 100 * 100 = 31415.93`. The second circle is twice the area of the first circle.
+D> Recalling circle mathematics, the area of a circle is `pi * radius * radius`. Thus the area of a circle representing a value of 0.5 is `pi * 70.7106 * 70.7106 = 15707.96` and the area of the circle representing 1 is `pi * 100 * 100 = 31415.93`. The second circle is twice the area of the first circle.
 
 The main thing to remember is that if you’re using circle area to represent a value, use `scaleSqrt`.
 
@@ -138,7 +128,7 @@ The main thing to remember is that if you’re using circle area to represent a 
 Consider the following code which performs a data join and sets the circle radius according to the joined value:
 
 ```js
-var myData = [10, 40, 30];
+let myData = [10, 40, 30];
 
 d3.select('g.chart')
   .selectAll('circle')
@@ -155,7 +145,9 @@ This is achieved by applying a `scaleSqrt` scale:
 
 ```js
 let myData = [10, 40, 30];
+markua-start-insert
 let radiusScale = d3.scaleSqrt().domain([0, 50]).range([0, 50]);
+markua-end-insert
 
 d3.select('g.chart')
   .selectAll('circle')
@@ -168,10 +160,8 @@ markua-end-insert
   });
 ```
 
-Notice that the function passed into `.attr` is now using `radiusScale`. Here’s a similar example in CodePen:
+Notice that the function passed into `.attr` is now using `radiusScale`.
 
-[https://codepen.io/createwithdata/pen/yLeqRLp](https://codepen.io/createwithdata/pen/yLeqRLp)
-
-The second data value (40) is twice the first data value (20). This results in the second circle having twice the area of the first circle.
+Here’s a similar example in CodePen: [https://codepen.io/createwithdata/pen/yLeqRLp](https://codepen.io/createwithdata/pen/yLeqRLp) The second data value (40) is twice the first data value (20). This results in the second circle having twice the area of the first circle.
 
 Now change `scaleSqrt` to `scaleLinear` in the CodePen example. When `scaleLinear` is used it’s fairly clear that the second circle’s area is much more than twice the first circle’s, even though its value is only 2 times bigger. We’ll use `scaleSqrt` to set the circle sizes in the Energy Explorer in the following practical.

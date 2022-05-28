@@ -1,12 +1,14 @@
-# Practical: Size the circles
+# Practical: Size the Circles
 
-In this chapter we modify the Energy Explorer to size each circle according to its **renewable energy** percentage. (This is the percentage of a country’s energy mix that comes from renewable energy.)
+In this chapter we modify Energy Explorer to size each circle according to its **renewable energy** percentage. (This is the percentage of a country’s energy mix that comes from renewable energy.)
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-1.png)
+By the end of this practical Energy Explorer will look like:
+
+![The energy data represented by circles, sized according to each country's renewable energy percentage](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-1.png)
 
 ## Overview
 
-Open step4. The file structure is:
+Open `step4` from the code download. The file structure is:
 
 ```text
 step4
@@ -23,12 +25,12 @@ Recall that in the previous practical we joined the energy mix array to circle e
 
 In this practical we:
 
-1. Convert the indicator values into **numbers**.
+1. Convert the indicator values from strings into **numbers**.
 2. Create a `scaleSqrt` **scale function** and use it to **set the radius** of each circle.
 
 ## Convert indicator values from strings into numbers
 
-When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting data with D3 chapter):
+When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting Data with D3 chapter):
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -86,7 +88,7 @@ the following is returned:
 
 ## Create a sqrtScale function and set the circle radii
 
-In `js/main.js` create a D3 `scaleSqrt` scale function with domain `[0, 100]` and range `[0, 20]` and assign it to a global variable `radiusScale`. Use the `radiusScale` function to set the circle radii:
+In `js/main.js` we make the following changes:
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -134,16 +136,16 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-A `scaleSqrt` scale function is created with domain `[0, 100]` (because the data value varies between 0 and 100). The range is set to `[0, 20]` meaning the maximum circle radius is 20. We’ll set this to a more suitable value later in the book. We saw in the previous chapter that `scaleSqrt` is the correct scale to use when using circle area to represent a quantity.
+A `scaleSqrt` scale function is created with domain `[0, 100]` and range `[0, 20]` and assigned to `radiusScale`. The domain is set to `[0, 100]` because the data values vary between 0 and 100 and the range is set to `[0, 20]` so that the maximum circle radius is 20. We’ll set this to a more suitable value later in the book. We saw in the previous chapter that `scaleSqrt` is the correct scale to use when using circle area to represent a quantity.
 
 We now pass a function into `.attr('r', ...)` so that the radius is set according to the joined value (instead of a constant value). For now we use the `renewable` property and apply the `radiusScale` scale function to it.
 
 Therefore each circle will be sized such that its area is proportional to the `renewable` property.
 
-Save `main.js` and point your browser at `step4` (if necessary) or select Live Preview and you should see:
+Save `main.js` and load `step4` in your browser. The circles now look like:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
 
 Each circle represents a county and is sized according to its renewable energy percentage. We can already see that there’s a few countries that appear to have quite a high percentage and plenty others with a low percentage.
 
-Later on in this book you’ll arrange the circles out more effectively and add labels so that you can see the individual countries more clearly.
+Later on in this book we’ll arrange the circles more effectively and add labels so we can see the individual countries more clearly.

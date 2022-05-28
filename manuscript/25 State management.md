@@ -1,6 +1,6 @@
-# State management
+# State Management
 
-The state of an application is information that describes what the application is currently doing. For example the state of a data visualisation might include things like:
+The state of an application describes what the application is currently doing. For example the state of a data visualisation might include things like:
 
 * the **data** that’s being visualised
 * the **type of chart** (bar, line, pie etc.) that the user has chosen
@@ -45,7 +45,7 @@ function action(type, param) {
 }
 ```
 
-Each action has a block of code which updates the state accordingly. At the end of `action` the `update` function (or similar) is called which triggers a redraw of the whole application.
+Each action has a block of code which updates the state accordingly. At the end of `action` the `update` function is called which triggers a redraw of the whole application.
 
 Let’s look at a full example.
 
@@ -73,7 +73,7 @@ function update() {
 update();
 ```
 
-Let’s add a feature whereby a circle is selected by clicking it. Only one circle may be selected at a time and we’ll set the color of the selected circle to red.
+Let’s add a feature whereby a circle is selected by clicking it. Only one circle may be selected at a time and we’ll set the colour of the selected circle to red.
 
 We start by adding a state object containing a property `selectedCircle` which indicates the circle that's been selected:
 
@@ -196,7 +196,7 @@ Now when a circle is clicked:
 
 * `handleClick` is called which calls `action` passing in `setSelectedCircle` as the action type and the circle index `i` as the second argument
 * `action` updates `state.selectedCircle` with the circle index and calls `update`
-* `update` updates the fill color of each circle. If the circle index matches `state.selectedCircle` it’ll get colored red
+* `update` updates the fill color of each circle. If the circle index matches `state.selectedCircle` it’ll get coloured red
 
 Navigate to [https://codepen.io/createwithdata/pen/YzwGaBw](https://codepen.io/createwithdata/pen/YzwGaBw) to view this example in CodePen.
 

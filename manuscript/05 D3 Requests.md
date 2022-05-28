@@ -1,4 +1,4 @@
-# Requesting data with D3
+# Requesting Data with D3
 
 This chapter covers data requests using D3. This is a nice topic to start your D3 journey as it’s not too hard to understand and it allows you to load some data into the browser (in order to visualise it).
 
@@ -99,7 +99,9 @@ The `transformRow` function gets called for each row. Its parameter is an elemen
 }
 ```
 
-You then create a new object with any transformations you wish to apply and return it. The array of objects that's passed into `dataIsReady` now consists of the transformed objects:
+You then create a new object with any transformations you wish to apply and return it. In our example, we convert `indicator1` and `indicator2` into numbers using `parseFloat`.
+
+The array of objects that's passed into `dataIsReady` now consists of the transformed objects:
 
 ```js
 [
@@ -126,9 +128,8 @@ Each indicator is now a **number** instead of a string.
 To recap:
 
 * `d3.csv('my-url', transformRow)` requests a CSV file located at `'my-url'` and returns a promise
-* `.then(dataIsReady)` configures the promise such that when the CSV file arrives the function `dataIsReady` is called
-* D3 converts the CSV file into an array of objects and transforms each row using the function `transformRow`
-* D3 then passes the array of transformed objects into `dataIsReady`
+* when the request fulfils, D3 converts the incoming CSV file into an array of objects and transforms each row using the function `transformRow`
+* D3 then calls `dataIsReady`, passing in the array of transformed objects
 
 ## d3.tsv
 

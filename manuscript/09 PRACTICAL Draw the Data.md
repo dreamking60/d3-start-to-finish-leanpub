@@ -1,19 +1,19 @@
-# Practical: Draw the data
+# Practical: Draw the Data
 
-In this chapter we modify the Energy Explorer to draw a **single circle for each country**.
+In this chapter we modify Energy Explorer to draw a **single circle for each country**.
 
 The end result will look like:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-2.png)
+![Circles joined to the energy data](9ea1b91da5d8a91c1909eaa715f61662.png)
 
 It’s not the most exciting of data visualisations, but each circle represents a country. Later on we show how to set the radius of each circle according to a data variable.
 
 ## Overview
 
-Open step3. The file structure is:
+Open `step3` from the code download. The file structure is:
 
 ```text
-step2
+step3
 ├── data
 │   └── data.csv
 ├── index.html
@@ -32,9 +32,9 @@ In this practical we:
 
 ## Add a container for the circles
 
-In `index.html` add a container for the SVG `<circle>` elements. Set its width and height to 1200.
+In `index.html` we add a container for the SVG `<circle>` elements snd set its width and height to 1200.
 
-Add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles:
+We then add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles:
 
 {caption: "index.html", line-numbers: false}
 ```
@@ -60,13 +60,9 @@ D>At this point we’re not sure what the size of the chart will be, but setting
 
 ## Join the data array to circle elements
 
-In `js/main.js` add a global variable `data` at the top of the file. In the `dataIsReady` function assign the array of data `csv` to this new variable.
+We make the following changes in `js/main.js`:
 
-D>The `data` variable is a global variable because it sits outside of any function and is accessible everyhwere in the code.
-
-Create a new function `update()` that uses D3 to join `data` to `<circle>` elements. Call `update` from `dataIsReady`.
-
-{caption: "main.js", line-numbers: false}
+{caption: "js/main.js", line-numbers: false}
 ```js
 markua-start-insert
 let data;
@@ -95,30 +91,34 @@ d3.csv('data/data.csv')
     .then(dataIsReady);
 ```
 
-The code inside `update` is similar to the code we covered in the previous sections on data joins. Let's go through it step by step.
+We've added a global variable `data` at the top of the file. In the `dataIsReady` function we assign the array of data `csv` to this new variable.
+
+D>The `data` variable is a global variable because it sits outside of any function and is accessible everywhere in the code.
+
+We also create a new function `update` that uses D3 to join `data` to `<circle>` elements. This new function is called from `dataIsReady`. The code inside `update` is similar to the code we covered in the previous sections on data joins. Let's go through it step by step.
 
 First we select the container element using `d3.select('#chart')` and then call `.selectAll` to select the SVG elements we're joining.
 
 We then specify the array that we’re joining using `.data(data)` method. (We're calling a method called `.data` and passing the global variable `data` into it.)
 
-And finally we call  `.attr` to update the `cx`, `cy` and `r` attributes of the circles. The `cx` attribute is set according to the array index `i`. This results in evenly spaced circles. The `cy` and `r` attributes are set to constants:
+Next we call `.join('circle')` to perform the join. (This will cause a `<circle>` element to be created for each array element.)
 
-Now when Energy Explorer loads, it'll load the CSV file using `d3.csv` and assign the resulting data array to the global variable `data`. It then calls `update` which joins `data` to circles resulting in a row of circles appearing in the browser.
+Finally we call  `.attr` to update the `cx`, `cy` and `r` attributes of the circles. The `cx` attribute is set according to the array index `i`. This results in evenly spaced circles. The `cy` and `r` attributes are set to constants:
+
+To summarise, when Energy Explorer loads, it'll load the CSV file using `d3.csv` and assign the resulting data array to the global variable `data`. It'll then call `update` which joins `data` to circles resulting in a row of circles appearing in the browser.
 
 ## Save and refresh
 
 Save `index.html` and `main.js` and make sure your browser is loading `step3`.
 
-> Make sure that your browser is showing `step3`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step3`. If you’re using Brackets, select Live Preview from the File menu.
+D> Make sure that your browser is showing `step3`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step3`. If you’re using Brackets, select Live Preview from the File menu.
 
 You should now see the following in your browser:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2020/07/image-2.png)
+![Circles joined to the energy data](9ea1b91da5d8a91c1909eaa715f61662.png)
 
 Each circle represents a country. There should be 141 circles on the page but some of them will be invisible because they go beyond the dimensions of the SVG element.
 
 The complete code for this section can be found in the `step3-complete` directory.
 
-The next step in building the Energy Explorer will be to size each circle according to one of the underlying data variables.
-
-But before you do this you’ll learn about **scale functions** in the next chapter.
+The next step in building Energy Explorer will be to size each circle according to one of the underlying data variables. But before you do this you’ll learn about **scale functions** in the next chapter.

@@ -1,6 +1,6 @@
 # Data Manipulation
 
-This chapter introduces another JavaScript library called Lodash ([https://lodash.com/](https://lodash.com/)). Lodash is a general purpose utility library that provides a large number of functions that perform common tasks. It’s especially useful when working with data (in particular arrays and objects). Later on you’ll use it in the Energy Explorer to sort the countries.
+This chapter introduces another JavaScript library called Lodash ([https://lodash.com/](https://lodash.com/)). Lodash is a general purpose utility library that provides a large number of functions that perform common tasks. It’s especially useful when working with data (in particular arrays and objects). Later on you’ll use it in Energy Explorer to sort the countries.
 
 One of the advantages of using a library such as Lodash is that it overcomes web browser differences. It’s perhaps not as prevalent as it once was, but some commonly used functions weren’t available in certain web browsers. Using Lodash was a convenient way of overcoming this issue. It’s beyond this book to show everything that Lodash can do, but we’ll look at some of the functions I commonly use when building data visualisations.
 
@@ -208,7 +208,7 @@ data.sort();    // data is now [ 100, 20, 3, 30, 50 ]
 
 The built in JavaScript sort function converts numbers to strings and sorts alphanumerically which is why you get a surprising result.
 
-### _.orderBy
+## _.orderBy
 
 The `_.orderBy` method is similar to `_.sortBy` except a string `'asc'` or `'desc'` can be passed in as the third parameter to specify whether the sort should be ascending or descending. For example:
 
@@ -261,6 +261,6 @@ _.orderBy(data, function(d) {
 ]
 ```
 
-### Wrapping up
+## Summary
 
 This chapter has introduced the Lodash library and looked at a few of its methods that are useful for data processing. In the next chapter you’ll use Lodash to sort the Energy Explorer countries according to the chosen indicator.

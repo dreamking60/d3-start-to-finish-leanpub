@@ -1,4 +1,4 @@
-# D3 event handling
+# D3 Event Handling
 
 In this chapter you’ll learn how to add **event handlers** to HTML and SVG elements. An event handler is a function that gets called when the **user interacts** with an HTML or SVG element. The most common interactions are:
 
@@ -195,7 +195,3 @@ function handleClick(e, d, i) {
   console.log('the element index is', i);
 }
 ```
-
-## Coming up
-
-In the next section we’ll look at the [Flourish popup library](https://github.com/kiln/flourish-popup) which lets you add a popup to a web application.

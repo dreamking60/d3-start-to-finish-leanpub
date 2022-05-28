@@ -220,7 +220,7 @@ circle.renewable {
 ...
 ```
 
-The `div#controls` element contains the menu and legend. We'd like the menu to be to the left and the legend to the right and we use Flexbox to achieve this. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.)
+The `div#controls` element contains the menu and legend. We'd like the menu to be on the left and the legend to be on the right and we use Flexbox to achieve this. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.)
 
 We set `display` to `flex` on the controls container. We also set `justify-content` to `space-between` to maximise the horizontal space between the menu and legend. Setting `align-items` to `center` aligns the menu and legend vertically.
 

@@ -1,4 +1,4 @@
-# Practical: Add state management
+# Practical: Add State Management
 
 In this section you’ll add state management to Energy Explorer in a similar manner to the State Management chapter. We’ll add a state object (that represents the current state) and an action function (for managing state changes).
 
@@ -29,7 +29,7 @@ In this practical we:
 1. Add a new module `js/store.js`.
 2. Add a new object `state` for storing state and a new function `action` that manages state changes.
 
-### Add a new module
+## Add a new module
 
 Create a new file within the `js` directory and name it `store.js`. (It’s named `store.js` because store is the name commonly used in the Flux pattern.)
 
@@ -79,9 +79,7 @@ markua-end-insert
 </html>
 ```
 
-Now save `store.js` and `index.html`.
-
-### Add an empty state object and action function
+## Add an empty state object and action function
 
 In `js/store.js` we add a new empty state object and an action function:
 

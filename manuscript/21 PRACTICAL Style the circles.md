@@ -1,6 +1,6 @@
-# Practical: Style the circles
+# Practical: Style the Circles
 
-This practical is a fun one. You’ll **style the circles** so that they represent each of the 4 energy types. The chart will look like:
+This practical is a fun one. We **style the circles** so that they represent each of the 4 energy types. The chart will look like:
 
 ![Energy Explorer with each circle styled according to the energy type](4498db5f451345a57c5e8690b15f4693.png)
 
@@ -33,24 +33,24 @@ In this practical we:
 3. Center the visualisation.
 4. Change the background colour.
 
-### Design a colour scheme
+## Design a colour scheme
 
-Each country is represent by four overlapping circles so we need a colour scheme that makes identifying a circle’s energy type simple. Also, when designing data visualisations it’s recommended that a colour scheme is chosen that works for the **colour blind**. There are a few visual variables we can use such as:
+Each country is represent by four overlapping circles so we need a colour scheme that makes it easy to identify a circle’s energy type. Also, when designing data visualisations it’s recommended that a colour-blind friendly scheme is chosen. There are a few visual variables we can use such as:
 
-* fill color
+* fill colour
 * fill pattern
-* stroke color
+* stroke colour
 * stroke width
 * stroke style (dotted, dashed etc.)
 
-**Fill** refers to the color of the inside of the circle and **stroke** refers to the circle outline.
+**Fill** refers to the colour of the inside of the circle and **stroke** refers to the circle outline.
 
 Let’s start with the renewable energy type. An obvious choice for this circle is **green**:
 
 {width: 15%}
 ![Solid green circle for renewable energy](6cc95d1a7b2bf7d04816352145e94496.png)
 
-Similarly, an obvious choice for Oil, Gas and Coal is **black** or **grey**. Black is probably too strong a color, so let’s use grey. If we use a filled grey circle we have to make sure smaller circles are drawn in front of larger circles. An easier approach is to use an empty circle with a grey stroke:
+Similarly, an obvious choice for Oil, Gas and Coal is **black** or **grey**. Black is probably too strong a colour, so let’s use grey. If we use a filled grey circle we have to make sure smaller circles are drawn in front of larger circles. An easier approach is to use an empty circle with a grey stroke:
 
 {width: 15%}
 ![Grey outlined circle for oil, gas and coal](db13edf95e7a18db402c8953b7b7a180.png)
@@ -72,13 +72,13 @@ Let’s use a **short dashes** for the hydroelectric circles and **long dashes**
 {width: 15%}
 ![Use dashed outlines to further distinguish the circles](e735b05075d732ba6b61acbd55693f79.png)
 
-It should now be possible to identify the energy type of each circle even if color blind.
+It should now be possible to identify the energy type of each circle even if colour blind.
 
-I don’t have a design background (I have an engineering background) so choosing colors isn’t my strongest skill. I often visit [coolors.co](https://coolors.co/) which lets you cycle through different color schemes. I like the look of the colors that coolors generates and I usually keep cycling through until I spot a color I like the look of. This is how I found the particular hues of green, blue and orange seen above.
+I don’t have a design background (I have an engineering background) so choosing colours isn’t my strongest skill. I often visit [coolors.co](https://coolors.co/) which lets you cycle through different colour schemes. I like the look of the colours that coolors generates and I usually keep cycling through until I spot a colour I like the look of. This is how I found the particular hues of green, blue and orange seen above.
 
 D>If you'd like to learn more about designing data visualisation colour schemes a good place to start is Lisa Charlotte Muth's [A detailed guide to colors in data vis style guides](https://blog.datawrapper.de/colors-for-data-vis-style-guides/).
 
-Here’s a table with the colors and styles we’ll use:
+Here’s a table with the colours and styles we’ll use:
 
 | Energy type | fill | stroke | stroke-dasharray |
 | --- | --- | --- | --- |
@@ -89,9 +89,9 @@ Here’s a table with the colors and styles we’ll use:
 
 `stroke-dasharray` is a CSS property that defines a stroke’s dash style. The first number defines how long the dash is and the second number defines the size of the gap between the dashes.
 
-### Style the circles
+## Style the circles
 
-We add CSS rules for each of the four energy types, so `css/style.css` now looks like:
+In `css/style.css`  we add CSS rules for each of the four energy types:
 
 {caption: "css/style.css"}
 ```css
@@ -184,9 +184,9 @@ circle.renewable {
 ...
 ```
 
-### Change the background color
+## Change the background colour
 
-Finally in `style.css` set the background color to off-white:
+Finally in `style.css` set the background colour to off-white:
 
 {caption: "style.css", line-numbers: false}
 ```css
@@ -214,10 +214,10 @@ Save `index.html` and `style.css` and load Step 9 in your browser. You should se
 
 ![Energy Explorer with styled circles and off white background](11ab4a0dec90485bd7bf728013ab78e5.png)
 
-### Summing up
+## Summary
 
 A major part of the visualisation is finished now. Each country is represented by four circles and you can now begin to compare the energy mixes of different countries.
 
 I’m personally drawn to the solid green circles. The larger they are, the more renewables contribute to that country’s energy mix. Denmark’s a good example. Albania’s an interesting case as it looks like the vast majority of its energy comes from hydroelectric (blue outline). And not surprisingly for many countries, the biggest contributor is oil, gas and coal (grey outline).
 
-In the next few chapters we look at adding an information popup that’ll appear when a country is hovered over.
+In the next few chapters we look at adding an information popup that appears when a country is hovered over.

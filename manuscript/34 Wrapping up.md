@@ -1,4 +1,4 @@
-# Wrapping up
+# Wrapping Up
 
 First of all, congratulations for getting this far. It’s been a long journey and hopefully you’ve learned a lot along the way.
 
@@ -22,10 +22,10 @@ Some of the things you learned were:
 * D3’s transitions
 * detailed styling with CSS
 
-Along the way you built the Energy Explorer. Some key aspects of the build were:
+Along the way you built Energy Explorer. Some key aspects of the build were:
 
 * using a layout function to perform the geometric computations. This makes the application easier to test and also would make it easier to switch to a different rendering library if necessary
-* joining an array to a group of elements in order to place a country’s circles in a single `g` element
+* joining an array to a group of elements in order to place a country’s circles in a single `<g>` element
 * a significant amount of detailed styling, which hopefully has shown you the amount of CSS work that is often necessary to build a real world data visualisation
 * adding an information popup to the visualisation
 * handling state using something similar to the Flux pattern. This is a simple, but powerful pattern that’s useful when building data visualisations (and other interactive applications)
@@ -40,10 +40,10 @@ Most (if not all) of what we’ve covered can apply to other visualisations and 
 
 It’s really up to you where you’d like to take the knowledge you’ve learned in this book. However, some ideas are:
 
-* modify the Energy Explorer. For example, you could try changing the color scheme, or other aspects of the look and feel. If you’re feeling ambitious you might want to adapt it to a different data set!
+* modify Energy Explorer. For example, you could try changing the color scheme, or other aspects of the look and feel. If you’re feeling ambitious you might want to adapt it to a different data set!
 * try building your own data visualisation from scratch, using similar techniques to those your learned in this book. You could use the same data set, or one of your own
 * share your experiences in the forum and let others know how you got on
-* learn more about D3 through its homepage or other resources such as my own D3 in Depth, or tutorials from [Nadieh Bremer](https://www.visualcinnamon.com/blog/), [Curran Kelleher](https://www.youtube.com/user/currankelleher), [Shirley Wu](https://sxywu.com/) and [Amelia Wattenberger](https://wattenberger.com/blog).
+* learn more about D3 through its homepage or other resources such as my own [D3 in Depth](https://www.d3indepth.com/), or tutorials from [Nadieh Bremer](https://www.visualcinnamon.com/blog/), [Curran Kelleher](https://www.youtube.com/user/currankelleher), [Shirley Wu](https://sxywu.com/) and [Amelia Wattenberger](https://wattenberger.com/blog).
 
 ## Wrapping up
 

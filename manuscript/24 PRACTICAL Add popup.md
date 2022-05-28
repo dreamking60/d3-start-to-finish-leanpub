@@ -1,4 +1,4 @@
-# Practical: Add a popup
+# Practical: Add a Popup
 
 In this practical we **add a popup** to Energy Explorer using the Flourish popup component:
 
@@ -9,7 +9,7 @@ When a country is hovered a popup will appear containing the country name togeth
 
 ## Overview
 
-Open step10. The file structure is:
+Open `step10`. The directory structure is:
 
 ```text
 step10
@@ -35,7 +35,7 @@ The Flourish popup library has been added so you don't need to download it yours
 In this practical we:
 
 1. Link to the popup library in `index.html`.
-2. Add new module `js/popup.js`.
+2. Add a new module `js/popup.js` to manage the popup.
 3. Add event handlers to the country groups that show/hide the popup.
 4. Populate the popup with the energy data.
 5. Offset the popup (so that it's above the circle center).
@@ -227,7 +227,7 @@ markua-start-insert
 markua-end-insert
 ```
 
-Save `js/popup.js`, `js/update.js` and `css/style.css`. Now when you hover over a country you should see a popup displaying the country name.
+Save `index.html`, `js/popup.js`, `js/update.js` and `css/style.css` and load `step10` in your browser. Now when you hover over a country you should see a popup displaying the country name.
 
 {width: 33%}
 ![Popup showing country name](217f3f1916a6f8a788ad2018dfa8b96e.png)
@@ -288,7 +288,7 @@ markua-end-insert
 }
 ```
 
-The new property `.popupData` is an object that contains the information that'll be displayed by the popup. We now modify `js/popup.js` so that each energy indicator is displayed:
+The new property `.popupData` is an object that contains the information that'll be displayed in the popup. We now modify `js/popup.js` so that each energy indicator is displayed:
 
 {caption: "js/popup.js"}
 ```js
@@ -529,7 +529,7 @@ Now the Energy Explorer with popup looks like:
 ![Energy Explorer with Flourish popup](7253c5359b08f6d4fc7f52559fa5c94b.png)
 
 
-## Wrapping up
+## Summary
 
 In this practical we added an information popup to Energy Explorer. This allows users to get precise information for each country.
 

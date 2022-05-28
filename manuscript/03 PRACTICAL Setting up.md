@@ -1,4 +1,4 @@
-# Practical: Setting up
+# Practical: Setting Up
 
 ## What you’ll need
 
@@ -10,9 +10,9 @@ This section covers the tools you need to build Energy Explorer. You need three 
 
 You probably already have a web browser. I recommend using Chrome or Firefox. You’re probably fine using other browsers so long as they’re modern and up to date.
 
-If you’re a developer and already using a preferred code editor then please stick with that. If you don’t have a preferred code editor I recommend [Atom](https://atom.io/), [VS Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/). These are covered in the Web Development Tools chapter in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation](fundamentalsbook) book.
+If you’re a developer and already using a preferred code editor then please stick with that. If you don’t have a preferred code editor I recommend [Atom](https://atom.io/), [VS Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/). These are covered in Appendix A.
 
-Finally you’ll need to have a web server running on your machine. This is so that the data can be loaded without running into browser security restrictions. If you’re a web developer there’s a good chance you’re familiar with setting up a server using Node, Python or similar. If not I recommend using Brackets as your code editor as this has a built-in server. For futher information read the Web Development Tools chapter in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).
+Finally you’ll need to have a web server running on your machine. This is so that the data can be loaded without running into browser security restrictions. If you’re a web developer there’s a good chance you’re familiar with setting up a server using Node, Python or similar. If not I recommend using Brackets as your code editor as this has a built-in server. For futher information refer to Appendix A and Appendix B.
 
 ## Get set up
 
@@ -24,7 +24,7 @@ The aim of this section is to:
 * **run a web server** to serve the first code step
 * **view the page** in your web browser
 
-If at any point these steps don’t make sense, I suggest going through the Web Development Tools chapter in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).
+(If at any point you get stuck, refer to Appendix A and Appendix B for further information.)
 
 ### Download the code
 
@@ -88,16 +88,18 @@ If you’re comfortable setting up a local web server (for example using Node or
 
 ![Starting node's http-server](91362466cb9b83dc8295bd5c9a85e6fc.png)
 
-Otherwise I recommend using Brackets as your code editor, opening `step1` as detailed above then clicking on the lightning symbol in the toolbar on the far right (or selecting Live Preview from the File menu.) You can also read the Web Development Tools chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) for other options.
+Otherwise I recommend using Brackets as your code editor and using it's Live Preview (see next section), or using VS Code's Live Server extension (see next section). (See Appendix A for more information.)
 
 ### View step1 in your browser
 
-If you’re using a standalone web server or VS Code's Live Server extension navigate to the appropriate location in your web browser (the URL will be something like `localhost:8000`). If you’re using Brackets a browser window should open when you click on Live Preview.
+If you're using a Node or Python server (or similar), navigate to the URL specified by the server and open `step1`. The URL should be something like `localhost:8000/step1`.
+
+If you're using Brackets, select `step1/index.html` and click the lightning symbol, or select Live Preview from the File menu. If you're using VS Code's Live Server extension, select the `step1` directory in the sidebar and click the 'Go Live' button (usually it's in the footer menu). See Appendix A and Appendix B for more information.
 
 You should now be able to see a friendly greeting in your web browser:
 
 {width: 50%}
-![Step 1 of the code download](a87e7b386cc4b34b0c09031b6bf552ba.png)
+![step1 of the code download (viewed using Brackets' server)](a87e7b386cc4b34b0c09031b6bf552ba.png)
 
 ### Edit the code
 
@@ -124,6 +126,6 @@ Refresh your browser and verify that the greeting has updated.
 {width: 50%}
 ![Greeting after editing index.html](3eba1689c4bcd951d085c7688962c678.png)
 
-## Take a break
+## Summary
 
 You’ve completed all the necessary set up steps and are ready to start learning and building with D3! The next chapter introduces D3 and gives a broad overview of what it is and what it can be used for.

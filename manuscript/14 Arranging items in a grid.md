@@ -1,4 +1,4 @@
-# Arranging items in a grid
+# Arranging Items in a Grid
 
 Arranging a list of items in a grid is a fairly common exercise but it isn’t always obvious how to do this so this chapter covers the underlying mathematics and code.
 
@@ -119,12 +119,12 @@ let cellHeight = cellWidth;
 
 // Iterate through array
 data.forEach(function(d, i) {
-	// Compute column and row number
+  // Compute column and row number
   let column = i % numColumns;
   let row = Math.floor(i / numColumns);
 
-	// Compute circle center
-	let x = column * cellWidth + 0.5 * cellWidth;
+  // Compute circle center
+  let x = column * cellWidth + 0.5 * cellWidth;
   let y = row * cellHeight + 0.5 * cellHeight;
 });
 ```

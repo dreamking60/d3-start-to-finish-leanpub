@@ -1,10 +1,10 @@
-# Practical: Load the data
+# Practical: Load the Data
 
 You learned about D3 requests in the previous section. In this practical we introduce the data that Energy Explorer uses and we show how to use D3 to load this data.
 
 ## Overview
 
-Open `d3-start-to-finish/step2` in your text editor. The file structure is (new directories and files shown in red):
+Open `step2` from the code download in your text editor. The directory structure is:
 
 ```
 step2
@@ -20,6 +20,8 @@ markua-start-insert
     └── main.js
 markua-end-insert
 ```
+
+New files and directories are shown in red.
 
 There are three new directories: `data`, `js` and `js/lib`. `data` is where the data is located and `js` is where JavaScript files live. `js/lib` contains libraries such as D3.
 
@@ -83,7 +85,7 @@ D>There's a number of ways to include D3 in your project. We've opted for one of
 
 We now request `data/data.csv` using `d3.csv`. Open `js/main.js` and add the following:
 
-{caption: "main.js", line-numbers: false}
+{caption: "js/main.js", line-numbers: false}
 ```js
 function dataIsReady(csv) {
     console.log(csv);
@@ -95,7 +97,7 @@ d3.csv('data/data.csv')
 
 This code is very similar to the code in the D3 Requests chapter. `d3.csv` requests a CSV file at `data/data.csv`. (This URL is relative to `index.html` and it points at the `data.csv` file.) D3 converts the CSV file into an array of objects then calls `dataIsReady` which outputs the array to the console.
 
-Now save `main.js` and refresh your browser.
+Now save `index.html` and `js/main.js` and load `step2` in your browser.
 
 D>Make sure your browser is showing `step2`. If you’re running a Node, Python, PHP or similar server, you might need to browse back to the directory list and open `step2`. If you’re using Brackets, select Live Preview from the File menu.
 
@@ -160,7 +162,7 @@ If not, check the following:
 
 This is one of the trickier steps to get working, so don’t worry if you’re having difficulty. Once this has been solved the remaining practicals shouldn’t present similar issues.
 
-## Wrapping up
+## Summary
 
 In this section we used D3’s `d3.csv` method to load the energy data. We added a function `dataIsReady` that’s called when the data arrives. `dataIsReady` outputs the data to the console.
 

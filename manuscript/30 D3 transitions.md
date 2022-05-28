@@ -129,7 +129,7 @@ markua-end-insert
 
 ## Transition duration
 
-The duration of the transition can be modified by calling `.duration` and passing in the transition duration (in milliseconds). For example:
+The duration of the transition can be modified by calling `.duration` after the `.transition` call and passing in the transition duration (in milliseconds). For example:
 
 ```js
 function update() {

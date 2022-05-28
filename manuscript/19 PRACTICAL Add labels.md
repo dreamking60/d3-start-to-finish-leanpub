@@ -1,6 +1,6 @@
-# Practical: Add labels
+# Practical: Add Labels
 
-Currently in Energy Explorer we join the `layoutData` array to `<circle>` elements (see `js/update.js`). We would now like to add a label to the circle indicating the country name. In this practical we'll do this by joining `layoutData` to `<g>` elements instead of `<circle>` elements. Each `<g>` element will contain a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
+Currently in Energy Explorer we join the `layoutData` array to `<circle>` elements (see `js/update.js`). We would now like to add a label to the circle indicating the country name. In this practical we'll do this by joining `layoutData` to `<g>` elements instead of `<circle>` elements. Each `<g>` element will be populated with a `<circle>` and `<text>` element. This technique was covered in the More on D3 Joins chapter.
 
 By the end of this practical, each country will be represented by a `<g>` element containing a `<circle>` and `<text>` element:
 
@@ -239,6 +239,6 @@ Save `index.html` and `css/style.css` and refresh your browser. The labels shoul
 
 The completed code for this practical can be found in `step7-complete`.
 
-### Wrapping up
+## Summary
 
 If you’ve got to this point you’ve done well! You’ve completed a major part of the Energy Explorer build. Converting the data join to a nested join was quite tricky but it creates a good foundation for the remaining practicals. In the next section you’ll add the remaining circles so that each country has four circles.

@@ -7,11 +7,11 @@ In this practical you’ll add code that sorts the countries according to `state
 
 We also add a feature whereby countries which have a zero value (or no data) for the selected indicator will be hidden. This isn’t an essential feature but I think it’s a nice one to have. It’s also an opportunity to add a simple filter to Energy Explorer. For example, when Nuclear is selected you’ll see:
 
-![When Nuclear is selected countries with no nuclear energy are filtered out](c28217c2aa67ca3db0355636f1e97163.png)
+![When Nuclear is selected, countries with no nuclear energy are filtered out](c28217c2aa67ca3db0355636f1e97163.png)
 
 ## Overview
 
-Open step12. The file structure is:
+Open `step12`. The file structure is:
 
 ```text
 step12
@@ -104,7 +104,7 @@ Recall that `data` looks something like:
 ]
 ```
 
-The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. A special case is that If the first menu item 'country' is selected we sort using the `name` property.
+The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. A special case is if the first menu item 'Country' is selected we sort using the `name` property.
 
 We make the following changes in `js/layout.js`:
 
@@ -272,6 +272,6 @@ For example click on 'Nuclear' and you'll see:
 
 ## Summary
 
-In this practical we added sort functionality to the Energy Explorer. All the important sort logic was added to the layout module and we didn’t need to change any of the rendering code in `update.js`. This is a nice separation of concerns.
+In this practical we added sort functionality to Energy Explorer. All the important sort logic was added to the layout module and we didn’t need to change any of the rendering code in `update.js`. This is a nice separation of concerns.
 
 We also added filtering so that if an energy indicator such as 'Oil, Gas & Coal' is selected only countries with a value above zero are visible. We used the `opacity` property to show or hide country groups. This is so that when animations are added (which will be done in an upcoming practical) the countries will fade in or out.
