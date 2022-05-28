@@ -52,6 +52,9 @@ markua-start-insert
     let labelHeight = 20;
 markua-end-insert
     let cellWidth = config.width / config.numColumns;
+markua-start-delete
+    let cellHeight = cellWidth;
+markua-end-delete
 markua-start-insert
     let cellHeight = cellWidth + labelHeight;
 markua-end-insert
@@ -155,10 +158,25 @@ function update() {
     let layoutData = layout(data);
 
     d3.select('#chart')
+markua-start-delete
+        .selectAll('circle')
+markua-end-delete
 markua-start-insert
         .selectAll('g')
 markua-end-insert
         .data(layoutData)
+markua-start-delete
+        .join('circle')
+        .attr('cx', function(d) {
+            return d.x;
+        })
+        .attr('cy', function(d) {
+            return d.y;
+        })
+        .attr('r', function(d) {
+            return d.radius;
+        });
+markua-end-delete
 markua-start-insert
         .join('g')
         .each(updateGroup);

@@ -54,7 +54,11 @@ function transformRow(d) {
         renewable: parseFloat(d.renewable)
     };
 }
-
+markua-end-insert
+markua-start-delete
+d3.csv('data/data.csv')
+markua-end-delete
+markua-start-insert
 d3.csv('data/data.csv', transformRow)
 markua-end-insert
     .then(dataIsReady);
@@ -109,6 +113,9 @@ function update() {
             return i * 10;
         })
         .attr('cy', 100)
+markua-start-delete
+        .attr('r', 2);
+markua-end-delete
 markua-start-insert
         .attr('r', function(d) {
             return radiusScale(d.renewable);

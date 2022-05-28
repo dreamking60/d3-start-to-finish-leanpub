@@ -98,6 +98,9 @@ markua-end-insert
 
     let radiusScale = d3.scaleSqrt()
         .domain([0, 100])
+start=delete
+        .range([0, 20]);
+markua-end-delete
 markua-start-insert
         .range([0, maxRadius]);
 markua-end-insert
@@ -108,7 +111,12 @@ markua-end-insert
 markua-start-insert
         let column = i % config.numColumns;
         let row = Math.floor(i / config.numColumns);
-
+markua-end-insert
+markua-start-delete
+        item.x = i * 10;
+        item.y = 100;
+markua-end-delete
+markua-start-insert
         item.x = column * cellWidth + 0.5 * cellWidth;
         item.y = row * cellHeight + 0.5 * cellHeight;
 markua-end-insert

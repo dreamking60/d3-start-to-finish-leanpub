@@ -81,10 +81,10 @@ function update() {
 markua-end-insert
 
 function dataIsReady(csv) {
-  start-remove
+markua-start-delete
   console.log(csv);
-  end-remove
-	markua-start-insert
+markua-end-delete
+markua-start-insert
     data = csv;
     update();
 markua-end-insert
