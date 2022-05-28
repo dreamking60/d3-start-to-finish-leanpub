@@ -114,6 +114,9 @@ function layout(data) {
     let cellWidth = config.width / config.numColumns;
     let cellHeight = cellWidth + labelHeight;
 
+markua-start-delete
+    let maxRadius = 0.35 * cellWidth;
+markua-end-delete
 markua-start-insert
     let maxRadius = getMaxRadius();
 markua-end-insert

@@ -95,6 +95,13 @@ In `css/style.css`  we add CSS rules for each of the four energy types:
 
 {caption: "css/style.css"}
 ```css
+markua-start-delete
+circle {
+    fill: none;
+    stroke: #aaa;
+}
+markua-end-delete
+
 markua-start-insert
 circle.renewable {
     fill: #7FB069;

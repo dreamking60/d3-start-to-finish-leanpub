@@ -200,6 +200,11 @@ function updateMenu() {
         .classed('selected', function(d) {
             return state.selectedIndicator === d.id;
         })
+markua-start-delete
+        .text(function(d) {
+            return d.label;
+        })
+markua-end-delete
 markua-start-insert
         .html(getHtml)
 markua-end-insert
@@ -268,6 +273,9 @@ markua-end-insert
 .menu .item {
     padding: 0 1rem;
     color: #333;
+markua-start-delete
+    opacity: 0.5;
+markua-end-delete
 markua-start-insert
     display: flex;
     align-items: center;
@@ -281,7 +289,12 @@ markua-start-insert
     opacity: 0.5;
     transition: opacity 0.3s;
 }
+markua-end-insert
 
+markua-start-delete
+.menu .item.selected, .menu .item:hover {
+markua-end-delete
+markua-start-insert
 .menu .item.selected .label, .menu .item:hover .label {
     opacity: 1;
 }

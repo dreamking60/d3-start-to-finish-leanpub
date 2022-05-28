@@ -101,6 +101,9 @@ function updateChart() {
 
     d3.select('#chart')
         .selectAll('g')
+markua-start-delete
+        .data(layoutData)
+markua-end-delete
 markua-start-insert
         .data(layoutData, function(d) {
             return d.id;
@@ -131,7 +134,7 @@ In `updateGroup` (`update.js`) add a call to `.transition()` before the `.attr` 
 function updateGroup(d, i) {
     let g = d3.select(this);
 
-    if(g.selectAll('*').empty()) initialiseGroup(g, d);
+    if(g.selectAll('*').empty()) initialiseGroup(g);
 
 markua-start-insert
     g.transition()

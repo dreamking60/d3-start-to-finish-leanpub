@@ -83,7 +83,9 @@ function layout(data) {
 
         item.x = column * cellWidth + 0.5 * cellWidth;
         item.y = row * cellHeight + 0.5 * cellHeight;
-
+markua-start-delete
+        item.radius = radiusScale(d.renewable);
+markua-end-delete
 markua-start-insert
         item.renewableRadius = radiusScale(d.renewable);
         item.oilGasCoalRadius = radiusScale(d.oilgascoal);
@@ -146,6 +148,20 @@ markua-end-insert
 function updateGroup(d, i) {
     let g = d3.select(this);
 
+markua-start-delete
+    if(g.selectAll('*').empty()) {
+        g.append('circle');
+
+        g.append('text')
+            .classed('label', true);
+    }
+
+    g.classed('country', true)
+        .attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+
+    g.select('circle')
+        .attr('r', d.radius);
+markua-end-delete
 markua-start-insert
     if(g.selectAll('*').empty()) initialiseGroup(g);
 
