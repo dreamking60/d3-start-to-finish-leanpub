@@ -155,18 +155,24 @@ markua-start-delete
         g.append('text')
             .classed('label', true);
     }
+markua-end-delete
+markua-start-insert
+    if(g.selectAll('*').empty()) initialiseGroup(g);
+markua-end-insert
 
+markua-start-delete
     g.classed('country', true)
         .attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+markua-end-delete
+markua-start-insert
+    g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+markua-end-insert
 
+markua-start-delete
     g.select('circle')
         .attr('r', d.radius);
 markua-end-delete
 markua-start-insert
-    if(g.selectAll('*').empty()) initialiseGroup(g);
-
-    g.attr('transform', 'translate(' + d.x + ',' + d.y + ')');
-
     g.select('.renewable')
         .attr('r', d.renewableRadius);
 

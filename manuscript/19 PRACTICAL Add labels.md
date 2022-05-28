@@ -167,6 +167,11 @@ markua-end-insert
         .data(layoutData)
 markua-start-delete
         .join('circle')
+markua-end-delete
+markua-start-insert
+        .join('g')
+markua-end-insert
+markua-start-delete
         .attr('cx', function(d) {
             return d.x;
         })
@@ -178,7 +183,6 @@ markua-start-delete
         });
 markua-end-delete
 markua-start-insert
-        .join('g')
         .each(updateGroup);
 markua-end-insert
 }

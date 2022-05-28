@@ -152,11 +152,12 @@ function layout(data) {
 markua-start-insert
     let sortedData = getSortedData(data);
 markua-end-insert
+
 markua-start-delete
     let layoutData = data.map(function(d, i) {
 markua-end-delete
 markua-start-insert
-	  let layoutData = sortedData.map(function(d, i) {
+    let layoutData = sortedData.map(function(d, i) {
 markua-end-insert
         let item = {};
 

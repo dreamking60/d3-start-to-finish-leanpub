@@ -55,6 +55,7 @@ function transformRow(d) {
     };
 }
 markua-end-insert
+
 markua-start-delete
 d3.csv('data/data.csv')
 markua-end-delete
