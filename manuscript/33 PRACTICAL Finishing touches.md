@@ -351,7 +351,7 @@ In `index.html` we make the following changes:
   <body>
     <div id="wrapper">
 markua-start-insert
-  	   <div id="header">Energy mix by country (2015)</div>
+      <div id="header">Energy mix by country (2015)</div>
 markua-end-insert
       <div id="controls">
         ...
