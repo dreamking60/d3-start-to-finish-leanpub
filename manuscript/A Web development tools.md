@@ -18,7 +18,7 @@ You could also add a **terminal emulator** to this list. A terminal emulator all
 
 ### Code editor
 
-A code editor is a desktop application that allows you to edit HTML, CSS and JavaScript files. You can use simple applications such as Notepad (on Windows) and TextEdit (on Mac). It’s important that these editors work in plain text mode so that they don’t insert extra characters. However I recommend using a dedicated code editor such as [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/) or [Brackets](http://brackets.io/). All of these are free and multi-platform. Advantages of using a dedicated code editor include:
+A code editor is a desktop application that allows you to edit HTML, CSS and JavaScript files. You can use simple applications such as Notepad (on Windows) and TextEdit (on Mac). It’s important that these editors work in plain text mode so that they don’t insert extra characters. However I recommend using a dedicated code editor such as [Brackets](http://brackets.io/) or [Visual Studio Code](https://code.visualstudio.com/). Both of these are free and multi-platform. Advantages of using a dedicated code editor include:
 
 * you can treat your application as a project making it easier to open and navigate
 * syntax highlighting (code is coloured according to whether its a keyword, a variable etc.)
@@ -39,7 +39,7 @@ When you create a web site on your own computer you don’t necessarily need you
 The options for running a local web server (starting at the easiest) include:
 
 * Brackets editor built-in web server
-* Atom or Visual Studio Code plug-ins
+* Visual Studio Code plug-ins
 * Python, Ruby, PHP or Node servers
 
 Another option which I’ve not personally explored is [Servez](https://greggman.github.io/servez/) which is a simple GUI based web server.
@@ -49,22 +49,6 @@ D>Personally I use a Node server (such as [http-server](https://github.com/http-
 #### Brackets web server
 
 [Brackets](http://brackets.io/) has a built in web server so this is by far the easiest option. This [video](https://youtu.be/KJXdvaY9lTA?t=122) gives a good demonstration. If you’re new to code editors I recommend using Brackets.
-
-#### atom-live-server
-
-Atom has a web server plug-in called [atom-live-server](https://atom.io/packages/atom-live-server).
-
-To install atom-live-server:
-
-* open the Settings panel (in the File menu)
-* click **Install** in the Settings panel
-* type `live-server` into the Search Packages search box
-* look for `atom-live-server` and click Install
-* type `ctrl-alt-l` to start the server
-
-Your web browser should then open your web application. More detailed instructions are [here](https://atom.io/packages/atom-live-server) and a video demonstration is [here](https://www.youtube.com/watch?v=0Xy3yDDY4IE).
-
-(If you’ve multiple projects open, the first one in the project browser will be served.)
 
 #### VS Code Live Server
 

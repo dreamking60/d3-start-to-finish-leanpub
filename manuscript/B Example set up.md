@@ -102,9 +102,9 @@ You now need link to your CSS file in `index.html`. Start editing your HTML file
   <head>
     <meta charset="utf-8">
     <title>My webpage</title>
-markua-markua-start-insert
+markua-start-insert
     <link rel="stylesheet" href="css/style.css">
-markua-markua-end-insert
+markua-end-insert
   </head>
 
 	<body>
@@ -151,9 +151,9 @@ You now need to add a link to your JavaScript file in `index.html`. Start editin
 
 	<body>
     <h1>Hello there!</h1>
-markua-markua-start-insert
+markua-start-insert
     <script src="src/main.js"></script>
-markua-markua-end-insert
+markua-end-insert
   </body>
 </html>
 ```

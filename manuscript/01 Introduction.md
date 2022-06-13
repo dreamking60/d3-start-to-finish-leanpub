@@ -89,6 +89,10 @@ Energy Explorer will be built using **HTML**, **SVG**, **CSS**, **JavaScript** a
 
 This book requires that you’re reasonably proficient in HTML, SVG, CSS and JavaScript. If you think your knowledge of these technologies needs a boost I  recommend reading my [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.
 
+## Code download
+
+If you don't already have the zip file containing code for this book you can download it from [here](https://cwd-resources.netlify.app/d3starttofinish/2-6-22-3jrisb/d3-start-to-finish-code.zip).
+
 ## Where to get help
 
 If you need help on anything in this book please tweet me at @createwithdata or email me at help@createwithdata.com.

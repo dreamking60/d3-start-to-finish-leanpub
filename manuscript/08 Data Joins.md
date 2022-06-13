@@ -98,6 +98,7 @@ Here’s an example in Codepen: [https://codepen.io/createwithdata/pen/ZEQxyyJ](
 
 You won’t see any output because each circle has radius zero so will be invisible. However, if you right-click on the SVG element (which has been coloured light grey) and choose Inspect (or similar) you’ll be able to see the page’s elements. Expand the `svg` and `g` elements and you should see the three circles that have been added by D3:
 
+{width: 80%}
 ![Inspecting the `<svg>` element to check the circles have been added](f6fe8d4a6fc37cef8f22b9ddc2af31f6.png)
 
 ### Recap
@@ -232,6 +233,7 @@ You can pass a function into any of **`.style`, `.attr`, `.classed`** or **`.tex
 
 ```js
 let myData = [10, 40, 30];
+
 d3.select('g.chart')
   .selectAll('circle')
   .data(myData)
@@ -263,6 +265,7 @@ A common use case is to evenly space the HTML/SVG elements. (For example bar cha
 
 ```js
 let myData = [10, 40, 30];
+
 d3.select('g.chart')
   .selectAll('circle')
   .data(myData)
@@ -396,7 +399,7 @@ Suppose our SVG looks like:
 and our data array is:
 
 ```js
-var myData = [
+let myData = [
   {
     name: "Paris",
     indicator1: 9030,

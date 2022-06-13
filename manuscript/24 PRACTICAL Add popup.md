@@ -229,7 +229,7 @@ markua-end-insert
 
 Save `index.html`, `js/popup.js`, `js/update.js` and `css/style.css` and load `step10` in your browser. Now when you hover over a country you should see a popup displaying the country name.
 
-{width: 33%}
+{width: 25%}
 ![Popup showing country name](217f3f1916a6f8a788ad2018dfa8b96e.png)
 
 
