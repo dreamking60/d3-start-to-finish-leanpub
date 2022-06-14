@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome! First of all, I’d like to thank you for buying this book. The aim is to teach you how to build a real-world interactive data visualisation called **Energy Explorer** and for you to learn about D3 along the way.
+Welcome! First of all, I’d like to thank you for buying this book. The aim is to teach you about D3.js and show you how to build a real-world interactive data visualisation called **Energy Explorer**.
 
 ![Energy Explorer](efcd4cbf87a2c746360581deb9c38f1b.png)
 
@@ -8,9 +8,7 @@ This book uses a mix of **theory** and **practice**. You’ll learn an aspect of
 
 ## Prerequisites
 
-To get the most out of this book I recommend that you’re experienced enough to build a simple front-end web application.
-
-Specifically you need to be familiar with:
+To get the most out of this book I recommend that you’re familiar with:
 
 * HTML
 * SVG
