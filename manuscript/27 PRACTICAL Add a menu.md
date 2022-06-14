@@ -5,7 +5,7 @@ In this practical we add a **menu** to Energy Explorer that lets the user select
 {width: 75%}
 ![Energy Explorer menu](2c402e21e967d37bbca528118e1a2661.png)
 
-The menu consists of 5 items: 'Country', 'Renewable', 'Oil, Gas & Coal', 'Hydroelectric' and 'Nuclear'. In this practical we add a property to the state object that stores which indicator has been selected. When a menu item is clicked we update the state accordingly. We'll implement sorting in a later practical.
+The menu consists of 5 items: 'Country', 'Renewable', 'Oil, Gas & Coal', 'Hydroelectric' and 'Nuclear'. We'll add a property to the state object that stores which indicator has been selected. When a menu item is clicked we update the state accordingly. We'll implement sorting in a later practical.
 
 ## Overview
 
@@ -41,7 +41,7 @@ We use D3 to join the menu item array to `div` elements. The resulting HTML will
 
 When a menu item is clicked a new state property `selectedIndicator` is updated and the chart and menu are redrawn.
 
- Open `step11` (which we already worked on in the previous practical). The file structure is:
+ Open `d3-start-to-finish-code/step11` (which we already worked on in the previous practical). The file structure is:
 
 ```text
 step11
@@ -76,7 +76,7 @@ In this practical we:
 
 ## Add a container for the menu
 
-In `index.html` we make the following changes:
+In `index.html` make the following changes:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -123,7 +123,7 @@ We add two new `<div>` elements to the main wrapper `<div id="wrapper">`. The fi
 
 ## Add selectedIndicator state property
 
-In `js/store.js` add a new property `selectedIndicator` which indicates which energy indicator the user has selected. We also add a new action type `setSelectedIndicator` which updates `state.selectedIndicator`.
+In `js/store.js` add a new property `selectedIndicator` which indicates which energy indicator the user has selected. Also add a new action type `setSelectedIndicator` which updates `state.selectedIndicator`.
 
 {caption: "js/store.js"}
 ```js
@@ -203,7 +203,7 @@ markua-end-insert
 
 ## Add code to construct and manage the menu
 
-In `menu.js` we add code to create and update the menu items using a D3 join. We also add code to handle menu item clicks:
+In `menu.js` add code to create and update the menu items using a D3 join. Also add code to handle menu item clicks:
 
 {caption: "js/menu.js"}
 ```js
@@ -256,7 +256,7 @@ When a menu item is clicked, `handleMenuClick` is called. This calls `action` wh
 
 ## Basic styling of the menu
 
-We add some CSS rules to `css/style.css` for styling the menu:
+Now add some CSS rules to `css/style.css` for styling the menu:
 
 {caption: "css/style.css"}
 ```css
@@ -297,12 +297,12 @@ circle.renewable {
 
 We set `cursor` to `default` on the `body` element so that the cursor pointer always displays as an arrow. (Without this, the text select pointer is displayed when menu items are hovered.)
 
-The menu item container (selected by `.menu .items`) is given a `display` of `flex` which arranges the menu items in a row. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.) Each menu item is given some horizontal padding and given an opacity of 0.5. If a menu item is hovered or selected it's given an opacity of 1.
+The menu item container (selected by `.menu .items`) is given a `display` of `flex` which arranges the menu items in a row. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](https://leanpub.com/html-svg-css-js-for-data-visualisation) book.) Each menu item is given some horizontal padding and given an opacity of 0.5. If a menu item is hovered or selected it's given an opacity of 1.
 
 
 ## Call updateMenu from update function
 
-Finally we need to make sure the menu is redrawn each time the state changes. In `js/update.js` we rename the function `update` to `updateChart`. We then create a new function named `update` which calls `updateChart` and `updateMenu`:
+Finally we need to make sure the menu is redrawn each time the state changes. In `js/update.js` rename the function `update` to `updateChart`. Then create a new function named `update` which calls `updateChart` and `updateMenu`:
 
 {caption: "js/update.js"}
 ```js

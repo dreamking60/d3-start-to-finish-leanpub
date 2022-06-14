@@ -1,10 +1,10 @@
 # More on D3 Selections
 
-This chapter covers additional methods you can call on a D3 selection. It also covers the **update function** which is a handy technique that keeps your HTML/SVG elements synchronised with your data.
+This chapter covers additional methods you can call on a D3 selection. It also covers **update functions** which are handy for keeping your HTML/SVG elements synchronised with your data.
 
 ## More selection methods
 
-In this section we’ll look at some additional methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later on in Energy Explorer.
+In this section we’ll look at some additional methods you can call on a D3 selection. The main ones to take note of are `.append` and `.each` as you’ll use them later in Energy Explorer.
 
 ### .size, .empty, .node & .nodes
 
@@ -34,11 +34,13 @@ You can check whether a selection is empty using `.empty`:
 s.empty();  // false
 ```
 
-You can get the first element in a selection using `.node`:
+You can get the first HTML/SVG element in a selection using `.node`:
 
 ```js
 s.node();  // <circle r="10"></circle>
 ```
+
+D>The `.node` method returns a DOM element. This is a JavaScript object that represents an HTML or SVG element in the document.
 
 Finally you can get an array containing all the elements using `.nodes`:
 
@@ -53,7 +55,7 @@ You can see these four methods in action at [https://codepen.io/createwithdata/p
 
 ### .append & .remove
 
-You can add a new element to each element of a selection using `.append`. The syntax of `.append` is:
+You can add a child element to each element of a selection using `.append`. The syntax of `.append` is:
 
 ```js
 s.append(elementType)
@@ -247,7 +249,7 @@ D>`window.setInterval` sets up a timer that calls the supplied function at regul
 
 Each time the timer fires (once every second) `updateData` and `update` are called. `updateData` clears `myData` and then adds a random number of random values to `myData`. `update` performs the data join which adds or removes circles so that there are `n` circles where `n` is the length of `myData`. The `cx`, `cy` and `r` attributes of each circle are also updated.
 
-Navigate to [https://codepen.io/createwithdata/pen/Yzwaarg](https://codepen.io/createwithdata/pen/Yzwaarg) to view the example in CodePen. You'll see that every time the timer fires, circles appear or disappear and change size.
+Navigate to [https://codepen.io/createwithdata/pen/Yzwaarg](https://codepen.io/createwithdata/pen/Yzwaarg) to view the example in CodePen. You'll see that every time the timer fires, circles appear, disappear or change size.
 
 ## Summary
 

@@ -4,7 +4,7 @@ This practical modularises Energy Explorer by splitting it into separate JavaScr
 
 ## Overview
 
-Open step5. The file structure is:
+Open `d3-start-to-finish-code/step5`. The file structure is:
 
 ```text
 step5
@@ -126,7 +126,7 @@ The output of `layout` will be used in the new update function (see later).
 
 ## Move update code
 
-We delete `radiusScale` from `js/main.js` (because it's now defined in `js/layout.js`) and **cut** (so we can paste it elsewhere) the update function from `js/main.js` :
+Now delete `radiusScale` from `js/main.js` (because it's now defined in `js/layout.js`) and **cut** (so you can paste it elsewhere) the update function from `js/main.js` :
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -172,7 +172,7 @@ d3.csv('data/data.csv', transformRow)
     .then(dataIsReady);
 ```
 
-Paste the update function into `js/update.js`:
+Paste the update function you've just cut into `js/update.js`:
 
 {caption: "js/update.js"}
 ```js

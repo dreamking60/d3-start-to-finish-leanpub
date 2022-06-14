@@ -33,7 +33,7 @@ Typically Lodash doesn’t change (or mutate) objects or arrays. Instead it gene
 The `_.uniq` method takes an array and returns a copy of the array, with all duplicates removed. Here’s an example:
 
 ```js
-_.uniq([10, 20, 50, 40, 20, 20, 10]);    // [10, 20, 50, 40]
+_.uniq([10, 20, 50, 40, 20, 20, 10]);  // [10, 20, 50, 40]
 ```
 
 I encourage you to try out each of these examples using [jsconsole](https://jsconsole.com/?%3Aload%20lodash).
@@ -44,8 +44,8 @@ The `_.includes` method takes an array and a value and returns `true` if the val
 
 ```js
 let data = [10, 20, 40, 50];
-_.includes(data, 20);    // true
-_.includes(data, 30);    // false
+_.includes(data, 20);  // true
+_.includes(data, 30);  // false
 ```
 
 ## _.without
@@ -53,7 +53,7 @@ _.includes(data, 30);    // false
 The `_.without` method takes an array and a value and returns a copy of the array, with instances of the provided value excluded. For example:
 
 ```js
-_.without([10, 20, 30, 40, 50], 20);    // [10, 30, 40, 50]
+_.without([10, 20, 30, 40, 50], 20);  // [10, 30, 40, 50]
 ```
 
 ## _.filter
@@ -132,7 +132,7 @@ _.filter(data, function(d) {
 The `_.sortBy` method takes an array and returns a sorted copy of the array. For example:
 
 ```js
-_.sortBy([50, 30, 100, 3, 20])    // [ 3, 20, 30, 50, 100 ]
+_.sortBy([50, 30, 100, 3, 20])  // [ 3, 20, 30, 50, 100 ]
 ```
 
 If you have an array of objects you can pass a function as the second argument to specify which property to sort by:
@@ -201,9 +201,9 @@ JavaScript has a built in sort function but `_.sortBy` has two differences: it r
 ```js
 let data = [50, 30, 100, 3, 20];
 
-_.sortBy(data);    // [ 3, 20, 30, 50, 100 ]
+_.sortBy(data);  // [ 3, 20, 30, 50, 100 ]
 
-data.sort();    // data is now [ 100, 20, 3, 30, 50 ]
+data.sort();  // data is now [ 100, 20, 3, 30, 50 ]
 ```
 
 The built in JavaScript sort function converts numbers to strings and sorts alphanumerically which is why you get a surprising result.

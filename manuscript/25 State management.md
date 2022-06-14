@@ -2,7 +2,6 @@
 
 The state of an application describes what the application is currently doing. For example the state of a data visualisation might include things like:
 
-* the **data** that’s being visualised
 * the **type of chart** (bar, line, pie etc.) that the user has chosen
 * the **colour palette** the user has chosen
 * **zoom level** and **pan position**
@@ -26,7 +25,11 @@ This goes hand in hand with a function named `action` that’s responsible for u
 * a string that describes the state change that should take place (such as `'setSelectedIndicator'` or `'setFilterType'` )
 * any further information that is required for the state change. Typically this is a string or object
 
-For example, `action('setSelectedIndicator', 'CO2_emissions')` sets `state.selectedIndicator` to `'CO2_emissions'`.
+For example:
+
+```action('setSelectedIndicator', 'CO2_emissions')```
+
+sets `state.selectedIndicator` to `'CO2_emissions'`.
 
 Typically `action` is called when there’s an event such as a button click. The `action` function consists of a `switch` statement containing `case` blocks for each action type:
 

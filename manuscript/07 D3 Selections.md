@@ -18,7 +18,7 @@ d3.select(selector);
 
 where `selector` is a string containing a CSS selector string (for example `'#chart'`).
 
-D>If you’re not familiar with CSS selectors take a look at the CSS section in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).
+D>If you’re not familiar with CSS selectors take a look at the CSS section in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](https://leanpub.com/html-svg-css-js-for-data-visualisation).
 
 `d3.select` selects the **first** element on the page that matches the selector string. It returns an object which has a number of methods (such as `.attr` and `.style`) that modify the selected HTML/SVG element. (A method is a function that’s been assigned to a property of an object.)
 
@@ -71,7 +71,7 @@ Once you’ve used `d3.select` or `d3.selectAll` to create a selection of HTML/S
 | `.classed` | Adds a class attribute to the selection’s elements |
 | `.text` | Sets the text content of the selection’s elements |
 
-(If you’re not familiar with CSS, HTML or SVG you can read up on them in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook).)
+(If you’re not familiar with CSS, HTML or SVG you can read up on them in the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](https://leanpub.com/html-svg-css-js-for-data-visualisation).)
 
 ### .style
 

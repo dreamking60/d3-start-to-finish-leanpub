@@ -4,7 +4,7 @@ You learned about D3 requests in the previous section. In this practical we intr
 
 ## Overview
 
-Open `step2` from the code download in your text editor. The directory structure is:
+Open `d3-start-to-finish-code/step2` in the code download in your text editor. The directory structure is:
 
 ```
 step2
@@ -21,9 +21,7 @@ markua-start-insert
 markua-end-insert
 ```
 
-New files and directories are shown in red.
-
-There are three new directories: `data`, `js` and `js/lib`. `data` is where the data is located and `js` is where JavaScript files live. `js/lib` contains libraries such as D3.
+New files and directories are shown in red. There are three new directories: `data`, `js` and `js/lib`. `data` is where the data is located and `js` is where JavaScript files live. `js/lib` contains libraries such as D3.
 
 There are also three new files: `data.csv`, `d3.min.js` and `main.js`. The first is the CSV file containing data for Energy Explorer, `d3.min.js` is D3 and `main.js` is an empty file that'll contain the Energy Explorer JavaScript code.
 
@@ -55,7 +53,7 @@ The data originates from the [World Bank’s World Development Indicators](http
 
 ## Include JavaScript files in index.html
 
-Now open `index.html`. We'll include the two JavaScript files `d3.min.js` and `main.js` in our webpage using the `<script>` element. This uses an attribute `src` to specify the path of the JavaScript file:
+Now open `index.html`. Add the two JavaScript files `d3.min.js` and `main.js` to the page by using the `<script>` element. This uses an attribute `src` to specify the path of the JavaScript file:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -75,11 +73,11 @@ markua-end-insert
 </html>
 ```
 
-When the page loads, the browser will open each JavaScript file in turn and execute it.
+Now save `index.html`.
 
 `d3.min.js` is the minified version of D3 and is located in the `js/lib` directory. (Minified means that the size of the library has been reduced by, for example, shortening the names of variables.) We use version 7 of D3 in this book. `main.js` is where Energy Explorer’s code will live.
 
-D>There's a number of ways to include D3 in your project. We've opted for one of the simpler approaches which is to download the library from the [D3 homepage](https://d3js.org/) and link to it in `index.html`. For larger projects you can use 'bundlers' such as Webpack that can obtain library code for you and package it all together. Such tools add a layer of complexity and to minimise distraction I don't use them in this book.
+D>There's a number of ways to include D3 in your project. We've opted for one of the simpler approaches which is to download the library from the [D3 homepage](https://d3js.org/) and link to it in `index.html`. When the page loads, the browser will open each JavaScript file in turn and execute it. For larger projects you can use 'bundlers' such as Webpack that can obtain library code for you and package it all together. Such tools add a layer of complexity and to minimise distraction I don't use them in this book.
 
 ## Request data
 

@@ -12,7 +12,7 @@ These are subtle changes but when added together they make a big difference.
 
 ## Overview
 
-Open `step15`. The file structure is:
+Open `d3-start-to-finish-code/step15`. The file structure is:
 
 ```text
 step15
@@ -48,7 +48,7 @@ Currently Energy Explorer is using the web browser’s **default font** for all 
 
 There’s a huge amount of resources and opinion surrounding font choice and unless you’re a trained designer it can be hard to know where to turn. I usually turn to Google Fonts and filter by Sans Serif and sort by most popular. Currently this returns Roboto, Open Sans and Lato as popular sans serif fonts. I usually try each of these and use my instinct to choose one. In the case of Energy Explorer I’ve chosen Open Sans. Feel free to choose a different font if you prefer.
 
-In `index.html` we add the following line to the `<head>` element:
+In `index.html` add the following line to the `<head>` element:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -78,7 +78,7 @@ This line was provided by Google Fonts. To get the line yourself:
 
 If you see a continuation character `\` please ignore it (it's been added by the typesetting software). The entire `<link>` element should occupy a single line.
 
-We then add a `font-family` declaration to the `body` rule in `css/style.css`:
+Now add a `font-family` declaration to the `body` rule in `css/style.css`:
 
 {caption: "css/style.css", line-numbers: false}
 ```css
@@ -99,7 +99,7 @@ Save `index.html` and `css/style.css` and load `step15` in the browser. The font
 
 ## Style the menu
 
-Before styling the menu we add the following headings to bring some order to `style.css`:
+Before styling the menu add the following headings to bring some order to `style.css`:
 
 {caption: "css/style.css", line-numbers: false}
 ```css
@@ -146,7 +146,7 @@ We'll now style the menu so that’ll it’ll look like:
 {width: 66%}
 ![Styled menu](5fc7b78417f8b12db93b9c6aa0d4211f.png)
 
-We need to add a circle to each indicator and add a 'Sort by' label. In `js/menu.js` we change how the menu items are created:
+We need to add a circle to each indicator and add a 'Sort by' label. In `js/menu.js` change how the menu items are created:
 
 {caption: "js/menu.js"}
 ```js
@@ -218,7 +218,7 @@ Save `js/menu.js` and refresh the browser. The menu now looks like:
 
 ![Menu with circles](e18dea52cd410dd36828018692e680e7.png)
 
-In `index.html` we add a `Sort by:` heading to the menu:
+In `index.html` add a `Sort by:` heading to the menu:
 
 {caption: "index.html"}
 ```html
@@ -253,7 +253,7 @@ markua-end-insert
 </html>
 ```
 
-We now make the following changes to the menu CSS:
+Now make the following changes to the menu CSS:
 
 {caption: "css/style.css"}
 ```css
@@ -338,7 +338,7 @@ and the footer will contain information on the data source and attribution infor
 
 ![Footer](307e652aedbc3da74282724210a03ff2.png)
 
-In `index.html` we make the following changes:
+In `index.html` make the following changes:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -375,7 +375,7 @@ markua-end-insert
 
 We've added a `<div>` element for the header just before the controls. We've also added a `<div>` element for the footer.
 
-We now add CSS for the header and footer:
+Now add CSS for the header and footer:
 
 {caption: "css/style.css"}
 ```css
@@ -436,7 +436,7 @@ and the footer looks like:
 
 We’re nearly finished! We've a few final CSS tweaks to add a final layer of polish to Energy Explorer.
 
-In `css/style.css` we make the following changes:
+In `css/style.css` make the following changes:
 
 {caption: "css/style.css"}
 ```css

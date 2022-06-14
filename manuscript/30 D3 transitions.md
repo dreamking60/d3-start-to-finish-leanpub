@@ -225,7 +225,7 @@ to the previous CodePen example [https://codepen.io/createwithdata/pen/BaKoWQZ](
 
 ## Key functions
 
-By default when you join an array to HTML/SVG elements, D3 joins the 1st array element to the 1st HTML/SVG element in the selection, the 2nd array element to the 2nd HTML/SVG element and so on. This means that if you sort the array, and perform the join again, the array elements might get joined to different HTML/SVG elements.
+When you join an array to HTML/SVG elements, D3 joins the 1st array element to the 1st HTML/SVG element in the selection, the 2nd array element to the 2nd HTML/SVG element and so on. This means that if you sort the array, and perform the join again, the array elements might get joined to different HTML/SVG elements.
 
 In a lot of cases this doesn’t cause issues but if you’re positioning the HTML/SVG elements according to the array index `i` and using transitions you’ll lose object constancy.
 

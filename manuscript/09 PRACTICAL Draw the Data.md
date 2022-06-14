@@ -10,7 +10,7 @@ It’s not the most exciting of data visualisations, but each circle represents 
 
 ## Overview
 
-Open `step3` from the code download. The file structure is:
+Open `d3-start-to-finish-code/step3` in the code download. The file structure is:
 
 ```text
 step3
@@ -32,9 +32,9 @@ In this practical we:
 
 ## Add a container for the circles
 
-In `index.html` we add a container for the SVG `<circle>` elements snd set its width and height to 1200.
+In `index.html` add a container for the SVG `<circle>` elements snd set its width and height to 1200.
 
-We then add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles:
+Now add a `<g>` element inside the `<svg>` element and give it an `id` attribute of value `chart`. This element will contain the circles:
 
 {caption: "index.html", line-numbers: false}
 ```
@@ -60,7 +60,7 @@ D>At this point we’re not sure what the size of the chart will be, but setting
 
 ## Join the data array to circle elements
 
-We make the following changes in `js/main.js`:
+Make the following changes in `js/main.js`:
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -94,7 +94,7 @@ d3.csv('data/data.csv')
     .then(dataIsReady);
 ```
 
-We've added a global variable `data` at the top of the file. In the `dataIsReady` function we assign the array of data `csv` to this new variable.
+We've added a global variable `data` at the top of the file. In the `dataIsReady` function we assign the array of data (`csv`) to this new variable.
 
 D>The `data` variable is a global variable because it sits outside of any function and is accessible everywhere in the code.
 

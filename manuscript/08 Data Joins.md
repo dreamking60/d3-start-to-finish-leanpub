@@ -145,8 +145,7 @@ let myData = [10, 40, 30];
 and the following SVG:
 
 ```html
-<g class="chart">
-</g>
+<g class="chart"></g>
 ```
 
 You can join the array to `circle` elements using:
@@ -327,8 +326,7 @@ The above code is a very typical pattern in D3. Here it is on CodePen:
 Here’s another example where a simple horizontal bar chart is created. The same array `myData` is used but `rect` elements are joined to the array rather than circles. Here’s the SVG:
 
 ```html
-<g class="barchart">
-</g>
+<g class="barchart"></g>
 ```
 
 Each `rect` will have a width that’s 4 times the joined value, a height of 45 and they’ll be vertically spaced 50 pixels apart:
@@ -392,8 +390,7 @@ An array of objects can be joined to HTML/SVG elements in the same manner as an 
 Suppose our SVG looks like:
 
 ```html
-<g class="cities">
-</g>
+<g class="cities"></g>
 ```
 
 and our data array is:
@@ -454,9 +451,7 @@ markua-end-insert
   });
 ```
 
-Here’s the example on CodePen:
-
-[https://codepen.io/createwithdata/pen/MWKVNMx](https://codepen.io/createwithdata/pen/MWKVNMx)
+Here’s the example on CodePen: [https://codepen.io/createwithdata/pen/MWKVNMx](https://codepen.io/createwithdata/pen/MWKVNMx)
 
 ![Joining array of objects to circle elements](295c4e7aa9010691b91fe397ce00c210.png)
 
@@ -513,9 +508,7 @@ We’re using `.classed` to set add a `high` class attribute if `indicator1` is 
 
 ![`<text>` elements joined to an array of objects](ccc3d7c7e4c61994606446bd7a0664b8.png)
 
-Here’s the example on CodePen:
-
-[https://codepen.io/createwithdata/pen/VwexZvP](https://codepen.io/createwithdata/pen/VwexZvP)
+Here’s the example on CodePen: [https://codepen.io/createwithdata/pen/VwexZvP](https://codepen.io/createwithdata/pen/VwexZvP)
 
 ### Summary
 

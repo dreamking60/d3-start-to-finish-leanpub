@@ -8,7 +8,7 @@ In this chapter we add transitions to Energy Explorer so that:
 
 ## Overview
 
-Open step13. The file structure is:
+Open `d3-start-to-finish-code/step13`. The file structure is:
 
 ```text
 step13
@@ -49,7 +49,7 @@ In the previous chapter we discussed the importance of adding a key function to 
 
 Energy Explorer meets all 3 of these criteria so we need to add a key function to the data join.
 
-In `js/layout.js` we add an `id` property to each `item`:
+In `js/layout.js` add an `id` property to each `item`:
 
 {caption: "js/layout.js", line-numbers: false}
 ```js
@@ -90,7 +90,7 @@ markua-end-insert
 
 (Each item in `data` and `sortedData` has a property named `id` so you can use that to set `item.id`. See the Load the Data practical for a reminder of the structure of `data`.)
 
-Now in `updateChart` in `js/update.js` we add a key function to the data join:
+Now in `updateChart` in `js/update.js` add a key function to the data join:
 
 {caption: "js/update.js", line-numbers: false}
 ```js
@@ -164,7 +164,7 @@ The transition feels a bit too quick so we'll change the duration in the next se
 
 ## Add transition duration and delay
 
-We add two new properties to the `config` object:
+Add two new properties to the `config` object:
 
 {caption: "js/config.js", line-numbers: false}
 ```js
@@ -180,7 +180,7 @@ markua-end-insert
 
 `transitionDuration` specifies transition duration and `transitionDelay` specifies the transition delay.
 
-We now add calls to `.duration` and `.delay` after the `.transition` in `updateGroup`:
+Now add calls to `.duration` and `.delay` after the `.transition` in `updateGroup`:
 
 {caption: "js/update.js", line-numbers: false}
 ```js
@@ -300,7 +300,7 @@ Save `js/update.js` and refresh the browser. Now the circles fade in, without fl
 
 ## Add a transition to the circle radii
 
-Our final change is to make the circles grow from zero radius. This is a subtle change but one that adds a final bit of polish to the transtions. The default radius of `circle` elements is zero so we don’t need to initialise the radii. We make the following changes:
+Our final change is to make the circles grow from zero radius. This is a subtle change but one that adds a final bit of polish to the transtions. The default radius of `circle` elements is zero so we don’t need to initialise the radii. Make the following changes:
 
 {caption: "js/update.js", line-numbers: false}
 ```js

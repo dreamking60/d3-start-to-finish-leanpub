@@ -1,6 +1,6 @@
 # Architecture for Web-based Data Visualisation
 
-This chapter introduces two techniques for architecting interactive data visualisations for increased code clarity and maintainability. These techniques become increasingly important as an application's size increases and they are of significant benefit to Energy Explorer.
+This chapter introduces two techniques for architecting interactive data visualisations for code clarity and maintainability. These techniques become increasingly important as an application's size increases and they are of significant benefit to Energy Explorer.
 
 The first technique is to use a layout function that takes an array of data and outputs a new array containing information (such as position and size) for rendering the visualisation. The benefit is that the logic for calculating the visual variables (such as position, size and colour) is separate to the rendering code. This makes maintaining and understanding the code easier and also makes porting the code from D3 to a different rendering engine (such as React) simpler.
 
@@ -43,7 +43,7 @@ function layout(data) {
 
 This function generates a new array `layoutData` by calling `map` on `data`. The map function iterates through `data` and computes `x`, `y` and `r` for each array element. The result is a new array containing the position and radius data.
 
-D>See the JavaScript Iteration chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](fundamentalsbook) if you’re not familiar with `map`.
+D>See the JavaScript Iteration chapter of the [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation book](https://leanpub.com/html-svg-css-js-for-data-visualisation) if you’re not familiar with `map`.
 
 Typically you assign the output of `layout(myData)` to a new variable:
 

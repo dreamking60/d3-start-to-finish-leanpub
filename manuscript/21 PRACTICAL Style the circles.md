@@ -8,7 +8,7 @@ Renewable energy is represented by a solid green circle, Oil, Gas & Coal by a gr
 
 ## Overview
 
-Open step9. The file structure is:
+Open `d3-start-to-finish-code/step9`. The file structure is:
 
 ```text
 step9
@@ -91,7 +91,7 @@ Here’s a table with the colours and styles we’ll use:
 
 ## Style the circles
 
-In `css/style.css`  we add CSS rules for each of the four energy types:
+In `css/style.css`  add CSS rules for each of the four energy types:
 
 {caption: "css/style.css"}
 ```css
@@ -171,9 +171,7 @@ markua-end-insert
 
 The main reason for adding the `div` element is that further interface elements (such as a menu and a legend) will be added later on and it’s good practice to enclose them in a single wrapper element.
 
-To center a `div` element you can set its width and set its margin to `0 auto`. This isn’t at all obvious if you don’t have much CSS experience but it’s common practice.
-
-In `css/style.css` we add a rule for the new `div` element:
+In `css/style.css` add a rule for the new `div` element:
 
 {caption: "style.css", line-numbers: false}
 ```css
@@ -190,6 +188,8 @@ circle.renewable {
 
 ...
 ```
+
+To center a `div` element you can set its width and set its margin to `0 auto`. This isn’t at all obvious if you don’t have much CSS experience but it’s common practice.
 
 ## Change the background colour
 
@@ -217,7 +217,7 @@ circle.renewable {
 
 ## Save and refresh
 
-Save `index.html` and `style.css` and load Step 9 in your browser. You should see that the circles are styled according to energy type, the visualisation is centered and the background is off-white:
+Save `index.html` and `style.css` and load `step9` in your browser. You should see that the circles are styled according to energy type, the visualisation is centered and the background is off-white:
 
 ![Energy Explorer with styled circles and off white background](11ab4a0dec90485bd7bf728013ab78e5.png)
 

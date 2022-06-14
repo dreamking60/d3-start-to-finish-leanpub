@@ -2,9 +2,9 @@
 
 Scale functions help you transform your **data values** into **visual values**.
 
-For example, in Energy Explorer the **data values** are the percentage values for each of the four energy types.
+**Data values** are the values of your data. For example, in Energy Explorer the data values are the percentage values for each of the four energy types.
 
-**Visual values** are properties such as position, size and colour. For example an x coordinate of `50px`, a height of `100px` or a colour of `#aaa`.
+**Visual values** are visual properties such as position, size and colour. For example an x coordinate of `50px`, a height of `100px` or a colour of `#aaa`.
 
 Suppose you have an array of numbers representing percentage values:
 
@@ -31,9 +31,9 @@ let myScale = d3.scaleLinear();
 The return value of `d3.scaleLinear` is a function (which we've assigned to `myScale`). By default this function takes an input value and returns the same value:
 
 ```js
-myScale(0);  // returns 0
-myScale(1);  // returns 1
-myScale(50);  // returns 50
+myScale(0);    // returns 0
+myScale(1);    // returns 1
+myScale(50);   // returns 50
 myScale(100);  // returns 100
 ```
 
@@ -48,9 +48,9 @@ myScale.domain([0, 100]).range([0, 1000]);
 Now look at the output values:
 
 ```js
-myScale(0);  // returns 0
-myScale(1);  // returns 10
-myScale(50);  // returns 500
+myScale(0);    // returns 0
+myScale(1);    // returns 10
+myScale(50);   // returns 500
 myScale(100);  // returns 1000
 ```
 
@@ -67,19 +67,17 @@ myScale.range(['white', 'red']);
 This results in:
 
 ```js
-myScale(0);  // returns "rgb(255, 255, 255)"
-myScale(1);  // returns "rgb(255, 252, 252)"
-myScale(50);  // returns "rgb(255, 128, 128)"
+myScale(0);    // returns "rgb(255, 255, 255)"
+myScale(1);    // returns "rgb(255, 252, 252)"
+myScale(50);   // returns "rgb(255, 128, 128)"
 myScale(100);  // returns "rgb(255, 0, 0)"
 ```
 
-Now the scale is returning colours ranging from white (`rgb(255, 255, 255)`) to red (`rgb(255, 0, 0)`).
-
-By default D3 scale functions extrapolate the output if you input values outside of the domain:
+Now the scale is returning colours ranging from white (`rgb(255, 255, 255)`) to red (`rgb(255, 0, 0)`). By default D3 scale functions extrapolate the output if you input values outside of the domain:
 
 ```js
 myScale.domain([0, 100]).range([0, 1000]);
-myScale(200);  // returns 2000
+myScale(200);   // returns 2000
 myScale(-100);  // returns -1000
 ```
 

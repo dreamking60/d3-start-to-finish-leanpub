@@ -9,7 +9,7 @@ When a country is hovered a popup will appear containing the country name togeth
 
 ## Overview
 
-Open `step10`. The directory structure is:
+Open `d3-start-to-finish-code/step10`. The directory structure is:
 
 ```text
 step10
@@ -138,7 +138,7 @@ Save `index.html`.
 
 ## Add event handlers
 
-We now create a popup object and add mouseover and mouseout event handlers to `js/popup.js`:
+In `js/popup.js` create a popup object and add mouseover and mouseout event handlers:
 
 {caption: "js/popup.js"}
 ```js
@@ -160,7 +160,7 @@ This code is similar to what we covered in the 'Flourish Popup Library' chapter.
 
 In `handleMouseover`, `this` represents the `<g>` element that triggered the mouse event. We pass the `labelText` property into the popup, just so we can get something up and running quickly.
 
-Let's register the event handlers in the update function using D3's `.on` method:
+Now register the event handlers in the update function using D3's `.on` method:
 
 {caption: "js/update.js"}
 ```js
@@ -235,7 +235,7 @@ Save `index.html`, `js/popup.js`, `js/update.js` and `css/style.css` and load `s
 
 ## Populate popup with energy data
 
-We'll now add the four energy indicators to the popup. We start by adding a new property `popupData` to each item in `js/layout.js`: 
+We now add the four energy indicators to the popup. Start by adding a new property `popupData` to each item in `js/layout.js`: 
 
 {caption: "js/layout.js"}
 ```js
@@ -288,7 +288,7 @@ markua-end-insert
 }
 ```
 
-The new property `.popupData` is an object that contains the information that'll be displayed in the popup. We now modify `js/popup.js` so that each energy indicator is displayed:
+The new property `.popupData` is an object that contains the information that'll be displayed in the popup. Now modify `js/popup.js` so that each energy indicator is displayed:
 
 {caption: "js/popup.js"}
 ```js
@@ -342,7 +342,7 @@ Save `js/layout.js` and `js/popup.js` and refresh your browser. You should now s
 
 Currently the popup is positioned in the center of the `<g>` element (which contains the circles and the label). Most of the country's circles are obscured so we’d like the popup to appear **towards the top** of the circles. We’ll do this by adding a hidden element, placing it where we’d like the popup to appear. This element will get passed into the popup’s `.position` method. 
 
-We start by adding a new property `popupOffset` to the layout items. This specifies where the popup pointer (the triangle underneath the popup) should appear in relation to the circle centers:
+Start by adding a new property `popupOffset` to the layout items. This specifies where the popup pointer (the triangle underneath the popup) should appear in relation to the circle centers:
 
 {caption: "js/layout.js"}
 ```js
@@ -389,7 +389,7 @@ markua-end-insert
 
 We position the popup pointer `0.8 * maxRadius` above the circle centers. This value was arrived at by experimentation and strikes a balance between the popup being high enough to reveal the underlying circles but not so high it disconnects from smaller circles. Ideally we'd position the popup according to the largest circle, but we're keeping things simple and focused for the benefit of learning.
 
-Now in `js/update.js` we add a new circle to each group: 
+Now in `js/update.js` add a new circle to each group: 
 
 {caption: "js/update.js"}
 ```js
@@ -441,7 +441,7 @@ markua-end-insert
 
 The new circle is added in `initialiseGroup` and given a class attribute of `popup-center`. It doesn't really matter what its radius is, so long as it isn't zero. In `updateGroup` the circle's `cy` attribute is updated using the new layout item property `.popupOffset`.
 
-Now we need to use the new circle to position the popup:
+Now use the new circle to position the popup:
 
 {caption: "js/popup.js"}
 ```js
@@ -487,14 +487,14 @@ function handleMouseout() {
 }
 ```
 
-In `handleMouseover` we select the new circle and pass it into the popup's `.point` method.
+In `handleMouseover` we select the new circle and call `.node()` to get the actual `<circle>` element (see the D3 Selections chapter for a reminder). We then pass the element into the popup's `.point` method.
 
 Save `js/layout.js`, `js/update.js` and `js/popup.js` and refresh your browser. The popup should now appear a bit higher up:
 
 {width: 33%}
 ![Popup positioned with the 'popupCenter' circle (which is visible)](52676cc44e50fc530a2071f3a46df13c.png)
 
-We also need to hide the new circles, so we add the following to `css/style.css`:
+We also need to hide the new circles, so add the following to `css/style.css`:
 
 {caption: "css/style.css"}
 ```css

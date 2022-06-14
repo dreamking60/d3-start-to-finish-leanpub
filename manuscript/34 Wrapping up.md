@@ -42,14 +42,14 @@ It’s really up to you where you’d like to take the knowledge you’ve learne
 
 * modify Energy Explorer. For example, you could try changing the color scheme, or other aspects of the look and feel. If you’re feeling ambitious you might want to adapt it to a different data set!
 * try building your own data visualisation from scratch, using similar techniques to those your learned in this book. You could use the same data set, or one of your own
-* share your experiences in the forum and let others know how you got on
+* share your experiences on social media (I'm @createwithdata and @peter_r_cook on Twitter) and let others know how you got on
 * learn more about D3 through its homepage or other resources such as my own [D3 in Depth](https://www.d3indepth.com/), or tutorials from [Nadieh Bremer](https://www.visualcinnamon.com/blog/), [Curran Kelleher](https://www.youtube.com/user/currankelleher), [Shirley Wu](https://sxywu.com/) and [Amelia Wattenberger](https://wattenberger.com/blog).
 
 ## Wrapping up
 
 Thank you so much for reading D3 Start to Finish, and for getting this far! I hope you found this book both useful and enjoyable. And I truly hope you’ve learned lots from it. I hope you’ve gained the confidence to work on other data visualisations written using D3 and perhaps even to build your own visualisation from scratch.
 
-Stay in touch, either by email at info@createwithdata.com or via Twitter (@createwithdata).
+Stay in touch, either by email at hello@createwithdata.com or via Twitter (@createwithdata).
 
 All the best, and keep coding!
 

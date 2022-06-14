@@ -1,10 +1,10 @@
 # Practical: Add State Management
 
-In this section you’ll add state management to Energy Explorer in a similar manner to the State Management chapter. We’ll add a state object (that represents the current state) and an action function (for managing state changes).
+In this section we’ll add state management to Energy Explorer using the approach covered in the State Management chapter. We’ll add a state object (that represents the current state) and an action function (for managing state changes).
 
 ## Overview
 
-Open `step11`. The file structure is:
+Open `d3-start-to-finish-code/step11`. The file structure is:
 
 ```text
 step11
@@ -56,7 +56,7 @@ markua-end-insert
     └── update.js
 ```
 
-In `index.html` we link to the new file:
+In `index.html` link to the new file:
 
 {caption: "index.html", line-numbers: false}
 ```html
@@ -81,7 +81,7 @@ markua-end-insert
 
 ## Add an empty state object and action function
 
-In `js/store.js` we add a new empty state object and an action function:
+In `js/store.js` add a new empty state object and an action function:
 
 {caption: "js/store.js", line-numbers: false}
 ```js

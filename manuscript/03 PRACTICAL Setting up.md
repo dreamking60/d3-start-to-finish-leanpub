@@ -84,7 +84,7 @@ Open your text editor and open `d3-start-to-finish-code/step1`. In VS Code or Br
 
 ### Start web server
 
-If you’re comfortable setting up a local web server (for example using Node or Python) please do so by navigating to `d3-start-to-finish` within a command line interface and starting the web server there. Here’s a screenshot of my command line after starting `http-server` (a node web server):
+If you’re comfortable setting up a local web server (for example using Node or Python) please do so by navigating to `d3-start-to-finish-code` within a command line interface and starting the web server there. Here’s a screenshot of my command line after starting `http-server` (a node web server):
 
 ![Starting node's http-server](91362466cb9b83dc8295bd5c9a85e6fc.png)
 

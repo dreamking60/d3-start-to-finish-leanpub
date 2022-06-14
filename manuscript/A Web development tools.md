@@ -4,7 +4,7 @@
 
 This book uses CodePen for many of the code examples. It's a reasonable tool for building small applications but larger applications are typically developed locally. This means using tools and files **on your computer** (rather than on the web). This appendix outlines a typical set up for developing web applications on your own computer. This is similar to the set-up most web developers use. The first section gives an overview of the necessary tools and the second section walks you through setting up these tools.
 
-This content originally appeared in my [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation](fundamentalsbook) book.
+This content originally appeared in my [Fundamentals of HTML, SVG, CSS and JavaScript for Data Visualisation](https://leanpub.com/html-svg-css-js-for-data-visualisation) book.
 
 ## Web development tools
 

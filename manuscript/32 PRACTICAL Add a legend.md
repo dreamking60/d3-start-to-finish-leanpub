@@ -8,7 +8,7 @@ The legend circle is sized such that it represents a value of 100%.
 
 ## Overview
 
-Open `step14`. The file structure is:
+Open `d3-start-to-finish-code/step14`. The file structure is:
 
 ```text
 step14
@@ -223,7 +223,7 @@ circle.renewable {
 ...
 ```
 
-The `div#controls` element contains the menu and legend. We'd like the menu to be on the left and the legend to be on the right and we use Flexbox to achieve this. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](fundamentalsbook) book.)
+The `div#controls` element contains the menu and legend. We'd like the menu to be on the left and the legend to be on the right and we use Flexbox to achieve this. (You can find out more about Flexbox in the [Fundamentals of HTML, SVG, CSS & JavaScript for Data Visualisation](https://leanpub.com/html-svg-css-js-for-data-visualisation) book.)
 
 We set `display` to `flex` on the controls container. We also set `justify-content` to `space-between` to maximise the horizontal space between the menu and legend. Setting `align-items` to `center` aligns the menu and legend vertically.
 

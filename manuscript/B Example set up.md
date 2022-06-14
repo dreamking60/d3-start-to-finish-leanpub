@@ -107,8 +107,8 @@ markua-start-insert
 markua-end-insert
   </head>
 
-	<body>
-	  <h1>Hello there!</h1>
+  <body>
+    <h1>Hello there!</h1>
   </body>
 </html>
 ```
@@ -121,7 +121,7 @@ Select **New** from the **File** menu and add the following JavaScript code to t
 
 {caption: "main.js"}
 ```js
-  alert("Hello!");
+alert("Hello!");
 ```
 
 Select **Save** from the **File** menu and when the dialog appears create a new directory within your project directory called `src`. Go into the `src` directory then save your new file as `main.js`. You’re aiming for the following directory structure:
@@ -149,7 +149,7 @@ You now need to add a link to your JavaScript file in `index.html`. Start editin
     <link rel="stylesheet" href="css/style.css">
   </head>
 
-	<body>
+  <body>
     <h1>Hello there!</h1>
 markua-start-insert
     <script src="src/main.js"></script>

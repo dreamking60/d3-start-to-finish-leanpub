@@ -13,7 +13,7 @@ By the end of this practical, each country will be represented by a `<g>` elemen
 
 ## Overview
 
-Open step7. The file structure is:
+Open `d3-start-to-finish-code/step7`. The file structure is:
 
 ```text
 step7

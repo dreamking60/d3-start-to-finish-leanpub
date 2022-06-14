@@ -1,6 +1,6 @@
 # Practical: Sort the Countries
 
-In this practical you’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method. Remember that `state.selectedIndicator` is updated whenever a menu item is clicked.
+In this practical we’ll add code that sorts the countries according to `state.selectedIndicator`. The sorting will be carried out **in the layout function** using Lodash’s `_.orderBy` method. Remember that `state.selectedIndicator` is updated whenever a menu item is clicked.
 
 {width: 75%}
 ![Energy Explorer menu](14b99904fd0c49ddbe35d100a23eede4.png)
@@ -11,7 +11,7 @@ We also add a feature whereby countries which have a zero value (or no data) for
 
 ## Overview
 
-Open `step12`. The file structure is:
+Open `d3-start-to-finish-code/step12`. The file structure is:
 
 ```text
 step12
@@ -106,7 +106,7 @@ Recall that `data` looks something like:
 
 The selected menu item will determine the property by which the array will be sorted. For example, if 'Oil, Gas & Coal' is selected we sort using the property `oilgascoal`. A special case is if the first menu item 'Country' is selected we sort using the `name` property.
 
-We make the following changes in `js/layout.js`:
+Make the following changes in `js/layout.js`:
 
 {caption: "js/layout.js"}
 ```js
@@ -220,7 +220,7 @@ We also add a new property `visible` to the layout items. This indicates whether
 
 ## Hide countries with a zero or missing value
 
-In `js/update.js` we update the country's opacity according to the `visible` property:
+In `js/update.js` update the country's opacity according to the `visible` property:
 
 {caption: "js/update.js"}
 ```js

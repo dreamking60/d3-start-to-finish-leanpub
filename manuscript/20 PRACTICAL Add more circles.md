@@ -1,6 +1,6 @@
 # Practical: Add More Circles
 
-In this practical we **add three more circles** so that each country has four circles. Each circle represents an energy type.
+In this practical we **add three more circles** so that each country is represented by four circles (one for each energy type).
 
 {width: 100%}
 ![Each country represented by four circles](148995046a809d8710b2ae2ccbfb65a0.png)
@@ -30,7 +30,7 @@ There’s three additional circles. Each circle also has a class attribute indic
 
 ## Overview
 
-Open step8. The file structure is:
+Open `d3-start-to-finish-code/step8`. The file structure is:
 
 ```text
 step8
@@ -120,7 +120,7 @@ In the above changes the layout function takes each of the four energy indicator
 
 ## Add four circles in the update function
 
-Currently the update function (`js/update.js`) adds a single circle. We make the following changes to add circles for each of the four energy types:
+Currently the update function (`js/update.js`) adds a single circle. Make the following changes which add circles for each of the four energy types:
 
 {caption: "js/update.js"}
 ```js

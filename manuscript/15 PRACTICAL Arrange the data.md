@@ -9,7 +9,7 @@ The [previous section](https://learn.createwithdata.com/books/d3-start-to-finish
 
 ## Overview
 
-Open step6. The file structure is:
+Open `d3-start-to-finish-code/step6`. The file structure is:
 
 ```text
 step6

@@ -8,7 +8,7 @@ By the end of this practical Energy Explorer will look like:
 
 ## Overview
 
-Open `step4` from the code download. The file structure is:
+Open `d3-start-to-finish-code/step4`. The file structure is:
 
 ```text
 step4
@@ -30,7 +30,7 @@ In this practical we:
 
 ## Convert indicator values from strings into numbers
 
-When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting Data with D3 chapter):
+When `d3.csv` loads a CSV file it treats all values (including numbers) as strings. Therefore we need to convert each of the indicator values (`hydroelectric`, `nuclear`, `oilgascoal` and `renewable`) into numbers using `parseFloat`. We use a transformation function (as explained in the Requesting Data with D3 chapter). Make the following changes in `js/main.js`:
 
 {caption: "js/main.js", line-numbers: false}
 ```js
@@ -93,7 +93,7 @@ the following is returned:
 
 ## Create a sqrtScale function and set the circle radii
 
-In `js/main.js` we make the following changes:
+In `js/main.js` make the following changes:
 
 {caption: "js/main.js", line-numbers: false}
 ```js

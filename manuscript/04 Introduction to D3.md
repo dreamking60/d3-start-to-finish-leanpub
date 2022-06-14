@@ -11,7 +11,7 @@ This section gives an overview of D3 joins and some of D3’s modules. Don’t w
 
 ## Joining data with D3
 
-One of the cornerstones of D3 is its **data joining** mechanism. A data join creates a correspondence between an **array of data** and a **group of HTML or SVG elements**. Specifically a data join means that:
+One of the cornerstones of D3 is its **data joining**. A data join creates a correspondence between an **array of data** and a **group of HTML or SVG elements**. Specifically a data join means that:
 
 * each array element has a **corresponding** HTML/SVG element
 * each HTML/SVG element may be **positioned**, **sized** and **styled** according to the value(s) of its corresponding array element
