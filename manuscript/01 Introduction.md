@@ -93,4 +93,12 @@ You can download the code for this book from [here](https://cwd-resources.netlif
 
 ## Where to get help
 
-If you need help on anything in this book please tweet me at @createwithdata or email me at help@createwithdata.com.
+If you need help on anything in this book please tweet me at [@createwithdata](https://twitter.com/createwithdata) or email me at help@createwithdata.com.
+
+## Stay in touch
+
+I love to stay in touch with my readers. One of the best ways to do this is via my mailing list. I send occasional messages containing useful information related to implementing data visualisations (e.g. using JavaScript or other tools). There'll also be discount codes for my other books. You can sign up [here](https://mailchi.mp/085e79e8fd7c/create-with-data-newsletter).
+
+## Translators
+
+If you're interested in translating D3 Start to Finish to another language contact me at info@createwithdata.com and I'll be happy to discuss further.

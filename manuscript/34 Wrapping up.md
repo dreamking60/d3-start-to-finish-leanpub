@@ -41,6 +41,7 @@ Most (if not all) of what we’ve covered can apply to other visualisations and 
 It’s really up to you where you’d like to take the knowledge you’ve learned in this book. However, some ideas are:
 
 * modify Energy Explorer. For example, you could try changing the color scheme, or other aspects of the look and feel. If you’re feeling ambitious you might want to adapt it to a different data set!
+* read the advanced edition of [D3 Start to Finish](https://leanpub.com/d3-start-to-finish) which includes chapters on data transformation, making Energy Explorer responsive, dark mode and ES2015 modules. If you haven't already bought it, email info@createwithdata.com for more infomation.
 * try building your own data visualisation from scratch, using similar techniques to those your learned in this book. You could use the same data set, or one of your own
 * share your experiences on social media (I'm @createwithdata and @peter_r_cook on Twitter) and let others know how you got on
 * learn more about D3 through its homepage or other resources such as my own [D3 in Depth](https://www.d3indepth.com/), or tutorials from [Nadieh Bremer](https://www.visualcinnamon.com/blog/), [Curran Kelleher](https://www.youtube.com/user/currankelleher), [Shirley Wu](https://sxywu.com/) and [Amelia Wattenberger](https://wattenberger.com/blog).
