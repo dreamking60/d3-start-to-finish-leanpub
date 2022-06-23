@@ -1,3 +1,4 @@
+{sample: true}
 # Scale Functions
 
 Scale functions help you transform your **data values** into **visual values**.
@@ -163,3 +164,4 @@ Notice that the function passed into `.attr` is now using `radiusScale`.
 Here’s a similar example in CodePen: [https://codepen.io/createwithdata/pen/yLeqRLp](https://codepen.io/createwithdata/pen/yLeqRLp) The second data value (40) is twice the first data value (20). This results in the second circle having twice the area of the first circle.
 
 Now change `scaleSqrt` to `scaleLinear` in the CodePen example. When `scaleLinear` is used it’s fairly clear that the second circle’s area is much more than twice the first circle’s, even though its value is only 2 times bigger. We’ll use `scaleSqrt` to set the circle sizes in the Energy Explorer in the following practical.
+{sample: false}

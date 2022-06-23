@@ -1,3 +1,4 @@
+{sample: true}
 # Energy Explorer
 
 This chapter gives a technical overview of Energy Explorer and an overview of the build steps.
@@ -89,3 +90,4 @@ Typically in each practical session you’ll **load** the step’s code into you
 | 13  | Add Transitions |
 | 14  | Add a Legend |
 | 15  | Finishing Touches |
+{sample: false}
