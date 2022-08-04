@@ -154,6 +154,6 @@ Save `main.js` and load `step4` in your browser. The circles now look like:
 
 ![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
 
-Each circle represents a county and is sized according to its renewable energy percentage. We can already see that there’s a few countries that appear to have quite a high percentage and plenty others with a low percentage.
+Each circle represents a county and is sized according to its renewable energy percentage. We can already see that there are a few countries that appear to have quite a high percentage and plenty others with a low percentage.
 
 Later on in this book we’ll arrange the circles more effectively and add labels so we can see the individual countries more clearly.

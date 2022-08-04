@@ -162,10 +162,10 @@ barLengthScale(4); // returns 200
 The above makes it clear what the scale function’s intent is: its input range is 0 to 10 and its output range is 0 to 500. This makes reading and maintaining the code easier. Furthermore you can do things like clamp the scale so that if the input exceeds the input domain, the function clamps the output to the output range. For example:
 
 ```js
-barWidthScale.clamp(true);
+barLengthScale.clamp(true);
 
-barWidthScale(10);  // returns 500
-barWidthScale(100); // returns 500
+barLengthScale(10);  // returns 500
+barLengthScale(100); // returns 500
 ```
 
 You’ll learn more about scale functions later in this book and you’ll use them to size the circles in Energy Explorer.

@@ -26,7 +26,7 @@ At the end of this practical each country group will look like:
 </g>
 ```
 
-There’s three additional circles. Each circle also has a class attribute indicating which energy type it represents.
+There are three additional circles. Each circle also has a class attribute indicating which energy type it represents.
 
 ## Overview
 

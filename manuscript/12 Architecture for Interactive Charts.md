@@ -143,7 +143,7 @@ export { add };
 You can then import the function using `import`:
 
 ```js
-import { sum } from './add.js';
+import { add } from './add.js';
 
 let n1 = 10, n2 = 20;
 console.log(add(n1, n2));

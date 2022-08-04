@@ -9,7 +9,7 @@ The state of an application describes what the application is currently doing. F
 
 Typically each time there’s a user interaction (e.g. clicking an item, choosing from a menu) the state changes. And each time the state changes, the display updates accordingly. 
 
-There’s several approaches to managing state in an application and we’ll look at an approach that is straightforward, effective and based on a very common pattern in web development known as [Flux](https://github.com/facebook/flux/tree/master/examples/flux-concepts). The basic idea is that the entire application state is stored in a JavaScript object. For example:
+There are several approaches to managing state in an application and we’ll look at an approach that is straightforward, effective and based on a very common pattern in web development known as [Flux](https://github.com/facebook/flux/tree/master/examples/flux-concepts). The basic idea is that the entire application state is stored in a JavaScript object. For example:
 
 ```js
 let state = {

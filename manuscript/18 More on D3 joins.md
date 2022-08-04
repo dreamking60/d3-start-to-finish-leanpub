@@ -390,7 +390,7 @@ This produces the output:
 
 Navigate to [https://codepen.io/createwithdata/pen/dyNgzqJ](https://codepen.io/createwithdata/pen/dyNgzqJ) to view this example in CodePen.
 
-To summarise, there's two data joins: the outer one joins `myData` to `<g>` elements and the inner one joins the inner arrays (e.g. `[10, 30, 20]`) to `<circle>` elements. This can be quite tricky to understand, so don't worry too much if you don't get it at first!
+To summarise, there are two data joins: the outer one joins `myData` to `<g>` elements and the inner one joins the inner arrays (e.g. `[10, 30, 20]`) to `<circle>` elements. This can be quite tricky to understand, so don't worry too much if you don't get it at first!
 
 ### Update function with nested join
 
@@ -399,7 +399,7 @@ The nested join can be also put inside an update function (see the More on D3 se
 ```js
 markua-start-insert
 function getData() {
-  // Return a randomis	ed array of arrays
+  // Return a randomised array of arrays
 }
 markua-end-insert
 
