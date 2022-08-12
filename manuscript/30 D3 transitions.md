@@ -4,7 +4,7 @@ A powerful effect that adds visual flair to a data visualisation is animation. T
 
 ![Before and after positions. Can you determine where each circle has moved to?](82c0a3dc64d341a8e88595c224249c46.png)
 
-Here’s a CodePen example that illustrates this: [https://codepen.io/createwithdata/pen/pogPwOy](https://codepen.io/createwithdata/pen/pogPwOy). In this example, if animations are switched off ('Use transitions' is unchecked) the circles jump immediately to their new positions. It’s not possible to track the movement of each circle. Furthermore, it’s not discernable whether you’re seeing circle movement, or an entirely new set of circles. With animations switched on, it’s clear that the circles are changing position. This is known as **object constancy**.
+Open the CodePen example [https://codepen.io/createwithdata/pen/pogPwOy](https://codepen.io/createwithdata/pen/pogPwOy). If animations are switched off ('Use transitions' is unchecked) the circles jump immediately to their new positions. It’s not possible to track the movement of each circle. Furthermore, it’s not discernable whether you’re seeing circle movement, or an entirely new set of circles. With animations switched on, it’s clear that the circles are changing position. This is known as **object constancy**.
 
 D3 has a powerful system for animating (or ‘transitioning’) HTML/SVG elements. You’ll be glad to know you’ve already done a lot of the hard work and adding animations to a selection of elements is relatively straightforward.
 
