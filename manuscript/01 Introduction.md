@@ -59,7 +59,7 @@ We also cover web development techniques that are useful when building interacti
 
 | Name | Description |
 | --- | --- |
-| **Modules** | Split your code up into separate modules rather than having all your code in a single file. |
+| **Modularisation** | Split your code up into separate modules rather than having all your code in a single file. |
 | **State management** | Implement a state management pattern so that user interaction can be handled in a clean and easy to understand manner. |
 | **Data manipulation** | Use the lodash library to process (sort, filter etc.) data. |
 
@@ -97,7 +97,7 @@ If you need help on anything in this book please tweet me at [@createwithdata](h
 
 ## Stay in touch
 
-I love to stay in touch with my readers. One of the best ways to do this is via my mailing list. I send occasional messages containing useful information related to implementing data visualisations (e.g. using JavaScript or other tools). There'll also be discount codes for my other books. You can sign up [here](https://mailchi.mp/085e79e8fd7c/create-with-data-newsletter).
+I love to stay in touch with my readers. One of the best ways to do this is via my mailing list. I send occasional messages containing useful information related to implementing data visualisations (e.g. using JavaScript or other tools). There'll also be discount codes for my other books. You can sign up on my website [www.createwithdata.com](https://www.createwithdata.com).
 
 ## Translators
 

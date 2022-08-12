@@ -98,7 +98,7 @@ markua-end-insert
 
     let radiusScale = d3.scaleSqrt()
         .domain([0, 100])
-start=delete
+markua-start-delete
         .range([0, 20]);
 markua-end-delete
 markua-start-insert
