@@ -50,19 +50,19 @@ Select **Save** from the **File** menu, navigate to your project directory, name
 
 ## Install Live Server extension
 
-Follow the instructions in the [Web development tools](https://learn.createwithdata.com/books/html-svg-css-and-javascript-for-data-visualisation/sections/tools-set-up-etc/) section to install the Live Server extension.
+Follow the instructions in the VS Code Live Server section of the Web development tools chapter to install the Live Server extension.
 
 ## Start Server
 
 If you haven’t already, select **Open Folder…** from the **File** menu and select your `my_website` directory. You should see your new directory appear in the sidebar. Now click on the Go Live button that appears in the bottom bar.
 
 {width: 25%}
-![Click the Go Live button in VS Code](https://learn.createwithdata.com/wp-content/uploads/2021/05/image-4.png)
+![Click the Go Live button in VS Code](4370e16cff63ad219f91a9e76ee5d663.png)
 
 Make sure your browser is pointing at ‘localhost:5500’ (use whichever port number is displayed in the bottom bar).
 
 {width: 50%}
-![Server has started message (with active port number displayed)](https://learn.createwithdata.com/wp-content/uploads/2021/05/image-5.png)
+![Server has started message (with active port number displayed)](478e7d3af35aec28e3d86b6d847f6cb0.png)
 
 Your page should now be visible in the web browser (it should say ‘Hello!’). Try editing your HTML file, saving it, then refreshing your browser. The changes you’ve made should be visible.
 

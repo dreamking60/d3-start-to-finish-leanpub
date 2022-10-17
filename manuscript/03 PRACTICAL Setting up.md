@@ -80,7 +80,7 @@ peter-home
 
 Open your text editor and open `d3-start-to-finish-code/step1`. In VS Code or Brackets you select ‘Open Folder…’ from the ‘File’ menu and select `d3-start-to-finish-code/step1`. Within the code editor’s file browser, expand `step1`, click on `index.html` and you should see something like:
 
-![step1/index.html in the code download](https://learn.createwithdata.com/wp-content/uploads/2020/10/image-1.png)
+![step1/index.html in the code download](7a9df67ce015631879cb1fb317e83bb2.png)
 
 ### Start web server
 

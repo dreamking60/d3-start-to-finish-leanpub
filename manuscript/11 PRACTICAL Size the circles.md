@@ -4,7 +4,7 @@ In this chapter we modify Energy Explorer to size each circle according to its *
 
 By the end of this practical Energy Explorer will look like:
 
-![The energy data represented by circles, sized according to each country's renewable energy percentage](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-1.png)
+![The energy data represented by circles, sized according to each country's renewable energy percentage](6ea4afce9132d407247a9b22a05b818b.png)
 
 ## Overview
 
@@ -152,7 +152,7 @@ Therefore each circle will be sized such that its area is proportional to the `r
 
 Save `main.js` and load `step4` in your browser. The circles now look like:
 
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-2.png)
+![Circles sized according to energy indicator](7fd786b428414616302b43c5de8637c8.png)
 
 Each circle represents a county and is sized according to its renewable energy percentage. We can already see that there are a few countries that appear to have quite a high percentage and plenty others with a low percentage.
 

@@ -3,9 +3,9 @@
 In this practical you’ll arrange the countries in a grid format:
 
 {width: 66%}
-![](https://learn.createwithdata.com/wp-content/uploads/2021/04/image-3.png)
+![Grid of circles](f633959a8459bd2ca0e17e6f420fab14.png)
 
-The [previous section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/arranging-items-in-a-grid/) explained the mathematics and code to arrange an array of data in a grid and we use a similar approach in Energy Explorer.
+The previous chapter explained the mathematics and code to arrange an array of data in a grid and we use a similar approach in Energy Explorer.
 
 ## Overview
 

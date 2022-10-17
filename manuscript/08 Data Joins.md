@@ -120,7 +120,7 @@ In the next section we’ll look at how the joined HTML/SVG elements can be modi
 
 ## Updating the joined elements
 
-Once you’ve joined an array to a selection of HTML/SVG elements you can update the position, colour, size etc. of each element using `.style`, `.attr`, `.classed` and `.text`. (These are the same four methods introduced in the [Updating a selection’s elements section](https://learn.createwithdata.com/books/d3-start-to-finish/sections/updating-a-selection/).)
+Once you’ve joined an array to a selection of HTML/SVG elements you can update the position, colour, size etc. of each element using `.style`, `.attr`, `.classed` and `.text`. (These are the same four methods introduced in the 'Updating a selection’s elements' section in the previous chapter.)
 
 Broadly speaking there are three approaches to updating each HTML/SVG element. You can:
 

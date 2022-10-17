@@ -362,7 +362,7 @@ markua-end-insert
 markua-start-insert
       <div id="footer">
         <div>Data: <a href="https://datacatalog.worldbank.org/dataset/world-development-indicators">World Bank</a></div>
-        <div><a href="https://learn.createwithdata.com">D3 Start to Finish</a></div>
+        <div><a href="https://www.createwithdata.com">D3 Start to Finish</a></div>
       </div>
 markua-end-insert
     </div>
